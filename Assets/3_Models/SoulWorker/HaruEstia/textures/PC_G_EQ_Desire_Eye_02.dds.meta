@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d11fb1925b4a3e346b5d06e25aecca7a
+IHVImageFormatImporter:
+  externalObjects: {}
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+    wrapW: 0
+  isReadable: 1
+  sRGBTexture: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
