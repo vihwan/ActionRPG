@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 308947906}
   - component: {fileID: 308947905}
   m_Layer: 8
-  m_Name: Cube (3)
+  m_Name: Obstacle 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -319,7 +319,7 @@ GameObject:
   - component: {fileID: 773233192}
   - component: {fileID: 773233191}
   m_Layer: 8
-  m_Name: Cube (4)
+  m_Name: Obstacle 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -591,7 +591,7 @@ GameObject:
   - component: {fileID: 1440557646}
   - component: {fileID: 1440557645}
   m_Layer: 8
-  m_Name: Cube
+  m_Name: Obstacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ GameObject:
   - component: {fileID: 1548781760}
   - component: {fileID: 1548781759}
   m_Layer: 8
-  m_Name: Cube (2)
+  m_Name: Obstacle 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,7 +777,7 @@ GameObject:
   - component: {fileID: 2000235372}
   - component: {fileID: 2000235371}
   m_Layer: 8
-  m_Name: Cube (1)
+  m_Name: Obstacle 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -924,35 +924,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 531143835676652540, guid: 9a2c511f708b2a54c801ea36cfca12df,
+    - target: {fileID: 6218875047735072615, guid: 9a2c511f708b2a54c801ea36cfca12df,
         type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 782411024}
-    - target: {fileID: 531143835676652542, guid: 9a2c511f708b2a54c801ea36cfca12df,
-        type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 531143835676652543, guid: 9a2c511f708b2a54c801ea36cfca12df,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 531143835676652543, guid: 9a2c511f708b2a54c801ea36cfca12df,
-        type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6212035263085321920, guid: 9a2c511f708b2a54c801ea36cfca12df,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: de5de9169767ce8478e50eb69591284b, type: 2}
-    - target: {fileID: 6212035263085321920, guid: 9a2c511f708b2a54c801ea36cfca12df,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a2c511f708b2a54c801ea36cfca12df, type: 3}

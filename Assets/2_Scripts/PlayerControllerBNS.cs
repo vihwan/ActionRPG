@@ -7,6 +7,8 @@ using UnityEngine;
 
 /* 왜인지 모르겠으나, characterController를 받아와서 사용하면, 애니메이션이 부들부들떨림 
  * -> 그냥 리지드바디와 컬라이더를 설정하니 이 현상이 사라짐
+ * -> 리지드바디로 쓰니 제약이 너무 많아짐
+ * -> 캐릭터 컨트롤러로 다시 바꾸고 하위 계층으로 옮기니 잘됨.
  * 
  * 2D Freeform으로 하니까 움직인 이후 IK가 적용이 풀린다. 
  * -> 1D로 바꾸니까 이러한 현상이 없어짐. 왜지?
@@ -37,31 +39,30 @@ public class PlayerControllerBNS : MonoBehaviour
     [SerializeField] private bool isWalk = false;
     [SerializeField] private PlayerMove playerMove = PlayerMove.IDLE;
 
+    public bool enableRM;
     private bool isWeaponChanging = false;
     private bool isJumping = false;
     private bool isGround = true;
 
     private float moveSpeed = 0f;
-    [Range(0, 1f)] [SerializeField] private float walkSpeed = 1f;
-    [Range(0, 3f)] [SerializeField] private float jogSpeed = 3f;
-    [Range(0, 6f)] [SerializeField] private float runSpeed = 6f;
-    [Range(0, .5f)] [SerializeField] private float turnSmoothTime = 0.1f;
+    [SerializeField] private float walkSpeed = 1f;
+    [SerializeField] private float jogSpeed = 3f;
+    [SerializeField] private float runSpeed = 6f;
+    [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float jumpSpeed = 10f;
     private float trunSmoothVelocity;
 
     //Component
-    private Rigidbody myRigid;
     public Transform cam;
     private Animator ani;
     private DoublePressKeyDetection[] keys;
-    private CapsuleCollider capsuleCollider;
+    private CharacterController characterController;
 
 
     private void Start()
     {
         ani = GetComponentInChildren<Animator>();
-        myRigid = GetComponent<Rigidbody>();
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        characterController = GetComponentInChildren<CharacterController>();
 
         keys = new[]
         {
@@ -75,6 +76,12 @@ public class PlayerControllerBNS : MonoBehaviour
 
     void Update()
     {
+        enableRM = !ani.GetBool("canMove");
+        ani.applyRootMotion = enableRM;
+
+        if (enableRM)
+            return;
+
         if (isWeaponChanging)
             return;
 
@@ -90,10 +97,34 @@ public class PlayerControllerBNS : MonoBehaviour
 
     private void TryDodge()
     {
+        //왼쪽 시프트키를 누르면 회피를 시전합니다.
+        //추가로 방향키를 입력하면 그 방향으로 이동합니다.
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ani.SetTrigger("Dodge");
-            myRigid.MovePosition(transform.position + Vector3.left * jumpSpeed);
+            var input = Input.inputString;
+            switch (input)
+            {
+                //왼쪽으로 이동
+                case "W":
+                    Debug.Log("W 입력");
+                    break;
+
+                case "A":
+                    Debug.Log("W 입력");
+                    break;
+
+                case "S":
+                    Debug.Log("W 입력");
+                    break;
+
+                case "D":
+                    Debug.Log("W 입력");
+                    break;
+
+                default:
+                    ani.SetTrigger("Dodge");
+                    break;
+            }          
         }
     }
 
@@ -103,7 +134,6 @@ public class PlayerControllerBNS : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isGround)
         {
             Debug.Log("점프한다!");
-            myRigid.velocity = transform.up * jumpSpeed;
             ani.SetTrigger("Jump");
         }
     }
@@ -215,7 +245,8 @@ public class PlayerControllerBNS : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-            myRigid.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime);
+           // myRigid.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime);
+            characterController.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
         }
     }
 
@@ -239,6 +270,6 @@ public class PlayerControllerBNS : MonoBehaviour
         //빛을 쏠때.. 고려해야할점
         //어디에서, 어느 방향으로, 얼만큼, (누굴 맞췄는지) 등등
 
-        isGround = Physics.Raycast(transform.position, Vector3.down, capsuleCollider.bounds.extents.y + 0.1f);
+        isGround = Physics.Raycast(transform.position, Vector3.down, characterController.bounds.extents.y + 0.1f);
     }
 }
