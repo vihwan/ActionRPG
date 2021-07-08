@@ -33,17 +33,21 @@ public enum PlayerMove
     RUN
 }
 
+[RequireComponent(typeof(WeaponManager))]
 public class PlayerControllerBNS : MonoBehaviour
 {
     [SerializeField] private bool isWeaponOut = false;
     [SerializeField] private bool isWalk = false;
     [SerializeField] private PlayerMove playerMove = PlayerMove.IDLE;
+    public LayerMask layerMask;
 
     public bool enableRM;
     private bool isWeaponChanging = false;
     private bool isJumping = false;
     private bool isGround = true;
 
+    private float gravity = -9.81f;
+    private Vector3 gravityForce;
     private float moveSpeed = 0f;
     [SerializeField] private float walkSpeed = 1f;
     [SerializeField] private float jogSpeed = 3f;
@@ -51,6 +55,11 @@ public class PlayerControllerBNS : MonoBehaviour
     [SerializeField] private float turnSmoothTime = 0.1f;
     [SerializeField] private float jumpSpeed = 10f;
     private float trunSmoothVelocity;
+    [Range(0f, 1f)]
+    [SerializeField] private float DistanceToGround;
+
+
+    private Dictionary<KeyCode, Action> keyDics = new Dictionary<KeyCode, Action>();
 
     //Component
     public Transform cam;
@@ -64,6 +73,7 @@ public class PlayerControllerBNS : MonoBehaviour
         ani = GetComponentInChildren<Animator>();
         characterController = GetComponentInChildren<CharacterController>();
 
+        
         keys = new[]
         {
             //Consturctor //Param : KeyCode, threshold
@@ -85,6 +95,14 @@ public class PlayerControllerBNS : MonoBehaviour
         if (isWeaponChanging)
             return;
 
+        if (!characterController.isGrounded)
+        {
+            gravityForce = new Vector3(0f, gravity * Time.deltaTime, 0f);
+            characterController.Move(gravityForce);
+            Debug.Log("Not Grounded. Add Gravity Force");
+        }
+
+
         WeaponOut();
         DoublePressKeyCheck();
         CheckMove();
@@ -97,34 +115,26 @@ public class PlayerControllerBNS : MonoBehaviour
 
     private void TryDodge()
     {
-        //왼쪽 시프트키를 누르면 회피를 시전합니다.
+        //왼쪽 시프트키를 누르면 회피를 시전합니다. (기본방향 : 뒤)
         //추가로 방향키를 입력하면 그 방향으로 이동합니다.
+        //param DodgeDir 0: 앞 1: 왼  2: 오 3: 뒤
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            var input = Input.inputString;
-            switch (input)
+            ani.SetInteger("DodgeDir", 3);
+            if (Input.GetKey(KeyCode.W))
             {
-                //왼쪽으로 이동
-                case "W":
-                    Debug.Log("W 입력");
-                    break;
+                ani.SetInteger("DodgeDir", 0);
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                ani.SetInteger("DodgeDir", 1);
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                ani.SetInteger("DodgeDir", 2);
+            }
 
-                case "A":
-                    Debug.Log("W 입력");
-                    break;
-
-                case "S":
-                    Debug.Log("W 입력");
-                    break;
-
-                case "D":
-                    Debug.Log("W 입력");
-                    break;
-
-                default:
-                    ani.SetTrigger("Dodge");
-                    break;
-            }          
+            ani.SetTrigger("Dodge");
         }
     }
 
@@ -221,10 +231,10 @@ public class PlayerControllerBNS : MonoBehaviour
             keys[i].UpdateCheck();
         }
 
-        keys[0].UpdateAction(() => Debug.Log("W"), () => Debug.Log("WW"));
-        keys[1].UpdateAction(() => Debug.Log("A"), () => Debug.Log("AA"));
-        keys[2].UpdateAction(() => Debug.Log("S"), () => Debug.Log("SS"));
-        keys[3].UpdateAction(() => Debug.Log("D"), () => Debug.Log("DD"));
+        //keys[0].UpdateAction(() => Debug.Log("W"), () => Debug.Log("WW"));
+        //keys[1].UpdateAction(() => Debug.Log("A"), () => Debug.Log("AA"));
+        //keys[2].UpdateAction(() => Debug.Log("S"), () => Debug.Log("SS"));
+        //keys[3].UpdateAction(() => Debug.Log("D"), () => Debug.Log("DD"));
     }
 
     //플레이어를 이동시킵니다.
@@ -271,5 +281,27 @@ public class PlayerControllerBNS : MonoBehaviour
         //어디에서, 어느 방향으로, 얼만큼, (누굴 맞췄는지) 등등
 
         isGround = Physics.Raycast(transform.position, Vector3.down, characterController.bounds.extents.y + 0.1f);
+    }
+
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (ani)
+        {
+            ani.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            ani.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+
+            //Left Foot
+            RaycastHit hit;
+            Ray ray = new Ray(ani.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
+            if(Physics.Raycast(ray,out hit, DistanceToGround + 1f, layerMask))
+            {
+                if(hit.transform.tag == "Walkable")
+                {
+                    Vector3 footPosition = hit.point;
+                    footPosition.y += DistanceToGround;
+                    ani.SetIKPosition(AvatarIKGoal.LeftFoot, footPosition);
+                }
+            }
+        }
     }
 }

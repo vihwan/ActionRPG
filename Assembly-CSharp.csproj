@@ -64,15 +64,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\2_Scripts\CalledInAnimation.cs" />
     <Compile Include="Assets\2_Scripts\CameraMan.cs" />
     <Compile Include="Assets\2_Scripts\CameraMoveController.cs" />
-    <Compile Include="Assets\2_Scripts\PlayerController.cs" />
+    <Compile Include="Assets\2_Scripts\DoublePressKeyDetection.cs" />
     <Compile Include="Assets\2_Scripts\PlayerControllerBNS.cs" />
-    <Compile Include="Assets\2_Scripts\Test\CalledInAnimation.cs" />
-    <Compile Include="Assets\2_Scripts\Test\DoublePressKeyDetection.cs" />
     <Compile Include="Assets\2_Scripts\Test\Utilities\Helper.cs" />
     <Compile Include="Assets\2_Scripts\Test\Utilities\KeepBool.cs" />
-    <Compile Include="Assets\2_Scripts\Test\WeaponManager.cs" />
+    <Compile Include="Assets\2_Scripts\WeaponManager.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAtData.cs" />
