@@ -30,10 +30,10 @@ public enum PlayerMove
     IDLE,
     WALK,
     JOG,
-    RUN
+    RUN,
+    Attack
 }
 
-[RequireComponent(typeof(WeaponManager))]
 public class PlayerControllerBNS : MonoBehaviour
 {
     [SerializeField] private bool isWeaponOut = false;
@@ -46,6 +46,7 @@ public class PlayerControllerBNS : MonoBehaviour
     private bool isJumping = false;
     private bool isGround = true;
 
+    [SerializeField] private int attackCount = 0;
     private float gravity = -9.81f;
     private Vector3 gravityForce;
     private float moveSpeed = 0f;
@@ -59,6 +60,7 @@ public class PlayerControllerBNS : MonoBehaviour
     [SerializeField] private float DistanceToGround;
 
 
+
     private Dictionary<KeyCode, Action> keyDics = new Dictionary<KeyCode, Action>();
 
     //Component
@@ -66,14 +68,20 @@ public class PlayerControllerBNS : MonoBehaviour
     private Animator ani;
     private DoublePressKeyDetection[] keys;
     private CharacterController characterController;
+    private Rigidbody myRigid;
+    private CapsuleCollider capsuleCollider;
+    private AnimatorStateInfo aniStateInfo;
 
 
     private void Start()
     {
         ani = GetComponentInChildren<Animator>();
         characterController = GetComponentInChildren<CharacterController>();
+        /*        myRigid = GetComponentInChildren<Rigidbody>();
+                capsuleCollider = GetComponentInChildren<CapsuleCollider>();*/
 
-        
+
+
         keys = new[]
         {
             //Consturctor //Param : KeyCode, threshold
@@ -88,6 +96,10 @@ public class PlayerControllerBNS : MonoBehaviour
     {
         enableRM = !ani.GetBool("canMove");
         ani.applyRootMotion = enableRM;
+        aniStateInfo = ani.GetCurrentAnimatorStateInfo(0);
+
+/*        Debug.Log(animatorStateInfo.normalizedTime);
+        Debug.Log(animatorStateInfo.IsName("Locomotion_WeaponOut"));*/
 
         if (enableRM)
             return;
@@ -103,7 +115,7 @@ public class PlayerControllerBNS : MonoBehaviour
         }
 
 
-        WeaponOut();
+        ExecuteWeaponOut();
         DoublePressKeyCheck();
         CheckMove();
         ChangeMoveStatus();
@@ -111,6 +123,61 @@ public class PlayerControllerBNS : MonoBehaviour
        // TryJump();
         Movement(moveSpeed);
         TryDodge();
+        TryAttack();
+    }
+
+    private void TryAttack()
+    {
+        /*
+         * 무기가 꺼내져있는 상태에서
+         * Idle,Walk,Jog 상태에서 공격시 - 공격 콤보
+         * Run 상태에서 공격시, 대시 공격
+         * **/
+        if(isWeaponOut == true)
+        {
+            if (!aniStateInfo.IsName("Locomotion_WeaponOut") && playerMove == PlayerMove.Attack)
+            {
+                if (aniStateInfo.normalizedTime >= aniStateInfo.length)
+                {
+                    if (ani.IsInTransition(0))
+                        return;
+
+                    attackCount = 0;
+                    ani.SetInteger("Combo", attackCount);
+                    ani.CrossFade("Locomotion_WeaponOut", 0.3f);
+                }
+            }
+
+            //공격키
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Debug.Log("공격하기");
+
+                //만약 다른 애니메이션으로 거쳐가는 중이라면 취소
+                if (ani.IsInTransition(0))
+                {
+                    Debug.Log("애니메이션 변경중");
+                    return;
+                }
+
+                if(attackCount == 0)
+                {
+                    attackCount = 1;
+                    ani.SetInteger("Combo", attackCount);
+                    playerMove = PlayerMove.Attack;
+                }
+                else
+                {
+                    //애니메이션 진행도가 애니메이션 길이의 절반을 넘어섰다면
+                    if (aniStateInfo.normalizedTime > aniStateInfo.length * 0.5f)
+                    {
+                        attackCount++;
+                        ani.SetInteger("Combo", attackCount);
+                        playerMove = PlayerMove.Attack;
+                    }
+                }
+            }
+        }
     }
 
     private void TryDodge()
@@ -148,22 +215,20 @@ public class PlayerControllerBNS : MonoBehaviour
         }
     }
 
-    private void WeaponOut()
+    private void ExecuteWeaponOut()
     {
         //무기 꺼내기
         if (Input.GetKeyUp(KeyCode.X) && playerMove == PlayerMove.IDLE)
         {
             isWeaponOut = !isWeaponOut;
-            StartCoroutine(ChangeWeaponCoroutine());         
+            ChangeWeaponCoroutine();         
         }
     }
 
-    private IEnumerator ChangeWeaponCoroutine()
+    private void ChangeWeaponCoroutine()
     {
         isWeaponChanging = true;
         ani.SetBool("WeaponOut", isWeaponOut);
-        yield return new WaitForSeconds(1f);
-
     }
 
     private void EndChangeWeapon()
@@ -255,8 +320,9 @@ public class PlayerControllerBNS : MonoBehaviour
 
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
 
-           // myRigid.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime);
+            //myRigid.MovePosition(transform.position + moveDir.normalized * moveSpeed * Time.deltaTime);
             characterController.Move(moveDir.normalized * moveSpeed * Time.deltaTime);
+
         }
     }
 
