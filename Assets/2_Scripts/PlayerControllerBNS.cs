@@ -92,16 +92,16 @@ public class PlayerControllerBNS : MonoBehaviour
         };
     }
 
-    void Update()
+    void FixedUpdate()
     {
         enableRM = !ani.GetBool("canMove");
         ani.applyRootMotion = enableRM;
         aniStateInfo = ani.GetCurrentAnimatorStateInfo(0);
 
-/*        Debug.Log(animatorStateInfo.normalizedTime);
-        Debug.Log(animatorStateInfo.IsName("Locomotion_WeaponOut"));*/
+        //Debug.Log(aniStateInfo.normalizedTime);
 
-        if (enableRM)
+
+        if (enableRM && playerMove != PlayerMove.Attack)
             return;
 
         if (isWeaponChanging)
@@ -111,7 +111,7 @@ public class PlayerControllerBNS : MonoBehaviour
         {
             gravityForce = new Vector3(0f, gravity * Time.deltaTime, 0f);
             characterController.Move(gravityForce);
-            Debug.Log("Not Grounded. Add Gravity Force");
+            //Debug.Log("Not Grounded. Add Gravity Force");
         }
 
 
@@ -120,7 +120,7 @@ public class PlayerControllerBNS : MonoBehaviour
         CheckMove();
         ChangeMoveStatus();
         SwitchWalk();
-       // TryJump();
+        // TryJump();
         Movement(moveSpeed);
         TryDodge();
         TryAttack();
@@ -133,26 +133,24 @@ public class PlayerControllerBNS : MonoBehaviour
          * Idle,Walk,Jog 상태에서 공격시 - 공격 콤보
          * Run 상태에서 공격시, 대시 공격
          * **/
-        if(isWeaponOut == true)
+        if (isWeaponOut == true)
         {
             if (!aniStateInfo.IsName("Locomotion_WeaponOut") && playerMove == PlayerMove.Attack)
             {
-                if (aniStateInfo.normalizedTime >= aniStateInfo.length)
+                if (aniStateInfo.normalizedTime >= 1.0f)
                 {
                     if (ani.IsInTransition(0))
                         return;
 
                     attackCount = 0;
                     ani.SetInteger("Combo", attackCount);
-                    ani.CrossFade("Locomotion_WeaponOut", 0.3f);
+                    ani.SetTrigger("Idle_WeaponOut");
                 }
             }
 
             //공격키
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("공격하기");
-
                 //만약 다른 애니메이션으로 거쳐가는 중이라면 취소
                 if (ani.IsInTransition(0))
                 {
@@ -160,22 +158,30 @@ public class PlayerControllerBNS : MonoBehaviour
                     return;
                 }
 
-                if(attackCount == 0)
+                if (attackCount == 0)
                 {
                     attackCount = 1;
                     ani.SetInteger("Combo", attackCount);
                     playerMove = PlayerMove.Attack;
+                    Debug.Log("공격하기");
                 }
                 else
                 {
                     //애니메이션 진행도가 애니메이션 길이의 절반을 넘어섰다면
-                    if (aniStateInfo.normalizedTime > aniStateInfo.length * 0.5f)
+                    if (aniStateInfo.normalizedTime >= 0.5f)
                     {
                         attackCount++;
                         ani.SetInteger("Combo", attackCount);
                         playerMove = PlayerMove.Attack;
+                        Debug.Log("공격하기");
                     }
                 }
+            }
+
+            if (aniStateInfo.IsName("Attack6") == true)
+            {
+                attackCount = 0;
+                ani.SetInteger("Combo", attackCount);
             }
         }
     }
@@ -221,7 +227,7 @@ public class PlayerControllerBNS : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.X) && playerMove == PlayerMove.IDLE)
         {
             isWeaponOut = !isWeaponOut;
-            ChangeWeaponCoroutine();         
+            ChangeWeaponCoroutine();
         }
     }
 
@@ -359,9 +365,9 @@ public class PlayerControllerBNS : MonoBehaviour
             //Left Foot
             RaycastHit hit;
             Ray ray = new Ray(ani.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
-            if(Physics.Raycast(ray,out hit, DistanceToGround + 1f, layerMask))
+            if (Physics.Raycast(ray, out hit, DistanceToGround + 1f, layerMask))
             {
-                if(hit.transform.tag == "Walkable")
+                if (hit.transform.tag == "Walkable")
                 {
                     Vector3 footPosition = hit.point;
                     footPosition.y += DistanceToGround;
