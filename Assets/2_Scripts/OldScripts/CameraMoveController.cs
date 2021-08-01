@@ -35,8 +35,6 @@ public class CameraMoveController : MonoBehaviour
     #region LookAround
     void LookAround()
     {
-
-
         mouseX += Input.GetAxis("Mouse X");
         mouseY += Input.GetAxis("Mouse Y") * -1;
 

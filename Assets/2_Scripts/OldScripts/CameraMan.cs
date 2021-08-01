@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraMan : MonoBehaviour
 {
-    private Transform player;
+    public Transform player;
 
-    void Start()
+/*    void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-    }
+    }*/
 
     void Update()
     {
