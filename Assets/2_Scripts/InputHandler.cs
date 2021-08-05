@@ -13,11 +13,18 @@ namespace SG
         private float mouseY;
 
         public bool b_Input;
+        public bool rb_Input; //약공격 : 키보드 E
+        public bool rt_Input; //강공격 : 키보드 R
+
         public float rollInputTimer;
         public bool rollFlag;
         public bool sprintFlag;
+        public bool comboFlag;
 
         private PlayerControls inputActions;
+        private PlayerAttacker playerAttacker;
+        private PlayerInventory playerInventory;
+        private PlayerManager playerManager;
 
 
         Vector2 movementInput;
@@ -31,6 +38,17 @@ namespace SG
         public float MouseX { get => mouseX; private set => mouseX = value; }
         public float MouseY { get => mouseY; private set => mouseY = value; }
         #endregion
+
+        private void Start()
+        {
+            playerAttacker = GetComponent<PlayerAttacker>();
+            if (playerAttacker == null)
+                Debug.LogWarning("playerAttacker Component is Null");
+
+            playerInventory = GetComponent<PlayerInventory>();
+            playerManager = GetComponent<PlayerManager>();
+        }
+
 
         public void OnEnable()
         {
@@ -54,6 +72,7 @@ namespace SG
         {
             MoveInput(delta);
             HandleRollInput(delta);
+            HandleAttackInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -83,6 +102,37 @@ namespace SG
                 }
 
                 rollInputTimer = 0;
+            }
+        }
+
+        private void HandleAttackInput(float delta)
+        {
+            inputActions.PlayerActions.RB.performed += i => rb_Input = true;
+            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+            if (rb_Input)
+            {
+                if (playerManager.canDoCombo)
+                {
+                    comboFlag = true;
+                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                    comboFlag = false;
+                }
+                else
+                {
+                    if (playerManager.isInteracting)
+                        return;
+
+                    if (playerManager.canDoCombo)
+                        return;
+
+                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                }     
+            }
+
+            if(rt_Input)
+            {
+                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
             }
         }
     }

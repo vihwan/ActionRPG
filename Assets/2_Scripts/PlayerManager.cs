@@ -17,7 +17,7 @@ namespace SG
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
-
+        public bool canDoCombo;
 
         private void Awake()
         {
@@ -39,6 +39,7 @@ namespace SG
         {
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
+            canDoCombo = anim.GetBool("canDoCombo");
 
 
             inputHandler.TickInput(delta);
@@ -61,12 +62,21 @@ namespace SG
         {
             inputHandler.rollFlag = false;
             inputHandler.sprintFlag = false;
-            isSprinting = inputHandler.b_Input;
+            inputHandler.rb_Input = false;
+            inputHandler.rt_Input = false;
+            //isSprinting = inputHandler.b_Input;
 
             if(isInAir)
             {
                 playerLocomotion.inAirTimer += Time.deltaTime;
+                //playerLocomotion.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             }
+
+/*            if (isGrounded)
+            {
+                playerLocomotion.Rigidbody.constraints = 
+                    RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+            }*/
         }
     }
 }

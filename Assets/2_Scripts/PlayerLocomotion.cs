@@ -29,6 +29,8 @@ namespace SG
 
         [Header("Player Stats")]
         [SerializeField]
+        float walkingSpeed = 1;
+        [SerializeField]
         float movementSpeed = 5;
         [SerializeField]
         float sprintSpeed = 7;
@@ -72,7 +74,11 @@ namespace SG
             moveDirection.y = 0;
 
             float speed = movementSpeed;
-            if (inputHandler.sprintFlag)
+            /*
+             * 08월 05일 수정 
+             * 1. 아무런 이동방향 없이 구르기 버튼을 눌렀을 경우, 실행되지 않고 오류가 발생.
+             * **/
+            if (inputHandler.sprintFlag && inputHandler.MoveAmount > 0.5f)
             {
                 speed = sprintSpeed;
                 playerManager.isSprinting = true;
@@ -80,7 +86,16 @@ namespace SG
             }
             else
             {
-                moveDirection *= speed;
+                if(inputHandler.MoveAmount < 0.5f)
+                {
+                    moveDirection *= walkingSpeed;
+                    playerManager.isSprinting = false;
+                }
+                else
+                {
+                    moveDirection *= speed;
+                    playerManager.isSprinting = false;
+                }
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
@@ -185,7 +200,7 @@ namespace SG
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Locomotion", false);
+                        animatorHandler.PlayTargetAnimation("Empty", false);
                         inAirTimer = 0;
                     }
 
@@ -224,6 +239,16 @@ namespace SG
                     myTransform.position = targetPosition;
                 }
             }
+
+            if(playerManager.isInteracting || inputHandler.MoveAmount > 0)
+            {
+                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else
+            {
+                myTransform.position = targetPosition;
+            }
+
 
         }
         #endregion

@@ -38,11 +38,7 @@ namespace SG
 
         private void Start()
         {
-
-            targetTransform = GameObject.Find("Player2").transform;
-            cameraTransform = GameObject.Find("Main Camera").transform;
-            cameraPivotTransform = GameObject.Find("Camera Pivot").transform;
-
+            targetTransform = FindObjectOfType<PlayerManager>().transform;
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);

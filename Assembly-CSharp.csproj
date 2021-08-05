@@ -78,6 +78,19 @@
     <Compile Include="Assets\2_Scripts\PlayerControls.cs" />
     <Compile Include="Assets\2_Scripts\PlayerLocomotion.cs" />
     <Compile Include="Assets\2_Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\2_Scripts\ResetAnimationBool.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DamageCollider.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DamagePlayer.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnemyStats.cs" />
+    <Compile Include="Assets\2_Scripts\Test\HealthBar.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Item.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PlayerAttacker.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PlayerInventory.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PlayerStats.cs" />
+    <Compile Include="Assets\2_Scripts\Test\UtilHelper.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponHolderSlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponItem.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponSlotManager.cs" />
     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
@@ -113,6 +126,7 @@
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\ScaleChange.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\SimpleObjectMake.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\_ObjectMakeBase.cs" />
+    <Compile Include="Assets\Extensions\GUI Pro Kit Fantasy RPG\Extensions\UIParticle\UIParticleSystem.cs" />
     <Compile Include="Assets\Extensions\MMD4Mecanim\Scripts\MMD4MecanimAnimMorphHelper.cs" />
     <Compile Include="Assets\Extensions\MMD4Mecanim\Scripts\MMD4MecanimBone.cs" />
     <Compile Include="Assets\Extensions\MMD4Mecanim\Scripts\MMD4MecanimBulletPhysics.cs" />
@@ -125,7 +139,6 @@
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\FollowTrackingCamera.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonCharacter.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonUserControl.cs" />
-    <Compile Include="Assets\ResetIsInteracting.cs" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent-Edge.shader" />
@@ -187,6 +200,7 @@
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiShadowVert.cginc" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Katana.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiGlitter.cginc" />
+    <None Include="Assets\Extensions\GUI Pro Kit Fantasy RPG\Extensions\UIParticle\hidden particle.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-Tessellation.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ShadowCaster.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDecal.cginc" />
@@ -205,6 +219,7 @@
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal One Eyed Bat\Read me.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiUVDistortion.cginc" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\Read me.txt" />
+    <None Include="Assets\3_Models\Genshin\다이루크\使用规则.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDissolve.cginc" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Giant Bee\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-ForwardAdd.cginc" />

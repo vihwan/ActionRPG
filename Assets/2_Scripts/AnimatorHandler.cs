@@ -115,6 +115,16 @@ namespace SG
             Vector3 velocity = deltaPosition / delta;
             playerLocomotion.Rigidbody.velocity = velocity;
         }
+
+        public void EnableCombo()
+        {
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            anim.SetBool("canDoCombo", false);
+        }
     }
 }
 
