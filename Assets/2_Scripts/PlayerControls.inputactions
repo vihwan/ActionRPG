@@ -129,6 +129,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Skill_One",
+                    "type": "Button",
+                    "id": "4ca1f6bb-00b6-403b-b257-8834e21008a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -173,6 +181,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "RT",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bed2927-e444-48d0-9e8c-e75f88b7fc86",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Skill_One",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

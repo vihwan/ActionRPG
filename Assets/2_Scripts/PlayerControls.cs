@@ -142,6 +142,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Skill_One"",
+                    ""type"": ""Button"",
+                    ""id"": ""4ca1f6bb-00b6-403b-b257-8834e21008a2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -188,6 +196,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""RT"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bed2927-e444-48d0-9e8c-e75f88b7fc86"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Skill_One"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -203,6 +222,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions_Roll = m_PlayerActions.FindAction("Roll", throwIfNotFound: true);
         m_PlayerActions_RB = m_PlayerActions.FindAction("RB", throwIfNotFound: true);
         m_PlayerActions_RT = m_PlayerActions.FindAction("RT", throwIfNotFound: true);
+        m_PlayerActions_Skill_One = m_PlayerActions.FindAction("Skill_One", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -296,6 +316,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_Roll;
     private readonly InputAction m_PlayerActions_RB;
     private readonly InputAction m_PlayerActions_RT;
+    private readonly InputAction m_PlayerActions_Skill_One;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -303,6 +324,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Roll => m_Wrapper.m_PlayerActions_Roll;
         public InputAction @RB => m_Wrapper.m_PlayerActions_RB;
         public InputAction @RT => m_Wrapper.m_PlayerActions_RT;
+        public InputAction @Skill_One => m_Wrapper.m_PlayerActions_Skill_One;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -321,6 +343,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RT.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
                 @RT.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnRT;
+                @Skill_One.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSkill_One;
+                @Skill_One.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSkill_One;
+                @Skill_One.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSkill_One;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -334,6 +359,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @RT.started += instance.OnRT;
                 @RT.performed += instance.OnRT;
                 @RT.canceled += instance.OnRT;
+                @Skill_One.started += instance.OnSkill_One;
+                @Skill_One.performed += instance.OnSkill_One;
+                @Skill_One.canceled += instance.OnSkill_One;
             }
         }
     }
@@ -348,5 +376,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnRoll(InputAction.CallbackContext context);
         void OnRB(InputAction.CallbackContext context);
         void OnRT(InputAction.CallbackContext context);
+        void OnSkill_One(InputAction.CallbackContext context);
     }
 }

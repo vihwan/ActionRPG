@@ -64,6 +64,7 @@ namespace SG
             inputHandler.sprintFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
+            inputHandler.sk_One_Input = false;
             //isSprinting = inputHandler.b_Input;
 
             if(isInAir)

@@ -66,7 +66,12 @@
   <ItemGroup>
     <Compile Include="Assets\2_Scripts\AnimatorHandler.cs" />
     <Compile Include="Assets\2_Scripts\CameraHandler.cs" />
+    <Compile Include="Assets\2_Scripts\DamageCollider.cs" />
+    <Compile Include="Assets\2_Scripts\DamageToPlayer.cs" />
+    <Compile Include="Assets\2_Scripts\EnemyStats.cs" />
+    <Compile Include="Assets\2_Scripts\HealthBar.cs" />
     <Compile Include="Assets\2_Scripts\InputHandler.cs" />
+    <Compile Include="Assets\2_Scripts\Item.cs" />
     <Compile Include="Assets\2_Scripts\OldScripts\CalledInAnimation.cs" />
     <Compile Include="Assets\2_Scripts\OldScripts\CameraMan.cs" />
     <Compile Include="Assets\2_Scripts\OldScripts\CameraMoveController.cs" />
@@ -75,22 +80,24 @@
     <Compile Include="Assets\2_Scripts\OldScripts\Utilities\Helper.cs" />
     <Compile Include="Assets\2_Scripts\OldScripts\Utilities\KeepBool.cs" />
     <Compile Include="Assets\2_Scripts\OldScripts\WeaponManager.cs" />
+    <Compile Include="Assets\2_Scripts\PlayerAttackAnimation.cs" />
     <Compile Include="Assets\2_Scripts\PlayerControls.cs" />
+    <Compile Include="Assets\2_Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\2_Scripts\PlayerLocomotion.cs" />
     <Compile Include="Assets\2_Scripts\PlayerManager.cs" />
+    <Compile Include="Assets\2_Scripts\PlayerStats.cs" />
     <Compile Include="Assets\2_Scripts\ResetAnimationBool.cs" />
-    <Compile Include="Assets\2_Scripts\Test\DamageCollider.cs" />
-    <Compile Include="Assets\2_Scripts\Test\DamagePlayer.cs" />
-    <Compile Include="Assets\2_Scripts\Test\EnemyStats.cs" />
-    <Compile Include="Assets\2_Scripts\Test\HealthBar.cs" />
-    <Compile Include="Assets\2_Scripts\Test\Item.cs" />
-    <Compile Include="Assets\2_Scripts\Test\PlayerAttacker.cs" />
-    <Compile Include="Assets\2_Scripts\Test\PlayerInventory.cs" />
-    <Compile Include="Assets\2_Scripts\Test\PlayerStats.cs" />
-    <Compile Include="Assets\2_Scripts\Test\UtilHelper.cs" />
-    <Compile Include="Assets\2_Scripts\Test\WeaponHolderSlot.cs" />
-    <Compile Include="Assets\2_Scripts\Test\WeaponItem.cs" />
-    <Compile Include="Assets\2_Scripts\Test\WeaponSlotManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\GUIManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PlayerSkill.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PlayerSkillManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\QuickSlotUI.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Skill.cs" />
+    <Compile Include="Assets\2_Scripts\Test\SkillBtn.cs" />
+    <Compile Include="Assets\2_Scripts\Test\SkillTimer.cs" />
+    <Compile Include="Assets\2_Scripts\UtilHelper.cs" />
+    <Compile Include="Assets\2_Scripts\WeaponHolderSlot.cs" />
+    <Compile Include="Assets\2_Scripts\WeaponItem.cs" />
+    <Compile Include="Assets\2_Scripts\WeaponSlotManager.cs" />
     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
@@ -139,14 +146,50 @@
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\FollowTrackingCamera.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonCharacter.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonUserControl.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark04.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
+    <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-Transparent-Edge.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ForwardAdd.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiFrag.cginc" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Assassin.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Treant\www.meshtint.com.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces-Edge.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Transparent.shader" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Integrated Particle\Shader_Integrated Paticle(WithNormal).shader" />
@@ -160,6 +203,7 @@
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess.shader" />
     <None Include="Assets\3_Models\Genshin\행자남\readme【一定要看】.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-ForwardBase.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiData.cginc" />
     <None Include="Assets\3_Models\Genshin\행자남\Traveler_Man_Hasvmd.xml" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-Lighting.cginc" />
@@ -171,16 +215,20 @@
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_RimLight(TextureAnimation).shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Spiderling Venom\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\Mini Legion Warband HP\Shader\HPMaskTint.shader" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Oswald-Bold - OFL.txt" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_ObjectBorder(SimpleBorder).shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-Transparent-Edge.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-Edge.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Wolf\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Warrior.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Anton OFL.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiSpawnInVert.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Edge.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces-Edge.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_GreatSword.txt" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_ObjectSkin.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\poi-tools\Resources\PoiTextureUnpacker.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal One Eyed Bat\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMainTex.cginc" />
@@ -198,6 +246,7 @@
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiWireframe.cginc" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Dual.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiShadowVert.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Katana.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiGlitter.cginc" />
     <None Include="Assets\Extensions\GUI Pro Kit Fantasy RPG\Extensions\UIParticle\hidden particle.shader" />
@@ -221,25 +270,33 @@
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\Read me.txt" />
     <None Include="Assets\3_Models\Genshin\다이루크\使用规则.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDissolve.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Giant Bee\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-ForwardAdd.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiShadowIncludes.cginc" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMath.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NEXTEdge-Pass4.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiRimLighting.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-NoShadowCasting-BothFaces-Transparent-Edge.shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiSubsurfaceScattering.cginc" />
     <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Spear.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Transparent-Edge.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim_Beta_20200105\MMD4Mecanim_Beta_20200105\Readme_en.txt" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Wolf\Read me.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMSDF.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiBlackLight.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Surface-ShadowCollector.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiSpawnInFrag.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiAlphaToCoverage.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Edge.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Treant\Read me.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_ObjectBorder(NormalBorder).shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Shaders\7PlusLabels.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Transparent.shader" />
@@ -258,6 +315,7 @@
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMatcap.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiHologram.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiPass.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\ThryEditor\Examples\Example2.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-AutoLight.cginc" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal King Cobra\www.meshtint.com.txt" />
@@ -281,6 +339,7 @@
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-Transparent-Edge.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDefines.cginc" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Dissolve Texture\Mobile\(Mobile)Shader_DissolveTexture(TextureAnimation).shader" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Giant Bee\Read me.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiOutlineFrag.cginc" />
@@ -289,16 +348,20 @@
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Extras\MasterScanner.shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-NoShadowCasting-BothFaces.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Spiderling Venom\Read me.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\Extensions\TinyDungeons\README.txt" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-SurfaceEdge-ForwardBase.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_FunctionsArtistic.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMacros.cginc" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiBackFace.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Tess-BothFaces.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiLighting.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-BothFaces-Transparent.shader" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Integrated Particle\Shader_Integrated Paticle(ValueControl).shader" />
     <None Include="Assets\Extensions\MMD4Mecanim\Shaders\MMD4Mecanim-MMDLit-Lighting.cginc" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Dragon\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiPassOutline.cginc" />
     <None Include="Assets\3_Models\Genshin\행자남\空.MMD4Mecanim.xml" />
@@ -308,8 +371,10 @@
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiVertexManipulations.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiBlending.cginc" />
     <None Include="Assets\Extensions\MMD4Mecanim_Beta_20200105\MMD4Mecanim_Beta_20200105\Readme_jp.txt" />
+    <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\ThryEditor\Examples\ThryPresetsExample.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\ThryEditor\Examples\ThryLabelExample.txt" />
+    <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMetal.cginc" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiV2F.cginc" />
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Dissolve Texture\Shader_DissolveTexture(MaskAnimation).shader" />
@@ -867,8 +932,14 @@
     <Reference Include="Unity.InputSystem">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -881,6 +952,9 @@
     </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder.Base">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
     </Reference>
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>

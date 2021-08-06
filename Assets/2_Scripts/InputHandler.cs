@@ -15,6 +15,7 @@ namespace SG
         public bool b_Input;
         public bool rb_Input; //약공격 : 키보드 E
         public bool rt_Input; //강공격 : 키보드 R
+        public bool sk_One_Input; // 스킬 공격 1 : 키보드 버튼 1
 
         public float rollInputTimer;
         public bool rollFlag;
@@ -22,9 +23,10 @@ namespace SG
         public bool comboFlag;
 
         private PlayerControls inputActions;
-        private PlayerAttacker playerAttacker;
+        private PlayerAttackAnimation playerAttacker;
         private PlayerInventory playerInventory;
         private PlayerManager playerManager;
+        private PlayerSkillManager playerSkillManager;
 
 
         Vector2 movementInput;
@@ -41,18 +43,19 @@ namespace SG
 
         private void Start()
         {
-            playerAttacker = GetComponent<PlayerAttacker>();
+            playerAttacker = GetComponent<PlayerAttackAnimation>();
             if (playerAttacker == null)
                 Debug.LogWarning("playerAttacker Component is Null");
 
             playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
+            playerSkillManager = GetComponent<PlayerSkillManager>();
         }
 
 
         public void OnEnable()
         {
-            if(inputActions == null)
+            if (inputActions == null)
             {
                 inputActions = new PlayerControls();
                 inputActions.PlayerMovement.Movement.performed +=
@@ -73,6 +76,8 @@ namespace SG
             MoveInput(delta);
             HandleRollInput(delta);
             HandleAttackInput(delta);
+            HandleQuickSlotInput();
+            HandleSkillAttackInput(delta);
         }
 
         private void MoveInput(float delta)
@@ -95,7 +100,7 @@ namespace SG
             }
             else
             {
-                if(rollInputTimer > 0 && rollInputTimer < 0.5f)
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
                 {
                     sprintFlag = false;
                     rollFlag = true;
@@ -108,7 +113,7 @@ namespace SG
         private void HandleAttackInput(float delta)
         {
             inputActions.PlayerActions.RB.performed += i => rb_Input = true;
-            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+            // inputActions.PlayerActions.RT.performed += i => rt_Input = true;
 
             if (rb_Input)
             {
@@ -127,12 +132,36 @@ namespace SG
                         return;
 
                     playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
-                }     
+                }
             }
 
-            if(rt_Input)
+            /*            if(rt_Input)
+                        {
+                            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                        }*/
+        }
+
+        private void HandleQuickSlotInput()
+        {
+            inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+
+            if (rt_Input)
             {
-                playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+                playerInventory.ChangeRightWeapon();
+            }
+        }
+
+        private void HandleSkillAttackInput(float delta)
+        {
+            inputActions.PlayerActions.Skill_One.performed += i => sk_One_Input = true;
+
+            if (sk_One_Input)
+            {
+
+                //콤보 도중에도 스킬을 쓸 수 있게 하는 것이 좋겠지?
+                //if (playerManager.isInteracting)
+                //    return;
+                playerSkillManager.UseSkill(1);       
             }
         }
     }
