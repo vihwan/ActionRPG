@@ -12,10 +12,17 @@ namespace SG
         private float mouseX;
         private float mouseY;
 
+        public bool a_Input; //상호작용 : 키보드 F
         public bool b_Input;
-        public bool rb_Input; //약공격 : 키보드 E
+        public bool rb_Input; //약공격 : 키보드 E / 마우스 왼클릭
         public bool rt_Input; //강공격 : 키보드 R
-        public bool sk_One_Input; // 스킬 공격 1 : 키보드 버튼 1
+        public bool jump_Input;
+
+        // 스킬 공격 : 키보드 버튼 1,2,3,4
+        public bool sk_One_Input; 
+        public bool sk_Two_Input;
+        public bool sk_Three_Input;
+        public bool sk_Ult_Input;
 
         public float rollInputTimer;
         public bool rollFlag;
@@ -64,6 +71,7 @@ namespace SG
             }
 
             inputActions.Enable();
+
         }
 
         private void OnDisable()
@@ -78,6 +86,8 @@ namespace SG
             HandleAttackInput(delta);
             HandleQuickSlotInput();
             HandleSkillAttackInput(delta);
+            HandleInteractingInput();
+            HandleJumpingInput();
         }
 
         private void MoveInput(float delta)
@@ -94,7 +104,7 @@ namespace SG
             b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
             if (b_Input)
             {
-                rollFlag = true;
+                //rollFlag = true;
                 rollInputTimer += delta;
                 sprintFlag = true;
             }
@@ -154,6 +164,9 @@ namespace SG
         private void HandleSkillAttackInput(float delta)
         {
             inputActions.PlayerActions.Skill_One.performed += i => sk_One_Input = true;
+            inputActions.PlayerActions.Skill_Two.performed += i => sk_Two_Input = true;
+            inputActions.PlayerActions.Skill_Three.performed += i => sk_Three_Input = true;
+            inputActions.PlayerActions.Skill_Ult.performed += i => sk_Ult_Input = true;
 
             if (sk_One_Input)
             {
@@ -163,6 +176,37 @@ namespace SG
                 //    return;
                 playerSkillManager.UseSkill(1);       
             }
+            else if (sk_Two_Input)
+            {
+                playerSkillManager.UseSkill(2);
+            }
+            else if (sk_Three_Input)
+            {
+                playerSkillManager.UseSkill(3);
+            }
+            else if (sk_Ult_Input)
+            {
+                playerSkillManager.UseSkill(4);
+            }
+        }
+
+        private void HandleInteractingInput()
+        {
+            inputActions.PlayerActions.A.performed += i => a_Input = true;
+
+            //Set the UI to the Interactable Object's Text
+            //Set the Text Popup to true
+            if (a_Input)
+            {
+                if(playerManager.InteractableObject != null)
+                    playerManager.ExecuteInteract();
+                //interactableObject.Interact(this);
+            }
+        }
+
+        private void HandleJumpingInput()
+        {
+            inputActions.PlayerActions.Jump.performed += i => jump_Input = true;
         }
     }
 }

@@ -22,6 +22,11 @@ namespace SG
         public Button Button { get => button;}
 
 
+        public void SetCoolTime(int time)
+        {
+            coolTime = time;
+        }
+
         //외부에서 실행될 함수를 받아올 함수
         public void SetEvent(System.Action action)
         {

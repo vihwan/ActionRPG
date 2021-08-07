@@ -8,19 +8,52 @@ namespace SG
     //스킬 아이콘 및 퀵슬롯 UI들을 관리하는 스크립트
     public class QuickSlotUI : MonoBehaviour
     {
-        private Image Icon_Skill_1;
-        private Image Icon_Skill_2;
-        private Image Icon_Skill_3;
-        private Image Icon_Skill_Ult;
-        private Image Icon_QuickSlot;
+        private SkillBtn skillBtn_1;
+        private SkillBtn skillBtn_2;
+        private SkillBtn skillBtn_3;
+        private SkillBtn skillBtn_Ult;
+        private SkillBtn consumesSlot;
+
+        private Image skillIcon_1;
+        private Image skillIcon_2;
+        private Image skillIcon_3;
+        private Image skillIcon_Ult;
+
+        private PlayerSkillManager skillManager;
+
+        public SkillBtn SkillBtn_1 { get => skillBtn_1; private set => skillBtn_1 = value; }
+        public SkillBtn SkillBtn_2 { get => skillBtn_2; private set => skillBtn_2 = value; }
+        public SkillBtn SkillBtn_3 { get => skillBtn_3; private set => skillBtn_3 = value; }
+        public SkillBtn SkillBtn_Ult { get => skillBtn_Ult; private set => skillBtn_Ult = value; }
 
         public void Init()
         {
-            Icon_Skill_1 = UtilHelper.Find<Image>(transform, "Skill_1/Mask/Icon");
-            Icon_Skill_2 = UtilHelper.Find<Image>(transform, "Skill_2/Icon");
-            Icon_Skill_3 = UtilHelper.Find<Image>(transform, "Skill_3/Icon");
-            Icon_Skill_Ult = UtilHelper.Find<Image>(transform, "Skill_Ult/Icon");
-            Icon_QuickSlot = UtilHelper.Find<Image>(transform, "QuickSlot/Icon");
+            SkillBtn_1 = UtilHelper.Find<SkillBtn>(transform, "Skill_1");
+            if (SkillBtn_1 != null)
+                skillIcon_1 = UtilHelper.Find<Image>(SkillBtn_1.transform, "Mask/Icon");
+
+            SkillBtn_2 = UtilHelper.Find<SkillBtn>(transform, "Skill_2");
+            if (SkillBtn_2 != null)
+                skillIcon_2 = UtilHelper.Find<Image>(SkillBtn_2.transform, "Mask/Icon");
+
+            SkillBtn_3 = UtilHelper.Find<SkillBtn>(transform, "Skill_3");
+            if (SkillBtn_3 != null)
+                skillIcon_3 = UtilHelper.Find<Image>(SkillBtn_3.transform, "Mask/Icon");
+
+            SkillBtn_Ult = UtilHelper.Find<SkillBtn>(transform, "Skill_Ult");
+            if (SkillBtn_Ult != null)
+                skillIcon_Ult = UtilHelper.Find<Image>(SkillBtn_Ult.transform, "Mask/Icon");
+
+            consumesSlot = UtilHelper.Find<SkillBtn>(transform, "ConsumesSlot");
+
+            skillManager = FindObjectOfType<PlayerSkillManager>();
+            if(skillManager != null)
+            {
+                UpdateSkillSlotsUI(1, skillManager.playerSkill_One);
+                UpdateSkillSlotsUI(2, skillManager.playerSkill_Two);
+                UpdateSkillSlotsUI(3, skillManager.playerSkill_Three);
+                UpdateSkillSlotsUI(4, skillManager.playerSkill_Ult);
+            }
         }
 
         //스킬 슬롯을 갱신하는 함수
@@ -29,20 +62,24 @@ namespace SG
             switch (skillSlotNum)
             {
                 case 1:
-                    Icon_Skill_1.sprite = skill.skillImage;
-                    Icon_Skill_1.enabled = true;
+                    skillIcon_1.sprite = skill.skillImage;
+                    skillIcon_1.enabled = true;
+                    skillBtn_1.SetCoolTime(skill.coolTime);
                     break;
                 case 2:
-                    Icon_Skill_2.sprite = skill.skillImage;
-                    Icon_Skill_2.enabled = true;
+                    skillIcon_2.sprite = skill.skillImage;
+                    skillIcon_2.enabled = true;
+                    skillBtn_2.SetCoolTime(skill.coolTime);
                     break;
                 case 3:
-                    Icon_Skill_3.sprite = skill.skillImage;
-                    Icon_Skill_3.enabled = true;
+                    skillIcon_3.sprite = skill.skillImage;
+                    skillIcon_3.enabled = true;
+                    skillBtn_3.SetCoolTime(skill.coolTime);
                     break;
                 case 4:
-                    Icon_Skill_Ult.sprite = skill.skillImage;
-                    Icon_Skill_Ult.enabled = true;
+                    skillIcon_Ult.sprite = skill.skillImage;
+                    skillIcon_Ult.enabled = true;
+                    skillBtn_Ult.SetCoolTime(skill.coolTime);
                     break;
             }
         }
@@ -52,6 +89,23 @@ namespace SG
         {
 
         }
+
+/*        public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weaponItem)
+        {
+
+            if (isLeft == false)
+            {
+                if(weaponItem.itemIcon != null)
+                {
+                    rightWeaponIcon.sprite = weaponItem.itemIcon;
+                    rightWeaponIcon.enabled = true;
+                }
+                else
+                {
+
+                }
+            }
+        }*/
     }
 
 }

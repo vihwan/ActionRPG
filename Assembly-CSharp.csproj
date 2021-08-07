@@ -88,12 +88,15 @@
     <Compile Include="Assets\2_Scripts\PlayerStats.cs" />
     <Compile Include="Assets\2_Scripts\ResetAnimationBool.cs" />
     <Compile Include="Assets\2_Scripts\Test\GUIManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Interactable.cs" />
+    <Compile Include="Assets\2_Scripts\Test\InteractableUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\PlayerSkill.cs" />
     <Compile Include="Assets\2_Scripts\Test\PlayerSkillManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\QuickSlotUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\Skill.cs" />
     <Compile Include="Assets\2_Scripts\Test\SkillBtn.cs" />
     <Compile Include="Assets\2_Scripts\Test\SkillTimer.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponPickUp.cs" />
     <Compile Include="Assets\2_Scripts\UtilHelper.cs" />
     <Compile Include="Assets\2_Scripts\WeaponHolderSlot.cs" />
     <Compile Include="Assets\2_Scripts\WeaponItem.cs" />

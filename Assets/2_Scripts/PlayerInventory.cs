@@ -6,7 +6,7 @@ namespace SG
 {
     public class PlayerInventory : MonoBehaviour
     {
-        WeaponSlotManager weaponSlotManager;
+        private WeaponSlotManager weaponSlotManager;
         public WeaponItem rightWeapon;
         public WeaponItem leftWeapon;
         public WeaponItem unarmedWeapon;
@@ -16,6 +16,8 @@ namespace SG
 
         public int currentRightWeaponIndex = -1;
         public int currentLeftWeaponIndex = -1;
+
+        public List<WeaponItem> weaponsInventory;
 
         private void Awake()
         {

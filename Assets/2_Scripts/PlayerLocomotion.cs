@@ -86,7 +86,7 @@ namespace SG
             }
             else
             {
-                if(inputHandler.MoveAmount < 0.5f)
+                if (inputHandler.MoveAmount < 0.5f)
                 {
                     moveDirection *= walkingSpeed;
                     playerManager.isSprinting = false;
@@ -152,7 +152,7 @@ namespace SG
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Backstep", true);
+                    animatorHandler.PlayTargetAnimation("Step_Back", true);
                 }
             }
         }
@@ -164,7 +164,7 @@ namespace SG
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
 
-            if(Physics.Raycast(origin,myTransform.forward, out hit, 0.4f))
+            if (Physics.Raycast(origin, myTransform.forward, out hit, 0.4f))
             {
                 moveDirection = Vector3.zero;
             }
@@ -183,7 +183,7 @@ namespace SG
 
             //레이캐스트를 이용해서 땅에 닿아있는지 상태를 체크합니다.
             Debug.DrawRay(origin, -Vector3.up * minimumDistanceNeededToBeginFall, Color.red, 0.1f, false);
-            if(Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
+            if (Physics.Raycast(origin, -Vector3.up, out hit, minimumDistanceNeededToBeginFall, ignoreForGroundCheck))
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
@@ -192,7 +192,7 @@ namespace SG
 
                 if (playerManager.isInAir)
                 {
-                    if(inAirTimer > 0.5f)
+                    if (inAirTimer > 0.5f)
                     {
                         Debug.Log("You were in the air for : " + inAirTimer);
                         animatorHandler.PlayTargetAnimation("Land", true);
@@ -230,7 +230,7 @@ namespace SG
 
             if (playerManager.isGrounded)
             {
-                if(playerManager.isInteracting || inputHandler.MoveAmount > 0)
+                if (playerManager.isInteracting || inputHandler.MoveAmount > 0)
                 {
                     myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, delta);
                 }
@@ -240,7 +240,7 @@ namespace SG
                 }
             }
 
-            if(playerManager.isInteracting || inputHandler.MoveAmount > 0)
+            if (playerManager.isInteracting || inputHandler.MoveAmount > 0)
             {
                 myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
             }
@@ -250,6 +250,28 @@ namespace SG
             }
 
 
+        }
+
+        public void HandleJumping()
+        {
+            if (playerManager.isInteracting)
+                return;
+
+            if (inputHandler.jump_Input)
+            {
+
+                moveDirection = cameraObject.forward * inputHandler.Vertical;
+                moveDirection += cameraObject.right * inputHandler.Horizontal;
+                animatorHandler.PlayTargetAnimation("Jump", true);
+                moveDirection.y = 0f; //Root Motion
+                Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
+                myTransform.rotation = jumpRotation;
+
+                if (inputHandler.MoveAmount > 0)
+                {
+
+                }
+            }
         }
         #endregion
     }

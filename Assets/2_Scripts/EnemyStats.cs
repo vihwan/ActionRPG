@@ -33,12 +33,13 @@ namespace SG
         {
             currentHealth = currentHealth - damage;
             animator.Play("Take Damage");
+            Debug.Log("데미지를 입힌다!");
 
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 animator.Play("Die");
-                //Handle Player Death
+                //Handle Enemy Death
             }
         }
     }
