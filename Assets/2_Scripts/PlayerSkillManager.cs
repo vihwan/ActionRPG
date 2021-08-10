@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,9 +33,9 @@ namespace SG
                 skillBtn_3 = quickSlotUI.SkillBtn_3;
                 skillBtn_Ult = quickSlotUI.SkillBtn_Ult;
             }
-            catch (System.Exception)
+            catch (Exception e)
             {
-                throw;
+                Debug.LogError(e);
             }
         }
 

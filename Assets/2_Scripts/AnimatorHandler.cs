@@ -8,7 +8,6 @@ namespace SG
     {
         PlayerManager playerManager;
         [SerializeField] private Animator anim;
-        [SerializeField] private InputHandler inputHandler;
         [SerializeField] private PlayerLocomotion playerLocomotion;
         private int vertical;
         private int horizontal;
@@ -22,7 +21,6 @@ namespace SG
         {
             playerManager = GetComponentInParent<PlayerManager>();
             Anim = GetComponent<Animator>();
-            inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
-    public class PlayerManager : MonoBehaviour
+    public class PlayerManager : CharacterManager
     {
         private InputHandler inputHandler;
         private Animator anim;
@@ -21,8 +21,8 @@ namespace SG
         public bool isGrounded;
         public bool canDoCombo;
 
-        public InteractableUI InteractableUI { get => interactableUI;}
-        public Interactable InteractableObject { get => interactableObject;}
+        public InteractableUI InteractableUI { get => interactableUI; }
+        public Interactable InteractableObject { get => interactableObject; }
 
         private void Awake()
         {
@@ -48,9 +48,7 @@ namespace SG
             anim.SetBool("isInAir", isInAir);
 
             inputHandler.TickInput(delta);
-            playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
-            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleJumping();
 
             //CheckForInteractable();
@@ -59,17 +57,13 @@ namespace SG
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
-            if (cameraHandler != null)
-            {
-                cameraHandler.FollowTarget(delta);
-                cameraHandler.HandleCameraRotation(delta, inputHandler.MouseX, inputHandler.MouseY);
-            }
+            playerLocomotion.HandleMovement(delta);
+            playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
         }
 
         private void LateUpdate()
         {
             inputHandler.rollFlag = false;
-            inputHandler.sprintFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
             inputHandler.sk_One_Input = false;
@@ -78,8 +72,16 @@ namespace SG
             inputHandler.sk_Ult_Input = false;
             inputHandler.a_Input = false;
             inputHandler.jump_Input = false;
+            inputHandler.menu_Input = false;
 
             isSprinting = inputHandler.b_Input;
+
+            float delta = Time.deltaTime;
+            if (cameraHandler != null)
+            {
+                cameraHandler.FollowTarget(delta);
+                cameraHandler.HandleCameraRotation(delta, inputHandler.MouseX, inputHandler.MouseY);
+            }
 
             if (isInAir)
             {
