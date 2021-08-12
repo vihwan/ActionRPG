@@ -12,10 +12,12 @@ namespace SG
 
         private HealthBar healthBar;
         private AnimatorHandler animatorHandler;
+        private PlayerManager playerManager;
 
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            playerManager = GetComponent<PlayerManager>();
         }
 
         private void Start()
@@ -37,12 +39,20 @@ namespace SG
         {
             currentHealth = currentHealth - damage;
             healthBar.SetCurrentHealth(currentHealth);
-            animatorHandler.PlayTargetAnimation("Damage_01", true);
 
-            if(currentHealth <= 0)
+            if(playerManager.isUnEquip == false)
+                animatorHandler.PlayTargetAnimation("Damage_01", true);
+            else
+                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true);
+
+            if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                animatorHandler.PlayTargetAnimation("Damage_Die", true);
+
+                if (playerManager.isUnEquip == false)
+                    animatorHandler.PlayTargetAnimation("Damage_Die", true);
+                else
+                    animatorHandler.PlayTargetAnimation("Damage_Die_UnEquip", true);
                 //Handle Player Death
             }
         }

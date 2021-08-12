@@ -104,11 +104,11 @@ namespace SG
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
             Rigidbody.velocity = projectedVelocity;
 
-           
+
 
             if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
             {
-                animatorHandler.UpdateAnimatorValues(inputHandler.Vertical,inputHandler.Horizontal, playerManager.isSprinting);
+                animatorHandler.UpdateAnimatorValues(inputHandler.Vertical, inputHandler.Horizontal, playerManager.isSprinting);
             }
             else
             {
@@ -125,7 +125,7 @@ namespace SG
         {
             if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
             {
-                if(inputHandler.sprintFlag || inputHandler.rollFlag)
+                if (inputHandler.sprintFlag || inputHandler.rollFlag)
                 {
                     Vector3 targetDirection = Vector3.zero;
                     targetDirection = cameraHandler.cameraTransform.forward * inputHandler.Vertical;
@@ -152,7 +152,7 @@ namespace SG
                     Quaternion tr = Quaternion.LookRotation(rotationDirection);
                     Quaternion targetRotation = Quaternion.Slerp(transform.rotation, tr, rotationSpeed * Time.deltaTime);
                     transform.rotation = targetRotation;
-                }        
+                }
             }
             else
             {
@@ -193,14 +193,21 @@ namespace SG
 
                 if (inputHandler.MoveAmount > 0)
                 {
-                    animatorHandler.PlayTargetAnimation("Rolling", true);
+                    if (playerManager.isUnEquip == false)
+                        animatorHandler.PlayTargetAnimation("Rolling", true);
+                    else
+                        animatorHandler.PlayTargetAnimation("Rolling_UnEquip", true);
+
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
                     myTransform.rotation = rollRotation;
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Step_Back", true);
+                    if (playerManager.isUnEquip == false)
+                        animatorHandler.PlayTargetAnimation("Step_Back", true);
+                    else
+                        animatorHandler.PlayTargetAnimation("Step_Back_UnEquip", true);
                 }
             }
         }
@@ -243,12 +250,20 @@ namespace SG
                     if (inAirTimer > 0.5f)
                     {
                         Debug.Log("You were in the air for : " + inAirTimer);
-                        animatorHandler.PlayTargetAnimation("Land", true);
+                        if (playerManager.isUnEquip == false)
+                            animatorHandler.PlayTargetAnimation("Land", true);
+                        else
+                            animatorHandler.PlayTargetAnimation("Land_UnEquip", true);
+
                         inAirTimer = 0;
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Empty", false);
+                        if (playerManager.isUnEquip == false)
+                            animatorHandler.PlayTargetAnimation("Empty", false);
+                        else
+                            animatorHandler.PlayTargetAnimation("Empty UnEquip", false);
+
                         inAirTimer = 0;
                     }
 
@@ -266,7 +281,10 @@ namespace SG
                 {
                     if (playerManager.isInteracting == false)
                     {
-                        animatorHandler.PlayTargetAnimation("Falling", true);
+                        if (playerManager.isUnEquip == false)
+                            animatorHandler.PlayTargetAnimation("Falling", true);
+                        else
+                            animatorHandler.PlayTargetAnimation("Falling_UnEquip", true);
                     }
 
                     Vector3 vel = rigidbody.velocity;
@@ -310,7 +328,12 @@ namespace SG
 
                 moveDirection = cameraObject.forward * inputHandler.Vertical;
                 moveDirection += cameraObject.right * inputHandler.Horizontal;
-                animatorHandler.PlayTargetAnimation("Jump", true);
+
+                if (playerManager.isUnEquip == false)
+                    animatorHandler.PlayTargetAnimation("Jump", true);
+                else
+                    animatorHandler.PlayTargetAnimation("Jump_UnEquip", true);
+
                 moveDirection.y = 0f; //Root Motion
                 Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
                 myTransform.rotation = jumpRotation;
@@ -318,6 +341,26 @@ namespace SG
                 if (inputHandler.MoveAmount > 0)
                 {
 
+                }
+            }
+        }
+
+        //장비 미장착에서만 동작. 전투중에 달리기 끝마치는 경우 같은 동작은 필요가 없다.
+        public void HandleSprintEnd()
+        {
+            if (playerManager.isInteracting)
+                return;
+
+            if (playerManager.isUnEquip == true)
+            {
+                if (inputHandler.b_Input)
+                {
+                    if (inputHandler.MoveAmount < 1f)
+                    {
+                        Debug.Log("Play SprintEnd");
+                        animatorHandler.PlayTargetAnimation("SprintEnd_UnEquip", true);
+                        playerManager.isSprinting = false;
+                    }
                 }
             }
         }

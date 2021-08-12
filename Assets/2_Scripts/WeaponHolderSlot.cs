@@ -30,13 +30,14 @@ namespace SG
         }
 
 
-        public void LoadWeaponModel(WeaponItem weaponItem)
+        public void LoadWeaponModel(WeaponItem weaponItem, out GameObject weaponGO)
         {
             UnloadWeaponAndDestroy();
 
             if (weaponItem == null)
             {
                 UnloadWeapon();
+                weaponGO = null;
                 return;
             }
 
@@ -59,6 +60,7 @@ namespace SG
             }
 
             currentWeaponModel = model;
+            weaponGO = currentWeaponModel;
         }
 
     }

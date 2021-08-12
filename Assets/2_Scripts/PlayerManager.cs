@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,17 +13,22 @@ namespace SG
         private PlayerLocomotion playerLocomotion;
         private InteractableUI interactableUI;
         private Interactable interactableObject;
+        private AnimationLayerHandler animationLayerHandler;
 
         public bool isInteracting;
 
         [Header("Player Flags")]
+        public bool isUnEquip;
         public bool isSprinting;
         public bool isInAir;
         public bool isGrounded;
         public bool canDoCombo;
 
+        public float changeWeaponOutWaitTime = 0f;
+        [SerializeField] private const float changeWeaponOutLimitTime = 5f;
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
+        public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
 
         private void Awake()
         {
@@ -38,6 +44,7 @@ namespace SG
             anim = GetComponentInChildren<Animator>();
             playerLocomotion = GetComponent<PlayerLocomotion>();
             interactableUI = FindObjectOfType<InteractableUI>();
+            animationLayerHandler = GetComponent<AnimationLayerHandler>();
         }
 
         private void Update()
@@ -46,6 +53,7 @@ namespace SG
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
             anim.SetBool("isInAir", isInAir);
+            isUnEquip = anim.GetBool("isUnEquip");
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
@@ -54,15 +62,22 @@ namespace SG
             //CheckForInteractable();
         }
 
+
+
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            playerLocomotion.HandleSprintEnd();
         }
 
         private void LateUpdate()
         {
+            float delta = Time.deltaTime;
+            if (!isUnEquip)
+                ChangePlayerToUnEquip(delta);
+
             inputHandler.rollFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
@@ -76,7 +91,7 @@ namespace SG
 
             isSprinting = inputHandler.b_Input;
 
-            float delta = Time.deltaTime;
+           
             if (cameraHandler != null)
             {
                 cameraHandler.FollowTarget(delta);
@@ -86,14 +101,7 @@ namespace SG
             if (isInAir)
             {
                 playerLocomotion.inAirTimer += Time.deltaTime;
-                //playerLocomotion.Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             }
-
-            /*            if (isGrounded)
-                        {
-                            playerLocomotion.Rigidbody.constraints = 
-                                RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
-                        }*/
         }
 
         //public void CheckForInteractable()
@@ -127,6 +135,25 @@ namespace SG
         //            InteractableUI.SetActiveInteractUI(false);
         //    }
         //}
+
+        private void ChangePlayerToUnEquip(float delta)
+        {
+            changeWeaponOutWaitTime += delta;
+
+            //구르기, 점프, 공격, 스킬 입력키가 입력되면(isInteracting == true 대기경과시간을 초기화)
+            if (this.isInteracting ||
+                inputHandler.rb_Input || inputHandler.jump_Input ||
+                inputHandler.sk_One_Input || inputHandler.sk_Two_Input || inputHandler.sk_Three_Input || inputHandler.sk_Ult_Input)
+            {
+                changeWeaponOutWaitTime = 0f;
+            }
+
+            if (changeWeaponOutWaitTime >= changeWeaponOutLimitTime)
+            {
+                AnimationLayerHandler.HandlePlayerUnEquip();
+                changeWeaponOutWaitTime = 0f;
+            }
+        }
 
         public void ExecuteInteract()
         {

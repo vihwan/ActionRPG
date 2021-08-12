@@ -43,9 +43,10 @@ namespace SG
         private PlayerSkillManager playerSkillManager;
         private GUIManager guiManager;
         private CameraHandler cameraHandler;
+        private ActiveWeaponObject activeWeaponObject;
 
 
-        Vector2 movementInput;
+        internal Vector2 movementInput;
         Vector2 cameraInput;
 
 
@@ -68,6 +69,7 @@ namespace SG
             playerSkillManager = GetComponent<PlayerSkillManager>();
             guiManager = FindObjectOfType<GUIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
+            activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
         }
 
 
@@ -151,6 +153,8 @@ namespace SG
 
             if (rb_Input)
             {
+                ChangePlayerMotionUnEquip();
+
                 if (playerManager.canDoCombo)
                 {
                     comboFlag = true;
@@ -187,22 +191,22 @@ namespace SG
         {
             if (sk_One_Input)
             {
-
-                //콤보 도중에도 스킬을 쓸 수 있게 하는 것이 좋겠지?
-                //if (playerManager.isInteracting)
-                //    return;
+                ChangePlayerMotionUnEquip();
                 playerSkillManager.UseSkill(1);       
             }
             else if (sk_Two_Input)
             {
+                ChangePlayerMotionUnEquip();
                 playerSkillManager.UseSkill(2);
             }
             else if (sk_Three_Input)
             {
+                ChangePlayerMotionUnEquip();
                 playerSkillManager.UseSkill(3);
             }
             else if (sk_Ult_Input)
             {
+                ChangePlayerMotionUnEquip();
                 playerSkillManager.UseSkill(4);
             }
         }
@@ -287,6 +291,16 @@ namespace SG
             }
 
             cameraHandler.SetCameraHeight();
+        }
+
+        private void ChangePlayerMotionUnEquip()
+        {
+            if (playerManager.isUnEquip == true)
+            {
+                playerManager.isUnEquip = false;
+                playerManager.AnimationLayerHandler.HandlePlayerEquip();
+                activeWeaponObject.SetActiveHandWeapon(0); //0 => SetHand true
+            }
         }
     }
 }

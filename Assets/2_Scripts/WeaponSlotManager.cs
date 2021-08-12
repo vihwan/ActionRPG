@@ -7,13 +7,14 @@ namespace SG
 {
     public class WeaponSlotManager : MonoBehaviour
     {
-        private WeaponHolderSlot leftHandSlot;
-        private WeaponHolderSlot rightHandSlot;
+        [SerializeField] private WeaponHolderSlot leftHandSlot;
+        [SerializeField] private WeaponHolderSlot rightHandSlot;
 
         private DamageCollider leftHandDamageCollider;
         private DamageCollider rightHandDamageCollider;
 
         private Animator animator;
+        private ActiveWeaponObject activeWeaponObject;
 
         private void Awake()
         {
@@ -31,12 +32,15 @@ namespace SG
             }
 
             animator = GetComponent<Animator>();
+            activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
         }
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
+            GameObject weaponGO;
+
             if (isLeft)
             {
-                leftHandSlot.LoadWeaponModel(weaponItem);
+                leftHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
                 LoadLeftWeaponDamageCollider();
 
                 #region Handle Left Weapon Idle Animations
@@ -52,8 +56,10 @@ namespace SG
             }
             else
             {
-                rightHandSlot.LoadWeaponModel(weaponItem);
+                
+                rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
                 LoadRightWeaponDamageCollider();
+                activeWeaponObject.Initailize(weaponGO);
 
                 #region Handle Right Weapon Idle Animations
                 if (weaponItem != null)

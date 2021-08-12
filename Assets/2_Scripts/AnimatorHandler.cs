@@ -82,14 +82,13 @@ namespace SG
 
             Anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
             Anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
-
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting)
+        public void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2f)
         {
             Anim.applyRootMotion = isInteracting;
             Anim.SetBool("isInteracting", isInteracting);
-            Anim.CrossFade(targetAnim, 0.2f);
+            Anim.CrossFade(targetAnim, duration);
 
             /*08월 06일, Override 행동 이후 자연스러운 애니메이션 변화를 위해서 추가**/
             if(targetAnim == "Empty")

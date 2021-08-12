@@ -96,6 +96,8 @@
     <Compile Include="Assets\2_Scripts\Skill.cs" />
     <Compile Include="Assets\2_Scripts\SkillBtn.cs" />
     <Compile Include="Assets\2_Scripts\SkillTimer.cs" />
+    <Compile Include="Assets\2_Scripts\Test\ActiveWeaponObject.cs" />
+    <Compile Include="Assets\2_Scripts\Test\AnimationLayerHandler.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />

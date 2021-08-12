@@ -53,9 +53,9 @@ MonoBehaviour:
   environmentLayer:
     serializedVersion: 2
     m_Bits: 0
-  lookSpeed: 0.03
+  lookSpeed: 0.01
   followSpeed: 0.1
-  pivotSpeed: 0.03
+  pivotSpeed: 0.01
   minimumPivot: -35
   maximumPivot: 35
   cameraSphereRadius: 0.2

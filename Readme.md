@@ -18,7 +18,9 @@ https://drive.google.com/drive/u/0/folders/1RcwYCNc75_wKahdHDvJu-_-m22C2K0Ym
 
 ## 확인된 버그 & 개선이 필요한 것
 
-점프 시 콜라이더가 모델을 따라오지 않는 버그. 이 경우는 애니메이션 문제일 가능성이 더 크다. 현재로써는 해결할 수 없는 부분.
+- 점프 시 콜라이더가 모델을 따라오지 않는 버그. 이 경우는 애니메이션 문제일 가능성이 더 크다. 현재로써는 해결할 수 없는 부분.
+
+- 일부 동작 종료 이후 애니메이션 동작이 끊키는 것 처럼 보임. 마치 CrossFade하지 않음. 가끔씩 이런 일이 발생하는데, 정확한 원인을 찾을 수가 없다.
 
 
 ## 다음 목표는..
@@ -69,47 +71,53 @@ DisableCombo
 7. 회피 - Shift 누르고 떼기
 8. 점프 - Space
 9. 막기(패링) - 마우스 우클릭
-10. 백스텝 - X
+10. 백스텝 - 아무런 입력 없이 시프트
 11. 무기교체 - X
-12. 타겟 고정
+12. 타겟 고정 - 마우스 휠버튼
 13. 카메라이동 - 마우스 이동
 
 --------------------------------
 
 ## Last Update
 
-## 2021.08.11 (수)
+## 2021.08.12 (목)
 
-< UI/UX 개발 계획 및 명세 작성 >
+1. 캐릭터 행동 - Equip Change
 
-1. ESC를 눌러 메인메뉴 창을 연다.
+* 상호작용하지 않으며, 비전투 상태일 경우에, 자동으로 무기를 집어넣는 상태로 전환하게 만든다.
 
-(메인 메뉴 창 목록)
+무기를 들고 있는 상태에서 공격 플래그가 켜지지 않으면, 무기를 집어넣는 상태가 된다.
+무기가 집어넣어져 있는 상태에서 공격 플래그가 켜지면 즉시 공격 애니메이션이 나가도록 설정한다.
+무기를 집어넣고 꺼내는 동작은 Interacting이 아니도록 설정 (임시).
 
-	1. 캐릭터
-	2. 가방
-	3. 월드맵
-	4. 퀘스트
-	5. 업적
-	6. 설정
-	7. 스크린샷 찍기
-	8. 게임종료
+달리는 도중에도 무기를 집어넣는 경우가 있기 때문에, 새로운 Both Hand 애니메이터 Layer를 생성.
+InputHandler의 MoveAmount가 0을 넘어가면 Both Hand Layer의 애니메이션 스테이트를 실행
 
+Base Layer UnEquip을 새로 생성. UnEquip상태일 경우에 동작하는 신규 Locomotion을 등록.
+Locomotion에 1D와 2D freeform 애니메이션을 추가.
 
-
-2. 2Handed Flag
-
-한손잡이를 양손잡으로 바꾸는 부분
-
-InputHandler에 bool y_Input, bool twoHandFlag를 추가
-HandleTwoHandInput() 메소드를 추가
-이후 WeaponSlotManager에서 Animator.Crossfade 함수로 애니메이션 호출
-Both Arms라는 새로운 Animation Layer를 생성. 이에 해당하는 Avatar Mask를 만들고 적용
-(ItemAsset)무기 패러미터로 Two Handed Idle 애니메이션 String을 추가
+UnEquip Override Layer를 새로 생성. player Flag의 isUnEquip이 true일 경우에 따로 실행되는
+애니메이션 클립들을 새로 등록하고, 조건문도 따로 작성.
 
 
-내가 만들고싶은 게임에는 굳이 이 기능은 필요없을 듯 싶다. 대신에 이를 응용해서
-무기를 장착안하고 있는 Unarmed 상태를 만들 수 있을 듯 하다.
+**<개선점>**
+
+**캐릭터 모델 하위에 붙어 있는, 미장착 상태( 등에 붙어있는 ) 무기를 적절한 게임 오브젝트 계층에 
+신규 스크립트를 작성하거나, 기존 스크립트에 새로운 파라미터를 추가해서 무기 모델을 Instantiate해주는 코드를 작성한다.**
+
+
+2. 캐릭터 이동 - 스프린팅 종료
+
+캐릭터가 빠르게 달리고 InputHandler의 MoveAmount가 = 0 이 되면, 캐릭터가 서서히 멈춰서는 동작이 나오도록
+설정.
+
+- 무기를 착용안한 상태에서, 스프린트 도중에, 쉬프트키를 누르고 있지만, 방향키를 뗀 순간 실행한다.
+	
+		Shift를 누른다 : b.input = true / sprintFlag = true / isSprinting = true
+		방향키를 뗀다 : input.MoveAmount != 1;
+Override UnEquip만 고려하여 작성. 전투 중에 서서히 멈추는 요소는 오히려 게임플레이에 방해가 될 수 있기에 제외.
+
+**하지만 이러면 아무런 방향키 입력 없이 Shift를 누를 경우, SprintEnd가 실행된다. 추가적인 조건문이 필요하다.**
 
 -------------------------------
 
@@ -147,6 +155,40 @@ Both Arms라는 새로운 Animation Layer를 생성. 이에 해당하는 Avatar 
 
 -------------------------------
 ## 이전 개발 일지
+
+
+### 2021.08.11 (수)
+
+1. < UI/UX 개발 계획 및 명세 작성 >
+
+ESC를 눌러 메인메뉴 창을 연다.
+
+(메인 메뉴 창 목록)
+
+	1. 캐릭터
+	2. 가방
+	3. 월드맵
+	4. 퀘스트
+	5. 업적
+	6. 설정
+	7. 스크린샷 찍기
+	8. 게임종료
+
+
+
+2. 2Handed Flag
+
+한손잡이를 양손잡으로 바꾸는 부분
+
+InputHandler에 bool y_Input, bool twoHandFlag를 추가
+HandleTwoHandInput() 메소드를 추가
+이후 WeaponSlotManager에서 Animator.Crossfade 함수로 애니메이션 호출
+Both Arms라는 새로운 Animation Layer를 생성. 이에 해당하는 Avatar Mask를 만들고 적용
+(ItemAsset)무기 패러미터로 Two Handed Idle 애니메이션 String을 추가
+
+
+내가 만들고싶은 게임에는 굳이 이 기능은 필요없을 듯 싶다. 대신에 이를 응용해서
+무기를 장착안하고 있는 Unarmed 상태를 만들 수 있을 듯 하다.
 
 
 ### 2021.08.10 (화)
