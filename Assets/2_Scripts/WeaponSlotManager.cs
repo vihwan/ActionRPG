@@ -7,8 +7,10 @@ namespace SG
 {
     public class WeaponSlotManager : MonoBehaviour
     {
+        [Header("Weapon Slot")]
         [SerializeField] private WeaponHolderSlot leftHandSlot;
         [SerializeField] private WeaponHolderSlot rightHandSlot;
+        [SerializeField] private WeaponUnholderSlot unholderSlot;
 
         private DamageCollider leftHandDamageCollider;
         private DamageCollider rightHandDamageCollider;
@@ -33,6 +35,7 @@ namespace SG
 
             animator = GetComponent<Animator>();
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
+            unholderSlot = GetComponentInChildren<WeaponUnholderSlot>();
         }
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
@@ -59,6 +62,7 @@ namespace SG
                 
                 rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
                 LoadRightWeaponDamageCollider();
+                unholderSlot.LoadUnEquipWeaponModel(weaponItem);
                 activeWeaponObject.Initailize(weaponGO);
 
                 #region Handle Right Weapon Idle Animations

@@ -62,8 +62,5 @@ namespace SG
             currentWeaponModel = model;
             weaponGO = currentWeaponModel;
         }
-
     }
-
-
 }

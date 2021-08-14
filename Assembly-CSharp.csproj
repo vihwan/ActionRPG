@@ -8,7 +8,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <ProjectGuid>{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -102,6 +103,7 @@
     <Compile Include="Assets\2_Scripts\Test\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponInventorySlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponUnholderSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\WindowPanel.cs" />
     <Compile Include="Assets\2_Scripts\UtilHelper.cs" />
     <Compile Include="Assets\2_Scripts\WeaponHolderSlot.cs" />

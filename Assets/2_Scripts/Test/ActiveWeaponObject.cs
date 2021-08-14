@@ -13,6 +13,9 @@ namespace SG
         public void Initailize(GameObject weaponGo)
         {
             handWeaponObject = weaponGo;
+            unequipWeaponObject = GetComponentInChildren<WeaponUnholderSlot>().currentUnequipWeaponModel;
+            if (unequipWeaponObject != null)
+                unequipWeaponObject.SetActive(false);
         }
 
         public void SetActiveHandWeapon(int num)

@@ -353,9 +353,9 @@ namespace SG
 
             if (playerManager.isUnEquip == true)
             {
-                if (inputHandler.b_Input)
+                if (playerManager.isSprinting)
                 {
-                    if (inputHandler.MoveAmount < 1f)
+                    if (rigidbody.velocity == Vector3.zero)
                     {
                         Debug.Log("Play SprintEnd");
                         animatorHandler.PlayTargetAnimation("SprintEnd_UnEquip", true);
