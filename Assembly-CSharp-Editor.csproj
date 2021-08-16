@@ -705,6 +705,9 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">

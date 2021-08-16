@@ -243,7 +243,7 @@ namespace SG
                 else
                 {
                     guiManager.CloseSelectMenuWindow();
-                    guiManager.CloseEquipmentWindowPanel();
+                    guiManager.windowPanel.CloseCharacterWindowPanel();
                     guiManager.SetActiveHudWindows(true);
                 }
             }

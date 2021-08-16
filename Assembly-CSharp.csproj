@@ -8,8 +8,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -100,6 +99,11 @@
     <Compile Include="Assets\2_Scripts\Test\ActiveWeaponObject.cs" />
     <Compile Include="Assets\2_Scripts\Test\AnimationLayerHandler.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterMenuSpringBoard.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterUI_EquipmentPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterUI_StatusPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterUI_WeaponPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponInventorySlot.cs" />
@@ -977,6 +981,9 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

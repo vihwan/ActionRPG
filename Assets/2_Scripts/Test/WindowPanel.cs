@@ -8,7 +8,8 @@ namespace SG
     // 무기, 소비, 가방 등 여러 인벤토리 창을 관리하는 스크립트입니다.
     public class WindowPanel : MonoBehaviour
     {
-        [SerializeField] public GameObject inventoryWindow;
+        [Header("Window GameObject")]
+        [SerializeField] internal CharacterWindowUI characterWindow;
 
         [Header("Weapon Inventory")]
         private Transform weaponInventorySlotsParent;
@@ -22,9 +23,12 @@ namespace SG
             weaponInventorySlotsParent = transform.Find("Inventory Slot Parent");
             weaponInventorySlots = GetComponentsInChildren<WeaponInventorySlot>(true);
 
-            inventoryWindow = transform.Find("Inventory Window").gameObject;
-            if (inventoryWindow != null)
-                inventoryWindow.SetActive(false);
+            characterWindow = UtilHelper.Find<CharacterWindowUI>(transform,"Character Window");
+            if (characterWindow != null)
+            {
+                characterWindow.Init();
+                characterWindow.gameObject.SetActive(false);
+            }
 
             playerInventory = FindObjectOfType<PlayerInventory>();
         }
@@ -52,6 +56,20 @@ namespace SG
             }
             #endregion
         }
+
+        #region Panel Window Controls
+        public void OpenCharacterWindowPanel()
+        {
+            characterWindow.gameObject.SetActive(true);
+            characterWindow.OpenStatusPanel();
+        }
+
+        public void CloseCharacterWindowPanel()
+        {
+            characterWindow.gameObject.SetActive(false);
+        }
+
+        #endregion
     }
 }
 

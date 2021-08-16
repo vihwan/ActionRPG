@@ -17,7 +17,7 @@ namespace SG
 
         [Header("UI Windows")]
         [SerializeField] private SelectMenu selectMenu;
-        [SerializeField] private WindowPanel windowPanel;
+        [SerializeField] internal WindowPanel windowPanel;
 
 
         // Start is called before the first frame update
@@ -39,13 +39,13 @@ namespace SG
             if (interactableUI != null)
                 interactableUI.Init();
 
-            selectMenu = GetComponentInChildren<SelectMenu>(true);
-            if (selectMenu != null)
-                selectMenu.Init();
-
             windowPanel = GetComponentInChildren<WindowPanel>(true);
             if (windowPanel != null)
                 windowPanel.Init();
+
+            selectMenu = GetComponentInChildren<SelectMenu>(true);
+            if (selectMenu != null)
+                selectMenu.Init();
 
             CloseSelectMenuWindow();
         }
@@ -72,19 +72,6 @@ namespace SG
         public void CloseSelectMenuWindow()
         {
             selectMenu.gameObject.SetActive(false);
-        }
-
-        #endregion
-
-        #region Panel Window Controls
-        public void OpenEquipmentWindowPanel()
-        {
-            windowPanel.inventoryWindow.SetActive(true);
-        }
-
-        public void CloseEquipmentWindowPanel()
-        {
-            windowPanel.inventoryWindow.SetActive(false);
         }
 
         #endregion

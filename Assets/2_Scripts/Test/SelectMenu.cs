@@ -2,13 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using UnityEngine.EventSystems;
 
 namespace SG { 
-    public class SelectMenu : MonoBehaviour
+    public class SelectMenu : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private Button equipButton;
+
+        [SerializeField] private Button characterButton;
         [SerializeField] private Button inventoryButton;
+        [SerializeField] private Button worldmapButton;
+        [SerializeField] private Button questButton;
+        [SerializeField] private Button achieveButton;
+        [SerializeField] private Button screenshotButton;
         [SerializeField] private Button optionButton;
+        [SerializeField] private Button exitButton;
+
+        [SerializeField] private TMP_Text guideText;
 
         private GUIManager guiManager;
 
@@ -16,16 +26,38 @@ namespace SG {
         public void Init()
         {
             guiManager = GetComponentInParent<GUIManager>();
-            equipButton = UtilHelper.Find<Button>(transform, "Select Equipment");
-            if (equipButton != null)
+            characterButton = UtilHelper.Find<Button>(transform, "Select Character");
+            if (characterButton != null)
             {
-                equipButton.onClick.AddListener(guiManager.OpenEquipmentWindowPanel);
-                equipButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
+                characterButton.onClick.AddListener(guiManager.windowPanel.OpenCharacterWindowPanel);
+                characterButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
             }
-  
-
             inventoryButton = UtilHelper.Find<Button>(transform, "Select Inventory");
+            worldmapButton = UtilHelper.Find<Button>(transform, "Select WorldMap");
+            questButton = UtilHelper.Find<Button>(transform, "Select Quest");
+            achieveButton = UtilHelper.Find<Button>(transform, "Select Achivement");
+            screenshotButton = UtilHelper.Find<Button>(transform, "Select Screenshot");
             optionButton = UtilHelper.Find<Button>(transform, "Select GameOptions");
+            exitButton = UtilHelper.Find<Button>(transform, "Select Exit");
+
+            guideText = GetComponentInChildren<TMP_Text>(true);
+            if (guideText != null)
+                guideText.text = "Now Ready";
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            Debug.Log(eventData.pointerCurrentRaycast.gameObject);
+            string enterObject = eventData.pointerCurrentRaycast.gameObject.name;
+            guideText.text = enterObject;
+            if (enterObject == "GuideText")
+                guideText.text = null;
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            if (eventData.pointerCurrentRaycast.gameObject == null)
+                guideText.text = null;
         }
     }
 }
