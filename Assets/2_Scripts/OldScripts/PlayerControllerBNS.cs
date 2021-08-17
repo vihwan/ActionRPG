@@ -43,7 +43,7 @@ public class PlayerControllerBNS : MonoBehaviour
 
     public bool enableRM;
     private bool isWeaponChanging = false;
-    private bool isJumping = false;
+    //private bool isJumping = false;
     private bool isGround = true;
 
     [SerializeField] private int attackCount = 0;
@@ -54,7 +54,7 @@ public class PlayerControllerBNS : MonoBehaviour
     [SerializeField] private float jogSpeed = 3f;
     [SerializeField] private float runSpeed = 6f;
     [SerializeField] private float turnSmoothTime = 0.1f;
-    [SerializeField] private float jumpSpeed = 10f;
+    //[SerializeField] private float jumpSpeed = 10f;
     private float trunSmoothVelocity;
     [Range(0f, 1f)]
     [SerializeField] private float DistanceToGround;

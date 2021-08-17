@@ -87,21 +87,36 @@ DisableCombo\
 
 ## Last Update
 
-## 2021.08.16 (월)
+## 2021.08.17 (화)
 
 1. UI/UX 명세 확인 및 제작
 
-UI 프로토타입을 설계하고 스크립트 작성
-캐릭터부터 순서대로
+ <CharacterMenu 제작중>
 
- - 캐릭터 UI 요소들 배치
+ - StatusPanel => PlayerStats와 PlayerInventory와 연동
+ - WeaponPanel => 
+ 			현재 장착중인 무기 - PlayerInventory의 rightWeapon과 연동
+ 			미장착 무기들 - _A의 WeaponInventory와 연동_
 
- 속성, 무기, 장비, 장비비교까지. 스킬과 자료는 추후 추가.
+ - EquipmentPanel =>
+ 		장비 종류 - 상의, 하의, 장갑, 신발, 악세사리, 특수장비
 
- SpringBoard 메뉴에 버튼들을 추가하고, 버튼을 클릭하면, 해당 버튼에 맞는 패널이 우측에서 생성되도록 설정
- SpringBoardButton은 Weapon까지밖에 설정하지 않음.
- 이후 WeaponPanel과 EquipmentPanel에 적절한 GameObject Parameter를 추가하여 연동되도록 설정하기.
+ 			현재 장착중인 장비 - PlayerInventory의 EquipmentSlot과 연동
+ 			미장착 장비들 - _A의 EquipmentInventory와 연동_
 
+ - SkillPanel =>  ScriptableObject.PlayerSkill, SkillDatabase
+ - DataPanel => 미정
+
+ Weapon과 나머지 Equipment들을 LeftPanel에서 보여주는 스크립트 작성 요망.
+
+
+2. TMP 한글 폰트 생성
+
+	Resources 폴더에 Fonts 폴더 생성
+
+	한글 - 배민주아체
+	영어 - 노트산스체
+	숫자 - ...
 
 -------------------------------
 
@@ -139,6 +154,22 @@ UI 프로토타입을 설계하고 스크립트 작성
 
 -------------------------------
 ## 이전 개발 일지
+
+### 2021.08.16 (월)
+
+1. UI/UX 명세 확인 및 제작
+
+UI 프로토타입을 설계하고 스크립트 작성
+캐릭터부터 순서대로
+
+ - 캐릭터 UI 요소들 배치
+
+ 속성, 무기, 장비, 장비비교까지. 스킬과 자료는 추후 추가.
+
+ SpringBoard 메뉴에 버튼들을 추가하고, 버튼을 클릭하면, 해당 버튼에 맞는 패널이 우측에서 생성되도록 설정
+ SpringBoardButton은 Weapon까지밖에 설정하지 않음.
+ 이후 WeaponPanel과 EquipmentPanel에 적절한 GameObject Parameter를 추가하여 연동되도록 설정하기.
+
 
 ### 2021.08.14 (토)
 

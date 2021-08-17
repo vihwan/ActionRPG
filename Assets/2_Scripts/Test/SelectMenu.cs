@@ -47,7 +47,6 @@ namespace SG {
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log(eventData.pointerCurrentRaycast.gameObject);
             string enterObject = eventData.pointerCurrentRaycast.gameObject.name;
             guideText.text = enterObject;
             if (enterObject == "GuideText")

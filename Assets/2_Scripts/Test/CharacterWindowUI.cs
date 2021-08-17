@@ -33,6 +33,9 @@ namespace SG
                 statusPanel.Init();
 
             weaponPanel = GetComponentInChildren<CharacterUI_WeaponPanel>();
+            if (weaponPanel != null)
+                weaponPanel.Init();
+
             equipmentPanel = GetComponentInChildren<CharacterUI_EquipmentPanel>();
 
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
@@ -44,6 +47,12 @@ namespace SG
                 backBtn.gameObject.SetActive(false);
         }
 
+        public void UpdateCharacterWindowUI()
+        {
+            statusPanel.SetParameter();
+            weaponPanel.SetParameter();
+        }
+
 
         #region CharacterMenu Right Panel SetActive
 
@@ -51,6 +60,7 @@ namespace SG
         {
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
+            UpdateCharacterWindowUI();
         }
 
         public void OpenWeaponPanel()

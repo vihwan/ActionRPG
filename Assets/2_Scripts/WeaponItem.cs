@@ -10,6 +10,15 @@ namespace SG
         public GameObject modelPrefab;
         public bool isUnarmed;
 
+        [Header("Weapon Status")]
+        public string kind;
+        public int attack;
+        public int currentDurability;
+        public int maxDurability;
+        [Range(1,5)] 
+        public int rarity;
+        
+
         [Header("Idle Animations")]
         public string right_Hand_Idle;
         public string left_Hand_Idle;
