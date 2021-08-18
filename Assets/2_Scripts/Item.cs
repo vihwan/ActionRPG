@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace SG
 {
-
     public enum ItemType
     {
         Weapon, //무기
@@ -14,8 +13,22 @@ namespace SG
         Shoes,  //신발
         Accessory, //악세사리
         SpecialEquip, //특수장비
-        Consumable
+        Consumable, //소비 아이템
+        Ingredient //재료 아이템
     }
+
+    //아이템마다 가지는 고유 속성(수치)
+    public enum Attribute
+    {
+        Hp,
+        Attack,
+        Defense,
+        Critical,
+        CriticalDamage,
+        Stamina
+    }
+
+    [System.Serializable]
     public class Item : ScriptableObject
     {
         [Header("Item Information")]
@@ -23,5 +36,12 @@ namespace SG
         public string itemName;
         [TextArea]
         public string itemDescription;
+    }
+
+    [System.Serializable]
+    public class ItemAttribute
+    {
+        public Attribute attribute;
+        public int value;
     }
 }

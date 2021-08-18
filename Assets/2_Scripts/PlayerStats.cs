@@ -27,6 +27,7 @@ namespace SG
         private HealthBar healthBar;
         private AnimatorHandler animatorHandler;
         private PlayerManager playerManager;
+        [SerializeField] private PlayerInventory playerInventory;
 
         private void Awake()
         {
@@ -42,6 +43,7 @@ namespace SG
             healthBar = FindObjectOfType<HealthBar>();
             if (healthBar != null)
                 healthBar.SetMaxHealth(maxHealth);
+            playerInventory = GetComponent<PlayerInventory>();
         }
 
         private void InitializeStatusSet()
@@ -55,6 +57,14 @@ namespace SG
             stamina = 100;
         }
 
+        private void UpdatePlayerStatus()
+        {
+            attack += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+            //defenseText.text = playerStats.defense.ToString();
+            //criticalText.text = playerStats.critical + "%";
+            //criticalDamageText.text = playerStats.criticalDamage * 100 + "%";
+            //staminaText.text = playerStats.stamina.ToString();
+        }
         private int SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10;

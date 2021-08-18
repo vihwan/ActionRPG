@@ -158,7 +158,7 @@ namespace SG
                 if (playerManager.canDoCombo)
                 {
                     comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.rightWeapon);
+                    playerAttacker.HandleWeaponCombo(playerInventory.currentWeapon);
                     comboFlag = false;
                 }
                 else
@@ -169,7 +169,7 @@ namespace SG
                     if (playerManager.canDoCombo)
                         return;
 
-                    playerAttacker.HandleLightAttack(playerInventory.rightWeapon);
+                    playerAttacker.HandleLightAttack(playerInventory.currentWeapon);
                 }
             }
 
@@ -181,10 +181,10 @@ namespace SG
 
         private void HandleQuickSlotInput()
         {
-            if (rt_Input)
+           /* if (rt_Input)
             {
                 playerInventory.ChangeRightWeapon();
-            }
+            }*/
         }
 
         private void HandleSkillAttackInput(float delta)

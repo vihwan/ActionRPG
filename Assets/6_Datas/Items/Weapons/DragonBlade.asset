@@ -22,11 +22,16 @@ MonoBehaviour:
   modelPrefab: {fileID: 450780483681248534, guid: 8bce3c5c5dc9b05458bc8edd97e18a98,
     type: 3}
   isUnarmed: 0
+  itemType: 0
   kind: Two Handed
-  attack: 20
   currentDurability: 45
   maxDurability: 50
   rarity: 4
+  itemAttributes:
+  - attribute: 0
+    value: 10
+  - attribute: 1
+    value: 30
   right_Hand_Idle: Right_Arm_Idle_01
   left_Hand_Idle: Left_Arm_Idle_01
   OneHanded_LightAttack1: Light_Attack_1

@@ -83,13 +83,19 @@ DisableCombo\
 12. 타겟 고정 - 마우스 휠버튼
 13. 카메라이동 - 마우스 이동
 
+------------------------------
+
+**UI Fonts**
+
+Resources 폴더에 Fonts 폴더 생성
+
+한글 - 배민주아체
+영어 - 노트산스체
+숫자 - ...
+
 --------------------------------
 
-## Last Update
-
-## 2021.08.17 (화)
-
-1. UI/UX 명세 확인 및 제작
+**Memo**
 
  <CharacterMenu 제작중>
 
@@ -107,16 +113,41 @@ DisableCombo\
  - SkillPanel =>  ScriptableObject.PlayerSkill, SkillDatabase
  - DataPanel => 미정
 
- Weapon과 나머지 Equipment들을 LeftPanel에서 보여주는 스크립트 작성 요망.
+> **Weapon과 나머지 Equipment들을 LeftPanel에서 보여주는 스크립트 작성 요망.**
+    ItemType Struct를 생성하고 ScriptableObject에 설정할 수 있도록 추가
+    PlayerInventory에 각 ItemType에 대한 List를 생성
 
 
-2. TMP 한글 폰트 생성
+-------------------------------
 
-	Resources 폴더에 Fonts 폴더 생성
+## Last Update
 
-	한글 - 배민주아체
-	영어 - 노트산스체
-	숫자 - ...
+## 2021.08.18 (수)
+
+1. UI/UX 명세 확인 및 제작
+
+- Item이 가질 수 있는 Stats
+
+	HP
+	ATK
+	DEF
+	CRI
+	CRI.DMG
+	STA
+	세트 효과
+
+한 가지 크게 착각한 게 있는데 플레이어가 가져야할 총 집합 수치들은 PlayerStats에 적용되어야한다는 사실이다.
+따라서 나중에 그러한 스탯들을 적용하고 업데이트 해주는 함수를 추가하는 것이 필요하다.
+
+또한, 아이템마다 다양한 속성을 지정할 필요가 있다. 예를 들어, 무기가 꼭 방어력이 오르면 안된다는 법칙은 없다.
+따라서 무기마다 아이템 속성을 개발자가 에디터에서 조절할 수 있도록 설정하는 것이 필요했다. => ItemAttribute
+
+그리고, PlayerInventory에서 플레이어가 여러 아이템을 가지고 관리하도록 할 수 있게, 저장할 수 있는 공간이 필요하다
+Weapon은 List로 된다고 하지만, Equipment나 나머지들은 어떻게 해야할지 아직 고민이 된다. Dictionary로 쓰면 좋긴 할텐데
+좀 더 고려해봐야겠다
+
+플레이어가 현재 장착하고 있는 무기,장비 슬롯도 만들어야할 필요가 있다. 그리고 장비한 아이템에 따라 플레이어의 스탯을 업데이트하는 것 또한 필요하다.
+
 
 -------------------------------
 
@@ -154,6 +185,40 @@ DisableCombo\
 
 -------------------------------
 ## 이전 개발 일지
+
+### 2021.08.17 (화)
+
+1. UI/UX 명세 확인 및 제작
+
+ <CharacterMenu 제작중>
+
+ - StatusPanel => PlayerStats와 PlayerInventory와 연동
+ - WeaponPanel => 
+ 			현재 장착중인 무기 - PlayerInventory의 rightWeapon과 연동
+ 			미장착 무기들 - _A의 WeaponInventory와 연동_
+
+ - EquipmentPanel =>
+ 		장비 종류 - 상의, 하의, 장갑, 신발, 악세사리, 특수장비
+
+ 			현재 장착중인 장비 - PlayerInventory의 EquipmentSlot과 연동
+ 			미장착 장비들 - _A의 EquipmentInventory와 연동_
+
+ - SkillPanel =>  ScriptableObject.PlayerSkill, SkillDatabase
+ - DataPanel => 미정
+
+> **Weapon과 나머지 Equipment들을 LeftPanel에서 보여주는 스크립트 작성 요망.**
+    ItemType Struct를 생성하고 ScriptableObject에 설정할 수 있도록 추가
+    PlayerInventory에 각 ItemType에 대한 List를 생성
+
+
+2. TMP 한글 폰트 생성
+
+	Resources 폴더에 Fonts 폴더 생성
+
+	한글 - 배민주아체
+	영어 - 노트산스체
+	숫자 - ...
+
 
 ### 2021.08.16 (월)
 

@@ -280,16 +280,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b10f2e6fe0b3df14cb2ae8be556bb1f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightWeapon: {fileID: 0}
-  leftWeapon: {fileID: 0}
+  currentWeapon: {fileID: 0}
   unarmedWeapon: {fileID: 11400000, guid: e99e015f1e1e97f438dd028ec4c1fc5f, type: 2}
+  currentEquipmentSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponInRightHandSlots:
   - {fileID: 11400000, guid: 7fe060a262c469a4a970f4cc13eac309, type: 2}
   weaponInLeftHandSlots:
   - {fileID: 11400000, guid: e99e015f1e1e97f438dd028ec4c1fc5f, type: 2}
-  currentRightWeaponIndex: 0
-  currentLeftWeaponIndex: 0
   weaponsInventory: []
+  equipmentsInventory:
+    keys: 
+    values: []
 --- !u!114 &616813801781678736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,9 +322,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e26160b8aa3234586b546de11622df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerName: Diluc
+  playerLevel: 0
+  playerExp: 0
   healthLevel: 10
   maxHealth: 0
   currentHealth: 0
+  attack: 0
+  defense: 0
+  critical: 0
+  criticalDamage: 0
+  stamina: 0
+  playerInventory: {fileID: 0}
 --- !u!114 &1853712168
 MonoBehaviour:
   m_ObjectHideFlags: 0

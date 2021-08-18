@@ -39,10 +39,10 @@ namespace SG
 
         public void SetParameter()
         {
-            WeaponItem playerWeapon = playerInventory.rightWeapon;
+            WeaponItem playerWeapon = playerInventory.currentWeapon;
             weaponName.text = playerWeapon.itemName;
             weaponKind.text = playerWeapon.kind;
-            weaponAttack.text = playerWeapon.attack.ToString();
+            weaponAttack.text = playerWeapon.itemAttributes[(int)Attribute.Attack].value.ToString();
             weaponDurability.text = 
                 playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
 

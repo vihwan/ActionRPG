@@ -11,12 +11,13 @@ namespace SG
         public bool isUnarmed;
 
         [Header("Weapon Status")]
+        public ItemType itemType = ItemType.Weapon;
         public string kind;
-        public int attack;
         public int currentDurability;
         public int maxDurability;
         [Range(1,5)] 
         public int rarity;
+        public ItemAttribute[] itemAttributes;
         
 
         [Header("Idle Animations")]

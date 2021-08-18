@@ -8130,7 +8130,6 @@ MonoBehaviour:
   criticalDamageText: {fileID: 0}
   staminaText: {fileID: 0}
   playerStats: {fileID: 0}
-  playerInventory: {fileID: 0}
 --- !u!222 &638245764
 CanvasRenderer:
   m_ObjectHideFlags: 0
