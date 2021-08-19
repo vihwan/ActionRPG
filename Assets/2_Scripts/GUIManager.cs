@@ -54,7 +54,7 @@ namespace SG
         //해당되는 하위 UI들을 전부 업데이트 시킨다.
         public void UpdateUI()
         {
-            windowPanel.UpdateUI();
+           // windowPanel.UpdateUI();
         }
 
         public void SetActiveHudWindows(bool status)

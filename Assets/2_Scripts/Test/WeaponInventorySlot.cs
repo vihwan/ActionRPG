@@ -7,20 +7,35 @@ namespace SG
 {
     public class WeaponInventorySlot : MonoBehaviour
     {
-        private WeaponItem item;
-        public Image icon;
+        [SerializeField] private WeaponItem item;
+        [SerializeField] private Button itemBtn;
+        [SerializeField] private Image icon;
+        [SerializeField] private bool isArmed;
+        [SerializeField] internal bool isSelect = false;
 
-        private void Start()
+        private WeaponInventoryList weaponInventoryList;
+        private void Awake()
         {
-            icon = GetComponentInChildren<Image>(true);
+            itemBtn = GetComponentInChildren<Button>();
+            if (itemBtn != null)
+            {
+                CharacterUI_WeaponPanel weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
+                itemBtn.onClick.AddListener(() => weaponPanel.SetParameter(item));
+                itemBtn.onClick.AddListener(SelectSlot);
+            }
+            icon = UtilHelper.Find<Image>(itemBtn.transform, "Image");
+
+            weaponInventoryList = GetComponentInParent<WeaponInventoryList>();
         }
 
         public void AddItem(WeaponItem weaponItem)
         {
+            gameObject.SetActive(true);
             item = weaponItem;
             icon.sprite = weaponItem.itemIcon;
             icon.enabled = true;
-            gameObject.SetActive(true);
+            isArmed = weaponItem.isArmed;
+            ChangeBackgroundColor();
         }
 
         public void ClearInventorySlot()
@@ -28,7 +43,34 @@ namespace SG
             item = null;
             icon = null;
             icon.enabled = false;
+            isArmed = false;
+            ChangeBackgroundColor();
             gameObject.SetActive(false);
+        }
+        public void SelectSlot()
+        {
+            foreach (WeaponInventorySlot slot in weaponInventoryList.weaponInventorySlots)
+            {
+                slot.isSelect = false;
+                slot.ChangeBackgroundColor();
+            }
+            isSelect = true;
+            Debug.Log("isSelect 조정 완료");
+            ChangeBackgroundColor();
+        }
+        public void ChangeBackgroundColor()
+        {
+            //장착, 미장착 상태인 무기를 구별하기 위해 버튼 색상을 바꾼다.
+            //임시적인 방안이므로, 나중에 다른 방법을 사용할 수 있습니다.
+            if (isArmed)
+            {
+                itemBtn.GetComponent<Image>().color = Color.cyan;
+                return;
+            }
+            else if (isSelect)
+                itemBtn.GetComponent<Image>().color = Color.green;
+            else if (!isSelect)
+                itemBtn.GetComponent<Image>().color = Color.white;
         }
     }
 }

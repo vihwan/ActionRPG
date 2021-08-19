@@ -106,9 +106,11 @@
     <Compile Include="Assets\2_Scripts\Test\CharacterWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\EquipItem.cs" />
+    <Compile Include="Assets\2_Scripts\Test\InventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />
     <Compile Include="Assets\2_Scripts\Test\SerializableDictionary.cs" />
     <Compile Include="Assets\2_Scripts\Test\SetItem.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponInventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponUnholderSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\WindowPanel.cs" />

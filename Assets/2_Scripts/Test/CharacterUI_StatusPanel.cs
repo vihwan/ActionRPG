@@ -43,17 +43,22 @@ namespace SG
             playerStats = FindObjectOfType<PlayerStats>();
         }
 
+        public void OnEnable()
+        {
+            SetParameter();
+        }
+
         public void SetParameter()
         {
             nameText.text = playerStats.playerName;
             levelText.text = "Lv. " + playerStats.playerLevel;
             expText.text = playerStats.playerExp + " / 1000";
             SetMaxExpSlider();
-            hpText.text = playerStats.currentHealth + " / " + playerStats.maxHealth;
+            hpText.text = playerStats.CurrentHealth + " / " + playerStats.maxHealth;
             attackText.text = playerStats.attack.ToString();
             defenseText.text = playerStats.defense.ToString();
-            criticalText.text = playerStats.critical + "%";
-            criticalDamageText.text = playerStats.criticalDamage * 100 + "%";
+            criticalText.text = playerStats.Critical + "%";
+            criticalDamageText.text = playerStats.criticalDamage + "%";
             staminaText.text = playerStats.stamina.ToString();
         }
 

@@ -16,19 +16,41 @@ namespace SG
         [Tooltip("Maxhealth = healthLevel * 10")]
         public int healthLevel = 10;
         public int maxHealth;
-        public int currentHealth;
+        [SerializeField] private int currentHealth;
         public int attack;
         public int defense;
-        public int critical;
-        public float criticalDamage;
+        [SerializeField] private int critical;
+        public int criticalDamage;
         public int stamina;
 
-
+        [Header("Need Component")]
         private HealthBar healthBar;
         private AnimatorHandler animatorHandler;
         private PlayerManager playerManager;
         [SerializeField] private PlayerInventory playerInventory;
 
+        public int CurrentHealth
+        {
+            get => currentHealth;
+            private set
+            {
+                if (value >= maxHealth)
+                    maxHealth = value;
+
+                currentHealth = value;
+            }
+        }
+        public int Critical
+        {
+            get => critical;
+            private set
+            {
+                if (value >= 100)
+                    value = 100;
+
+                critical = value;
+            }
+        }
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -37,13 +59,13 @@ namespace SG
 
         private void Start()
         {
-            InitializeStatusSet();
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
             healthBar = FindObjectOfType<HealthBar>();
             if (healthBar != null)
                 healthBar.SetMaxHealth(maxHealth);
             playerInventory = GetComponent<PlayerInventory>();
+            InitializeStatusSet();
         }
 
         private void InitializeStatusSet()
@@ -53,17 +75,25 @@ namespace SG
             attack = 5;
             defense = 3;
             critical = 5;
-            criticalDamage = 1.5f;
+            criticalDamage = 150;
             stamina = 100;
+
+            UpdatePlayerStatus();
         }
 
         private void UpdatePlayerStatus()
         {
+            //foreach (ItemAttribute attribute in playerInventory.currentWeapon.itemAttributes)
+            //{
+            //    if(attribute == null)
+            //}
+            maxHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+            currentHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
             attack += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Attack].value;
-            //defenseText.text = playerStats.defense.ToString();
-            //criticalText.text = playerStats.critical + "%";
-            //criticalDamageText.text = playerStats.criticalDamage * 100 + "%";
-            //staminaText.text = playerStats.stamina.ToString();
+            defense += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+            critical += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+            criticalDamage += playerInventory.currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+            stamina += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
         }
         private int SetMaxHealthFromHealthLevel()
         {

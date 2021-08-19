@@ -11,14 +11,17 @@ namespace SG
         [Header("SpringBoard")]
         [SerializeField] private CharacterMenuSpringBoard springBoardMenu;
 
-        [Header("CharacterUI Panel")]
+        [Header("CharacterUI Left Panel")]
+        [SerializeField] internal WeaponInventoryList weaponInventoryList;
+
+        [Header("CharacterUI Right Panel")]
         [SerializeField] private CharacterUI_StatusPanel statusPanel;
         [SerializeField] private CharacterUI_WeaponPanel weaponPanel;
         [SerializeField] private CharacterUI_EquipmentPanel equipmentPanel;
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
-        [SerializeField] private Button backBtn;
+        [SerializeField] internal Button backBtn;
 
         public void Init()
         {
@@ -44,14 +47,22 @@ namespace SG
 
             backBtn = UtilHelper.Find<Button>(transform, "BackBtn");
             if (backBtn != null)
+            {
+                backBtn.onClick.AddListener(CloseLeftPanel);
                 backBtn.gameObject.SetActive(false);
+            }
+
+
+            weaponInventoryList = GetComponentInChildren<WeaponInventoryList>(true);
+            if (weaponInventoryList != null)
+                weaponInventoryList.Init();
         }
 
-        public void UpdateCharacterWindowUI()
+/*        public void UpdateCharacterWindowUI()
         {
             statusPanel.SetParameter();
             weaponPanel.SetParameter();
-        }
+        }*/
 
 
         #region CharacterMenu Right Panel SetActive
@@ -60,7 +71,7 @@ namespace SG
         {
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
-            UpdateCharacterWindowUI();
+            //UpdateCharacterWindowUI();
         }
 
         public void OpenWeaponPanel()
@@ -81,6 +92,21 @@ namespace SG
             statusPanel.gameObject.SetActive(false);
             weaponPanel.gameObject.SetActive(false);
             equipmentPanel.gameObject.SetActive(false);
+        }
+        #endregion
+
+        #region
+
+        public void CloseLeftPanel()
+        {
+            if(weaponInventoryList.gameObject.activeSelf == true)
+            {
+                weaponInventoryList.DeSelectAllSlots();
+                OpenWeaponPanel();
+                weaponInventoryList.gameObject.SetActive(false);
+                weaponPanel.openPanelBtn.gameObject.SetActive(true);
+            }
+            backBtn.gameObject.SetActive(false);
         }
         #endregion
     }

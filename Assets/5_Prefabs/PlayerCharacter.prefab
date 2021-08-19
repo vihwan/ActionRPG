@@ -135,8 +135,8 @@ GameObject:
   - component: {fileID: 616813801781678702}
   - component: {fileID: 616813801781678697}
   - component: {fileID: 616813801781678739}
-  - component: {fileID: 616813801781678736}
   - component: {fileID: 616813801781678737}
+  - component: {fileID: 616813801781678736}
   - component: {fileID: 1853712168}
   - component: {fileID: 1399220363}
   m_Layer: 10
@@ -289,27 +289,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  weaponInRightHandSlots:
-  - {fileID: 11400000, guid: 7fe060a262c469a4a970f4cc13eac309, type: 2}
-  weaponInLeftHandSlots:
-  - {fileID: 11400000, guid: e99e015f1e1e97f438dd028ec4c1fc5f, type: 2}
   weaponsInventory: []
   equipmentsInventory:
     keys: 
     values: []
---- !u!114 &616813801781678736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616813801781678696}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f89983b54090ce4791a6166b25e3126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lastAttack: 
 --- !u!114 &616813801781678737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -334,6 +317,19 @@ MonoBehaviour:
   criticalDamage: 0
   stamina: 0
   playerInventory: {fileID: 0}
+--- !u!114 &616813801781678736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616813801781678696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f89983b54090ce4791a6166b25e3126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastAttack: 
 --- !u!114 &1853712168
 MonoBehaviour:
   m_ObjectHideFlags: 0

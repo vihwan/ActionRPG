@@ -13,15 +13,9 @@ namespace SG
     {
         [Header("Current Equipping")]
         public WeaponItem currentWeapon;
-        // public WeaponItem leftWeapon;
         public WeaponItem unarmedWeapon;
         public EquipItem[] currentEquipmentSlots = new EquipItem[6];
-
-        public WeaponItem[] weaponInRightHandSlots = new WeaponItem[1];
-        public WeaponItem[] weaponInLeftHandSlots = new WeaponItem[1];
-
-        //public int currentRightWeaponIndex = -1;
-        //public int currentLeftWeaponIndex = -1;
+        //소비템칸 하나
 
         [Header("Inventory")]
         public List<WeaponItem> weaponsInventory;
@@ -32,17 +26,19 @@ namespace SG
 
         private void Awake()
         {
+            //Default Weapon Set
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            if (currentWeapon == null)
+            {
+                currentWeapon = Resources.Load<WeaponItem>("Scriptable/DragonBlade");
+                currentWeapon.isArmed = true;
+                weaponsInventory.Insert(0, currentWeapon); //List에서, 해당 위치에 넣는 함수 해당위치에 넣으면 뒷부분은 알아서 밀린다.
+            }
+            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
         private void Start()
         {
-            currentWeapon = weaponInRightHandSlots[0];
-            // leftWeapon = weaponInLeftHandSlots[currentLeftWeaponIndex];
-            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
-            // weaponSlotManager.LoadWeaponOnSlot(leftWeapon, true);
-
-            equipmentsInventory.Add(ItemType.Tops, new EquipItem());
         }
 
         //[System.Obsolete]
