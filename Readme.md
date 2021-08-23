@@ -167,10 +167,9 @@ Resources 폴더에 Fonts 폴더 생성
 
 	- SetTemplate 클래스 생성
 
-	playerInventory의 currentEquipmentSlots의 SetType을 서로 비교하여, 일정 갯수 이상을 넘으면, SetTemplate를 생성하고,
-	UI로 표시하도록 생성
+		playerInventory의 currentEquipmentSlots의 SetType을 서로 비교하여, 일정 갯수 이상을 넘으면, SetTemplate를 생성하고, UI로 표시하도록 생성
 
-	**CharacterUI_EquipmentPanel.CreateSetItemTemplate 부터 작성
+	**CharacterUI_EquipmentPanel.CreateSetItemTemplate 부터 작성**
 
 
 -------------------------------
