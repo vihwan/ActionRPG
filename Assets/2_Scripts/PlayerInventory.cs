@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace SG
 {
@@ -23,11 +24,22 @@ namespace SG
 
         //Need Component
         private WeaponSlotManager weaponSlotManager;
+        private PlayerStats playerStats;
 
         private void Awake()
         {
             //Default Weapon Set
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            playerStats = GetComponent<PlayerStats>();
+            if (playerStats == null)
+                Debug.LogWarning("PlayerStats가 참조되지 않았습니다.");
+
+            //무기 인벤토리의 무기들 isArmed를 false로 초기화
+            foreach (WeaponItem item in weaponsInventory)
+            {
+                item.isArmed = false;
+            }
+
             if (currentWeapon == null)
             {
                 currentWeapon = Resources.Load<WeaponItem>("Scriptable/DragonBlade");
@@ -37,9 +49,56 @@ namespace SG
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
-        private void Start()
+        public void ChangeCurrentWeapon(WeaponItem weaponItem)
         {
+            //무기를 벗으면, 벗은 만큼 수치를 감소
+            currentWeapon.isArmed = false;
+            playerStats.UpdatePlayerStatus_UnEquip(currentWeapon);
+
+            currentWeapon = weaponItem;
+            currentWeapon.isArmed = true;
+            playerStats.UpdatePlayerStatus_Equip(currentWeapon);
+            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
+
+
+        //LeftPanel_WeaponInventory가 닫힐 때, 실행하는 것이 좋다.
+        public void SortWeaponInventory(WeaponItem weaponItem)
+        {
+            if (weaponsInventory.Contains(weaponItem))
+            {
+                weaponsInventory.Remove(weaponItem);
+                weaponsInventory.Insert(0, weaponItem);
+            }
+        }
+
+        public void SortInventoryListToGANADA()
+        {
+            SortWeaponInventory(currentWeapon);
+            List<WeaponItem> tempList = weaponsInventory.Skip(1).ToList();
+            tempList = tempList.OrderBy(weaponItem => weaponItem.itemName).ToList();
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                weaponsInventory[i + 1] = tempList[i];
+                Debug.Log(tempList[i].itemName);
+            }
+        }
+
+        public void SortInventoryListToRarity()
+        {
+            SortWeaponInventory(currentWeapon);
+            List<WeaponItem> tempList = weaponsInventory.Skip(1).ToList();
+            tempList = tempList.OrderByDescending(weaponItem => weaponItem.rarity).ToList();
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                weaponsInventory[i + 1] = tempList[i];
+                Debug.Log(tempList[i].itemName + "의 레어도 : " + tempList[i].rarity);
+            }
+        }
+
+
 
         //[System.Obsolete]
         //        public void ChangeRightWeapon()

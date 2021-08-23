@@ -65,7 +65,7 @@ namespace SG
                 unholderSlot.LoadUnEquipWeaponModel(weaponItem);
                 activeWeaponObject.Initailize(weaponGO);
 
-                #region Handle Right Weapon Idle Animations
+/*                #region Handle Right Weapon Idle Animations
                 if (weaponItem != null)
                 {
                     animator.CrossFade(weaponItem.right_Hand_Idle, 0.2f);
@@ -75,7 +75,7 @@ namespace SG
                 {
                     animator.CrossFade("Right Arm Empty", 0.2f);
                 }
-                #endregion
+                #endregion*/
             }
         }
 

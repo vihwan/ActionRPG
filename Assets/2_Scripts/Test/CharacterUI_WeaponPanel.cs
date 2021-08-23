@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using TMPro;
 using System.Text;
 
-namespace SG 
+namespace SG
 {
     public class CharacterUI_WeaponPanel : MonoBehaviour
     {
-        [Header("Panel")]
+        [Header("Basic")]
         [SerializeField] private TMP_Text weaponName;
         [SerializeField] private TMP_Text weaponKind;
         [SerializeField] private TMP_Text weaponStatus;
@@ -19,16 +19,31 @@ namespace SG
         [SerializeField] private List<GameObject> rareStars;
         [SerializeField] private TMP_Text weaponExplain;
         [SerializeField] private GameObject currentEquipObject;
+
+        [Header("Comparison Panel")]
+        [SerializeField] internal GameObject comparisonPanel;
+        [SerializeField] private TMP_Text weaponName_Cf; //confer의 약어 : 비교하다라는 의미를 뜻함.
+        [SerializeField] private TMP_Text weaponKind_Cf;
+        [SerializeField] private TMP_Text weaponStatus_Cf;
+        [SerializeField] private TMP_Text weaponDurability_Cf;
+        [SerializeField] private Transform weaponRarityTransform_Cf;
+        [SerializeField] private List<GameObject> rareStars_Cf;
+        [SerializeField] private TMP_Text weaponExplain_Cf;
+        [SerializeField] private bool canOpenComparisonPanel = true;
+
+        [Header("Buttons")]
         [SerializeField] internal Button openPanelBtn;
         [SerializeField] internal Button changeWeaponBtn;
+        [SerializeField] internal Button comparisonWeaponBtn;
 
         [Header("Need Component")]
-        [SerializeField] private PlayerInventory playerInventory;
+        [SerializeField] internal PlayerInventory playerInventory;
         private CharacterWindowUI characterWindowUI; //상위 계층 
 
         private StringBuilder sb = new StringBuilder();
         public void Init()
         {
+            #region Panel Initialize
             weaponName = UtilHelper.Find<TMP_Text>(transform, "UI Background/Name");
             weaponKind = UtilHelper.Find<TMP_Text>(transform, "UI Background/Kind");
             weaponStatus = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/Text");
@@ -36,16 +51,23 @@ namespace SG
             weaponRarityTransform = transform.Find("UI Background/Rarity");
             weaponExplain = UtilHelper.Find<TMP_Text>(transform, "UI Background/Explain/ExplainText");
             currentEquipObject = transform.Find("UI Background/CurrentState").gameObject;
-
-            playerInventory = FindObjectOfType<PlayerInventory>();
-            if (playerInventory == null)
-                Debug.LogWarning("playerInventory를 찾지 못했습니다.");
-
             RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
+            #endregion
 
+            #region Comparison Panel Initialize
+            comparisonPanel = transform.Find("UI Background Comparison").gameObject;
+            weaponName_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Name");
+            weaponKind_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Kind");
+            weaponStatus_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Status/Text");
+            weaponDurability_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Durability/Text");
+            weaponRarityTransform_Cf = transform.Find("UI Background Comparison/Rarity");
+            weaponExplain_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Explain/ExplainText");
+            #endregion
+
+            #region Button Initialize
             openPanelBtn = UtilHelper.Find<Button>(transform, "UI Background/OpenPanelBtn");
             if (openPanelBtn != null)
-                openPanelBtn.onClick.AddListener(OpenChangeWeaponInventory);
+                openPanelBtn.onClick.AddListener(OpenWeaponLeftInventory);
 
             changeWeaponBtn = UtilHelper.Find<Button>(transform, "UI Background/ChangeWeaponBtn");
             if (changeWeaponBtn != null)
@@ -53,16 +75,43 @@ namespace SG
                 changeWeaponBtn.onClick.AddListener(null);
                 changeWeaponBtn.gameObject.SetActive(false);
             }
+
+            comparisonWeaponBtn = UtilHelper.Find<Button>(transform, "UI Background/ComparisonWeaponBtn");
+            if (comparisonWeaponBtn != null)
+            {
+                comparisonWeaponBtn.onClick.AddListener(() => SetComparisonPanel(canOpenComparisonPanel));
+                comparisonWeaponBtn.gameObject.SetActive(false);
+            }
+            #endregion
+
+            #region Component Initialize
+            playerInventory = FindObjectOfType<PlayerInventory>();
+            if (playerInventory == null)
+                Debug.LogWarning("playerInventory를 찾지 못했습니다.");
+
             characterWindowUI = GetComponentInParent<CharacterWindowUI>();
+            #endregion
+
+            comparisonPanel.SetActive(false);
         }
 
         public void OnEnable()
         {
             SetParameter(playerInventory.currentWeapon);
         }
+
+
+        //무기 교체 버튼을 눌렀을 경우 발생하는 이벤트 함수
+        private void ChangeWeaponBtnEvent(WeaponItem selectWeapon)
+        {
+            playerInventory.ChangeCurrentWeapon(selectWeapon);
+            SetCurrentStateObjects(selectWeapon.isArmed);
+            characterWindowUI.weaponInventoryList.UpdateSlots();
+        }
+
         private void AddStatusText(int value, string statName, bool isPercent = false)
         {
-            if(value != 0)
+            if (value != 0)
             {
                 if (sb.Length > 0)
                     sb.AppendLine();
@@ -94,7 +143,7 @@ namespace SG
                     sb.Append(" ");
                 }
 
-                if(isPercent)
+                if (isPercent)
                 {
                     sb.Append(value);
                     sb.Append("%");
@@ -105,7 +154,7 @@ namespace SG
                 }
             }
         }
-        private void SetItemStatusText(WeaponItem playerWeapon)
+        private void SetItemStatusText(TMP_Text tMP_Text, WeaponItem playerWeapon)
         {
             sb.Length = 0;
             AddStatusText(playerWeapon.itemAttributes[(int)Attribute.Hp].value, "체력");
@@ -115,7 +164,7 @@ namespace SG
             AddStatusText(playerWeapon.itemAttributes[(int)Attribute.CriticalDamage].value, "치명타 배율", isPercent: true);
             AddStatusText(playerWeapon.itemAttributes[(int)Attribute.Stamina].value, "스태미나");
 
-            weaponStatus.text = sb.ToString();
+            tMP_Text.text = sb.ToString();
         }
 
         public void SetParameter(WeaponItem playerWeapon)
@@ -123,14 +172,34 @@ namespace SG
             weaponName.text = playerWeapon.itemName;
             weaponKind.text = playerWeapon.kind;
 
-            SetItemStatusText(playerWeapon);
+            SetItemStatusText(weaponStatus, playerWeapon);
 
-            weaponDurability.text = 
+            weaponDurability.text =
                 playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
 
-            CreateRarityStar(playerWeapon);
+            CreateRarityStar(weaponRarityTransform, rareStars , playerWeapon);
             weaponExplain.text = playerWeapon.itemDescription;
             SetCurrentStateObjects(playerWeapon.isArmed);
+
+            if (changeWeaponBtn.gameObject.activeSelf == true)
+            {
+                changeWeaponBtn.onClick.RemoveAllListeners();
+                changeWeaponBtn.onClick.AddListener(() => ChangeWeaponBtnEvent(playerWeapon));
+                changeWeaponBtn.onClick.AddListener(CloseComparisonPanel);
+            }
+        }
+        public void SetParameter_Comparision(WeaponItem currentWeapon)
+        {
+            weaponName_Cf.text = currentWeapon.itemName;
+            weaponKind_Cf.text = currentWeapon.kind;
+
+            SetItemStatusText(weaponStatus_Cf, currentWeapon);
+
+            weaponDurability_Cf.text =
+                currentWeapon.currentDurability.ToString() + " / " + currentWeapon.maxDurability.ToString();
+
+            CreateRarityStar(weaponRarityTransform_Cf, rareStars_Cf , currentWeapon);
+            weaponExplain_Cf.text = currentWeapon.itemDescription;
         }
 
         private void SetCurrentStateObjects(bool state)
@@ -139,41 +208,62 @@ namespace SG
             //장착중인 아이템이 아니라면, 무기 교체 버튼이 나타나야함
             currentEquipObject.SetActive(state);
             changeWeaponBtn.gameObject.SetActive(!state);
+            comparisonWeaponBtn.gameObject.SetActive(!state);
         }
 
-        private void CreateRarityStar(WeaponItem playerWeapon)
+        private void CreateRarityStar(Transform transform, List<GameObject> rareStarsList, WeaponItem playerWeapon)
         {
-            int rarityCount = weaponRarityTransform.childCount;
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+            rareStarsList.Clear();
+
+            int rarityCount = 0;
             if (rarityCount < playerWeapon.rarity)
             {
                 while (rarityCount < playerWeapon.rarity)
                 {
-                    GameObject star = Instantiate(RareStar, weaponRarityTransform);
-                    rareStars.Add(star);
+                    GameObject star = Instantiate(RareStar, transform);
+                    rareStarsList.Add(star);
                     rarityCount++;
                 }
             }
-            else if (rarityCount > playerWeapon.rarity)
+/*            else if (rarityCount > playerWeapon.rarity)
             {
                 while (rarityCount > playerWeapon.rarity)
                 {
-                    Destroy(rareStars[0]); 
-                    rareStars.RemoveAt(0);
+                    GameObject deleteStar = rareStars[0];
+                    rareStarsList.Remove(deleteStar);
+                    Destroy(deleteStar);
                     rarityCount--;
                 }
             }
-                return;
+            return;*/
         }
 
 
         //무기 교체 버튼을 누르면, 왼쪽 패널의 무기 인벤토리를 엽니다.
-        private void OpenChangeWeaponInventory()
+        private void OpenWeaponLeftInventory()
         {
             //왼쪽 패널에 무기 인벤토리를 생성
             characterWindowUI.weaponInventoryList.gameObject.SetActive(true);
             //뒤로가기 버튼 활성화
             characterWindowUI.backBtn.gameObject.SetActive(true);
             openPanelBtn.gameObject.SetActive(false);
+        }
+
+        private void SetComparisonPanel(bool state)
+        {
+            canOpenComparisonPanel = !canOpenComparisonPanel;
+            comparisonPanel.SetActive(state);
+            SetParameter_Comparision(playerInventory.currentWeapon);
+        }
+
+        public void CloseComparisonPanel()
+        {
+            canOpenComparisonPanel = true;
+            comparisonPanel.SetActive(false);
         }
     }
 }

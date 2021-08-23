@@ -289,7 +289,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  weaponsInventory: []
+  weaponsInventory:
+  - {fileID: 11400000, guid: 6dd05d937f27e5d4eb8db1fdc6b61738, type: 2}
+  - {fileID: 11400000, guid: 0211f04082699ed47960bc4869848148, type: 2}
   equipmentsInventory:
     keys: 
     values: []

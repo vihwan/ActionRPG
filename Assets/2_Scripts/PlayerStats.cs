@@ -78,23 +78,51 @@ namespace SG
             criticalDamage = 150;
             stamina = 100;
 
-            UpdatePlayerStatus();
+            UpdatePlayerStatus_Initialize();
         }
 
-        private void UpdatePlayerStatus()
+        public void UpdatePlayerStatus_Initialize()
         {
-            //foreach (ItemAttribute attribute in playerInventory.currentWeapon.itemAttributes)
-            //{
-            //    if(attribute == null)
-            //}
-            maxHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-            currentHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-            attack += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Attack].value;
-            defense += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Defense].value;
-            critical += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Critical].value;
-            criticalDamage += playerInventory.currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
-            stamina += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+            if(playerInventory.currentWeapon != null)
+            {
+                maxHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                currentHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                attack += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+                defense += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+                critical += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+                criticalDamage += playerInventory.currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+                stamina += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+            }
         }
+
+        public void UpdatePlayerStatus_Equip(WeaponItem currentWeapon)
+        {
+            if (playerInventory.currentWeapon != null)
+            {
+                maxHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                currentHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                attack += currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+                defense += currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+                critical += currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+                criticalDamage += currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+                stamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+            }
+        }
+
+        public void UpdatePlayerStatus_UnEquip(WeaponItem currentWeapon)
+        {
+            if (playerInventory.currentWeapon != null)
+            {
+                maxHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                currentHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                attack -= currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+                defense -= currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+                critical -= currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+                criticalDamage -= currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+                stamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+            }
+        }
+
         private int SetMaxHealthFromHealthLevel()
         {
             maxHealth = healthLevel * 10;

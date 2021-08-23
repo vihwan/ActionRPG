@@ -102,6 +102,7 @@ namespace SG
             if(weaponInventoryList.gameObject.activeSelf == true)
             {
                 weaponInventoryList.DeSelectAllSlots();
+                weaponPanel.playerInventory.SortWeaponInventory(weaponPanel.playerInventory.currentWeapon);
                 OpenWeaponPanel();
                 weaponInventoryList.gameObject.SetActive(false);
                 weaponPanel.openPanelBtn.gameObject.SetActive(true);

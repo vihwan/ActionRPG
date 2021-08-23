@@ -7,7 +7,7 @@ namespace SG
 {
     public class WeaponInventorySlot : MonoBehaviour
     {
-        [SerializeField] private WeaponItem item;
+        [SerializeField] internal WeaponItem item;
         [SerializeField] private Button itemBtn;
         [SerializeField] private Image icon;
         [SerializeField] private bool isArmed;
@@ -22,6 +22,7 @@ namespace SG
                 CharacterUI_WeaponPanel weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
                 itemBtn.onClick.AddListener(() => weaponPanel.SetParameter(item));
                 itemBtn.onClick.AddListener(SelectSlot);
+                itemBtn.onClick.AddListener(() => CheckSlotIsCurrentWeapon(weaponInventoryList.playerInventory.currentWeapon));
             }
             icon = UtilHelper.Find<Image>(itemBtn.transform, "Image");
 
@@ -55,9 +56,29 @@ namespace SG
                 slot.ChangeBackgroundColor();
             }
             isSelect = true;
-            Debug.Log("isSelect 조정 완료");
             ChangeBackgroundColor();
         }
+
+        public void UpdateSlot(WeaponItem weaponItem)
+        {
+            isArmed = weaponItem.isArmed;
+            ChangeBackgroundColor();
+            Debug.Log(weaponItem.name + "의 isArmed : " + weaponItem.isArmed);
+        }
+
+        private void CheckSlotIsCurrentWeapon(WeaponItem currentWeapon)
+        {
+            if(item == currentWeapon)
+            {
+                CharacterUI_WeaponPanel ch = FindObjectOfType<CharacterUI_WeaponPanel>();
+                if (ch != null)
+                {
+                    if(ch.comparisonPanel.activeSelf == true)
+                        ch.CloseComparisonPanel();
+                }
+            }
+        }
+
         public void ChangeBackgroundColor()
         {
             //장착, 미장착 상태인 무기를 구별하기 위해 버튼 색상을 바꾼다.
@@ -72,6 +93,6 @@ namespace SG
             else if (!isSelect)
                 itemBtn.GetComponent<Image>().color = Color.white;
         }
+
     }
 }
-

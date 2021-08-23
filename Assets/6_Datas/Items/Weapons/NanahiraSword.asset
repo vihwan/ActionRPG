@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054e387345c7e1c478f5e2f2110592f2, type: 3}
+  m_Name: NanahiraSword
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 1d81b0b4208239b42a62c61a473bde99, type: 3}
+  itemName: "\uB098\uB098\uD788\uB77C\uC758\uAC80"
+  itemDescription: "\uC774\uAC8C \uBB54\uB370 \uC774 \uC2ED\uB355\uC544"
+  modelPrefab: {fileID: 100050, guid: 8a7b78e82902d1b4eba2923c6a4cf1c7, type: 3}
+  isArmed: 0
+  itemType: 0
+  kind: "\uC591\uC190\uAC80"
+  currentDurability: 40
+  maxDurability: 40
+  rarity: 5
+  itemAttributes:
+  - attribute: 0
+    value: 20
+  - attribute: 1
+    value: 50
+  - attribute: 2
+    value: 30
+  - attribute: 3
+    value: 5
+  - attribute: 4
+    value: 30
+  - attribute: 5
+    value: 10
+  right_Hand_Idle: Right_Arm_Idle_01
+  left_Hand_Idle: Left_Arm_Idle_01
+  OneHanded_LightAttack1: Light_Attack_1
+  OneHanded_LightAttack2: Light_Attack_2
+  OneHanded_LightAttack3: Light_Attack_3
+  OneHanded_HeavyAttack1: Heavy_Attack_1

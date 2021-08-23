@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using TMPro;
 
 namespace SG
 {
@@ -10,17 +10,44 @@ namespace SG
     {
         private Transform weaponInventorySlotsParent;
         [SerializeField] internal WeaponInventorySlot[] weaponInventorySlots;
-        private PlayerInventory playerInventory;
+        private TMP_Dropdown itemSort_Dropdown;
+
+        [Header("Need Component")]
+        internal PlayerInventory playerInventory;
         public void Init()
         {
             weaponInventorySlotsParent = transform.Find("Inventory Slot Parent");
             weaponInventorySlots = GetComponentsInChildren<WeaponInventorySlot>(true);
+            itemSort_Dropdown = GetComponentInChildren<TMP_Dropdown>(true);
+            if (itemSort_Dropdown != null)
+            {
+                InitDropdown();
+                itemSort_Dropdown.onValueChanged.AddListener(SortInventoryList);
+            }
+
             playerInventory = FindObjectOfType<PlayerInventory>();
+        }
+
+
+
+        private void InitDropdown()
+        {
+            itemSort_Dropdown.ClearOptions();
+
+            List<string> options = new List<string>();
+            options.Add("가나다순");
+            options.Add("레어도순");
+
+            itemSort_Dropdown.AddOptions(options);
+            itemSort_Dropdown.value = 0;
+            itemSort_Dropdown.RefreshShownValue();
         }
 
         public void OnEnable()
         {
-            UpdateUI();
+            SortInventoryListToGANADA();
+            itemSort_Dropdown.value = 0;
+            itemSort_Dropdown.RefreshShownValue();
         }
 
         public void DeSelectAllSlots()
@@ -32,10 +59,20 @@ namespace SG
             }
         }
 
+        public void UpdateSlots()
+        {
+            for (int i = 0; i < weaponInventorySlots.Length; i++)
+            {
+                weaponInventorySlots[i].UpdateSlot(playerInventory.weaponsInventory[i]);
+            }
+
+            Debug.Log("무기 아이콘 색상 갱신 완료");
+        }
+
         // 무기 아이템 아이콘을 불러와 보여준다. 현재 장착중인 아이템이 가장 먼저 실행.
         public void UpdateUI()
         {
-
+            //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
             if(weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
             {
                 int dex = playerInventory.weaponsInventory.Count - weaponInventorySlots.Length;
@@ -59,7 +96,33 @@ namespace SG
                     weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
                 }
             }
+
+            DeSelectAllSlots();
+        }
+
+        private void SortInventoryList(int value)
+        {
+            switch (value)
+            {
+                case 0:
+                    SortInventoryListToGANADA();
+                    break;
+                case 1:
+                    SortInventoryListToRarity();
+                    break;
+            }
+        }
+
+        private void SortInventoryListToGANADA()
+        {
+            playerInventory.SortInventoryListToGANADA();
+            UpdateUI();
+        }
+
+        private void SortInventoryListToRarity()
+        {
+            playerInventory.SortInventoryListToRarity();
+            UpdateUI();
         }
     }
-
 }
