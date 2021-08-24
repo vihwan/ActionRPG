@@ -10,28 +10,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 39e933b3b48b92744abb8612d4a724f3, type: 3}
-  m_Name: GoldenArmor
+  m_Name: AchilleusArmor
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 0}
-  itemName: GoldenArmor
-  itemDescription: "\uADF8\uB9AC\uC2A4 \uC2E0\uD654\uC5D0 \uB4F1\uC7A5\uD558\uB294
-    \uD2B8\uB85C\uC774 \uC804\uC7C1\uC758 \uB300\uC601\uC6C5, \uC544\uD0AC\uB808\uC6B0\uC2A4\uAC00
-    \uC0AC\uC6A9\uD588\uB2E4\uB358 \uD669\uAE08\uAC11\uC8FC. \uC774\uB7F0\uAC8C \uC65C
-    \uADF8\uB140\uC11D\uD55C\uD14C \uC788\uC5C8\uB294\uC9C0\uB294 \uC54C \uC218 \uC5C6\uB2E4."
+  itemIcon: {fileID: 21300000, guid: 2f1eaeeaad36ee5469eff7ff158f37ba, type: 3}
+  itemName: "\uC544\uD0AC\uB808\uC6B0\uC2A4\uC758 \uAC11\uC637"
+  itemDescription: "\uACE0\uB300 \uADF8\uB9AC\uC2A4 \uD2B8\uB85C\uC774 \uC804\uC7C1\uC758
+    \uC601\uC6C5, \uC544\uD0AC\uB808\uC6B0\uC2A4\uAC00 \uC785\uC5C8\uB2E4\uB358 \uAC11\uC637\uC774\uB2E4."
   modelPrefab: {fileID: 0}
+  isArmed: 0
   itemType: 1
   kind: "\uC911\uAC11"
-  currentDurability: 40
-  maxDurability: 40
-  rarity: 5
+  currentDurability: 46
+  maxDurability: 50
+  rarity: 4
   itemAttributes:
   - attribute: 0
     value: 300
   - attribute: 1
     value: 10
   - attribute: 2
-    value: 30
+    value: 20
   - attribute: 3
     value: 5
+  - attribute: 4
+    value: 0
   - attribute: 5
-    value: 20
+    value: 30
+  enhanceLevel: 1

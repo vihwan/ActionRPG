@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e933b3b48b92744abb8612d4a724f3, type: 3}
+  m_Name: Special5
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: df93d674ba4548e42a34db9ece16f692, type: 3}
+  itemName: "\uC554\uD751\uC220\uC0AC\uC758 \uC815\uC218"
+  itemDescription: "\uC554\uD751\uC220\uC0AC\uC758 \uD798\uC774 \uB2F4\uACA8\uC838
+    \uC788\uB294 \uC2EC\uC7A5\r"
+  modelPrefab: {fileID: 0}
+  isArmed: 0
+  itemType: 6
+  kind: "\uD2B9\uC218\uC7A5\uBE44"
+  currentDurability: 15
+  maxDurability: 15
+  rarity: 5
+  itemAttributes:
+  - attribute: 0
+    value: 0
+  - attribute: 1
+    value: 20
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 10
+  - attribute: 4
+    value: 40
+  - attribute: 5
+    value: 0
+  enhanceLevel: 0

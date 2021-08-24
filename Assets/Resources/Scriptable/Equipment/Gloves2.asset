@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e933b3b48b92744abb8612d4a724f3, type: 3}
+  m_Name: Gloves2
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: a0c8d176f5a5bc740b040a868a64163a, type: 3}
+  itemName: "\uAE38 \uC548\uB0B4\uC790\uC758 \uC5EC\uD589\uC11C"
+  itemDescription: "\uC138\uC0C1\uC744 \uB204\uBE44\uACE0 \uB2E4\uB2CC \uC5B4\uB290
+    \uBC29\uB791\uC790\uAC00 \uC9C1\uC811 \uC4F4 \uC5EC\uD589 \uAC00\uC774\uB4DC."
+  modelPrefab: {fileID: 0}
+  isArmed: 0
+  itemType: 3
+  kind: "\uC7A5\uAC11"
+  currentDurability: 20
+  maxDurability: 20
+  rarity: 2
+  itemAttributes:
+  - attribute: 0
+    value: 0
+  - attribute: 1
+    value: 10
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 0
+  enhanceLevel: 1

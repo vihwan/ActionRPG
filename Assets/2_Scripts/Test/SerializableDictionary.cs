@@ -4,9 +4,8 @@ using UnityEngine;
 
 namespace SG
 {
+    [System.Serializable] public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
 
-    [System.Serializable]
-    public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ISerializationCallbackReceiver
     {
         [SerializeField] private List<TKey> keys = new List<TKey>();
         [SerializeField] private List<TValue> values = new List<TValue>();
@@ -27,13 +26,6 @@ namespace SG
         public void OnAfterDeserialize()
         {
             this.Clear();
-
-            if (keys.Count != values.Count)
-            {
-                throw new System.Exception(string.Format(
-                    "there are {0} keys and {1} values after deserialization. " +
-                    "Make sure that both key and value types are serializable."));
-            }
 
             for (int i = 0; i < keys.Count; i++)
             {

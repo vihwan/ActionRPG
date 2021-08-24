@@ -83,7 +83,7 @@ namespace SG
 
         public void UpdatePlayerStatus_Initialize()
         {
-            if(playerInventory.currentWeapon != null)
+            if (playerInventory.currentWeapon != null)
             {
                 maxHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
                 currentHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
@@ -121,6 +121,29 @@ namespace SG
                 criticalDamage -= currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
                 stamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
             }
+        }
+
+        public void UpdatePlayerStatus_Equip(EquipItem currentEquipItem)
+        {
+            maxHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            currentHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            attack += currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
+            defense += currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
+            critical += currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
+            criticalDamage += currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
+            stamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+
+        }
+
+        public void UpdatePlayerStatus_UnEquip(EquipItem currentEquipItem)
+        {
+            maxHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            currentHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            attack -= currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
+            defense -= currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
+            critical -= currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
+            criticalDamage -= currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
+            stamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
         }
 
         private int SetMaxHealthFromHealthLevel()

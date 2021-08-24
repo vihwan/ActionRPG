@@ -14,7 +14,8 @@ namespace SG
 
         [Header("Need Component")]
         internal PlayerInventory playerInventory;
-        public void Init()
+        internal CharacterUI_WeaponPanel weaponPanel;
+        public override void Init()
         {
             weaponInventorySlotsParent = transform.Find("Inventory Slot Parent");
             weaponInventorySlots = GetComponentsInChildren<WeaponInventorySlot>(true);
@@ -26,6 +27,7 @@ namespace SG
             }
 
             playerInventory = FindObjectOfType<PlayerInventory>();
+            weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
         }
 
 
@@ -43,7 +45,7 @@ namespace SG
             itemSort_Dropdown.RefreshShownValue();
         }
 
-        public void OnEnable()
+        public override void OnEnable()
         {
             SortInventoryListToGANADA();
             itemSort_Dropdown.value = 0;
@@ -100,7 +102,7 @@ namespace SG
             DeSelectAllSlots();
         }
 
-        private void SortInventoryList(int value)
+        internal override void SortInventoryList(int value)
         {
             switch (value)
             {
@@ -111,17 +113,21 @@ namespace SG
                     SortInventoryListToRarity();
                     break;
             }
+
+            weaponPanel.SetParameter(playerInventory.currentWeapon);
+            if (weaponPanel.comparisonPanel.activeSelf == true)
+                weaponPanel.comparisonPanel.SetActive(false);
         }
 
         private void SortInventoryListToGANADA()
         {
-            playerInventory.SortInventoryListToGANADA();
+            playerInventory.SortWeaponInventoryListToGANADA();
             UpdateUI();
         }
 
         private void SortInventoryListToRarity()
         {
-            playerInventory.SortInventoryListToRarity();
+            playerInventory.SortWeaponInventoryListToRarity();
             UpdateUI();
         }
     }

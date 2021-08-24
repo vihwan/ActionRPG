@@ -16,7 +16,7 @@ public static class UtilHelper
         }
         else
         {
-            Debug.LogWarning("Cannot Find Component");
+            Debug.LogWarning("Cannot Find Component : " + path);
             return null;
         }
     }

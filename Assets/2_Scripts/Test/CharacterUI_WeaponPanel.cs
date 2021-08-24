@@ -229,17 +229,6 @@ namespace SG
                     rarityCount++;
                 }
             }
-/*            else if (rarityCount > playerWeapon.rarity)
-            {
-                while (rarityCount > playerWeapon.rarity)
-                {
-                    GameObject deleteStar = rareStars[0];
-                    rareStarsList.Remove(deleteStar);
-                    Destroy(deleteStar);
-                    rarityCount--;
-                }
-            }
-            return;*/
         }
 
 

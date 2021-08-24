@@ -4,16 +4,16 @@ using UnityEngine;
 
 namespace SG
 {
-
     public enum SetType
     {
         Jason, //이아손
         Zhongli, //종려
         Fragnance //향기
     }
-    public class SetItem : MonoBehaviour
+    
+    public class SetItem : ScriptableObject
     {
-        private SetType setType = SetType.Jason;
+        public SetType setType;
         public string setName;
         public string setEffect_One;
         public string setEffect_Two;

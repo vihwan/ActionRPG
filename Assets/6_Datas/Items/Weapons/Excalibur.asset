@@ -10,32 +10,33 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 054e387345c7e1c478f5e2f2110592f2, type: 3}
-  m_Name: GarzotSword
+  m_Name: Excalibur
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 940e5b52081c14fbca49b3d440713816, type: 3}
-  itemName: "\uAC00\uC870\uD2B8\uAC80"
-  itemDescription: "\uC544\uBB34\uD2BC \uAC00\uC870\uD2B8\uAC80"
-  modelPrefab: {fileID: 1932134108094490, guid: ec3810164eb2ffd40a94de96f81b74d8,
+  itemIcon: {fileID: 21300000, guid: b1c526cf9e551634fa9ff6b6ef2f2118, type: 3}
+  itemName: "\uC131\uAC80 \uC5D1\uC2A4\uCE7C\uB9AC\uBC84"
+  itemDescription: "\uC544\uC11C\uC655 \uC804\uC124\uC5D0 \uB4F1\uC7A5\uD558\uB294
+    \uC131\uAC80. "
+  modelPrefab: {fileID: 1796098590423106, guid: f218e382629978c42a7fe498682aa052,
     type: 3}
   isArmed: 0
   itemType: 0
-  kind: "\uBAB0\uB8E8"
-  currentDurability: 3
-  maxDurability: 3
-  rarity: 2
+  kind: "\uB300\uAC80"
+  currentDurability: 20
+  maxDurability: 20
+  rarity: 3
   itemAttributes:
   - attribute: 0
-    value: 3
+    value: 50
   - attribute: 1
-    value: 5
+    value: 50
   - attribute: 2
-    value: 3
+    value: 10
   - attribute: 3
-    value: 3
+    value: 0
   - attribute: 4
-    value: 3
+    value: 10
   - attribute: 5
-    value: 5
+    value: 10
   right_Hand_Idle: Right_Arm_Idle_01
   left_Hand_Idle: Left_Arm_Idle_01
   OneHanded_LightAttack1: Light_Attack_1

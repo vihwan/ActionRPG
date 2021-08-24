@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39e933b3b48b92744abb8612d4a724f3, type: 3}
+  m_Name: Shoes3
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 079bc3f261aa0594e829d504738f8fe2, type: 3}
+  itemName: "\uC804\uC7C1\uC758 \uB05D"
+  itemDescription: "\uC804\uC7C1\uC744 \uC2B9\uB9AC\uD55C \uAC83\uBCF4\uB2E4 \uB354
+    \uC911\uC694\uD558\uACE0 \uC704\uB300\uD55C \uAC83\uC740, \uC804\uC7C1\uC744
+    \uB9C9\uB294 \uAC83\uC774\uC9C0..\r\n"
+  modelPrefab: {fileID: 0}
+  isArmed: 0
+  itemType: 4
+  kind: "\uC2E0\uBC1C"
+  currentDurability: 15
+  maxDurability: 15
+  rarity: 3
+  itemAttributes:
+  - attribute: 0
+    value: 10
+  - attribute: 1
+    value: 0
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 15
+  enhanceLevel: 3

@@ -283,18 +283,42 @@ MonoBehaviour:
   currentWeapon: {fileID: 0}
   unarmedWeapon: {fileID: 11400000, guid: e99e015f1e1e97f438dd028ec4c1fc5f, type: 2}
   currentEquipmentSlots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 97824b23283272a43886fcfa44e88148, type: 2}
+  - {fileID: 11400000, guid: 550e2cf9438a77745973fa1eabcc1275, type: 2}
+  - {fileID: 11400000, guid: 550e2cf9438a77745973fa1eabcc1275, type: 2}
+  - {fileID: 11400000, guid: 550e2cf9438a77745973fa1eabcc1275, type: 2}
+  - {fileID: 11400000, guid: 550e2cf9438a77745973fa1eabcc1275, type: 2}
+  - {fileID: 11400000, guid: 550e2cf9438a77745973fa1eabcc1275, type: 2}
   weaponsInventory:
   - {fileID: 11400000, guid: 6dd05d937f27e5d4eb8db1fdc6b61738, type: 2}
   - {fileID: 11400000, guid: 0211f04082699ed47960bc4869848148, type: 2}
-  equipmentsInventory:
-    keys: 
-    values: []
+  - {fileID: 11400000, guid: a43b63cf931970848923640d289799f7, type: 2}
+  - {fileID: 11400000, guid: b992df446a2da1146ad92119a9c5f711, type: 2}
+  topsInventory:
+  - {fileID: 11400000, guid: 6ef1262b97ba68f498ce9355f51717ca, type: 2}
+  - {fileID: 11400000, guid: b962d4e31a9c805449e237ce62c5b114, type: 2}
+  bottomsInventory:
+  - {fileID: 11400000, guid: aad8fc6d6fb1e6c429244c977ac90f12, type: 2}
+  - {fileID: 11400000, guid: ec98b279732f06a43b2178b37d430751, type: 2}
+  glovesInventory:
+  - {fileID: 11400000, guid: a1f0acef12c0dcd4c9acb8a54cf79a8f, type: 2}
+  - {fileID: 11400000, guid: 307267ea6a9c0b043b0f114412cb0cef, type: 2}
+  - {fileID: 11400000, guid: 67606cde445738c42892749d29ea19ff, type: 2}
+  shoesInventory:
+  - {fileID: 11400000, guid: dea93a72e519f2c4180e2adaf5faa75b, type: 2}
+  - {fileID: 11400000, guid: 16927e3373f00274eba74c0ad4f2f4a0, type: 2}
+  - {fileID: 11400000, guid: fb0845834444c674aa8f8c9765014840, type: 2}
+  accessoryInventory:
+  - {fileID: 11400000, guid: f2e69c6f57a27d1489718d3d83308563, type: 2}
+  - {fileID: 11400000, guid: 7c754f70f851ebe49906bc46fac7e371, type: 2}
+  - {fileID: 11400000, guid: 437d72214adf0dd4c9fa9ed2b8d27d19, type: 2}
+  - {fileID: 11400000, guid: e214f94ec0e6391478dc02bb3f1169af, type: 2}
+  specialEquipInventory:
+  - {fileID: 11400000, guid: 35bf24bfb3a5f1c4b9f417cb613a00b1, type: 2}
+  - {fileID: 11400000, guid: d52f6e8abd944ba4fa1f74649cb20649, type: 2}
+  - {fileID: 11400000, guid: fc86b5303fcf7b84e80e447a2fcb5196, type: 2}
+  - {fileID: 11400000, guid: c0eed94a7358a234bbd58148ea5ccd09, type: 2}
+  - {fileID: 11400000, guid: 998b8e7dd7acc5a4994dd7b0cd25f6a9, type: 2}
 --- !u!114 &616813801781678737
 MonoBehaviour:
   m_ObjectHideFlags: 0

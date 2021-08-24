@@ -13,6 +13,7 @@ namespace SG
 
         [Header("CharacterUI Left Panel")]
         [SerializeField] internal WeaponInventoryList weaponInventoryList;
+        [SerializeField] internal EquipmentInventoryList equipmentInventoryList;
 
         [Header("CharacterUI Right Panel")]
         [SerializeField] private CharacterUI_StatusPanel statusPanel;
@@ -40,6 +41,8 @@ namespace SG
                 weaponPanel.Init();
 
             equipmentPanel = GetComponentInChildren<CharacterUI_EquipmentPanel>();
+            if (equipmentPanel != null)
+                equipmentPanel.Init();
 
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
             if (closeBtn != null)
@@ -56,6 +59,10 @@ namespace SG
             weaponInventoryList = GetComponentInChildren<WeaponInventoryList>(true);
             if (weaponInventoryList != null)
                 weaponInventoryList.Init();
+
+            equipmentInventoryList = GetComponentInChildren<EquipmentInventoryList>(true);
+            if (equipmentInventoryList != null)
+                equipmentInventoryList.Init();
         }
 
 /*        public void UpdateCharacterWindowUI()
@@ -102,11 +109,33 @@ namespace SG
             if(weaponInventoryList.gameObject.activeSelf == true)
             {
                 weaponInventoryList.DeSelectAllSlots();
-                weaponPanel.playerInventory.SortWeaponInventory(weaponPanel.playerInventory.currentWeapon);
+                //weaponPanel.playerInventory.SortWeaponInventory(weaponPanel.playerInventory.currentWeapon);
                 OpenWeaponPanel();
                 weaponInventoryList.gameObject.SetActive(false);
                 weaponPanel.openPanelBtn.gameObject.SetActive(true);
+
+                if (weaponPanel.comparisonPanel.activeSelf == true)
+                    weaponPanel.comparisonPanel.SetActive(false);
             }
+
+            if(equipmentInventoryList.gameObject.activeSelf == true)
+            {
+                equipmentInventoryList.DeSelectAllSlots();
+                equipmentInventoryList.gameObject.SetActive(false);
+                equipmentPanel.CloseLeftEquipmentInventory();
+                equipmentPanel.openLeftInventoryBtn.gameObject.SetActive(true);
+                return;
+            }
+
+            if(equipmentPanel.individualPanel.activeSelf == true)
+            {
+                foreach (EquipSlot slot in equipmentPanel.equipSlots)
+                {
+                    slot.ChangeFrameColor(false);
+                }
+                equipmentPanel.individualPanel.SetActive(false);
+            }
+
             backBtn.gameObject.SetActive(false);
         }
         #endregion

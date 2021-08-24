@@ -8,59 +8,91 @@ namespace SG
 {
     public class EquipSlot : MonoBehaviour
     {
-        private EquipItem item;
+        [SerializeField] private EquipItem item;
         private Button itemBtn;
         private Image icon;
+        private Image enhanceFrame;
         private TMP_Text enhanceLevelText;
 
         [SerializeField] private bool isArmed;
         [SerializeField] internal bool isSelect = false;
 
+        [SerializeField] private Sprite frameNormal;
+        [SerializeField] private Sprite frameGold;
 
-        private void Awake()
+        [SerializeField] private CharacterUI_EquipmentPanel equipmentPanel;
+
+        public void Init()
         {
+            equipmentPanel = GetComponentInParent<CharacterUI_EquipmentPanel>();
+
             itemBtn = GetComponentInChildren<Button>(true);
-            if(itemBtn != null)
+            if (itemBtn != null)
             {
                 //버튼을 누르면, 해당 아이템 정보가 오른쪽에 출력
-                itemBtn.onClick.AddListener(null);
+                itemBtn.onClick.AddListener(equipmentPanel.DeselectAllEquipSlots);
+                itemBtn.onClick.AddListener(() => OpenIndividualEquipItemPanel(item));
             }
+
+            enhanceFrame = UtilHelper.Find<Image>(transform, "EnhanceFrame");
             enhanceLevelText = UtilHelper.Find<TMP_Text>(transform, "EnhanceFrame/Text");
             icon = UtilHelper.Find<Image>(transform, "Button/Icon");
+            frameNormal = Resources.Load<Sprite>("Sprites/Item/Frame/frame_normal");
+            frameGold = Resources.Load<Sprite>("Sprites/Item/Frame/frame_select");
         }
 
+        public void OpenIndividualEquipItemPanel(EquipItem equipItem)
+        {
+            isSelect = true;
+            ChangeFrameColor(true);
+            equipmentPanel.OpenIndividualItemPanel();
+            equipmentPanel.SetParameterIndividualEquipItem(equipItem);
+        }
+
+        public EquipItem GetEquipItem()
+        {
+            return item;
+        }
         public void AddItem(EquipItem equipItem)
         {
             item = equipItem;
             icon.sprite = equipItem.itemIcon;
-            icon.enabled = true;
             isArmed = equipItem.isArmed;
             enhanceLevelText.text = "+" + equipItem.enhanceLevel;
-            ChangeBackgroundColor();
-        }
 
+            if (icon.sprite == null)
+                icon.enabled = false;
+            else
+                icon.enabled = true;
+
+            if (equipItem.enhanceLevel == 0)
+                enhanceFrame.gameObject.SetActive(false);
+            else
+                enhanceFrame.gameObject.SetActive(true);
+
+        }
         public void ClearEquipSlot()
         {
             item = null;
             icon = null;
-            icon.enabled = false;
             isArmed = false;
-            ChangeBackgroundColor();
+            ChangeFrameColor(false);
             gameObject.SetActive(false);
         }
-        public void ChangeBackgroundColor()
+        public void ChangeFrameColor(bool state)
         {
-            //장착, 미장착 상태인 무기를 구별하기 위해 버튼 색상을 바꾼다.
+            //선택, 미선택 상태인 장비 슬롯을 구별하기 위해 프레임 스프라이트를 바꾼다.
             //임시적인 방안이므로, 나중에 다른 방법을 사용할 수 있습니다.
-            if (isArmed)
-            {
-                itemBtn.GetComponent<Image>().color = Color.cyan;
-                return;
+            if (state == true)
+            {       
+                itemBtn.GetComponent<Image>().sprite = frameGold;
+                enhanceFrame.sprite = frameGold;
             }
-            else if (isSelect)
-                itemBtn.GetComponent<Image>().color = Color.green;
-            else if (!isSelect)
-                itemBtn.GetComponent<Image>().color = Color.white;
+            else
+            {
+                itemBtn.GetComponent<Image>().sprite = frameNormal;
+                enhanceFrame.sprite = frameNormal;
+            }
         }
     }
 }

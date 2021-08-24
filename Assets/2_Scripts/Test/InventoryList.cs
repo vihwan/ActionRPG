@@ -11,6 +11,10 @@ namespace SG
     public class InventoryList : MonoBehaviour
     {
 
+        public virtual void Init() { }
+        public virtual void OnEnable() { }
+
+        internal virtual void SortInventoryList(int value) { }
     }
 
 }

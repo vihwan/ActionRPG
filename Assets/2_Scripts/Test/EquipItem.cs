@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
+    [System.Serializable]
     [CreateAssetMenu(menuName = "Items/Equip Item")]
     public class EquipItem : Item
     {
@@ -26,6 +27,7 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.CriticalDamage, value = 0},
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
+
         public int enhanceLevel = 0; //강화 수치
 
         //public SetItem setItem;

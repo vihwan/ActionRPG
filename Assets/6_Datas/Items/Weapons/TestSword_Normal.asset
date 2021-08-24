@@ -23,7 +23,7 @@ MonoBehaviour:
   kind: "\uC591\uC190\uAC80"
   currentDurability: 30
   maxDurability: 30
-  rarity: 3
+  rarity: 1
   itemAttributes:
   - attribute: 0
     value: 0
