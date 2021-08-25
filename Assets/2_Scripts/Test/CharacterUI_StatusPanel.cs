@@ -51,26 +51,26 @@ namespace SG
         public void SetParameter()
         {
             nameText.text = playerStats.playerName;
-            levelText.text = "Lv. " + playerStats.playerLevel;
-            expText.text = playerStats.playerExp + " / 1000";
+            levelText.text = "Lv. " + playerStats.PlayerLevel;
+            expText.text = playerStats.PlayerExp + " / 1000";
             SetMaxExpSlider();
-            hpText.text = playerStats.CurrentHealth + " / " + playerStats.maxHealth;
-            attackText.text = playerStats.attack.ToString();
-            defenseText.text = playerStats.defense.ToString();
+            hpText.text = playerStats.CurrentHealth + " / " + playerStats.MaxHealth;
+            attackText.text = playerStats.Attack.ToString();
+            defenseText.text = playerStats.Defense.ToString();
             criticalText.text = playerStats.Critical + "%";
-            criticalDamageText.text = playerStats.criticalDamage + "%";
-            staminaText.text = playerStats.stamina.ToString();
+            criticalDamageText.text = playerStats.CriticalDamage + "%";
+            staminaText.text = playerStats.Stamina.ToString();
         }
 
         private void SetMaxExpSlider()
         {
             expSlider.maxValue = 1000f;
-            expSlider.value = playerStats.playerExp;
+            expSlider.value = playerStats.PlayerExp;
         }
 
         public void SetCurrentExpSlider()
         {
-            expSlider.value = playerStats.playerExp;
+            expSlider.value = playerStats.PlayerExp;
         }
     }
 }

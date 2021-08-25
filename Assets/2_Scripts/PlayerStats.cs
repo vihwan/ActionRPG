@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,20 +9,20 @@ namespace SG
     {
 
         [Header("Basics")]
-        public string playerName = "Diluc";
-        public int playerLevel;
-        public int playerExp;
+        public readonly string playerName = "Diluc";
+        [SerializeField] private int playerLevel;
+        [SerializeField] private int playerExp;
 
         [Header("Status")]
         [Tooltip("Maxhealth = healthLevel * 10")]
-        public int healthLevel = 10;
-        public int maxHealth;
+        [SerializeField] private int healthLevel = 10;
+        [SerializeField] private int maxHealth;
         [SerializeField] private int currentHealth;
-        public int attack;
-        public int defense;
+        [SerializeField] private int attack;
+        [SerializeField] private int defense;
         [SerializeField] private int critical;
-        public int criticalDamage;
-        public int stamina;
+        [SerializeField] private int criticalDamage;
+        [SerializeField] private int stamina;
 
         [Header("Need Component")]
         private HealthBar healthBar;
@@ -29,6 +30,10 @@ namespace SG
         private PlayerManager playerManager;
         [SerializeField] private PlayerInventory playerInventory;
 
+        //Property
+        public int PlayerLevel { get => playerLevel; private set => playerLevel = value; }
+        public int PlayerExp { get => playerExp; private set => playerExp = value; }
+        public int MaxHealth { get => maxHealth; private set => maxHealth = value; }
         public int CurrentHealth
         {
             get => currentHealth;
@@ -51,6 +56,11 @@ namespace SG
                 critical = value;
             }
         }
+        public int Attack { get => attack; private set => attack = value; }
+        public int Defense { get => defense; private set => defense = value; }
+        public int CriticalDamage { get => criticalDamage; private set => criticalDamage = value; }
+        public int Stamina { get => stamina; private set => stamina = value; }
+
         private void Awake()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -62,14 +72,13 @@ namespace SG
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
             healthBar = FindObjectOfType<HealthBar>();
-            if (healthBar != null)
-                healthBar.SetMaxHealth(maxHealth);
             playerInventory = GetComponent<PlayerInventory>();
             InitializeStatusSet();
         }
 
         private void InitializeStatusSet()
         {
+            //Player Default Status
             playerLevel = 1;
             playerExp = 30;
             attack = 5;
@@ -78,20 +87,18 @@ namespace SG
             criticalDamage = 150;
             stamina = 100;
 
+            //Plus Player Stats depend on Equipping Items.
             UpdatePlayerStatus_Initialize();
+            healthBar.SetMaxHealth(maxHealth);
         }
 
         public void UpdatePlayerStatus_Initialize()
         {
-            if (playerInventory.currentWeapon != null)
+            UpdatePlayerStatus_Equip(playerInventory.currentWeapon);
+
+            for (int i = 0; i < playerInventory.currentEquipmentSlots.Length; i++)
             {
-                maxHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                currentHealth += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                attack += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Attack].value;
-                defense += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Defense].value;
-                critical += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Critical].value;
-                criticalDamage += playerInventory.currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
-                stamina += playerInventory.currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                UpdatePlayerStatus_Equip(playerInventory.currentEquipmentSlots[i]);
             }
         }
 
@@ -144,6 +151,11 @@ namespace SG
             critical -= currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
             criticalDamage -= currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
             stamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+        }
+
+        public void SetMaxHealthBar()
+        {
+            healthBar.SetMaxHealth(maxHealth);
         }
 
         private int SetMaxHealthFromHealthLevel()

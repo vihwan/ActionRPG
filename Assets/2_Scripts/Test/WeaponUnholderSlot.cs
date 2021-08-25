@@ -9,9 +9,10 @@ namespace SG
     {
         public Transform parentOverride;
         public GameObject currentUnequipWeaponModel;
-
         public void LoadUnEquipWeaponModel(WeaponItem weaponItem)
         {
+            UnloadWeaponAndDestroy();
+
             GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject;
             if (model != null)
             {
@@ -32,6 +33,14 @@ namespace SG
                 model.transform.localScale = Vector3.one;
             }
             currentUnequipWeaponModel = model;
+        }
+
+        private void UnloadWeaponAndDestroy()
+        {
+            if (currentUnequipWeaponModel != null)
+            {
+                Destroy(currentUnequipWeaponModel);
+            }
         }
     }
 }

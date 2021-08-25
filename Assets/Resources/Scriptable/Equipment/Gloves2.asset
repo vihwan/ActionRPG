@@ -18,7 +18,7 @@ MonoBehaviour:
     \uBC29\uB791\uC790\uAC00 \uC9C1\uC811 \uC4F4 \uC5EC\uD589 \uAC00\uC774\uB4DC."
   modelPrefab: {fileID: 0}
   isArmed: 0
-  itemType: 3
+  itemType: 2
   kind: "\uC7A5\uAC11"
   currentDurability: 20
   maxDurability: 20

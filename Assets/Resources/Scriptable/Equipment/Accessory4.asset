@@ -18,7 +18,7 @@ MonoBehaviour:
     \uBC18\uC9C0\r"
   modelPrefab: {fileID: 0}
   isArmed: 0
-  itemType: 5
+  itemType: 4
   kind: "\uC545\uC138\uC0AC\uB9AC"
   currentDurability: 20
   maxDurability: 20

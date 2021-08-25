@@ -141,24 +141,44 @@ namespace SG
         private void OnEnable()
         {
             SetParameterMain(playerInventory.currentEquipmentSlots);
-            SetEquipSlots(playerInventory.currentEquipmentSlots);
+            SetAllEquipSlots(playerInventory.currentEquipmentSlots);
         }
 
         //장비 슬롯들을 플레이어가 착용하고 있는 장비에 맞게 세팅하는 함수입니다.
-        private void SetEquipSlots(EquipItem[] currentEquipmentSlots)
+        private void SetAllEquipSlots(EquipItem[] currentEquipmentSlots)
         {
-            equipSlots[(int)EquipType.Tops].AddItem(currentEquipmentSlots[(int)EquipType.Tops]);
-            equipSlots[(int)EquipType.Bottoms].AddItem(currentEquipmentSlots[(int)EquipType.Bottoms]);
-            equipSlots[(int)EquipType.Gloves].AddItem(currentEquipmentSlots[(int)EquipType.Gloves]);
-            equipSlots[(int)EquipType.Shoes].AddItem(currentEquipmentSlots[(int)EquipType.Shoes]);
-            equipSlots[(int)EquipType.Accessory].AddItem(currentEquipmentSlots[(int)EquipType.Accessory]);
-            equipSlots[(int)EquipType.SpecialEquip].AddItem(currentEquipmentSlots[(int)EquipType.SpecialEquip]);
+            equipSlots[(int)ItemType.Tops].AddItem(currentEquipmentSlots[(int)ItemType.Tops]);
+            equipSlots[(int)ItemType.Bottoms].AddItem(currentEquipmentSlots[(int)ItemType.Bottoms]);
+            equipSlots[(int)ItemType.Gloves].AddItem(currentEquipmentSlots[(int)ItemType.Gloves]);
+            equipSlots[(int)ItemType.Shoes].AddItem(currentEquipmentSlots[(int)ItemType.Shoes]);
+            equipSlots[(int)ItemType.Accessory].AddItem(currentEquipmentSlots[(int)ItemType.Accessory]);
+            equipSlots[(int)ItemType.SpecialEquip].AddItem(currentEquipmentSlots[(int)ItemType.SpecialEquip]);
+        }
+        private void UpdateSpecificEquipSlot(EquipItem equipItem)
+        {
+            equipSlots[(int)currentSelectObjectType].AddItem(equipItem);
         }
 
-        //장비 전체 효과를 설정하는 함수
-        //플레이어가 착용하고 있는 각 장비들의 스테이터스를 전부 더해 보여주어야한다.
+
+        private void SetAllEquipSlotsButtonInteractive(bool state)
+        {
+            for (int i = 0; i < equipSlots.Length; i++)
+            {
+                equipSlots[i].itemBtn.interactable = state;
+            }
+        }
+
+
+        public void UpdateMainPanel()
+        {
+            SetParameterMain(playerInventory.currentEquipmentSlots);
+        }
+
         private void SetParameterMain(EquipItem[] currentEquipmentSlots)
         {
+            //장비 전체 효과를 설정하는 함수
+            //플레이어가 착용하고 있는 각 장비들의 스테이터스를 전부 더해 보여주어야한다.
+
             int wholeHp = 0;
             int wholeAttack = 0;
             int wholeDefense = 0;
@@ -177,7 +197,7 @@ namespace SG
             }
 
             SetItemStatusText(equipEffectText, wholeHp, wholeAttack, wholeDefense, wholeCritical, wholeCriticalDMG, wholeStamina);
-            CreateSetItemTemplate(currentEquipmentSlots);
+            //CreateSetItemTemplate(currentEquipmentSlots);
         }
 
 
@@ -227,6 +247,7 @@ namespace SG
             playerInventory.ChangeCurrentEquipment(selectEquipItem);
             SetCurrentStateObjects(selectEquipItem.isArmed);
             characterWindowUI.equipmentInventoryList.UpdateSlots();
+            UpdateSpecificEquipSlot(playerInventory.currentEquipmentSlots[(int)currentSelectObjectType]);
         }
 
         public void DeselectAllEquipSlots()
@@ -267,36 +288,27 @@ namespace SG
         //장비 교체 버튼을 클릭했을 시 발생하는 이벤트 함수
         private void OpenLeftEquipmentInventory()
         {
+            //왼쪽 장비 인벤토리 리스트 패널을 활성화
             characterWindowUI.equipmentInventoryList.SetEquipItemTypeToView(currentSelectObjectType);
             characterWindowUI.equipmentInventoryList.gameObject.SetActive(true);
+
+            //모든 장비 슬롯의 버튼 interactive를 비활성화
+            SetAllEquipSlotsButtonInteractive(false);
+
+            //장비 교체 버튼 비활성화
             openLeftInventoryBtn.gameObject.SetActive(false);
+
+            //뒤로가기 버튼 활성화
             if (characterWindowUI.backBtn.gameObject.activeSelf == false)
                 characterWindowUI.backBtn.gameObject.SetActive(true);
         }
 
         public void CloseLeftEquipmentInventory()
         {
-            switch (currentSelectObjectType)
-            {
-                case ItemType.Tops:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.Tops]);
-                    break;
-                case ItemType.Bottoms:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.Bottoms]);
-                    break;
-                case ItemType.Gloves:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.Gloves]);
-                    break;
-                case ItemType.Shoes:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.Shoes]);
-                    break;
-                case ItemType.Accessory:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.Accessory]);
-                    break;
-                case ItemType.SpecialEquip:
-                    SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)EquipType.SpecialEquip]);
-                    break;    
-            }     
+            //개별 아이템 정보를 갱신
+            SetParameterIndividualEquipItem(playerInventory.currentEquipmentSlots[(int)currentSelectObjectType]);
+            //모든 장비 슬롯의 버튼 interactive를 활성화
+            SetAllEquipSlotsButtonInteractive(true);
         }
 
         private void SetComparisonPanel(bool state)

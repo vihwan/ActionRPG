@@ -52,6 +52,16 @@ namespace SG
             ChangeBackgroundColor();
         }
 
+
+        public void ClearInventorySlot()
+        {
+            item = null;
+            icon.enabled = false;
+            icon.sprite = null;
+            isArmed = false;
+            ChangeBackgroundColor();
+            gameObject.SetActive(false);
+        }
         public void UpdateSlot(EquipItem equipItem)
         {
             isArmed = equipItem.isArmed;

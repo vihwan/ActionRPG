@@ -134,6 +134,7 @@ namespace SG
                     slot.ChangeFrameColor(false);
                 }
                 equipmentPanel.individualPanel.SetActive(false);
+                equipmentPanel.UpdateMainPanel();
             }
 
             backBtn.gameObject.SetActive(false);

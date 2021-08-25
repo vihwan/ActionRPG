@@ -77,14 +77,23 @@ namespace SG
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
             if(weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
             {
-                int dex = playerInventory.weaponsInventory.Count - weaponInventorySlots.Length;
-                for (int i = 0; i < dex; i++)
+                int diff = playerInventory.weaponsInventory.Count - weaponInventorySlots.Length;
+                for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<WeaponInventorySlot>("Prefabs/InventorySlots/WeaponInventorySlotPrefab")
                                     , weaponInventorySlotsParent);
                 }
                 weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(true);
+            }       
+            else
+            { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
+                int diff = weaponInventorySlots.Length - playerInventory.weaponsInventory.Count;
+                for (int i = diff; i > 0; i--)
+                {
+                    weaponInventorySlots[diff].ClearInventorySlot();
+                }
             }
+           
 
             for (int i = 0; i < playerInventory.weaponsInventory.Count; i++)
             {

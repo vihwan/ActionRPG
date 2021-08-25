@@ -70,7 +70,7 @@ namespace SG
             {
                 item.isArmed = false;
             }
-            
+
             //무기 초기화
             if (currentWeapon == null)
             {
@@ -94,8 +94,6 @@ namespace SG
             }
 
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
-
-
         }
 
         private void EquipItemIsArmedInitailize(List<EquipItem> list)
@@ -130,6 +128,7 @@ namespace SG
             currentWeapon = weaponItem;
             currentWeapon.isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentWeapon);
+            playerStats.SetMaxHealthBar();
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
@@ -137,7 +136,7 @@ namespace SG
         //바꾸고자 하는 장비의 타입을 가져와 이에 따라 알맞는 장비 슬롯을 찾아 장비를 갱신합니다.
         //이에 따라 플레이어 스테이터스도 조정됩니다.
 
-        
+
         public void ChangeCurrentEquipment(EquipItem equipItem)
         {
             /**
@@ -149,14 +148,15 @@ namespace SG
             따라서, currentEquipmentSlots에 맞게 하기 위해서 -1을 해줄 필요가 있다.
              */
 
-            ItemType temp = equipItem.itemType; 
+            ItemType temp = equipItem.itemType;
 
-            currentEquipmentSlots[(int)temp - 1].isArmed = false;
+            currentEquipmentSlots[(int)temp].isArmed = false;
             playerStats.UpdatePlayerStatus_UnEquip(currentEquipmentSlots[(int)temp]);
 
-            currentEquipmentSlots[(int)temp - 1] = equipItem;
-            currentEquipmentSlots[(int)temp - 1].isArmed = true;
+            currentEquipmentSlots[(int)temp] = equipItem;
+            currentEquipmentSlots[(int)temp].isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentEquipmentSlots[(int)temp]);
+            playerStats.SetMaxHealthBar();
         }
 
 

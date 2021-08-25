@@ -9,7 +9,7 @@ namespace SG
     public class EquipSlot : MonoBehaviour
     {
         [SerializeField] private EquipItem item;
-        private Button itemBtn;
+        internal Button itemBtn;
         private Image icon;
         private Image enhanceFrame;
         private TMP_Text enhanceLevelText;
@@ -53,6 +53,8 @@ namespace SG
         {
             return item;
         }
+
+        //장비 슬롯의 정보를 추가하거나 업데이트할 때 쓰는 함수입니다.
         public void AddItem(EquipItem equipItem)
         {
             item = equipItem;
