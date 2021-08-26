@@ -19,6 +19,7 @@ namespace SG
         [SerializeField] private CharacterUI_StatusPanel statusPanel;
         [SerializeField] private CharacterUI_WeaponPanel weaponPanel;
         [SerializeField] private CharacterUI_EquipmentPanel equipmentPanel;
+        [SerializeField] private CharacterUI_SkillPanel skillPanel;
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
@@ -43,6 +44,10 @@ namespace SG
             equipmentPanel = GetComponentInChildren<CharacterUI_EquipmentPanel>();
             if (equipmentPanel != null)
                 equipmentPanel.Init();
+
+            skillPanel = GetComponentInChildren<CharacterUI_SkillPanel>();
+            if (skillPanel != null)
+                skillPanel.Init();
 
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
             if (closeBtn != null)
@@ -93,12 +98,19 @@ namespace SG
             equipmentPanel.gameObject.SetActive(true);
         }
 
+        public void OpenSkillPanel()
+        {
+            CloseAllRightPanel();
+            skillPanel.gameObject.SetActive(true);
+        }
+
 
         public void CloseAllRightPanel()
         {
             statusPanel.gameObject.SetActive(false);
             weaponPanel.gameObject.SetActive(false);
             equipmentPanel.gameObject.SetActive(false);
+            skillPanel.gameObject.SetActive(false);
         }
         #endregion
 
@@ -124,6 +136,10 @@ namespace SG
                 equipmentInventoryList.gameObject.SetActive(false);
                 equipmentPanel.CloseLeftEquipmentInventory();
                 equipmentPanel.openLeftInventoryBtn.gameObject.SetActive(true);
+
+                if (equipmentPanel.comparisonPanel.activeSelf == true)
+                    equipmentPanel.comparisonPanel.SetActive(false);
+
                 return;
             }
 

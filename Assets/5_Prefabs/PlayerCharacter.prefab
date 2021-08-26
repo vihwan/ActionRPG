@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 616813801781678737}
   - component: {fileID: 616813801781678736}
   - component: {fileID: 1853712168}
+  - component: {fileID: 1447140967}
   - component: {fileID: 1399220363}
   m_Layer: 10
   m_Name: PlayerCharacter
@@ -332,7 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03e26160b8aa3234586b546de11622df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerName: Diluc
   playerLevel: 0
   playerExp: 0
   healthLevel: 10
@@ -377,6 +377,21 @@ MonoBehaviour:
   skillBtn_2: {fileID: 0}
   skillBtn_3: {fileID: 0}
   skillBtn_Ult: {fileID: 0}
+--- !u!114 &1447140967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616813801781678696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58528f8bec41a8246a391b2896514d6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeSkills: []
+  passiveSkills: []
+  ultimateSkills: []
 --- !u!114 &1399220363
 MonoBehaviour:
   m_ObjectHideFlags: 0

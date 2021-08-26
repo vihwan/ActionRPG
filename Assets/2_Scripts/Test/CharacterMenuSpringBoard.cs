@@ -32,6 +32,8 @@ namespace SG
                 equipBtn.onClick.AddListener(characterWindow.OpenEquipmentPanel);
 
             skillBtn = UtilHelper.Find<Button>(transform, "Skill");
+            if (skillBtn != null)
+                skillBtn.onClick.AddListener(characterWindow.OpenSkillPanel);
 
             dataBtn = UtilHelper.Find<Button>(transform, "Data");
         }

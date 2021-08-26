@@ -122,11 +122,18 @@ namespace SG
             if (changeEquipBtn != null)
             {
                 changeEquipBtn.gameObject.SetActive(false);
-                //장비 교체
+                //장비 교체는 인벤토리 슬롯을 클릭할 때마다 AddListener를 등록
             }
  
 
             comparisonEquipBtn = UtilHelper.Find<Button>(individualPanel.transform, "ComparisonEquipBtn");
+            if (comparisonEquipBtn != null)
+            {
+                comparisonEquipBtn.onClick.AddListener(()=> SetComparisonPanel(canOpenComparisonPanel));
+                comparisonEquipBtn.gameObject.SetActive(false);
+            }
+
+
             #endregion
 
             #region Component Initialize
