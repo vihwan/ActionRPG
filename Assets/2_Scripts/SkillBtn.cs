@@ -10,34 +10,27 @@ namespace SG
     {
         private System.Action clickEvent;
         private Button button;
+        private Image buttonIcon;
         private Image cooldownImage;
         private SkillTimer timer;
+        private bool isAct = false;
 
-        [SerializeField] 
+        [SerializeField]
         private float coolTime = 5f;
         private float elapsedTime = 0f;
 
         private bool isUpdate;
 
-        public Button Button { get => button;}
+        public Button Button { get => button; }
 
 
-        public void SetCoolTime(int time)
-        {
-            coolTime = time;
-        }
-
-        //외부에서 실행될 함수를 받아올 함수
-        public void SetEvent(System.Action action)
-        {
-            clickEvent += action;
-        }
-
-        private void Start()
+        public void Init()
         {
             button = GetComponent<Button>();
             if (Button != null)
-                Button.onClick.AddListener(onClick);
+                Button.onClick.AddListener(OnClick);
+
+            buttonIcon = UtilHelper.Find<Image>(transform, "Mask/Icon");
 
             cooldownImage = UtilHelper.Find<Image>(transform, "Cooldown");
             if (cooldownImage != null)
@@ -49,11 +42,54 @@ namespace SG
                 timer.Init();
         }
 
+        private void SetCoolTime(int time)
+        {
+            coolTime = time;
+        }
 
-        public void onClick()
+        private void SetSkillBtnIcon(PlayerSkill playerSkill)
+        {
+            if (playerSkill == null)
+            {
+                buttonIcon.sprite = null;
+                buttonIcon.enabled = false;
+                return;
+            }
+            buttonIcon.sprite = playerSkill.SkillImage;
+            buttonIcon.enabled = true;
+        }
+
+        //외부에서 실행될 함수를 받아올 함수
+        public void SetEvent(System.Action action)
+        {
+            clickEvent += action;
+        }
+
+        public void SetActiveBtn(PlayerSkill playerSkill)
+        {
+            if (playerSkill != null)
+            {
+                isAct = true;
+                SetCoolTime(playerSkill.CoolTime);
+                SetSkillBtnIcon(playerSkill);
+            }
+            else
+            {
+                isAct = false;
+                SetSkillBtnIcon(playerSkill);
+            }
+        }
+
+
+
+
+        public void OnClick()
         {
             if (clickEvent != null)
                 clickEvent();
+
+            if (isAct == false)
+                return;
 
             //버튼이 클릭되었을 때, 버튼의 기능을 꺼둡니다.
             Button.enabled = false;

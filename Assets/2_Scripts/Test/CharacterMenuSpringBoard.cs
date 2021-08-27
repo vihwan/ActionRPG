@@ -36,6 +36,10 @@ namespace SG
                 skillBtn.onClick.AddListener(characterWindow.OpenSkillPanel);
 
             dataBtn = UtilHelper.Find<Button>(transform, "Data");
+            if (dataBtn != null)
+                dataBtn.onClick.AddListener(characterWindow.OpenDataPanel);
+
+            dataBtn = UtilHelper.Find<Button>(transform, "Data");
         }
     }
 }

@@ -20,14 +20,23 @@ namespace SG
         [SerializeField] private CharacterUI_WeaponPanel weaponPanel;
         [SerializeField] private CharacterUI_EquipmentPanel equipmentPanel;
         [SerializeField] private CharacterUI_SkillPanel skillPanel;
+        [SerializeField] private CharacterUI_DataPanel dataPanel;
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
         [SerializeField] internal Button backBtn;
 
+        [SerializeField] private GUIManager guiManager;
+        [SerializeField] private PlayerSkillManager playerSkillManager;
+        [SerializeField] private InputHandler inputHandler;
+
         public void Init()
         {
             WindowPanel windowPanel = GetComponentInParent<WindowPanel>();
+
+            guiManager = GetComponentInParent<GUIManager>();
+            playerSkillManager = FindObjectOfType<PlayerSkillManager>();
+            inputHandler = playerSkillManager.gameObject.GetComponent<InputHandler>();
 
             springBoardMenu = UtilHelper.Find<CharacterMenuSpringBoard>(transform,"SpringBoardMenu");
             if (springBoardMenu != null)
@@ -49,9 +58,17 @@ namespace SG
             if (skillPanel != null)
                 skillPanel.Init();
 
+            dataPanel = GetComponentInChildren<CharacterUI_DataPanel>();
+            if (dataPanel != null)
+                dataPanel.Init();
+
+
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
             if (closeBtn != null)
-                closeBtn.onClick.AddListener(windowPanel.CloseCharacterWindowPanel);
+            {
+                closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
+            }
+                
 
             backBtn = UtilHelper.Find<Button>(transform, "BackBtn");
             if (backBtn != null)
@@ -70,14 +87,13 @@ namespace SG
                 equipmentInventoryList.Init();
         }
 
-/*        public void UpdateCharacterWindowUI()
+        private void OnDisable()
         {
-            statusPanel.SetParameter();
-            weaponPanel.SetParameter();
-        }*/
+            playerSkillManager.SetPlayerHUDSkillSlot(skillPanel.currentSkillList);
+        }
 
 
-        #region CharacterMenu Right Panel SetActive
+        #region Right Panel SetActive
 
         public void OpenStatusPanel()
         {
@@ -104,17 +120,22 @@ namespace SG
             skillPanel.gameObject.SetActive(true);
         }
 
-
+        public void OpenDataPanel()
+        {
+            CloseAllRightPanel();
+            dataPanel.gameObject.SetActive(true);
+        }
         public void CloseAllRightPanel()
         {
             statusPanel.gameObject.SetActive(false);
             weaponPanel.gameObject.SetActive(false);
             equipmentPanel.gameObject.SetActive(false);
             skillPanel.gameObject.SetActive(false);
+            dataPanel.gameObject.SetActive(false);
         }
         #endregion
 
-        #region
+        #region Close Left Panel
 
         public void CloseLeftPanel()
         {

@@ -11,7 +11,17 @@ namespace SG
         [SerializeField] private PlayerSkill playerSkill;
         [SerializeField] private Image skillIcon;
         [SerializeField] private Button slotBtn;
+        [SerializeField] private Image slotBtnImage;
         [SerializeField] private TMP_Text levelText;
+        [SerializeField] internal bool isSelect = false;
+
+        [SerializeField] private Sprite frameNormal;
+        [SerializeField] private Sprite frameGold;
+
+        [SerializeField] private CharacterUI_SkillPanel skillPanel;
+
+        public PlayerSkill PlayerSkill { get => playerSkill; private set => playerSkill = value; }
+        public Image SkillIcon { get => skillIcon; set => skillIcon = value; }
 
         public void Init()
         {
@@ -19,34 +29,50 @@ namespace SG
             if (slotBtn != null)
                 slotBtn.onClick.AddListener(OpenSkillInformation);
 
+            slotBtnImage = slotBtn.GetComponent<Image>();
+
             skillIcon = UtilHelper.Find<Image>(slotBtn.transform, "Image");
             levelText = GetComponentInChildren<TMP_Text>();
+
+            frameNormal = Resources.Load<Sprite>("Sprites/Item/Frame/frame_normal");
+            frameGold = Resources.Load<Sprite>("Sprites/Item/Frame/frame_select");
+
+            skillPanel = GetComponentInParent<CharacterUI_SkillPanel>();
         }
 
         public void AddSkill(PlayerSkill playerSkill)
         {
             this.playerSkill = playerSkill;
-            this.skillIcon.sprite = playerSkill.skillImage;
-            this.levelText.text = playerSkill.level.ToString();
+            this.skillIcon.sprite = playerSkill.SkillImage;
+            this.levelText.text = playerSkill.Level.ToString();
         }
 
         public void OpenSkillInformation()
         {
-           //스킬 상세 정보 창을 엽니다.
-           //OpenSkillInformationPanel(this.playerSkill);
+            skillPanel.DeselectAllSkillSlots();
+            isSelect = true;
+            ChangeFrameColor(isSelect);
+
+            skillPanel.SetParameterSkillPanel(playerSkill);
         }
 
         public void NotAcquireSkill()
         {
 
         }
-
-        public void ChangeBackgroundColor()
+        public void ChangeFrameColor(bool state)
         {
-            //버튼 테두리 색상을 변경합니다.
-            //스킬 아이콘을 클릭 했을 시, 클릭되었다는 것을 확인하기 위해 동작하는 함수
+            //선택, 미선택 상태인 장비 슬롯을 구별하기 위해 프레임 스프라이트를 바꾼다.
+            //임시적인 방안이므로, 나중에 다른 방법을 사용할 수 있습니다.
+            if (state == true)
+            {
+                slotBtnImage.sprite = frameGold;
+            }
+            else
+            {
+                slotBtnImage.sprite = frameNormal;
+            }
         }
-
     }
 
 }

@@ -101,6 +101,7 @@
     <Compile Include="Assets\2_Scripts\Test\AnimationLayerHandler.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterMenuSpringBoard.cs" />
+    <Compile Include="Assets\2_Scripts\Test\CharacterUI_DataPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterUI_EquipmentPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterUI_SkillPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterUI_StatusPanel.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\2_Scripts\Test\EquipmentInventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\EquipmentInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\MouseItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\PlayerSkillInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\ScreenshotHandler.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />
@@ -119,6 +121,7 @@
     <Compile Include="Assets\2_Scripts\Test\SetItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\SetTemplate.cs" />
     <Compile Include="Assets\2_Scripts\Test\SkillSlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\SkillSlot_Current.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponInventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\WeaponUnholderSlot.cs" />

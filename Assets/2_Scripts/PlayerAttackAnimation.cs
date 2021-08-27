@@ -46,6 +46,9 @@ namespace SG
 
         public void HandleSkillAttack(PlayerSkill playerSkill)
         {
+            if (playerSkill == null)
+                return;
+
             animatorHandler.Anim.SetBool("canDoCombo", false);
             animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
         }

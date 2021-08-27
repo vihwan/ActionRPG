@@ -411,6 +411,12 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Player UI",
+            "id": "40133e4e-f292-46d4-8572-04bb1b28a924",
+            "actions": [],
+            "bindings": []
         }
     ],
     "controlSchemes": []

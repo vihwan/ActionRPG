@@ -24,7 +24,7 @@ namespace SG
 
 
         // 스킬 공격 : 키보드 버튼 1,2,3,4
-        public bool sk_One_Input; 
+        public bool sk_One_Input;
         public bool sk_Two_Input;
         public bool sk_Three_Input;
         public bool sk_Ult_Input;
@@ -148,12 +148,9 @@ namespace SG
 
         private void HandleAttackInput(float delta)
         {
-            
-            // inputActions.PlayerActions.RT.performed += i => rt_Input = true;
-
             if (rb_Input)
             {
-                ChangePlayerMotionUnEquip();
+                ChangePlayerMotionToEquip();
 
                 if (playerManager.canDoCombo)
                 {
@@ -173,40 +170,42 @@ namespace SG
                 }
             }
 
-            /*            if(rt_Input)
-                        {
-                            playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
-                        }*/
+
+            //강공격
+            //if (rt_Input)
+            //{
+            //    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
+            //}
         }
 
         private void HandleQuickSlotInput()
         {
-           /* if (rt_Input)
-            {
-                playerInventory.ChangeRightWeapon();
-            }*/
+            /* if (rt_Input)
+             {
+                 playerInventory.ChangeRightWeapon();
+             }*/
         }
 
         private void HandleSkillAttackInput(float delta)
         {
             if (sk_One_Input)
             {
-                ChangePlayerMotionUnEquip();
-                playerSkillManager.UseSkill(1);       
+                ChangePlayerMotionToEquip();
+                playerSkillManager.UseSkill(1);
             }
             else if (sk_Two_Input)
             {
-                ChangePlayerMotionUnEquip();
+                ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(2);
             }
             else if (sk_Three_Input)
             {
-                ChangePlayerMotionUnEquip();
+                ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(3);
             }
             else if (sk_Ult_Input)
             {
-                ChangePlayerMotionUnEquip();
+                ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(4);
             }
         }
@@ -219,7 +218,7 @@ namespace SG
             //Set the Text Popup to true
             if (a_Input)
             {
-                if(playerManager.InteractableObject != null)
+                if (playerManager.InteractableObject != null)
                     playerManager.ExecuteInteract();
                 //interactableObject.Interact(this);
             }
@@ -233,20 +232,14 @@ namespace SG
         {
             if (menu_Input)
             {
-                menuFlag = !menuFlag;
-                if (menuFlag)
-                {
-                    guiManager.OpenSelectMenuWindow();
-                    guiManager.UpdateUI();
-                    guiManager.SetActiveHudWindows(false);
-                }
-                else
-                {
-                    guiManager.CloseSelectMenuWindow();
-                    guiManager.windowPanel.CloseCharacterWindowPanel();
-                    guiManager.SetActiveHudWindows(true);
-                }
+                HandleMenuFlag();
             }
+        }
+
+        public void HandleMenuFlag()
+        {
+            menuFlag = !menuFlag;
+            guiManager.SetActiveGUIMenu(menuFlag);
         }
 
         private void HandleLockOnInput()
@@ -256,13 +249,13 @@ namespace SG
             {
                 lockOn_Input = false;
                 cameraHandler.HandleLockOn();
-                if(cameraHandler.nearestLockOnTarget != null)
+                if (cameraHandler.nearestLockOnTarget != null)
                 {
                     cameraHandler.currentLockOnTarget = cameraHandler.nearestLockOnTarget;
                     lockOnFlag = true;
                 }
             }
-            else if(lockOn_Input && lockOnFlag)
+            else if (lockOn_Input && lockOnFlag)
             {
                 lockOn_Input = false;
                 lockOnFlag = false;
@@ -270,21 +263,21 @@ namespace SG
             }
 
             //대상 바꾸기 Q,E
-            if(lockOnFlag && right_Stick_Left_Input)
+            if (lockOnFlag && right_Stick_Left_Input)
             {
                 right_Stick_Left_Input = false;
                 cameraHandler.HandleLockOn();
-                if(cameraHandler.leftLockTarget != null)
+                if (cameraHandler.leftLockTarget != null)
                 {
                     cameraHandler.currentLockOnTarget = cameraHandler.leftLockTarget;
                 }
             }
 
-            if(lockOnFlag && right_Stick_Right_Input)
+            if (lockOnFlag && right_Stick_Right_Input)
             {
                 right_Stick_Right_Input = false;
                 cameraHandler.HandleLockOn();
-                if(cameraHandler.rightLockTarget != null)
+                if (cameraHandler.rightLockTarget != null)
                 {
                     cameraHandler.currentLockOnTarget = cameraHandler.rightLockTarget;
                 }
@@ -293,7 +286,7 @@ namespace SG
             cameraHandler.SetCameraHeight();
         }
 
-        private void ChangePlayerMotionUnEquip()
+        private void ChangePlayerMotionToEquip()
         {
             if (playerManager.isUnEquip == true)
             {

@@ -9,8 +9,6 @@ namespace SG
         [SerializeField] public List<PlayerSkill> activeSkills;
         [SerializeField] public List<PlayerSkill> passiveSkills;
         [SerializeField] public List<PlayerSkill> ultimateSkills;
-
-
     }
 
 }

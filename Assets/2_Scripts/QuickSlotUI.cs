@@ -14,11 +14,6 @@ namespace SG
         private SkillBtn skillBtn_Ult;
         private SkillBtn consumesSlot;
 
-        private Image skillIcon_1;
-        private Image skillIcon_2;
-        private Image skillIcon_3;
-        private Image skillIcon_Ult;
-
         private PlayerSkillManager skillManager;
 
         public SkillBtn SkillBtn_1 { get => skillBtn_1; private set => skillBtn_1 = value; }
@@ -30,24 +25,24 @@ namespace SG
         {
             SkillBtn_1 = UtilHelper.Find<SkillBtn>(transform, "Skill_1");
             if (SkillBtn_1 != null)
-                skillIcon_1 = UtilHelper.Find<Image>(SkillBtn_1.transform, "Mask/Icon");
+                SkillBtn_1.Init();
 
             SkillBtn_2 = UtilHelper.Find<SkillBtn>(transform, "Skill_2");
             if (SkillBtn_2 != null)
-                skillIcon_2 = UtilHelper.Find<Image>(SkillBtn_2.transform, "Mask/Icon");
+                SkillBtn_2.Init();
 
             SkillBtn_3 = UtilHelper.Find<SkillBtn>(transform, "Skill_3");
             if (SkillBtn_3 != null)
-                skillIcon_3 = UtilHelper.Find<Image>(SkillBtn_3.transform, "Mask/Icon");
+                SkillBtn_3.Init();
 
             SkillBtn_Ult = UtilHelper.Find<SkillBtn>(transform, "Skill_Ult");
             if (SkillBtn_Ult != null)
-                skillIcon_Ult = UtilHelper.Find<Image>(SkillBtn_Ult.transform, "Mask/Icon");
+                SkillBtn_Ult.Init();
 
             consumesSlot = UtilHelper.Find<SkillBtn>(transform, "ConsumesSlot");
 
             skillManager = FindObjectOfType<PlayerSkillManager>();
-            if(skillManager != null)
+            if (skillManager != null)
             {
                 UpdateSkillSlotsUI(1, skillManager.playerSkill_One);
                 UpdateSkillSlotsUI(2, skillManager.playerSkill_Two);
@@ -57,29 +52,24 @@ namespace SG
         }
 
         //스킬 슬롯을 갱신하는 함수
-        public void UpdateSkillSlotsUI(int skillSlotNum, PlayerSkill skill)
+        public void UpdateSkillSlotsUI(int skillSlotNum, PlayerSkill playerSkill)
         {
             switch (skillSlotNum)
             {
                 case 1:
-                    skillIcon_1.sprite = skill.skillImage;
-                    skillIcon_1.enabled = true;
-                    skillBtn_1.SetCoolTime(skill.coolTime);
+                    skillBtn_1.SetActiveBtn(playerSkill);
                     break;
+
                 case 2:
-                    skillIcon_2.sprite = skill.skillImage;
-                    skillIcon_2.enabled = true;
-                    skillBtn_2.SetCoolTime(skill.coolTime);
+                    skillBtn_2.SetActiveBtn(playerSkill);
                     break;
+
                 case 3:
-                    skillIcon_3.sprite = skill.skillImage;
-                    skillIcon_3.enabled = true;
-                    skillBtn_3.SetCoolTime(skill.coolTime);
+                    skillBtn_3.SetActiveBtn(playerSkill);
                     break;
+
                 case 4:
-                    skillIcon_Ult.sprite = skill.skillImage;
-                    skillIcon_Ult.enabled = true;
-                    skillBtn_Ult.SetCoolTime(skill.coolTime);
+                    skillBtn_Ult.SetActiveBtn(playerSkill);
                     break;
             }
         }
@@ -90,22 +80,22 @@ namespace SG
 
         }
 
-/*        public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weaponItem)
-        {
-
-            if (isLeft == false)
-            {
-                if(weaponItem.itemIcon != null)
-                {
-                    rightWeaponIcon.sprite = weaponItem.itemIcon;
-                    rightWeaponIcon.enabled = true;
-                }
-                else
+        /*        public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weaponItem)
                 {
 
-                }
-            }
-        }*/
+                    if (isLeft == false)
+                    {
+                        if(weaponItem.itemIcon != null)
+                        {
+                            rightWeaponIcon.sprite = weaponItem.itemIcon;
+                            rightWeaponIcon.enabled = true;
+                        }
+                        else
+                        {
+
+                        }
+                    }
+                }*/
     }
 
 }

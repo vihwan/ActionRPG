@@ -8,8 +8,11 @@ namespace SG
     public class Skill : ScriptableObject
     {
         [Header("Skill Information")]
-        public Sprite skillImage;
-        public string skillName;
+        [SerializeField] private Sprite skillImage;
+        [SerializeField] private string skillName;
+
+        public Sprite SkillImage { get => skillImage; private set => skillImage = value; }
+        public string SkillName { get => skillName; private set => skillName = value; }
     }
 }
 

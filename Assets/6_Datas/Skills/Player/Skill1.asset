@@ -14,5 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 8e0bc87a0991fb646ad0f0834130139d, type: 3}
   skillName: "\uC289\uC288\uC289"
+  skillType: 0
+  level: 1
+  needMana: 0
   coolTime: 5
+  explainText: "\uC289.\uC288\uC289.\uC289. \uC2DC\uBC1C\uB7FC\uC544 \uC289\uC288\uADDC\uC288\uADEF\uADDC"
+  damageDic:
+  - damageName: "\uC548\uB155"
+    damage: 0
   skillAnimationName: Skill_Attack_1

@@ -20,7 +20,7 @@ namespace SG
 
         public void SetActiveHandWeapon(int num)
         {
-            bool status = true;
+            bool status = false;
 
             if (num == 0)
                 status = true;

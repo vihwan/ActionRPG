@@ -39,6 +39,19 @@ namespace SG
             }
         }
 
+        public void SetPlayerHUDSkillSlot(List<SkillSlot_Current> skillList)
+        {
+            playerSkill_One = skillList[0].PlayerSkill;
+            playerSkill_Two = skillList[1].PlayerSkill;
+            playerSkill_Three = skillList[2].PlayerSkill;
+            playerSkill_Ult = skillList[3].PlayerSkill;
+
+            quickSlotUI.UpdateSkillSlotsUI(1, playerSkill_One);
+            quickSlotUI.UpdateSkillSlotsUI(2, playerSkill_Two);
+            quickSlotUI.UpdateSkillSlotsUI(3, playerSkill_Three);
+            quickSlotUI.UpdateSkillSlotsUI(4, playerSkill_Ult);
+        }
+
         public void UseSkill(int skillNum)
         {
             switch (skillNum)
@@ -47,7 +60,7 @@ namespace SG
                     {
                         if (skillBtn_1.Button.enabled == true)
                         {
-                            skillBtn_1.onClick();
+                            skillBtn_1.OnClick();
                             playerAttacker.HandleSkillAttack(playerSkill_One);
                         }
                         else
@@ -61,7 +74,7 @@ namespace SG
                     {
                         if (skillBtn_2.Button.enabled == true)
                         {
-                            skillBtn_2.onClick();
+                            skillBtn_2.OnClick();
                             playerAttacker.HandleSkillAttack(playerSkill_Two);
                         }
                         else
@@ -75,7 +88,7 @@ namespace SG
                     {
                         if (skillBtn_3.Button.enabled == true)
                         {
-                            skillBtn_3.onClick();
+                            skillBtn_3.OnClick();
                             playerAttacker.HandleSkillAttack(playerSkill_Three);
                         }
                         else
@@ -89,7 +102,7 @@ namespace SG
                     {
                         if (skillBtn_Ult.Button.enabled == true)
                         {
-                            skillBtn_Ult.onClick();
+                            skillBtn_Ult.OnClick();
                             playerAttacker.HandleSkillAttack(playerSkill_Ult);
                         }
                         else

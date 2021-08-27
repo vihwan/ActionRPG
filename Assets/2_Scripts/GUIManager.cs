@@ -50,11 +50,20 @@ namespace SG
             CloseSelectMenuWindow();
         }
 
-        
-        //해당되는 하위 UI들을 전부 업데이트 시킨다.
-        public void UpdateUI()
+
+        public void SetActiveGUIMenu(bool state)
         {
-           // windowPanel.UpdateUI();
+            SetActiveHudWindows(!state);
+
+            if (state)
+            {
+                OpenSelectMenuWindow();
+            }
+            else
+            {
+                CloseSelectMenuWindow();
+                windowPanel.CloseCharacterWindowPanel();
+            }
         }
 
         public void SetActiveHudWindows(bool status)
