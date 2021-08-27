@@ -113,6 +113,7 @@
     <Compile Include="Assets\2_Scripts\Test\EquipmentInventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\EquipmentInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\InventoryWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\MouseItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\PlayerSkillInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\ScreenshotHandler.cs" />

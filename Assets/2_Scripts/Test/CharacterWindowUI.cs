@@ -69,14 +69,12 @@ namespace SG
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
             }
                 
-
             backBtn = UtilHelper.Find<Button>(transform, "BackBtn");
             if (backBtn != null)
             {
                 backBtn.onClick.AddListener(CloseLeftPanel);
                 backBtn.gameObject.SetActive(false);
             }
-
 
             weaponInventoryList = GetComponentInChildren<WeaponInventoryList>(true);
             if (weaponInventoryList != null)

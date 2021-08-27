@@ -17,6 +17,7 @@ namespace SG
 
         private Animator animator;
         private ActiveWeaponObject activeWeaponObject;
+        private PlayerManager playerManager;
 
         private void Awake()
         {
@@ -36,6 +37,7 @@ namespace SG
             animator = GetComponent<Animator>();
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
             unholderSlot = GetComponentInChildren<WeaponUnholderSlot>();
+            playerManager = FindObjectOfType<PlayerManager>();
         }
         public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
         {
@@ -63,7 +65,7 @@ namespace SG
                 rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
                 LoadRightWeaponDamageCollider();
                 unholderSlot.LoadUnEquipWeaponModel(weaponItem);
-                activeWeaponObject.Initailize(weaponGO);
+                activeWeaponObject.Initailize(weaponGO, playerManager.isUnEquip);
 
 /*                #region Handle Right Weapon Idle Animations
                 if (weaponItem != null)

@@ -30,11 +30,6 @@ namespace SG
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
 
-        private void Awake()
-        {
-
-        }
-
         private void Start()
         {
             if (CameraHandler.Instance != null)
