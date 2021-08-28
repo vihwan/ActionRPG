@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
+    [System.Serializable]
     [CreateAssetMenu(menuName = "Items/Weapon Item")]
     public class WeaponItem : Item
     {
@@ -11,7 +12,6 @@ namespace SG
         public bool isArmed;
 
         [Header("Weapon Status")]
-        public ItemType itemType = ItemType.Weapon;
         public string kind;
         public int currentDurability;
         public int maxDurability;

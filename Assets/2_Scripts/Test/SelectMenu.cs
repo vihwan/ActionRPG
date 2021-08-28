@@ -32,7 +32,14 @@ namespace SG {
                 characterButton.onClick.AddListener(guiManager.windowPanel.OpenCharacterWindowPanel);
                 characterButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
             }
-            inventoryButton = UtilHelper.Find<Button>(transform, "Select Inventory");
+
+            inventoryButton = UtilHelper.Find<Button>(transform, "Select Inventory");    
+            if (inventoryButton != null)
+            {
+                inventoryButton.onClick.AddListener(guiManager.windowPanel.OpenInventoryWindowPanel);
+                inventoryButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
+            }
+
             worldmapButton = UtilHelper.Find<Button>(transform, "Select WorldMap");
             questButton = UtilHelper.Find<Button>(transform, "Select Quest");
             achieveButton = UtilHelper.Find<Button>(transform, "Select Achivement");

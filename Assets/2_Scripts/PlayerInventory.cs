@@ -6,16 +6,6 @@ using System;
 
 namespace SG
 {
-    public enum EquipType
-    {
-        Tops,
-        Bottoms,
-        Gloves,
-        Shoes,
-        Accessory,
-        SpecialEquip
-    }
-
     //Dictionary의 키를 enum타입으로 사용하면, 평소보다 메모리 소모가 심하기 때문에 가비지 콜렉터 호출이 심해집니다
     //이를 해결하기 위해 EnumComparer 구조체를 생성하고 Dictionary에 사용하면, GC의 호출을 최소화시킬 수 있습니다.
     public struct ItemTypeEnumComparer : IEqualityComparer<ItemType>
@@ -50,6 +40,7 @@ namespace SG
         public List<EquipItem> shoesInventory;
         public List<EquipItem> accessoryInventory;
         public List<EquipItem> specialEquipInventory;
+        public List<ConsumableItem> consumableInventory;
 
         public Dictionary<ItemType, List<EquipItem>> equipmentsInventory;
 

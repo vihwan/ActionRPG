@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 5c66ca1b59b00134cac2f0536414b1fa, type: 3}
   itemName: "\uB098\uB098\uD788\uB77C\uC758\uAC80"
+  itemType: 6
   itemDescription: "\uBCA0\uC774\uC2A4 \uB77C\uC778\uC744 \uD558\uACE0 \uC2F6\uC5B4\uC9C0\uB294
     \uBB34\uAE30. \uADF8\uB798\uC11C \uC774\uAC8C \uBB54\uB370 \uC774 \uC2ED\uB355\uC544."
   modelPrefab: {fileID: 100050, guid: 8a7b78e82902d1b4eba2923c6a4cf1c7, type: 3}
   isArmed: 0
-  itemType: 0
   kind: "\uC591\uC190\uAC80"
   currentDurability: 40
   maxDurability: 40

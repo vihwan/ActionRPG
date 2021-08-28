@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace SG
 {
@@ -23,7 +24,7 @@ namespace SG
             if (itemSort_Dropdown != null)
             {
                 InitDropdown();
-                itemSort_Dropdown.onValueChanged.AddListener(SortInventoryList);
+                itemSort_Dropdown.onValueChanged.AddListener(OnClickSortInventoryList);
             }
 
             playerInventory = FindObjectOfType<PlayerInventory>();
@@ -111,7 +112,7 @@ namespace SG
             DeSelectAllSlots();
         }
 
-        internal override void SortInventoryList(int value)
+        internal override void OnClickSortInventoryList(int value)
         {
             switch (value)
             {

@@ -5,18 +5,13 @@ using UnityEngine;
 namespace SG
 {
     [System.Serializable]
-    [CreateAssetMenu(menuName = "Items/Equip Item")]
-    public class EquipItem : Item
+    [CreateAssetMenu(menuName = "Items/Consumable Item")]
+    public class ConsumableItem : Item
     {
-        public GameObject modelPrefab;
-        public bool isArmed;
-
-        [Header("Equipment Status")]
+        [Header("Consumable Status")]
         public string kind;
-        public int currentDurability;
-        public int maxDurability;
-        [Range(1, 5)]
-        public int rarity = 1;
+        public int quantity;
+        [Range(1, 5)] public int rarity = 1;
         public List<ItemAttribute> itemAttributes = new List<ItemAttribute>()
         {
             new ItemAttribute(){attribute = Attribute.Hp, value = 0 },
@@ -26,9 +21,5 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.CriticalDamage, value = 0},
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
-
-        public int enhanceLevel = 0; //강화 수치
-
-        //public SetItem setItem;
     }
 }

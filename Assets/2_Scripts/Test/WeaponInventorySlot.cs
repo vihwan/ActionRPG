@@ -5,13 +5,10 @@ using UnityEngine.UI;
 
 namespace SG
 {
-    public class WeaponInventorySlot : MonoBehaviour
+    public class WeaponInventorySlot : InventorySlot
     {
         [SerializeField] internal WeaponItem item;
-        [SerializeField] private Button itemBtn;
-        [SerializeField] private Image icon;
         [SerializeField] private bool isArmed;
-        [SerializeField] internal bool isSelect = false;
 
         private WeaponInventoryList weaponInventoryList;
         private void Awake()

@@ -10,11 +10,9 @@ namespace SG
     //부모 클래스로써, 상속이 가능하도록 
     public class InventoryList : MonoBehaviour
     {
-
         public virtual void Init() { }
         public virtual void OnEnable() { }
-
-        internal virtual void SortInventoryList(int value) { }
+        internal virtual void OnClickSortInventoryList(int value) { }
     }
 
 }

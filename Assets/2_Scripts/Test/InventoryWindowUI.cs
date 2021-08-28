@@ -1,18 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class InventoryWindowUI : MonoBehaviour
+namespace SG
 {
-    // Start is called before the first frame update
-    void Start()
+    public class InventoryWindowUI : MonoBehaviour
     {
-        
-    }
+        [Header("SpringBoard")]
+        [SerializeField] private InventoryMenuSpringBoard springBoardMenu;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [Header("Button")]
+        [SerializeField] private Button closeBtn;
+
+        [Header("Inventory UI Main Contents")]
+        [SerializeField] private InventoryMainContents mainContents;
+
+        [SerializeField] private InputHandler inputHandler;
+        public void Init()
+        {
+            inputHandler = FindObjectOfType<InputHandler>();
+
+            springBoardMenu = GetComponentInChildren<InventoryMenuSpringBoard>();
+            if (springBoardMenu != null)
+                springBoardMenu.Init();
+
+            mainContents = GetComponentInChildren<InventoryMainContents>();
+            if (mainContents != null)
+                mainContents.Init();
+
+            closeBtn = GetComponentInChildren<Button>();
+            if (closeBtn != null)
+                closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
+        }
     }
 }

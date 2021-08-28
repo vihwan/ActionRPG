@@ -34,6 +34,7 @@ namespace SG
         [Header("Item Information")]
         public Sprite itemIcon;
         public string itemName;
+        public ItemType itemType;
         [TextArea]
         public string itemDescription;
     }

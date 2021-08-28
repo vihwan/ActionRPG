@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: b1c526cf9e551634fa9ff6b6ef2f2118, type: 3}
   itemName: "\uC131\uAC80 \uC5D1\uC2A4\uCE7C\uB9AC\uBC84"
+  itemType: 6
   itemDescription: "\uC544\uC11C\uC655 \uC804\uC124\uC5D0 \uB4F1\uC7A5\uD558\uB294
     \uC131\uAC80. "
   modelPrefab: {fileID: 1796098590423106, guid: f218e382629978c42a7fe498682aa052,
     type: 3}
   isArmed: 0
-  itemType: 0
   kind: "\uB300\uAC80"
   currentDurability: 20
   maxDurability: 20

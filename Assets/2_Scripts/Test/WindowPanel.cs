@@ -10,6 +10,7 @@ namespace SG
     {
         [Header("Window GameObject")]
         [SerializeField] internal CharacterWindowUI characterWindow;
+        [SerializeField] internal InventoryWindowUI inventoryWindow;
 
         [Header("Weapon Inventory")]
         private Transform weaponInventorySlotsParent;
@@ -23,11 +24,18 @@ namespace SG
             weaponInventorySlotsParent = transform.Find("Inventory Slot Parent");
             weaponInventorySlots = GetComponentsInChildren<WeaponInventorySlot>(true);
 
-            characterWindow = UtilHelper.Find<CharacterWindowUI>(transform,"Character Window");
+            characterWindow = UtilHelper.Find<CharacterWindowUI>(transform, "Character Window");
             if (characterWindow != null)
             {
                 characterWindow.Init();
                 characterWindow.gameObject.SetActive(false);
+            }
+
+            inventoryWindow = UtilHelper.Find<InventoryWindowUI>(transform, "Inventory Window");
+            if(inventoryWindow != null)
+            {
+                inventoryWindow.Init();
+                inventoryWindow.gameObject.SetActive(false);
             }
 
             playerInventory = FindObjectOfType<PlayerInventory>();
@@ -38,9 +46,9 @@ namespace SG
             #region Weapon Inventory Slot
             for (int i = 0; i < weaponInventorySlots.Length; i++)
             {
-                if(i < playerInventory.weaponsInventory.Count)
+                if (i < playerInventory.weaponsInventory.Count)
                 {
-                    if(weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
+                    if (weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
                     {
                         Instantiate(Resources.Load<GameObject>("Prefab/InventorySlots/WeaponInventorySlotPrefab")
                                     , weaponInventorySlotsParent);
@@ -67,6 +75,11 @@ namespace SG
         public void CloseCharacterWindowPanel()
         {
             characterWindow.gameObject.SetActive(false);
+        }
+
+        public void OpenInventoryWindowPanel()
+        {
+            inventoryWindow.gameObject.SetActive(true);
         }
 
         #endregion
