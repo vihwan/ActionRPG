@@ -11,12 +11,14 @@ namespace SG
         [SerializeField] private bool isArmed;
 
         private EquipmentInventoryList equipmentInventoryList;
+        private CharacterUI_EquipmentPanel equipPanel;
         private void Awake()
         {
+            equipPanel = FindObjectOfType<CharacterUI_EquipmentPanel>();
+
             itemBtn = GetComponentInChildren<Button>();
             if (itemBtn != null)
             {
-                CharacterUI_EquipmentPanel equipPanel = FindObjectOfType<CharacterUI_EquipmentPanel>();
                 itemBtn.onClick.AddListener(() => equipPanel.SetParameterIndividualEquipItem(item));
                 itemBtn.onClick.AddListener(SelectSlot);
                // itemBtn.onClick.AddListener(() => CheckSlotIsCurrentEquipment());

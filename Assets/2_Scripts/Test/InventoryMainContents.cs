@@ -23,53 +23,115 @@ namespace SG
 
 
         [Header("Info")]
+        internal InventoryMain_InfoPanel infoPanel;
 
         [Header("Need Component"), HideInInspector]
         internal PlayerInventory playerInventory;
+        public List<InventoryMain_ContentList> ContentLists { get => contentLists; private set => contentLists = value; }
+        public InventoryMain_ContentList WeaponList { get => weaponList; private set => weaponList = value; }
+        public InventoryMain_ContentList TopsList { get => topsList; private set => topsList = value; }
+        public InventoryMain_ContentList BottomsList { get => bottomsList; private set => bottomsList = value; }
+        public InventoryMain_ContentList GlovesList { get => glovesList; private set => glovesList = value; }
+        public InventoryMain_ContentList ShoesList { get => shoesList; private set => shoesList = value; }
+        public InventoryMain_ContentList AccessoryList { get => accessoryList; private set => accessoryList = value; }
+        public InventoryMain_ContentList SpecialEquipList { get => specialEquipList; private set => specialEquipList = value; }
+        public InventoryMain_ContentList ConsumableList { get => consumableList; private set => consumableList = value; }
+        public InventoryMain_ContentList IngredientList { get => ingredientList; private set => ingredientList = value; }
+
         public void Init()
         {
             weaponList = UtilHelper.Find<InventoryMain_ContentList>(transform, "WeaponList");
             if (weaponList != null)
+            {
+                weaponList.Init();
                 contentLists.Add(weaponList);
+            }
+
 
             topsList = UtilHelper.Find<InventoryMain_ContentList>(transform, "TopsList");
             if (topsList != null)
+            {
+                topsList.Init();
                 contentLists.Add(topsList);
+            }
+
 
             bottomsList = UtilHelper.Find<InventoryMain_ContentList>(transform, "BottomsList");
             if (bottomsList != null)
+            {
+                bottomsList.Init();
                 contentLists.Add(bottomsList);
+            }
+
 
             glovesList = UtilHelper.Find<InventoryMain_ContentList>(transform, "GlovesList");
             if (glovesList != null)
+            {
+                glovesList.Init();
                 contentLists.Add(glovesList);
+            }
 
-            weaponList = UtilHelper.Find<InventoryMain_ContentList>(transform, "WeaponList");
-            if (weaponList != null)
-                contentLists.Add(weaponList);
+            shoesList = UtilHelper.Find<InventoryMain_ContentList>(transform, "ShoesList");
+            if (shoesList != null)
+            {
+                shoesList.Init();
+                contentLists.Add(shoesList);
+            }
 
-            weaponList = UtilHelper.Find<InventoryMain_ContentList>(transform, "WeaponList");
-            if (weaponList != null)
-                contentLists.Add(weaponList);
 
-            weaponList = UtilHelper.Find<InventoryMain_ContentList>(transform, "WeaponList");
-            if (weaponList != null)
-                contentLists.Add(weaponList);
+            accessoryList = UtilHelper.Find<InventoryMain_ContentList>(transform, "AccessoryList");
+            if (accessoryList != null)
+            {
+                accessoryList.Init();
+                contentLists.Add(accessoryList);
+            }
 
-            weaponList = UtilHelper.Find<InventoryMain_ContentList>(transform, "WeaponList");
-            if (weaponList != null)
-                contentLists.Add(weaponList);
 
-            /*            contentLists = GetComponentsInChildren<InventoryMain_ContentList>(true);
-                        if(contentLists != null)
-                        {
-                            for (int i = 0; i < contentLists.Length; i++)
-                            {
-                                contentLists[i].Init();
-                            }
-                        }*/
+            specialEquipList = UtilHelper.Find<InventoryMain_ContentList>(transform, "SpecialEquipList");
+            if (specialEquipList != null)
+            {
+                specialEquipList.Init();
+                contentLists.Add(specialEquipList);
+            }
+
+
+            consumableList = UtilHelper.Find<InventoryMain_ContentList>(transform, "ConsumableList");
+            if (consumableList != null)
+            {
+                consumableList.Init();
+                contentLists.Add(consumableList);
+            }
+
+
+            ingredientList = UtilHelper.Find<InventoryMain_ContentList>(transform, "IngredientList");
+            if (ingredientList != null)
+            {
+                ingredientList.Init();
+                contentLists.Add(ingredientList);
+            }
+
+            infoPanel = GetComponentInChildren<InventoryMain_InfoPanel>(true);
+            if (infoPanel != null)
+                infoPanel.Init();
+
 
             playerInventory = FindObjectOfType<PlayerInventory>();
         }
+
+        public void SetActiveContentList(InventoryMain_ContentList list, bool state)
+        {
+            SetFalseAllContentList();
+            list.gameObject.SetActive(state);
+            list.SetBeforeSelectSlotInfoPanel();
+        }
+
+        public void SetFalseAllContentList()
+        {
+            for (int i = 0; i < contentLists.Count; i++)
+            {
+                contentLists[i].gameObject.SetActive(false);
+            }
+        }
+
     }
 }

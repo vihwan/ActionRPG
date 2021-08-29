@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3640b5a42a6c3c040bebc8b7d95a5573, type: 3}
+  m_Name: Odd Tooth
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: e79cd9a5c2695d541a9bdb124546d778, type: 3}
+  itemName: "\uAE30\uC774\uD55C \uC774\uBE68"
+  itemType: 8
+  itemDescription: "\uB204\uAD70\uAC00\uC758 \uC774\uBE68\uC774\uB2E4. \uADFC\uB370
+    \uCC38 \uAE30\uC774\uD558\uAC8C \uC0DD\uACBC\uB2E4."
+  kind: "\uC18C\uC7AC"
+  quantity: 0
+  rarity: 1
+  itemAttributes:
+  - attribute: 0
+    value: 0
+  - attribute: 1
+    value: 0
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 0

@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3640b5a42a6c3c040bebc8b7d95a5573, type: 3}
+  m_Name: Crystal
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 73739f68da323714387660deab9ce2b7, type: 3}
+  itemName: "\uC218\uC815"
+  itemType: 8
+  itemDescription: "\uAC00\uACF5\uB418\uC9C0 \uC54A\uC740 \uC218\uC815\uCCB4. \uC138\uACF5\uC744
+    \uD574\uC57C \uC9C4\uC815\uD55C \uAC00\uCE58\uB97C \uC54C \uC218 \uC788\uB2E4."
+  kind: "\uAD11\uC11D"
+  quantity: 0
+  rarity: 4
+  itemAttributes:
+  - attribute: 0
+    value: 0
+  - attribute: 1
+    value: 0
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 0

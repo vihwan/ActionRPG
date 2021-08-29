@@ -97,49 +97,7 @@ Resources 폴더에 Fonts 폴더 생성
 
 **Memo**
 
- <CharacterMenu 제작중>
-
- - StatusPanel => PlayerStats와 PlayerInventory와 연동
- - WeaponPanel => 
- 			현재 장착중인 무기 - PlayerInventory의 rightWeapon과 연동
- 			미장착 무기들 - _A의 WeaponInventory와 연동_
-
- - EquipmentPanel =>
- 		장비 종류 - 상의, 하의, 장갑, 신발, 악세사리, 특수장비
-
- 			현재 장착중인 장비 - PlayerInventory의 EquipmentSlot과 연동
- 			미장착 장비들 - _A의 EquipmentInventory와 연동_
-
- - SkillPanel =>  ScriptableObject.PlayerSkill, SkillDatabase
- - DataPanel => 미정
-
-> **Weapon과 나머지 Equipment들을 LeftPanel에서 보여주는 스크립트 작성 요망.**
-    ItemType enum을 생성하고 ScriptableObject에 설정할 수 있도록 추가
-    PlayerInventory에 각 ItemType에 대한 List를 생성
-
-//추후 생각
-
-	- SetItem 클래스 재조정 
-
-		세트아이템의 종류는 임시로 3가지 : 이아손, 종려, 향기
-		각 세트아이템의 타입에 따라 세트 이름과 효과를 프로퍼티로 설정
-
-	- SetTemplate 클래스 생성
-
-		playerInventory의 currentEquipmentSlots의 SetType을 서로 비교하여, 일정 갯수 이상을 넘으면, SetTemplate를 생성하고, UI로 표시하도록 생성
-
-
--------------------------------
-
-## Last Update
-
-## 2021.08.27 (금)
-
-< UI/UX 명세 확인 및 제작 >
-
-**InventoryWindowUI 제작으로 들어가자.**
-
-1. Inventory Menu
+ <Inventory Menu 제작중>
 
 	1) SpringBoardMenu
 
@@ -169,7 +127,55 @@ Resources 폴더에 Fonts 폴더 생성
 		
 		각 목록에 생성되는 ContentSlot의 정보를 받아 표시하는 정보창
 
-2. Consumable Slot, Ingredient Slot 추가
+//추후 생각
+
+	- SetItem 클래스 재조정 
+
+		세트아이템의 종류는 임시로 3가지 : 이아손, 종려, 향기
+		각 세트아이템의 타입에 따라 세트 이름과 효과를 프로퍼티로 설정
+
+	- SetTemplate 클래스 생성
+
+		playerInventory의 currentEquipmentSlots의 SetType을 서로 비교하여, 일정 갯수 이상을 넘으면, SetTemplate를 생성하고, UI로 표시하도록 생성
+
+
+-------------------------------
+
+## Last Update
+
+## 2021.08.29 (일)
+
+< UI/UX 명세 확인 및 제작 >
+
+1. Consumable, Ingredient 아이템 임시 생성
+
+	- (완료) 소비 아이템 6가지, 재료 아이템 3가지
+	- (완료) Resources.LoadAll을 통해 PlayerInventory에 Instantiate하여 세팅
+
+2. Inventory Menu - ContentList
+
+	- (완료) 인벤토리 창을 열었을 때, 각 리스트마다 정보를 불러오는 스크립트 작성
+	- (완료) 슬롯을 클릭하면, 아이템 정보가 출력되도록 설정
+
+		정보창 컴포넌트를 생성하고 연결.
+		소비, 재료템은 강화텍스트, 내구도텍스트가 출력되지 않는다.
+
+	- (완료) 각 리스트마다 드롭 다운을 통해 정렬이 가능하게 하여 업데이트 되도록 설정
+	- (완료) 각 스프링보드 아이콘버튼을 클릭하면 해당 List가 표시되도록 설정
+	- (완료) Left, Right Arrow를 통해 리스트 Active가 유연하게 바뀌도록 설정
+	- (완료) 스프링 인벤토리 버튼을 클릭해 리스트를 열면, 무기 리스트가 표시 및 맨 첫번째 슬롯의 아이템의 정보가 표시되도록 설정.
+	- (완료) 각 리스트를 처음 열면, 첫번째 아이템의 정보가 표시, 처음이 아니면 이전에 선택했던 아이템이 표시되도록 설정.
+
+
+3. InventoryContentSlot
+
+	- (완료) 장착중인 아이템인지, 선택한 슬롯인지 표시하는 함수 구현
+
+4. SpringBoardMenu
+
+	- (완료) 화면에 표시중인지 아닌지 표시하는 이미지 변경
+
+**스프링보드 텍스트 바꾸기**
 
 
 -------------------------------
@@ -218,6 +224,53 @@ Resources 폴더에 Fonts 폴더 생성
 -------------------------------
 
 ## 이전 개발 일지
+
+### 2021.08.28 (토)
+
+< UI/UX 명세 확인 및 제작 >
+
+**InventoryWindowUI 제작으로 들어가자.**
+
+1. Inventory Menu
+
+	1) SpringBoardMenu
+
+	- 무기, 상의, 하의, 장갑, 신발, 악세사리, 특수장비, 소비, 재료
+	- 버튼 클릭 표시
+
+	2) CloseBtn
+
+	- 닫기 버튼. 클릭하면 윈도우 메뉴 전체가 닫힘
+
+	3) Left,Right Arrow Btn
+
+	- 클릭하면, 현재 표시중인 List를 false 다음 List 목록을 true
+
+	4) InventoryContentSlotPrefab
+
+	- Main Contents의 리스트 밑에 생성되는 아이템슬롯 칸
+	- 아이템 정보를 외부에서 받아와 저장.
+
+	5) Main Contents
+
+	- 각 버튼에 해당하는 목록들을 생성
+
+		WeaponList, TopsList, BottomsList, GlovesList, ShoesList, AccessoryList, SpecialEquipList, ConsumableList, IngredientList
+
+	- Info Background
+		
+		각 목록에 생성되는 ContentSlot의 정보를 받아 표시하는 정보창
+
+2. Consumable Slot, Ingredient Slot 추가
+
+
+**PlayerInventory에 소비,재료 인벤토리 추가**
+임시 아이템들 몇개 생성
+각 List마다 정보를 불러오는 스크립트 작성
+슬롯을 클릭하면 아이템 정보가 출력되도록 설정
+드롭 다운을 통해 정렬이 가능하도록 설정
+
+
 
 
 ### 2021.08.27 (금)

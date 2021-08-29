@@ -41,6 +41,7 @@ namespace SG
         public List<EquipItem> accessoryInventory;
         public List<EquipItem> specialEquipInventory;
         public List<ConsumableItem> consumableInventory;
+        public List<IngredientItem> ingredientInventory;
 
         public Dictionary<ItemType, List<EquipItem>> equipmentsInventory;
 
@@ -71,6 +72,9 @@ namespace SG
             }
 
             SettingEquipmentInventoryList();
+            SettingConsumableInventoryList();
+            SettingIngredientInventoryList();
+
 
             foreach (KeyValuePair<ItemType, List<EquipItem>> pair in equipmentsInventory)
             {
@@ -85,6 +89,28 @@ namespace SG
             }
 
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
+        }
+
+        private void SettingConsumableInventoryList()
+        {
+            ConsumableItem[] items;
+            items = Resources.LoadAll<ConsumableItem>("Scriptable/Consumable");
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                consumableInventory.Add(items[i]);
+            }
+        }
+
+        private void SettingIngredientInventoryList()
+        {
+            IngredientItem[] items;
+            items = Resources.LoadAll<IngredientItem>("Scriptable/Ingredient");
+
+            for (int i = 0; i < items.Length; i++)
+            {
+                ingredientInventory.Add(items[i]);
+            }
         }
 
         private void EquipItemIsArmedInitailize(List<EquipItem> list)
@@ -224,38 +250,52 @@ namespace SG
             }
         }
 
+        public void SortConsumableInventoryListToGANADA()
+        {
+            // List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
+            List<ConsumableItem> tempList = consumableInventory.ToList();
+            tempList = tempList.OrderBy(consumableItem => consumableItem.itemName).ToList();
 
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                consumableInventory[i] = tempList[i];
+                //consumableInventory[i + 1] = tempList[i];
+            }
+        }
 
-        //[System.Obsolete]
-        //        public void ChangeRightWeapon()
-        //        {
-        //            currentRightWeaponIndex++;
+        public void SortConsumableInventoryListToRarity()
+        {
+            // List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
+            List<ConsumableItem> tempList = consumableInventory.ToList();
+            tempList = tempList.OrderByDescending(consumableItem => consumableItem.rarity).ToList();
 
-        //            if (currentRightWeaponIndex == 0 && weaponInRightHandSlots[0] != null)
-        //            {
-        //                rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex];
-        //                weaponSlotManager.LoadWeaponOnSlot(weaponInRightHandSlots[currentRightWeaponIndex], false);
-        //            }
-        //            else if (currentRightWeaponIndex == 0 && weaponInRightHandSlots[0] == null)
-        //            {
-        //                currentRightWeaponIndex++;
-        //            }
-        //            else if (currentRightWeaponIndex == 1 && weaponInRightHandSlots[1] != null)
-        //            {
-        //                rightWeapon = weaponInRightHandSlots[currentRightWeaponIndex];
-        //                weaponSlotManager.LoadWeaponOnSlot(weaponInRightHandSlots[currentRightWeaponIndex], false);
-        //            }
-        //            else
-        //            {
-        //                currentRightWeaponIndex++;
-        //            }
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                consumableInventory[i] = tempList[i];
+                //consumableInventory[i + 1] = tempList[i];
+            }
+        }
 
-        //            if( currentRightWeaponIndex > weaponInRightHandSlots.Length - 1)
-        //            {
-        //                currentRightWeaponIndex = -1;
-        //                rightWeapon = unarmedWeapon;
-        //                weaponSlotManager.LoadWeaponOnSlot(unarmedWeapon, false);
-        //            }
-        //        }
+        public void SortIngredientInventoryListToGANADA()
+        {
+            List<IngredientItem> tempList = ingredientInventory.ToList();
+            tempList = tempList.OrderBy(ingredientItem => ingredientItem.itemName).ToList();
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                ingredientInventory[i] = tempList[i];
+            }
+        }
+
+        public void SortIngredientInventoryListToRarity()
+        {
+            List<IngredientItem> tempList = ingredientInventory.ToList();
+            tempList = tempList.OrderByDescending(ingredientItem => ingredientItem.rarity).ToList();
+
+            for (int i = 0; i < tempList.Count; i++)
+            {
+                ingredientInventory[i] = tempList[i];
+            }
+        }
     }
 }

@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399e99bfc0be7d642adf1e7a8507570a, type: 3}
+  m_Name: MushYakitori
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 0ea62a84854231240a0e3d4d812e99ec, type: 3}
+  itemName: "\uBC84\uC12F \uB2ED\uAF2C\uCE58"
+  itemType: 7
+  itemDescription: "\uC57C\uC0DD\uBC84\uC12F\uACFC \uB2ED\uACE0\uAE30\uB85C \uB9CC\uB4E0
+    \uAF2C\uCE58. \uC801\uB2F9\uD558\uAC8C \uC775\uD600 \uAF2C\uCE58 \uD558\uB098\uB85C
+    \uC0B0\uACFC \uB4E4\uC758 \uD5A5\uC744 \uB290\uB084 \uC218 \uC788\uB2E4."
+  kind: "\uC74C\uC2DD"
+  quantity: 0
+  rarity: 2
+  itemAttributes:
+  - attribute: 0
+    value: 30
+  - attribute: 1
+    value: 0
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 0

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 399e99bfc0be7d642adf1e7a8507570a, type: 3}
+  m_Name: HolhoaYakitori
+  m_EditorClassIdentifier: 
+  itemIcon: {fileID: 21300000, guid: 54a5ed75497f60d4dabe7328f7b06e71, type: 3}
+  itemName: "\uD640\uD638\uC774 \uAD6C\uC774"
+  itemType: 7
+  itemDescription: "\uC13C \uBD88\uC5D0\uC11C \uAD6C\uC6B4 \uC0DD\uC120 \uAF2C\uCE58.
+    \uD669\uAE08\uBE5B \uCC2C\uB780\uD55C \uAECD\uC9C8\uC774 \uCD09\uCD09\uD55C \uC0B4\uC744
+    \uB458\uB7EC\uC2F8\uACE0 \uC788\uB2E4. \uD55C\uC785 \uBCA0\uC5B4 \uBB3C\uACE0
+    \uC2F6\uC744 \uB9CC\uD07C \uAD70\uCE68 \uB3C8\uB2E4. \uAF2C\uCC59\uC774\uC5D0
+    \uBD99\uC5B4\uC788\uB294 \uB9C8\uC9C0\uB9C9 \uC0B4 \uD55C\uC810\uAE4C\uC9C0 \uC808\uB300
+    \uB193\uCE60 \uC218 \uC5C6\uB2E4."
+  kind: "\uC74C\uC2DD"
+  quantity: 0
+  rarity: 3
+  itemAttributes:
+  - attribute: 0
+    value: 30
+  - attribute: 1
+    value: 0
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 0
+  - attribute: 4
+    value: 0
+  - attribute: 5
+    value: 0

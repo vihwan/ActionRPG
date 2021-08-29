@@ -118,6 +118,7 @@
     <Compile Include="Assets\2_Scripts\Test\InventoryList.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryMainContents.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryMain_ContentList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\InventoryMain_InfoPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryMenuSpringBoard.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\InventoryWindowUI.cs" />
