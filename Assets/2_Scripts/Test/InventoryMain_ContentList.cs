@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 namespace SG
 {
@@ -29,28 +30,30 @@ namespace SG
 
             deleteBtn = UtilHelper.Find<Button>(t, "DeleteButton");
             if (deleteBtn != null)
-                deleteBtn.onClick.AddListener(OnClickDelete);
+                deleteBtn.onClick.AddListener(() => OnClickDelete(beforeSelectSlot));
 
             inventoryMainContents = GetComponentInParent<InventoryMainContents>();
         }
-
         public void SetBeforeSelectSlotInfoPanel()
         {
             if (beforeSelectSlot != null)
                 inventoryMainContents.infoPanel.SetParameter(beforeSelectSlot);
             else
             {
-                if(inventoryContentSlots[0] != null)
+                if (inventoryContentSlots.Length != 0)
                 {
-                    inventoryMainContents.infoPanel.SetParameter(inventoryContentSlots[0]);
-                }         
+                    if (inventoryContentSlots[0] != null)
+                    {
+                        inventoryMainContents.infoPanel.SetParameter(inventoryContentSlots[0]);
+                        beforeSelectSlot = inventoryContentSlots[0];
+                    }
+                }
             }
 
             SortInventoryListToGANADA();
             itemSort_Dropdown.value = 0;
             itemSort_Dropdown.RefreshShownValue();
         }
-
         private void InitDropdown()
         {
             itemSort_Dropdown.ClearOptions();
@@ -63,15 +66,19 @@ namespace SG
             itemSort_Dropdown.value = 0;
             itemSort_Dropdown.RefreshShownValue();
         }
-
         public void SetBeforeSelectSlot(InventoryContentSlot slot)
         {
             beforeSelectSlot = slot;
         }
-
-        public void UpdateUI()
+        private void SetNoneContentList(bool state)
         {
-            UpdateUIDependOnGameObjectName();
+            inventoryMainContents.SetNoneText(state);
+            SetActiveDropdownandDeleteButton(!state);
+        }
+        private void SetActiveDropdownandDeleteButton(bool state)
+        {
+            itemSort_Dropdown.gameObject.SetActive(state);
+            deleteBtn.gameObject.SetActive(state);
         }
 
         public void UpdateSlots()
@@ -84,7 +91,10 @@ namespace SG
 
             Debug.Log("소비 아이콘 색상 갱신 완료");
         }
-
+        public void UpdateUI()
+        {
+            UpdateUIDependOnGameObjectName();
+        }
         public void UpdateUIDependOnGameObjectName()
         {
             switch (this.gameObject.name)
@@ -129,7 +139,6 @@ namespace SG
                     break;
             }
         }
-
         public void UpdateUIWeapon()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -146,13 +155,19 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.weaponsInventory.Count;
-                for (int i = diff; i > 0; i--)
+                for (int i = 0; i < diff; i++)
                 {
-                    inventoryContentSlots[diff].ClearItem();
+                    inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
             }
 
+            if (inventoryMainContents.playerInventory.weaponsInventory.Count == 0)
+            {
+                SetNoneContentList(true);
+                return;
+            }
 
+            //각 인벤토리 슬롯에 아이템 정보를 추가한다.
             for (int i = 0; i < inventoryMainContents.playerInventory.weaponsInventory.Count; i++)
             {
                 if (inventoryMainContents.playerInventory.weaponsInventory[i].isArmed)
@@ -166,9 +181,8 @@ namespace SG
                 }
             }
 
-            //DeSelectAllSlots();
+            SetNoneContentList(false);
         }
-
         public void UpdateUIEquipment(ItemType itemType)
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -185,10 +199,16 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count;
-                for (int i = 1; i <= diff; i++)
+                for (int i = 0; i < diff; i++)
                 {
-                    inventoryContentSlots[inventoryContentSlots.Length - i].ClearItem();
+                    inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
+            }
+
+            if (inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count == 0)
+            {
+                SetNoneContentList(true);
+                return;
             }
 
             int count = 0;
@@ -198,9 +218,9 @@ namespace SG
                 count++;
             }
 
+            SetNoneContentList(false);
             //DeSelectAllSlots();
         }
-
         public void UpdateUIConsumable()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -217,10 +237,16 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.consumableInventory.Count;
-                for (int i = diff; i > 0; i--)
+                for (int i = 0; i < diff; i++)
                 {
-                    inventoryContentSlots[diff].ClearItem();
+                    inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
+            }
+
+            if (inventoryMainContents.playerInventory.consumableInventory.Count == 0)
+            {
+                SetNoneContentList(true);
+                return;
             }
 
             for (int i = 0; i < inventoryMainContents.playerInventory.consumableInventory.Count; i++)
@@ -236,9 +262,9 @@ namespace SG
                 }
             }
 
+            SetNoneContentList(false);
             DeSelectAllSlots();
         }
-
         public void UpdateUIIngredient()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -255,25 +281,83 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.ingredientInventory.Count;
-                for (int i = diff; i > 0; i--)
+                for (int i = 0; i < diff; i++)
                 {
-                    inventoryContentSlots[diff].ClearItem();
+                    inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
+            }
+
+            if (inventoryMainContents.playerInventory.ingredientInventory.Count == 0)
+            {
+                SetNoneContentList(true);
+                return;
             }
 
             for (int i = 0; i < inventoryMainContents.playerInventory.ingredientInventory.Count; i++)
             {
                 inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.ingredientInventory[i]);
             }
+
+            SetNoneContentList(false);
         }
-
-
-        private void OnClickDelete()
+        private void OnClickDelete(InventoryContentSlot beforeSelectSlot)
         {
+            int index = 0;
+            for (int i = 0; i < inventoryContentSlots.Length; i++)
+            {
+                if (inventoryContentSlots[i] == beforeSelectSlot)
+                {
+                    index = i;
+                    break;
+                }
+            }
 
+            Item item;
+            switch (this.gameObject.name)
+            {
+                case "WeaponList": item = beforeSelectSlot.weaponItem; break;
+                case "TopsList": item = beforeSelectSlot.equipItem; break;
+                case "BottomsList": item = beforeSelectSlot.equipItem; break;
+                case "GlovesList": item = beforeSelectSlot.equipItem; break;
+                case "ShoesList": item = beforeSelectSlot.equipItem; break;
+                case "AccessoryList": item = beforeSelectSlot.equipItem; break;
+                case "SpecialEquipList": item = beforeSelectSlot.equipItem; break;
+                case "ConsumableList": item = beforeSelectSlot.consumableItem; break;
+                case "IngredientList": item = beforeSelectSlot.ingredientItem; break;
+                default: item = null; break;
+            }
+
+            GameObject popupObj = Instantiate(Resources.Load<GameObject>("Prefabs/PopUpMsg"), this.transform.parent, false);
+            popupObj.SetActive(true);
+
+            PopUpMessage popUpMessage = popupObj.GetComponent<PopUpMessage>();
+            popUpMessage.TextMsg.text = "정말 버리시겠습니까? \n" + item.itemName;
+            popUpMessage.TextMsg.fontSize -= 3;
+            popUpMessage.YesText.text = "예스";
+            popUpMessage.NoText.text = "노";
+
+            popUpMessage.SetYesCallback(() =>
+            {
+                Debug.Log(item.itemName + "를 버립니다.");
+                inventoryMainContents.playerInventory.SaveDeleteItemToInventory(item);
+                UpdateUI();
+                SetIndexMinusOneItemAppear(index);
+                Destroy(popupObj);
+            });
+            popUpMessage.SetNoCallback(() =>
+            {
+                Debug.Log("취소합니다.");
+                Destroy(popupObj);
+            });
         }
 
-
+        private void SetIndexMinusOneItemAppear(int index)
+        {
+            DeSelectAllSlots();
+            inventoryMainContents.infoPanel.SetParameter(inventoryContentSlots[index - 1]);
+            inventoryContentSlots[index - 1].isSelect = true;
+            inventoryContentSlots[index - 1].ChangeBackgroundColor();
+        }
         public void DeSelectAllSlots()
         {
             foreach (InventoryContentSlot slot in inventoryContentSlots)
@@ -294,7 +378,6 @@ namespace SG
                     break;
             }
         }
-
         private void SortInventoryListToGANADA()
         {
             switch (this.gameObject.name)
@@ -340,7 +423,6 @@ namespace SG
             }
             UpdateUI();
         }
-
         private void SortInventoryListToRarity()
         {
             switch (this.gameObject.name)

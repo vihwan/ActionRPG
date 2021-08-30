@@ -52,7 +52,8 @@ namespace SG
             for (int i = 0; i < mainContents.ContentLists.Count; i++)
             {
                 mainContents.ContentLists[i].UpdateUI();
-                mainContents.infoPanel.SetParameter(mainContents.ContentLists[i].inventoryContentSlots[0]);
+                if(mainContents.ContentLists[i].inventoryContentSlots.Length != 0)
+                    mainContents.infoPanel.SetParameter(mainContents.ContentLists[i].inventoryContentSlots[0]);
             }
 
             mainContents.SetFalseAllContentList();

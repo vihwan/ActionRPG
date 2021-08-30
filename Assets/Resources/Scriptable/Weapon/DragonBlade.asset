@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 7e93415f0d7b2e741aebb88451d8a469, type: 3}
   itemName: "\uB4DC\uB798\uACE4 \uBE14\uB808\uC774\uB4DC"
+  itemType: 6
   itemDescription: "\uD22C\uBA85 \uB4DC\uB798\uACE4\uC740 \uC874\uB098 \uC9F1 \uC138\uC11C
     \uB4DC\uB798\uACE4\uB4E4 \uC911\uC5D0\uC11C \uCD5C\uAC15\uC774\uC5C8\uB2E4. \uC2E0\uC774\uB098
     \uB9C8\uC871\uB3C4 \uC774\uACBC\uB2E4. \uB2E4 \uB364\uBCBC\uB3C4 \uC774\uACBC\uB2E4.
@@ -21,8 +22,7 @@ MonoBehaviour:
     \uC774\uC57C\uAE30\uC758 \uC0AC\uB150\uC774 \uB2F4\uAE34 \uAC80\uC774\uB2E4."
   modelPrefab: {fileID: 450780483681248534, guid: 8bce3c5c5dc9b05458bc8edd97e18a98,
     type: 3}
-  isUnarmed: 0
-  itemType: 0
+  isArmed: 0
   kind: "\uC591\uC190\uAC80"
   currentDurability: 45
   maxDurability: 50

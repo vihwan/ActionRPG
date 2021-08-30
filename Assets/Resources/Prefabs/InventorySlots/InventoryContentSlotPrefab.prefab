@@ -56,6 +56,10 @@ MonoBehaviour:
   quantityText: {fileID: 0}
   weaponItem: {fileID: 0}
   equipItem: {fileID: 0}
+  consumableItem: {fileID: 0}
+  ingredientItem: {fileID: 0}
+  mainContents: {fileID: 0}
+  contentList: {fileID: 0}
 --- !u!1 &684589351541670899
 GameObject:
   m_ObjectHideFlags: 0
@@ -344,8 +348,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.8
-  m_fontSizeBase: 21.8
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

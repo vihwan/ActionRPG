@@ -128,7 +128,11 @@ namespace SG
         private void SetCurrentStateObjects(bool state)
         {
             currentEquipObject.SetActive(state);
-            consumableEquipBtn.gameObject.SetActive(!state);
+
+            if (mainContents.ConsumableList.gameObject.activeSelf == true)
+                consumableEquipBtn.gameObject.SetActive(!state);
+            else if (mainContents.ConsumableList.gameObject.activeSelf == false)
+                consumableEquipBtn.gameObject.SetActive(false);
         }
         public void ChangeConsumableEquipBtnListener(ConsumableItem consumableItem)
         {

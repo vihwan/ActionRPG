@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace SG
 {
@@ -17,6 +18,7 @@ namespace SG
         [SerializeField]
         private float coolTime = 5f;
         private float elapsedTime = 0f;
+        private TMP_Text quantityText;
 
         private bool isUpdate;
         public Button Button { get => button; }
@@ -36,13 +38,18 @@ namespace SG
             timer = GetComponentInChildren<SkillTimer>(true);
             if (timer != null)
                 timer.Init();
+
+            quantityText = UtilHelper.Find<TMP_Text>(transform, "QuantityText");
         }
 
+        private void SetQuantityText(int count)
+        {
+            quantityText.text = count.ToString();
+        }
         private void SetCoolTime(int time)
         {
             coolTime = time;
         }
-
         private void SetConsumableBtnIcon(ConsumableItem consumableItem)
         {
             if (consumableItem == null)
@@ -68,6 +75,7 @@ namespace SG
                 isAct = true;
                 SetCoolTime(consumableItem.coolTime);
                 SetConsumableBtnIcon(consumableItem);
+                SetQuantityText(consumableItem.quantity);
             }
             else
             {

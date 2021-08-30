@@ -31,8 +31,6 @@ namespace SG
             weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
         }
 
-
-
         private void InitDropdown()
         {
             itemSort_Dropdown.ClearOptions();
@@ -89,9 +87,9 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = weaponInventorySlots.Length - playerInventory.weaponsInventory.Count;
-                for (int i = diff; i > 0; i--)
+                for (int i = 0; i < diff; i++)
                 {
-                    weaponInventorySlots[diff].ClearInventorySlot();
+                    weaponInventorySlots[weaponInventorySlots.Length - 1 - i].ClearInventorySlot();
                 }
             }
            

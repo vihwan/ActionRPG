@@ -29,10 +29,12 @@ namespace SG
 
         private PlayerAttackAnimation playerAttacker;
         private QuickSlotUI quickSlotUI;
+        private PlayerInventory playerInventory;
 
         private void Start()
         {
             playerAttacker = GetComponent<PlayerAttackAnimation>();
+            playerInventory = GetComponent<PlayerInventory>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             try
             {
@@ -47,6 +49,8 @@ namespace SG
             {
                 Debug.LogError(e);
             }
+
+            SetPlayerHUDConsumableSlot(playerInventory.currentConsumable);
         }
 
         public void SetPlayerHUDSkillSlot(List<SkillSlot_Current> skillList)
@@ -65,7 +69,6 @@ namespace SG
         public void SetPlayerHUDConsumableSlot(ConsumableItem consumableItem)
         {
             consumableItem_One = consumableItem;
-
             quickSlotUI.UpdateQuickSlotUI(consumableItem_One);
         }
 

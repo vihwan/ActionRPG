@@ -21,9 +21,11 @@ namespace SG
         private InventoryMain_ContentList consumableList;
         private InventoryMain_ContentList ingredientList;
 
-
         [Header("Info")]
         internal InventoryMain_InfoPanel infoPanel;
+
+        [Header("Text")]
+        [SerializeField] private TMP_Text noneText;
 
         [Header("Need Component"), HideInInspector]
         internal PlayerInventory playerInventory;
@@ -37,6 +39,7 @@ namespace SG
         public InventoryMain_ContentList SpecialEquipList { get => specialEquipList; private set => specialEquipList = value; }
         public InventoryMain_ContentList ConsumableList { get => consumableList; private set => consumableList = value; }
         public InventoryMain_ContentList IngredientList { get => ingredientList; private set => ingredientList = value; }
+        public TMP_Text NoneText { get => noneText; private set => noneText = value; }
 
         public void Init()
         {
@@ -115,6 +118,10 @@ namespace SG
                 infoPanel.Init();
 
 
+            noneText = UtilHelper.Find<TMP_Text>(transform, "NoneText");
+            if (noneText != null)
+                noneText.gameObject.SetActive(false);
+
             playerInventory = FindObjectOfType<PlayerInventory>();
         }
 
@@ -132,6 +139,26 @@ namespace SG
                 contentLists[i].gameObject.SetActive(false);
             }
         }
-
+        public void SetNoneText(bool state)
+        {
+            noneText.gameObject.SetActive(state);
+            infoPanel.gameObject.SetActive(!state);
+            if (state == true)
+            {
+                for (int i = 0; i < contentLists.Count; i++)
+                {
+                    Image contentImg = contentLists[i].GetComponent<Image>();
+                    contentImg.color = new Color(contentImg.color.r, contentImg.color.g, contentImg.color.b, 0f);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < contentLists.Count; i++)
+                {
+                    Image contentImg = contentLists[i].GetComponent<Image>();
+                    contentImg.color = new Color(contentImg.color.r, contentImg.color.g, contentImg.color.b, 1f);
+                }
+            }
+        }
     }
 }

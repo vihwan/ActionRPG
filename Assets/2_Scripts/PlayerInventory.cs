@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using Random = UnityEngine.Random;
 
 namespace SG
 {
@@ -58,75 +59,149 @@ namespace SG
             if (playerStats == null)
                 Debug.LogWarning("PlayerStats가 참조되지 않았습니다.");
 
-            //무기 인벤토리의 무기들 isArmed를 false로 초기화
-            foreach (WeaponItem item in weaponsInventory)
-            {
-                item.isArmed = false;
-            }
+            //아이템 생성 및 초기화
+            LoadWeaponInventoryList();
+            LoadEquipmentInventoryList();
+            LoadConsumableInventoryList();
+            LoadIngredientInventoryList();
 
-            //무기 초기화
-            if (currentWeapon == null)
-            {
-                currentWeapon = Resources.Load<WeaponItem>("Scriptable/DragonBlade");
-                currentWeapon.isArmed = true;
-                weaponsInventory.Insert(0, currentWeapon); //List에서, 해당 위치에 넣는 함수 해당위치에 넣으면 뒷부분은 알아서 밀린다.
-            }
-
-            SettingEquipmentInventoryList();
-            SettingConsumableInventoryList();
-            SettingIngredientInventoryList();
-
-
-            foreach (KeyValuePair<ItemType, List<EquipItem>> pair in equipmentsInventory)
-            {
-                EquipItemIsArmedInitailize(pair.Value);
-            }
-
-            //장비들 초기화
-            foreach (EquipItem item in currentEquipmentSlots)
-            {
-                item.isArmed = true;
-                equipmentsInventory[item.itemType].Insert(0, item);
-            }
+            //개별 장비 리스트를 딕셔너리에 추가
+            AddEquipmentInventoryListToDictionary();
 
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
-        private void SettingConsumableInventoryList()
+        //private void OnValidate()
+        //{
+        //    if (currentWeapon != null)
+        //        currentWeapon.isArmed = true;
+
+        //    for (int i = 0; i < currentEquipmentSlots.Length; i++)
+        //    {
+        //        if (currentEquipmentSlots[i] != null)
+        //            currentEquipmentSlots[i].isArmed = true;
+        //    }
+
+        //    if (currentConsumable != null)
+        //        currentConsumable.isArmed = true;
+        //}
+        private void LoadWeaponInventoryList()
+        {
+            WeaponItem[] items;
+            items = Resources.LoadAll<WeaponItem>("Scriptable/Weapon");
+            for (int i = 0; i < items.Length; i++)
+            {
+                WeaponItem weaponItem = Instantiate(items[i]);
+                weaponsInventory.Add(weaponItem);
+                weaponItem.isArmed = false;
+            }
+
+            //기본무기를 드래곤블레이드로 - "임시"
+            for (int i = 0; i < weaponsInventory.Count; i++)
+            {
+                if (weaponsInventory[i].itemName == "드래곤 블레이드")
+                {
+                    currentWeapon = weaponsInventory[i];
+                    currentWeapon.isArmed = true;
+                }
+            }
+
+            if (currentWeapon == null)
+                Debug.LogWarning("무기를 찾지 못했다.");
+        }
+        private void LoadEquipmentInventoryList()
+        {
+            EquipItem[] items;
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Tops");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                topsInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Bottoms");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                bottomsInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Gloves");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                glovesInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Shoes");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                shoesInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Accessory");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                accessoryInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/SpecialEquip");
+            for (int i = 0; i < items.Length; i++)
+            {
+                EquipItem equipItem = Instantiate(items[i]);
+                specialEquipInventory.Add(equipItem);
+                equipItem.isArmed = false;
+            }
+
+            //현재 장비 세팅
+            currentEquipmentSlots[0] = topsInventory[0];
+            currentEquipmentSlots[1] = bottomsInventory[0];
+            currentEquipmentSlots[2] = glovesInventory[0];
+            currentEquipmentSlots[3] = shoesInventory[0];
+            currentEquipmentSlots[4] = accessoryInventory[0];
+            currentEquipmentSlots[5] = specialEquipInventory[0];
+
+            for (int i = 0; i < currentEquipmentSlots.Length; i++)
+            {
+                currentEquipmentSlots[i].isArmed = true;
+            }
+        }
+        private void LoadConsumableInventoryList()
         {
             ConsumableItem[] items;
             items = Resources.LoadAll<ConsumableItem>("Scriptable/Consumable");
 
             for (int i = 0; i < items.Length; i++)
             {
-                consumableInventory.Add(items[i]);
-                items[i].isArmed = false;
+                ConsumableItem consumeItem = Instantiate(items[i]);
+                consumableInventory.Add(consumeItem);
+                consumeItem.isArmed = false;
+                consumeItem.quantity = Random.Range(1, 6);
             }
 
             currentConsumable = consumableInventory[0];
             currentConsumable.isArmed = true;
         }
-
-        private void SettingIngredientInventoryList()
+        private void LoadIngredientInventoryList()
         {
             IngredientItem[] items;
             items = Resources.LoadAll<IngredientItem>("Scriptable/Ingredient");
 
             for (int i = 0; i < items.Length; i++)
             {
-                ingredientInventory.Add(items[i]);
+                IngredientItem ingredientItem = Instantiate(items[i]);
+                ingredientInventory.Add(ingredientItem);
+                ingredientItem.quantity = Random.Range(1, 30);
             }
         }
-
-        private void EquipItemIsArmedInitailize(List<EquipItem> list)
-        {
-            foreach (EquipItem item in list)
-            {
-                item.isArmed = false;
-            }
-        }
-
-        private void SettingEquipmentInventoryList()
+        private void AddEquipmentInventoryListToDictionary()
         {
             equipmentsInventory = new Dictionary<ItemType, List<EquipItem>>(new ItemTypeEnumComparer());
 
@@ -137,6 +212,7 @@ namespace SG
             equipmentsInventory.Add(ItemType.Accessory, accessoryInventory);
             equipmentsInventory.Add(ItemType.SpecialEquip, specialEquipInventory);
         }
+
 
         //무기를 교체하는 함수
         //현재 무기와 교체하고자 하는 무기를 갱신합니다.
@@ -178,8 +254,129 @@ namespace SG
             currentConsumable.isArmed = true;
         }
 
+        //아이템 획득 시 처리하는 함수
+        public void SaveGetItemToInventory()
+        {
 
-        //LeftPanel_WeaponInventory가 닫힐 때, 실행하는 것이 좋다.
+        }
+
+        //아이템 버릴 시(삭제 시) 처리하는 함수
+        //객체 파괴와 동시에 Inventory를 정리
+
+
+        #region Delete Items
+        public void SaveDeleteItemToInventory(Item item, int count = 0)
+        {
+            switch (item.itemType)
+            {
+                case ItemType.Tops: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.Bottoms: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.Gloves: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.Shoes: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.Accessory: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.SpecialEquip: SaveDeleteItemToInventory(item as EquipItem); break;
+                case ItemType.Weapon: SaveDeleteItemToInventory(item as WeaponItem); break;
+                case ItemType.Consumable: SaveDeleteItemToInventory(item as ConsumableItem, count); break;
+                case ItemType.Ingredient: SaveDeleteItemToInventory(item as IngredientItem, count); break;
+                default: break;
+            }
+        }
+        public void SaveDeleteItemToInventory(WeaponItem weaponItem)
+        {
+            if(GetItemIsArmed(weaponItem))
+            {
+                Debug.Log("장착중인 아이템은 버릴 수 없다.");
+                return;
+            }
+
+            for (int i = 0; i < weaponsInventory.Count; i++)
+            {
+                if (weaponsInventory[i] == weaponItem)
+                {
+                    
+                    Destroy(weaponsInventory[i]);
+                    weaponsInventory.RemoveAt(i);
+                    // weaponsInventory.RemoveAll(item => item = null);
+                    return;
+                }
+            }
+            Debug.Log("아이템 제거 완료");
+        }
+        public void SaveDeleteItemToInventory(EquipItem equipItem)
+        {
+            if (GetItemIsArmed(equipItem))
+            {
+                Debug.Log("장착중인 아이템은 버릴 수 없다.");
+                return;
+            }
+
+            for (int i = 0; i < equipmentsInventory[equipItem.itemType].Count; i++)
+            {
+                if (equipmentsInventory[equipItem.itemType][i] == equipItem)
+                {
+                    //equipmentsInventory[equipItem.itemType].Remove(equipmentsInventory[equipItem.itemType][i]);
+                    Destroy(equipmentsInventory[equipItem.itemType][i]);
+                    equipmentsInventory[equipItem.itemType].RemoveAt(i);
+                }
+            }
+        }
+        public void SaveDeleteItemToInventory(ConsumableItem consumableItem, int count)
+        {
+            if(GetItemIsArmed(consumableItem))
+            {
+                Debug.Log("장착중인 아이템은 버릴 수 없다.");
+                return;
+            }
+
+            for (int i = 0; i < consumableInventory.Count; i++)
+            {
+                if (consumableInventory[i] == consumableItem)
+                {
+                    consumableInventory[i].quantity -= count;
+
+                    if (consumableInventory[i].quantity <= 0)
+                    {
+                        //consumableInventory.Remove(equipmentsInventory[equipItem.itemType][i]);
+                        Destroy(consumableInventory[i]);
+                        consumableInventory.RemoveAt(i);
+                    }
+
+                }
+            }
+        }
+        public void SaveDeleteItemToInventory(IngredientItem ingredientItem, int count)
+        {
+            for (int i = 0; i < ingredientInventory.Count; i++)
+            {
+                if (ingredientInventory[i] == ingredientItem)
+                {
+                    ingredientInventory[i].quantity -= count;
+
+                    if (ingredientInventory[i].quantity <= 0)
+                    {
+                        //ingredientInventory.Remove(equipmentsInventory[equipItem.itemType][i]);
+                        Destroy(ingredientInventory[i]);
+                        ingredientInventory.RemoveAt(i);
+                    }
+                }
+            }
+        }
+        #endregion
+
+        public bool GetItemIsArmed(WeaponItem weaponItem)
+        {
+            return weaponItem.isArmed;
+        }
+        public bool GetItemIsArmed(EquipItem equipItem)
+        {
+            return equipItem.isArmed;
+        }
+        public bool GetItemIsArmed(ConsumableItem consumableItem)
+        {
+            return consumableItem.isArmed;
+        }
+
+        #region Inventory Sorting Methods
         public void SortWeaponInventory(WeaponItem weaponItem)
         {
             if (weaponsInventory.Contains(weaponItem))
@@ -209,6 +406,9 @@ namespace SG
 
         public void SortWeaponInventoryListToGANADA()
         {
+            if (weaponsInventory.Count == 0)
+                return;
+
             SortWeaponInventory(currentWeapon);
             List<WeaponItem> tempList = weaponsInventory.Skip(1).ToList();
             tempList = tempList.OrderBy(weaponItem => weaponItem.itemName).ToList();
@@ -222,6 +422,9 @@ namespace SG
 
         public void SortWeaponInventoryListToRarity()
         {
+            if (weaponsInventory.Count == 0)
+                return;
+
             SortWeaponInventory(currentWeapon);
             List<WeaponItem> tempList = weaponsInventory.Skip(1).ToList();
             tempList = tempList.OrderByDescending(weaponItem => weaponItem.rarity).ToList();
@@ -235,6 +438,9 @@ namespace SG
 
         public void SortEquipmentInventoryListToGANADA(ItemType itemType)
         {
+            if (equipmentsInventory[itemType].Count == 0)
+                return;
+
             SortEquipmentInventory(currentEquipmentSlots, itemType);
             List<EquipItem> tempList = equipmentsInventory[itemType].Skip(1).ToList();
             tempList = tempList.OrderBy(equipItem => equipItem.itemName).ToList();
@@ -243,12 +449,14 @@ namespace SG
             for (int i = 0; i < tempList.Count; i++)
             {
                 equipmentsInventory[itemType].Add(tempList[i]);
-                Debug.Log(tempList[i].itemName);
             }
         }
 
         public void SortEquipmentInventoryListToRarity(ItemType itemType)
         {
+            if (equipmentsInventory[itemType].Count == 0)
+                return;
+
             SortEquipmentInventory(currentEquipmentSlots, itemType);
             List<EquipItem> tempList = equipmentsInventory[itemType].Skip(1).ToList();
             tempList = tempList.OrderByDescending(equipItem => equipItem.rarity).ToList();
@@ -263,6 +471,9 @@ namespace SG
 
         public void SortConsumableInventoryListToGANADA()
         {
+            if (consumableInventory.Count == 0)
+                return;
+
             SortConsumableInventory(currentConsumable);
             List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
             //List<ConsumableItem> tempList = consumableInventory.ToList();
@@ -277,6 +488,9 @@ namespace SG
 
         public void SortConsumableInventoryListToRarity()
         {
+            if (consumableInventory.Count == 0)
+                return;
+
             SortConsumableInventory(currentConsumable);
             List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
             //List<ConsumableItem> tempList = consumableInventory.ToList();
@@ -291,6 +505,9 @@ namespace SG
 
         public void SortIngredientInventoryListToGANADA()
         {
+            if (ingredientInventory.Count == 0)
+                return;
+
             List<IngredientItem> tempList = ingredientInventory.ToList();
             tempList = tempList.OrderBy(ingredientItem => ingredientItem.itemName).ToList();
 
@@ -302,6 +519,9 @@ namespace SG
 
         public void SortIngredientInventoryListToRarity()
         {
+            if (ingredientInventory.Count == 0)
+                return;
+
             List<IngredientItem> tempList = ingredientInventory.ToList();
             tempList = tempList.OrderByDescending(ingredientItem => ingredientItem.rarity).ToList();
 
@@ -310,5 +530,6 @@ namespace SG
                 ingredientInventory[i] = tempList[i];
             }
         }
+        #endregion
     }
 }

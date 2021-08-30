@@ -113,9 +113,9 @@ namespace SG
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = equipmentInventorySlots.Length - playerInventory.equipmentsInventory[itemType].Count;
-                for (int i = 1; i <= diff; i++)
+                for (int i = 0; i < diff; i++)
                 {
-                    equipmentInventorySlots[equipmentInventorySlots.Length - i].ClearInventorySlot();
+                    equipmentInventorySlots[equipmentInventorySlots.Length - 1 - i].ClearInventorySlot();
                 }
             }
 
