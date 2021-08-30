@@ -63,6 +63,7 @@ namespace SG
             {
                 CloseSelectMenuWindow();
                 windowPanel.CloseCharacterWindowPanel();
+                windowPanel.CloseInventoryWindowPanel();
             }
         }
 

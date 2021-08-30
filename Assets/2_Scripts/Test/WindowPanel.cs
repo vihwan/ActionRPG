@@ -82,6 +82,11 @@ namespace SG
             inventoryWindow.gameObject.SetActive(true);
         }
 
+        public void CloseInventoryWindowPanel()
+        {
+            inventoryWindow.gameObject.SetActive(false);
+        }
+
         #endregion
     }
 }

@@ -25,7 +25,21 @@ namespace SG
         Defense,
         Critical,
         CriticalDamage,
-        Stamina
+        Stamina,
+    }
+
+    //소비 아이템 고유 속성
+    public enum ConsumeAttribute
+    {
+        Hp,
+        Mp,
+        Stamina,
+        Attack,
+        Defense,
+        Critical,
+        CriticalDamage,
+        Speed,
+        SkillDamage
     }
 
     [System.Serializable]
@@ -44,5 +58,13 @@ namespace SG
     {
         public Attribute attribute;
         public int value;
+    }
+
+    [System.Serializable]
+    public class ConsumableAttribute
+    {
+        public ConsumeAttribute consumableAttribute;
+        public int value;
+        public int time = 0; 
     }
 }

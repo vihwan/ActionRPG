@@ -107,6 +107,7 @@
     <Compile Include="Assets\2_Scripts\Test\CharacterUI_StatusPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterUI_WeaponPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\CharacterWindowUI.cs" />
+    <Compile Include="Assets\2_Scripts\Test\ConsumableBtn.cs" />
     <Compile Include="Assets\2_Scripts\Test\ConsumableItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\EquipItem.cs" />

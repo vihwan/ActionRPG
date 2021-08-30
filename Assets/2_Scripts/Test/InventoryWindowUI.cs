@@ -12,20 +12,19 @@ namespace SG
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
+        [SerializeField] Button leftArrowBtn;
+        [SerializeField] Button rightArrowBtn;
 
         [Header("Inventory UI Main Contents")]
         [SerializeField] internal InventoryMainContents mainContents;
 
-
-        [Header("Button")]
-        [SerializeField] Button leftBtn;
-        [SerializeField] Button rightBtn;
-
-
+        [Header("Need Component")]
         [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private PlayerSkillManager playerSkillManager;
         public void Init()
         {
             inputHandler = FindObjectOfType<InputHandler>();
+            playerSkillManager = FindObjectOfType<PlayerSkillManager>();
 
             springBoardMenu = GetComponentInChildren<InventoryMenuSpringBoard>();
             if (springBoardMenu != null)
@@ -35,25 +34,24 @@ namespace SG
             if (mainContents != null)
                 mainContents.Init();
 
-            closeBtn = GetComponentInChildren<Button>();
+            closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
             if (closeBtn != null)
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
 
+            leftArrowBtn = UtilHelper.Find<Button>(transform, "LeftArrowBtn");
+            if (leftArrowBtn != null)
+                leftArrowBtn.onClick.AddListener(SetActiveLeftList);
 
-            leftBtn = UtilHelper.Find<Button>(transform, "LeftArrowBtn");
-            if (leftBtn != null)
-                leftBtn.onClick.AddListener(SetActiveLeftList);
-
-            rightBtn = UtilHelper.Find<Button>(transform, "RightArrowBtn");
-            if (rightBtn != null)
-                rightBtn.onClick.AddListener(SetActiveRightList);
+            rightArrowBtn = UtilHelper.Find<Button>(transform, "RightArrowBtn");
+            if (rightArrowBtn != null)
+                rightArrowBtn.onClick.AddListener(SetActiveRightList);
         }
 
         private void OnEnable()
         {
             for (int i = 0; i < mainContents.ContentLists.Count; i++)
             {
-                mainContents.ContentLists[i].UpdateList();
+                mainContents.ContentLists[i].UpdateUI();
                 mainContents.infoPanel.SetParameter(mainContents.ContentLists[i].inventoryContentSlots[0]);
             }
 
@@ -61,6 +59,11 @@ namespace SG
             springBoardMenu.ChangeSpringButtonColor(springBoardMenu.SpringMenuBtns[0]);
             mainContents.SetActiveContentList(mainContents.WeaponList, true);
             mainContents.infoPanel.SetParameter(mainContents.WeaponList.inventoryContentSlots[0]);
+        }
+
+        private void OnDisable()
+        {
+            playerSkillManager.SetPlayerHUDConsumableSlot(mainContents.playerInventory.currentConsumable);
         }
 
 

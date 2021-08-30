@@ -165,8 +165,6 @@ namespace SG
         {
             equipSlots[(int)currentSelectObjectType].AddItem(equipItem);
         }
-
-
         private void SetAllEquipSlotsButtonInteractive(bool state)
         {
             for (int i = 0; i < equipSlots.Length; i++)
@@ -245,8 +243,6 @@ namespace SG
             SetItemStatusText(equipStatus_Cf, equipItem);
             CreateRarityStar(weaponRarityTransform_Cf, rareStars_Cf, equipItem);
         }
-
-
 
         //장비 교체 버튼(changeEquipBtn)을 눌렀을 경우 발생하는 이벤트 함수
         private void ChangeEquipBtnEvent(EquipItem selectEquipItem)

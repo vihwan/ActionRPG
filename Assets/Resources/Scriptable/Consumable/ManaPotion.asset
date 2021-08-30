@@ -13,23 +13,40 @@ MonoBehaviour:
   m_Name: ManaPotion
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: 92ae1e80d023b8041a663fb8c1d89100, type: 3}
-  itemName: "\uD790\uB9C1 \uD3EC\uC158"
+  itemName: "\uB9C8\uB098 \uD3EC\uC158"
   itemType: 7
   itemDescription: "\uBA39\uC73C\uBA74 \uB9C8\uB098\uB97C \uD68C\uBCF5\uD558\uB294
     \uD3EC\uC158"
   kind: "\uB9C8\uB098\uD3EC\uC158"
   quantity: 0
   rarity: 1
-  itemAttributes:
-  - attribute: 0
+  coolTime: 0
+  isArmed: 1
+  consumableAttributes:
+  - consumableAttribute: 0
+    value: 0
+    time: 0
+  - consumableAttribute: 1
     value: 30
-  - attribute: 1
+    time: 0
+  - consumableAttribute: 2
     value: 0
-  - attribute: 2
+    time: 0
+  - consumableAttribute: 3
     value: 0
-  - attribute: 3
+    time: 0
+  - consumableAttribute: 4
     value: 0
-  - attribute: 4
+    time: 0
+  - consumableAttribute: 5
     value: 0
-  - attribute: 5
+    time: 0
+  - consumableAttribute: 6
     value: 0
+    time: 0
+  - consumableAttribute: 7
+    value: 0
+    time: 0
+  - consumableAttribute: 8
+    value: 0
+    time: 0

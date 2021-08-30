@@ -25,12 +25,12 @@ namespace SG
 
         private InventoryWindowUI inventoryWindowUI;
 
+        //property
         public List<Button> SpringMenuBtns { get => springMenuBtns; private set => springMenuBtns = value; }
 
         public void Init()
         {
             inventoryWindowUI = GetComponentInParent<InventoryWindowUI>();
-
             selectText = GetComponentInChildren<TMP_Text>();
 
             weaponBtn = UtilHelper.Find<Button>(transform, "Weapon");
@@ -60,7 +60,6 @@ namespace SG
                 bottomsBtn.onClick.AddListener(() => ChangeSpringButtonColor(bottomsBtn));
             }
                 
-
             glovesBtn = UtilHelper.Find<Button>(transform, "Gloves");
             if (glovesBtn != null)
             {
@@ -69,8 +68,6 @@ namespace SG
                     () => inventoryWindowUI.mainContents.SetActiveContentList(inventoryWindowUI.mainContents.GlovesList, true));
                 glovesBtn.onClick.AddListener(() => ChangeSpringButtonColor(glovesBtn));
             }
-
-            
 
             shoesBtn = UtilHelper.Find<Button>(transform, "Shoes");
             if (shoesBtn != null)
@@ -81,7 +78,6 @@ namespace SG
                 shoesBtn.onClick.AddListener(() => ChangeSpringButtonColor(shoesBtn));
             }
            
-
             accessoryBtn = UtilHelper.Find<Button>(transform, "Accessory");
             if (accessoryBtn != null)
             {
@@ -91,7 +87,6 @@ namespace SG
                 accessoryBtn.onClick.AddListener(() => ChangeSpringButtonColor(accessoryBtn));
             }
                 
-
             specialEquipBtn = UtilHelper.Find<Button>(transform, "SpecialEquip");
             if (specialEquipBtn != null)
             {
@@ -99,8 +94,7 @@ namespace SG
                 specialEquipBtn.onClick.AddListener(
                        () => inventoryWindowUI.mainContents.SetActiveContentList(inventoryWindowUI.mainContents.SpecialEquipList, true));
                 specialEquipBtn.onClick.AddListener(() => ChangeSpringButtonColor(specialEquipBtn));
-            }
-               
+            }          
 
             consumableBtn = UtilHelper.Find<Button>(transform, "Consumable");
             if (consumableBtn != null)
@@ -120,16 +114,21 @@ namespace SG
                 ingredientBtn.onClick.AddListener(() => ChangeSpringButtonColor(ingredientBtn));
             }          
         }
-
-
-        private void OnClickChangeSpringMenu()
+        private void ChangeSpringMenuText(Button button)
         {
-
-        }
-
-        private void ChangeSpringMenuText()
-        {
-            
+            switch (button.gameObject.name)
+            {
+                default: Debug.Log("텍스트 변경 안됨"); break;
+                case "Weapon"      : selectText.text = "무기"; break;
+                case "Tops"        : selectText.text = "상의"; break;
+                case "Bottoms"     : selectText.text = "하의"; break;
+                case "Gloves"      : selectText.text = "장갑"; break;
+                case "Shoes"       : selectText.text = "신발"; break;
+                case "Accessory"   : selectText.text = "악세사리"; break;
+                case "SpecialEquip": selectText.text = "특수장비"; break;
+                case "Consumable"  : selectText.text = "소비"; break;
+                case "Ingredient"  : selectText.text = "재료"; break;
+            }
         }
         public void ChangeSpringButtonColor(Button button)
         {  
@@ -138,6 +137,8 @@ namespace SG
                 springMenuBtns[i].GetComponent<Image>().color = Color.white;
             }
             button.GetComponent<Image>().color = Color.cyan;
+
+            ChangeSpringMenuText(button);
         }
     }
 }

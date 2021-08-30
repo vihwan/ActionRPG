@@ -20,10 +20,7 @@ namespace SG
         private float elapsedTime = 0f;
 
         private bool isUpdate;
-
         public Button Button { get => button; }
-
-
         public void Init()
         {
             button = GetComponent<Button>();
@@ -79,8 +76,6 @@ namespace SG
                 SetSkillBtnIcon(playerSkill);
             }
         }
-
-
 
 
         public void OnClick()

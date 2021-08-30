@@ -290,6 +290,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7c624ba307b948647bcaa6dd41eac2c0, type: 2}
   - {fileID: 11400000, guid: 6edb623a95a65e84d9070fc0971fe1d9, type: 2}
   - {fileID: 11400000, guid: 6d5db1296b297de41b9f0a7456c56f6e, type: 2}
+  currentConsumable: {fileID: 11400000, guid: 27cdd654eecf3a14a9e9ff11811b0c1b, type: 2}
   weaponsInventory:
   - {fileID: 11400000, guid: 6dd05d937f27e5d4eb8db1fdc6b61738, type: 2}
   - {fileID: 11400000, guid: 0211f04082699ed47960bc4869848148, type: 2}
@@ -321,6 +322,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: fc86b5303fcf7b84e80e447a2fcb5196, type: 2}
   - {fileID: 11400000, guid: c0eed94a7358a234bbd58148ea5ccd09, type: 2}
   - {fileID: 11400000, guid: 998b8e7dd7acc5a4994dd7b0cd25f6a9, type: 2}
+  consumableInventory: []
+  ingredientInventory: []
 --- !u!114 &616813801781678737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,6 +380,8 @@ MonoBehaviour:
   skillBtn_2: {fileID: 0}
   skillBtn_3: {fileID: 0}
   skillBtn_Ult: {fileID: 0}
+  consumableItem_One: {fileID: 11400000, guid: 27cdd654eecf3a14a9e9ff11811b0c1b, type: 2}
+  consumableBtn_1: {fileID: 0}
 --- !u!114 &1447140967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,9 +394,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58528f8bec41a8246a391b2896514d6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeSkills: []
-  passiveSkills: []
-  ultimateSkills: []
+  activeSkills:
+  - {fileID: 11400000, guid: d166caa33f0fabf468e823f9c76f9fd3, type: 2}
+  - {fileID: 11400000, guid: b227ffbe5d8351247a6711180f8af8e3, type: 2}
+  - {fileID: 11400000, guid: a3759d8e72e72ce4c9192c0666cf46b1, type: 2}
+  - {fileID: 11400000, guid: 56f7f98d4d25b6d44a2edd271a76fccd, type: 2}
+  - {fileID: 11400000, guid: 572aac3661b40614badf7afffb66ad8d, type: 2}
+  passiveSkills:
+  - {fileID: 11400000, guid: ba03a58dc9b8cfa40bbb23519595673c, type: 2}
+  - {fileID: 11400000, guid: df47cb3a16aa5414485d11df8232c5f1, type: 2}
+  - {fileID: 11400000, guid: 8b41c7dd2af1f3e41a270287d8a33253, type: 2}
+  ultimateSkills:
+  - {fileID: 11400000, guid: 76996bc7d39e2fe4c9c30a7e55ca9916, type: 2}
+  - {fileID: 11400000, guid: 146d800eb6f4c3d4eb3dcc7c154d00d2, type: 2}
 --- !u!114 &1399220363
 MonoBehaviour:
   m_ObjectHideFlags: 0

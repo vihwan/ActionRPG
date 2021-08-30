@@ -12,7 +12,7 @@ namespace SG
         private SkillBtn skillBtn_2;
         private SkillBtn skillBtn_3;
         private SkillBtn skillBtn_Ult;
-        private SkillBtn consumesSlot;
+        private ConsumableBtn consumesSlot;
 
         private PlayerSkillManager skillManager;
 
@@ -20,6 +20,7 @@ namespace SG
         public SkillBtn SkillBtn_2 { get => skillBtn_2; private set => skillBtn_2 = value; }
         public SkillBtn SkillBtn_3 { get => skillBtn_3; private set => skillBtn_3 = value; }
         public SkillBtn SkillBtn_Ult { get => skillBtn_Ult; private set => skillBtn_Ult = value; }
+        public ConsumableBtn ConsumesSlot { get => consumesSlot; private set => consumesSlot = value; }
 
         public void Init()
         {
@@ -39,7 +40,9 @@ namespace SG
             if (SkillBtn_Ult != null)
                 SkillBtn_Ult.Init();
 
-            consumesSlot = UtilHelper.Find<SkillBtn>(transform, "ConsumesSlot");
+            consumesSlot = UtilHelper.Find<ConsumableBtn>(transform, "ConsumesSlot");
+            if (consumesSlot != null)
+                consumesSlot.Init();
 
             skillManager = FindObjectOfType<PlayerSkillManager>();
             if (skillManager != null)
@@ -48,6 +51,7 @@ namespace SG
                 UpdateSkillSlotsUI(2, skillManager.playerSkill_Two);
                 UpdateSkillSlotsUI(3, skillManager.playerSkill_Three);
                 UpdateSkillSlotsUI(4, skillManager.playerSkill_Ult);
+                UpdateQuickSlotUI(skillManager.consumableItem_One);
             }
         }
 
@@ -75,27 +79,9 @@ namespace SG
         }
 
         //퀵슬롯 아이콘(ex. 소비템)을 갱신하는 함수
-        public void UpdateQuickSlotUI()
+        public void UpdateQuickSlotUI(ConsumableItem consumableItem)
         {
-
+            consumesSlot.SetActiveBtn(consumableItem);
         }
-
-        /*        public void UpdateWeaponQuickSlotsUI(bool isLeft, WeaponItem weaponItem)
-                {
-
-                    if (isLeft == false)
-                    {
-                        if(weaponItem.itemIcon != null)
-                        {
-                            rightWeaponIcon.sprite = weaponItem.itemIcon;
-                            rightWeaponIcon.enabled = true;
-                        }
-                        else
-                        {
-
-                        }
-                    }
-                }*/
     }
-
 }

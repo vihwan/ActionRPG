@@ -41,8 +41,14 @@ namespace SG
             else
             {
                 if(inventoryContentSlots[0] != null)
+                {
                     inventoryMainContents.infoPanel.SetParameter(inventoryContentSlots[0]);
+                }         
             }
+
+            SortInventoryListToGANADA();
+            itemSort_Dropdown.value = 0;
+            itemSort_Dropdown.RefreshShownValue();
         }
 
         private void InitDropdown()
@@ -63,9 +69,20 @@ namespace SG
             beforeSelectSlot = slot;
         }
 
-        public void UpdateList()
+        public void UpdateUI()
         {
             UpdateUIDependOnGameObjectName();
+        }
+
+        public void UpdateSlots()
+        {
+            //List<EquipItem> tempList = playerInventory.equipmentsInventory[selectEquipType];
+            for (int i = 0; i < inventoryMainContents.playerInventory.consumableInventory.Count; i++)
+            {
+                inventoryContentSlots[i].UpdateSlot(inventoryMainContents.playerInventory.consumableInventory[i]);
+            }
+
+            Debug.Log("소비 아이콘 색상 갱신 완료");
         }
 
         public void UpdateUIDependOnGameObjectName()
@@ -208,8 +225,18 @@ namespace SG
 
             for (int i = 0; i < inventoryMainContents.playerInventory.consumableInventory.Count; i++)
             {
-                inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.consumableInventory[i]);
+                if (inventoryMainContents.playerInventory.consumableInventory[i].isArmed)
+                {
+                    inventoryContentSlots[0].AddItem(inventoryMainContents.playerInventory.consumableInventory[i]);
+                    continue;
+                }
+                else
+                {
+                    inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.consumableInventory[i]);
+                }
             }
+
+            DeSelectAllSlots();
         }
 
         public void UpdateUIIngredient()
@@ -311,7 +338,7 @@ namespace SG
                 default:
                     break;
             }
-            UpdateList();
+            UpdateUI();
         }
 
         private void SortInventoryListToRarity()
@@ -357,7 +384,7 @@ namespace SG
                 default:
                     break;
             }
-            UpdateList();
+            UpdateUI();
         }
     }
 }

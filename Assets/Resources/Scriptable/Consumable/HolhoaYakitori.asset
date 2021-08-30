@@ -24,16 +24,31 @@ MonoBehaviour:
   kind: "\uC74C\uC2DD"
   quantity: 0
   rarity: 3
-  itemAttributes:
-  - attribute: 0
-    value: 30
-  - attribute: 1
+  consumableAttributes:
+  - consumableAttribute: 0
+    value: 150
+    time: 0
+  - consumableAttribute: 1
     value: 0
-  - attribute: 2
+    time: 0
+  - consumableAttribute: 2
     value: 0
-  - attribute: 3
+    time: 0
+  - consumableAttribute: 3
     value: 0
-  - attribute: 4
+    time: 0
+  - consumableAttribute: 4
     value: 0
-  - attribute: 5
+    time: 0
+  - consumableAttribute: 5
     value: 0
+    time: 0
+  - consumableAttribute: 6
+    value: 0
+    time: 0
+  - consumableAttribute: 7
+    value: 0
+    time: 0
+  - consumableAttribute: 8
+    value: 0
+    time: 0

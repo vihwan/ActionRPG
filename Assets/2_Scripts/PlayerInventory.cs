@@ -30,6 +30,7 @@ namespace SG
         public WeaponItem currentWeapon;
         public WeaponItem unarmedWeapon;
         public EquipItem[] currentEquipmentSlots = new EquipItem[6];
+        public ConsumableItem currentConsumable;
         //소비템칸 하나
 
         [Header("Inventory")]
@@ -99,7 +100,11 @@ namespace SG
             for (int i = 0; i < items.Length; i++)
             {
                 consumableInventory.Add(items[i]);
+                items[i].isArmed = false;
             }
+
+            currentConsumable = consumableInventory[0];
+            currentConsumable.isArmed = true;
         }
 
         private void SettingIngredientInventoryList()
@@ -152,19 +157,8 @@ namespace SG
         //장비를 교체하는 함수
         //바꾸고자 하는 장비의 타입을 가져와 이에 따라 알맞는 장비 슬롯을 찾아 장비를 갱신합니다.
         //이에 따라 플레이어 스테이터스도 조정됩니다.
-
-
         public void ChangeCurrentEquipment(EquipItem equipItem)
         {
-            /**
-             ############# 주의 ###############
-
-            ItemType의 첫번째 원소는 Weapon이므로
-            장비 Type은 1부터 시작이다.
-             
-            따라서, currentEquipmentSlots에 맞게 하기 위해서 -1을 해줄 필요가 있다.
-             */
-
             ItemType temp = equipItem.itemType;
 
             currentEquipmentSlots[(int)temp].isArmed = false;
@@ -174,6 +168,14 @@ namespace SG
             currentEquipmentSlots[(int)temp].isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentEquipmentSlots[(int)temp]);
             playerStats.SetMaxHealthBar();
+        }
+
+        //장착중인 소비 아이템을 교체하는 함수
+        public void ChangeCurrentConsumable(ConsumableItem consumableItem)
+        {
+            currentConsumable.isArmed = false;
+            currentConsumable = consumableItem;
+            currentConsumable.isArmed = true;
         }
 
 
@@ -193,6 +195,15 @@ namespace SG
             {
                 equipmentsInventory[itemType].Remove(equipItems[(int)itemType]);
                 equipmentsInventory[itemType].Insert(0, equipItems[(int)itemType]);
+            }
+        }
+
+        public void SortConsumableInventory(ConsumableItem consumableItem)
+        {
+            if (consumableInventory.Contains(consumableItem))
+            {
+                consumableInventory.Remove(consumableItem);
+                consumableInventory.Insert(0, consumableItem);
             }
         }
 
@@ -252,27 +263,29 @@ namespace SG
 
         public void SortConsumableInventoryListToGANADA()
         {
-            // List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
-            List<ConsumableItem> tempList = consumableInventory.ToList();
+            SortConsumableInventory(currentConsumable);
+            List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
+            //List<ConsumableItem> tempList = consumableInventory.ToList();
             tempList = tempList.OrderBy(consumableItem => consumableItem.itemName).ToList();
 
             for (int i = 0; i < tempList.Count; i++)
             {
-                consumableInventory[i] = tempList[i];
-                //consumableInventory[i + 1] = tempList[i];
+                //consumableInventory[i] = tempList[i];
+                consumableInventory[i + 1] = tempList[i];
             }
         }
 
         public void SortConsumableInventoryListToRarity()
         {
-            // List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
-            List<ConsumableItem> tempList = consumableInventory.ToList();
+            SortConsumableInventory(currentConsumable);
+            List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
+            //List<ConsumableItem> tempList = consumableInventory.ToList();
             tempList = tempList.OrderByDescending(consumableItem => consumableItem.rarity).ToList();
 
             for (int i = 0; i < tempList.Count; i++)
             {
-                consumableInventory[i] = tempList[i];
-                //consumableInventory[i + 1] = tempList[i];
+                //consumableInventory[i] = tempList[i];
+                consumableInventory[i + 1] = tempList[i];
             }
         }
 

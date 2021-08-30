@@ -12,6 +12,7 @@ namespace SG
         public string kind;
         public int quantity;
         [Range(1, 5)] public int rarity = 1;
+
         public List<ItemAttribute> itemAttributes = new List<ItemAttribute>()
         {
             new ItemAttribute(){attribute = Attribute.Hp, value = 0 },
@@ -21,5 +22,11 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.CriticalDamage, value = 0},
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
+
+        private void OnValidate()
+        {
+            if (quantity < 0)
+                quantity = 0;
+        }
     }
 }

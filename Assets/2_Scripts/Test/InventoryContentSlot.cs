@@ -71,7 +71,7 @@ namespace SG
             this.consumableItem = consumableItem;
             icon.sprite = consumableItem.itemIcon;
             icon.enabled = true;
-            isArmed = false;
+            isArmed = consumableItem.isArmed;
 
             quantityText.text = consumableItem.quantity.ToString();
             quantityText.gameObject.SetActive(true);
@@ -111,6 +111,12 @@ namespace SG
             contentList.DeSelectAllSlots();
             isSelect = true;
             ChangeBackgroundColor();
+        }
+        public void UpdateSlot(ConsumableItem consumableItem)
+        {
+            isArmed = consumableItem.isArmed;
+            ChangeBackgroundColor();
+            Debug.Log(consumableItem.name + "의 isArmed : " + consumableItem.isArmed);
         }
         public void ChangeBackgroundColor()
         {

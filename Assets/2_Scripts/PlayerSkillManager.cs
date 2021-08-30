@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace SG
 {
+    //플레이어가 현재 장착중인 스킬과 소비 아이템을 관리하는 매니저입니다.
     public class PlayerSkillManager : MonoBehaviour
     {
         [Header("Player Skill")]
@@ -19,6 +20,13 @@ namespace SG
         [SerializeField] public SkillBtn skillBtn_3;
         [SerializeField] public SkillBtn skillBtn_Ult;
 
+        [Header("Player Consumable")]
+        public ConsumableItem consumableItem_One;
+
+        [Header("Player Consumable Button")]
+        [SerializeField] public ConsumableBtn consumableBtn_1;
+        
+
         private PlayerAttackAnimation playerAttacker;
         private QuickSlotUI quickSlotUI;
 
@@ -32,6 +40,8 @@ namespace SG
                 skillBtn_2 = quickSlotUI.SkillBtn_2;
                 skillBtn_3 = quickSlotUI.SkillBtn_3;
                 skillBtn_Ult = quickSlotUI.SkillBtn_Ult;
+
+                consumableBtn_1 = quickSlotUI.ConsumesSlot;
             }
             catch (Exception e)
             {
@@ -50,6 +60,13 @@ namespace SG
             quickSlotUI.UpdateSkillSlotsUI(2, playerSkill_Two);
             quickSlotUI.UpdateSkillSlotsUI(3, playerSkill_Three);
             quickSlotUI.UpdateSkillSlotsUI(4, playerSkill_Ult);
+        }
+
+        public void SetPlayerHUDConsumableSlot(ConsumableItem consumableItem)
+        {
+            consumableItem_One = consumableItem;
+
+            quickSlotUI.UpdateQuickSlotUI(consumableItem_One);
         }
 
         public void UseSkill(int skillNum)
