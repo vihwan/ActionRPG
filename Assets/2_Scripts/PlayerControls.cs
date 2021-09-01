@@ -266,6 +266,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""ConsumeItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""52f37016-a1f4-4e29-aae2-0bd92691aa71"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -422,6 +430,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""LockOn"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""63254c5e-70c7-4aa3-bdc8-7de53067a8a8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConsumeItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -453,6 +472,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_PlayerActions_A = m_PlayerActions.FindAction("A", throwIfNotFound: true);
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Menu = m_PlayerActions.FindAction("Menu", throwIfNotFound: true);
+        m_PlayerActions_ConsumeItem = m_PlayerActions.FindAction("ConsumeItem", throwIfNotFound: true);
         // Player UI
         m_PlayerUI = asset.FindActionMap("Player UI", throwIfNotFound: true);
     }
@@ -572,6 +592,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_PlayerActions_A;
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Menu;
+    private readonly InputAction m_PlayerActions_ConsumeItem;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -587,6 +608,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @A => m_Wrapper.m_PlayerActions_A;
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Menu => m_Wrapper.m_PlayerActions_Menu;
+        public InputAction @ConsumeItem => m_Wrapper.m_PlayerActions_ConsumeItem;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -629,6 +651,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Menu.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
                 @Menu.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnMenu;
+                @ConsumeItem.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnConsumeItem;
+                @ConsumeItem.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnConsumeItem;
+                @ConsumeItem.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnConsumeItem;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -666,6 +691,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Menu.started += instance.OnMenu;
                 @Menu.performed += instance.OnMenu;
                 @Menu.canceled += instance.OnMenu;
+                @ConsumeItem.started += instance.OnConsumeItem;
+                @ConsumeItem.performed += instance.OnConsumeItem;
+                @ConsumeItem.canceled += instance.OnConsumeItem;
             }
         }
     }
@@ -715,6 +743,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnA(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnMenu(InputAction.CallbackContext context);
+        void OnConsumeItem(InputAction.CallbackContext context);
     }
     public interface IPlayerUIActions
     {

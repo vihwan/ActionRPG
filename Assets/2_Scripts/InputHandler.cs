@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,12 +23,14 @@ namespace SG
         public bool right_Stick_Right_Input; // 타겟 오른쪽으로 변경 : E
         public bool right_Stick_Left_Input; // 타겟 왼쪽으로 변경 : Q
 
-
         // 스킬 공격 : 키보드 버튼 1,2,3,4
         public bool sk_One_Input;
         public bool sk_Two_Input;
         public bool sk_Three_Input;
         public bool sk_Ult_Input;
+
+        //소비 아이템 사용 : C
+        public bool consume_Input; 
 
         public float rollInputTimer;
         public bool rollFlag;
@@ -93,6 +96,7 @@ namespace SG
                 inputActions.PlayerActions.LockOn.performed += i => lockOn_Input = true;
                 inputActions.PlayerMovement.LockOnTargetLeft.performed += i => right_Stick_Left_Input = true;
                 inputActions.PlayerMovement.LockOnTargetRight.performed += i => right_Stick_Right_Input = true;
+                inputActions.PlayerActions.ConsumeItem.performed += i => consume_Input = true;
             }
             inputActions.Enable();
         }
@@ -113,6 +117,16 @@ namespace SG
             HandleJumpingInput();
             HandleMenuInput();
             HandleLockOnInput();
+            HandleConsumeItemInput();
+        }
+
+        private void HandleConsumeItemInput()
+        {
+            if(consume_Input)
+            {
+                //아이템 소비
+                playerSkillManager.UseConsumeItem();
+            }
         }
 
         private void HandleMoveInput(float delta)

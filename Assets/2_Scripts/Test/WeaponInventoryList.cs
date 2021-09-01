@@ -51,7 +51,7 @@ namespace SG
             itemSort_Dropdown.RefreshShownValue();
         }
 
-        public void DeSelectAllSlots()
+        public void SetAllSlotsDeselect()
         {
             foreach (WeaponInventorySlot slot in weaponInventorySlots)
             {
@@ -107,7 +107,7 @@ namespace SG
                 }
             }
 
-            DeSelectAllSlots();
+            SetAllSlotsDeselect();
         }
 
         internal override void OnClickSortInventoryList(int value)

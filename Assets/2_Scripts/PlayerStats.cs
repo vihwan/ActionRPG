@@ -18,11 +18,17 @@ namespace SG
         [SerializeField] private int healthLevel = 10;
         [SerializeField] private int maxHealth;
         [SerializeField] private int currentHealth;
+
+        [SerializeField] private int maxMana;
+        [SerializeField] private int currentMana;
+
+        [SerializeField] private int maxStamina;
+        [SerializeField] private int currentStamina;
+
         [SerializeField] private int attack;
         [SerializeField] private int defense;
         [SerializeField] private int critical;
         [SerializeField] private int criticalDamage;
-        [SerializeField] private int stamina;
 
         [Header("Need Component")]
         private HealthBar healthBar;
@@ -33,33 +39,80 @@ namespace SG
         //Property
         public int PlayerLevel { get => playerLevel; private set => playerLevel = value; }
         public int PlayerExp { get => playerExp; private set => playerExp = value; }
-        public int MaxHealth { get => maxHealth; private set => maxHealth = value; }
+        public int MaxHealth
+        {
+            get => maxHealth; private set
+            {
+                maxHealth = value;
+                if (maxHealth < CurrentHealth)
+                    CurrentHealth = maxHealth;
+            }
+        }
         public int CurrentHealth
         {
             get => currentHealth;
             private set
             {
-                if (value >= maxHealth)
-                    maxHealth = value;
-
                 currentHealth = value;
+                if (currentHealth >= MaxHealth)
+                    currentHealth = MaxHealth;
             }
         }
+        public int MaxMana
+        {
+            get => maxMana;
+            private set
+            {
+
+                maxMana = value;
+                if (maxMana < CurrentMana)
+                    CurrentMana = maxMana;
+            }
+        }
+        public int CurrentMana
+        {
+            get => currentMana;
+            private set
+            {
+                currentMana = value;
+                if (currentMana >= MaxMana)
+                    currentMana = MaxMana;
+            }
+        }
+        public int MaxStamina
+        {
+            get => maxStamina;
+            private set
+            {
+                maxStamina = value;
+                if (maxStamina < CurrentStamina)
+                    CurrentStamina = maxStamina;
+            }
+        }
+        public int CurrentStamina
+        {
+            get => currentStamina;
+            private set
+            {
+                currentStamina = value;
+                if (currentStamina >= MaxStamina)
+                    currentStamina = MaxStamina;
+            }
+        }
+        public int Attack { get => attack; private set => attack = value; }
+        public int Defense { get => defense; private set => defense = value; }
         public int Critical
         {
             get => critical;
             private set
             {
-                if (value >= 100)
-                    value = 100;
-
                 critical = value;
+                if (critical >= 100)
+                    critical = 100;
             }
         }
-        public int Attack { get => attack; private set => attack = value; }
-        public int Defense { get => defense; private set => defense = value; }
         public int CriticalDamage { get => criticalDamage; private set => criticalDamage = value; }
-        public int Stamina { get => stamina; private set => stamina = value; }
+
 
         private void Awake()
         {
@@ -69,8 +122,10 @@ namespace SG
 
         private void Start()
         {
-            maxHealth = SetMaxHealthFromHealthLevel();
-            currentHealth = maxHealth;
+            MaxHealth = SetMaxHealthFromHealthLevel();
+            CurrentHealth = MaxHealth;
+            MaxMana = 100;
+            MaxStamina = 100;
             healthBar = FindObjectOfType<HealthBar>();
             playerInventory = GetComponent<PlayerInventory>();
             InitializeStatusSet();
@@ -79,17 +134,18 @@ namespace SG
         private void InitializeStatusSet()
         {
             //Player Default Status
-            playerLevel = 1;
-            playerExp = 30;
-            attack = 5;
-            defense = 3;
-            critical = 5;
-            criticalDamage = 150;
-            stamina = 100;
+            PlayerLevel = 1;
+            PlayerExp = 30;
+            Attack = 5;
+            Defense = 3;
+            Critical = 5;
+            CriticalDamage = 150;
+            CurrentStamina = 100;
+            CurrentMana = 100;
 
             //Plus Player Stats depend on Equipping Items.
             UpdatePlayerStatus_Initialize();
-            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetMaxHealth(MaxHealth);
         }
 
         public void UpdatePlayerStatus_Initialize()
@@ -106,13 +162,14 @@ namespace SG
         {
             if (playerInventory.currentWeapon != null)
             {
-                maxHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                currentHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                attack += currentWeapon.itemAttributes[(int)Attribute.Attack].value;
-                defense += currentWeapon.itemAttributes[(int)Attribute.Defense].value;
-                critical += currentWeapon.itemAttributes[(int)Attribute.Critical].value;
-                criticalDamage += currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
-                stamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                MaxHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                CurrentHealth += currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                Attack += currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+                Defense += currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+                Critical += currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+                CriticalDamage += currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+                MaxStamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                CurrentStamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
             }
         }
 
@@ -120,63 +177,65 @@ namespace SG
         {
             if (playerInventory.currentWeapon != null)
             {
-                maxHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                currentHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
-                attack -= currentWeapon.itemAttributes[(int)Attribute.Attack].value;
-                defense -= currentWeapon.itemAttributes[(int)Attribute.Defense].value;
-                critical -= currentWeapon.itemAttributes[(int)Attribute.Critical].value;
-                criticalDamage -= currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
-                stamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                MaxHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                CurrentHealth -= currentWeapon.itemAttributes[(int)Attribute.Hp].value;
+                Attack -= currentWeapon.itemAttributes[(int)Attribute.Attack].value;
+                Defense -= currentWeapon.itemAttributes[(int)Attribute.Defense].value;
+                Critical -= currentWeapon.itemAttributes[(int)Attribute.Critical].value;
+                CriticalDamage -= currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
+                MaxStamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                CurrentStamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
             }
         }
 
         public void UpdatePlayerStatus_Equip(EquipItem currentEquipItem)
         {
-            maxHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
-            currentHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
-            attack += currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
-            defense += currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
-            critical += currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
-            criticalDamage += currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
-            stamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
-
+            MaxHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            CurrentHealth += currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            Attack += currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
+            Defense += currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
+            Critical += currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
+            CriticalDamage += currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
+            MaxStamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+            CurrentStamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
         }
 
         public void UpdatePlayerStatus_UnEquip(EquipItem currentEquipItem)
         {
-            maxHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
-            currentHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
-            attack -= currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
-            defense -= currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
-            critical -= currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
-            criticalDamage -= currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
-            stamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+            MaxHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            CurrentHealth -= currentEquipItem.itemAttributes[(int)Attribute.Hp].value;
+            Attack -= currentEquipItem.itemAttributes[(int)Attribute.Attack].value;
+            Defense -= currentEquipItem.itemAttributes[(int)Attribute.Defense].value;
+            Critical -= currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
+            CriticalDamage -= currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
+            MaxStamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+            CurrentStamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
         }
 
         public void SetMaxHealthBar()
         {
-            healthBar.SetMaxHealth(maxHealth);
+            healthBar.SetMaxHealth(MaxHealth);
         }
 
         private int SetMaxHealthFromHealthLevel()
         {
-            maxHealth = healthLevel * 10;
-            return maxHealth;
+            MaxHealth = healthLevel * 10;
+            return MaxHealth;
         }
 
         public void TakeDamage(int damage)
         {
-            currentHealth = currentHealth - damage;
-            healthBar.SetCurrentHealth(currentHealth);
+            CurrentHealth -= damage;
+            healthBar.SetCurrentHealth(CurrentHealth);
 
             if (playerManager.isUnEquip == false)
                 animatorHandler.PlayTargetAnimation("Damage_01", true);
             else
                 animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true);
 
-            if (currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
-                currentHealth = 0;
+                CurrentHealth = 0;
 
                 if (playerManager.isUnEquip == false)
                     animatorHandler.PlayTargetAnimation("Damage_Die", true);
@@ -184,6 +243,23 @@ namespace SG
                     animatorHandler.PlayTargetAnimation("Damage_Die_UnEquip", true);
                 //Handle Player Death
             }
+        }
+
+        public void PlusStatsByComsumableItem(ConsumableItem consumableItem)
+        {
+            CurrentHealth += consumableItem.consumableAttributes[(int)ConsumeAttribute.Hp].value;
+            CurrentMana += consumableItem.consumableAttributes[(int)ConsumeAttribute.Mp].value;
+
+            //체력바 UI 갱신
+            healthBar.SetCurrentHealth(CurrentHealth);
+        }
+
+        public bool GetCurrentHealthEqualsMaxHealth()
+        {
+            if (CurrentHealth == MaxHealth)
+                return true;
+            else
+                return false;
         }
     }
 }

@@ -126,6 +126,7 @@
     <Compile Include="Assets\2_Scripts\Test\MouseItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\PlayerSkillInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\PopUpMessage.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PopUpMessageMultiSelection.cs" />
     <Compile Include="Assets\2_Scripts\Test\ScreenshotHandler.cs" />
     <Compile Include="Assets\2_Scripts\Test\SelectMenu.cs" />
     <Compile Include="Assets\2_Scripts\Test\SerializableDictionary.cs" />

@@ -283,11 +283,7 @@ namespace SG
         }
         public void SaveDeleteItemToInventory(WeaponItem weaponItem)
         {
-            if(GetItemIsArmed(weaponItem))
-            {
-                Debug.Log("장착중인 아이템은 버릴 수 없다.");
-                return;
-            }
+
 
             for (int i = 0; i < weaponsInventory.Count; i++)
             {
@@ -304,12 +300,6 @@ namespace SG
         }
         public void SaveDeleteItemToInventory(EquipItem equipItem)
         {
-            if (GetItemIsArmed(equipItem))
-            {
-                Debug.Log("장착중인 아이템은 버릴 수 없다.");
-                return;
-            }
-
             for (int i = 0; i < equipmentsInventory[equipItem.itemType].Count; i++)
             {
                 if (equipmentsInventory[equipItem.itemType][i] == equipItem)
@@ -322,11 +312,6 @@ namespace SG
         }
         public void SaveDeleteItemToInventory(ConsumableItem consumableItem, int count)
         {
-            if(GetItemIsArmed(consumableItem))
-            {
-                Debug.Log("장착중인 아이템은 버릴 수 없다.");
-                return;
-            }
 
             for (int i = 0; i < consumableInventory.Count; i++)
             {

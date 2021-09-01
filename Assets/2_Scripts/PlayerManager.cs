@@ -83,6 +83,7 @@ namespace SG
             inputHandler.a_Input = false;
             inputHandler.jump_Input = false;
             inputHandler.menu_Input = false;
+            inputHandler.consume_Input = false;
 
             isSprinting = inputHandler.b_Input;
 

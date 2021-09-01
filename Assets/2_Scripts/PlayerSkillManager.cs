@@ -30,11 +30,13 @@ namespace SG
         private PlayerAttackAnimation playerAttacker;
         private QuickSlotUI quickSlotUI;
         private PlayerInventory playerInventory;
+        private PlayerStats playerStats;
 
         private void Start()
         {
             playerAttacker = GetComponent<PlayerAttackAnimation>();
             playerInventory = GetComponent<PlayerInventory>();
+            playerStats = GetComponent<PlayerStats>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             try
             {
@@ -69,7 +71,7 @@ namespace SG
         public void SetPlayerHUDConsumableSlot(ConsumableItem consumableItem)
         {
             consumableItem_One = consumableItem;
-            quickSlotUI.UpdateQuickSlotUI(consumableItem_One);
+            quickSlotUI.UpdateConsumeSlotUI(consumableItem_One);
         }
 
         public void UseSkill(int skillNum)
@@ -131,6 +133,42 @@ namespace SG
                         }
                     }
                     break;
+            }
+        }
+
+        public void UseConsumeItem()
+        {
+            //플레이어 체력 회복
+            //플레이어 체력이 전부 회복되어있을 경우 아이템 사용 불가.
+            //UI갱신 - 체력바
+            //UI갱신 - 퀵슬롯
+
+            if (consumableBtn_1.isAct == true)
+            {
+                if (playerStats.GetCurrentHealthEqualsMaxHealth())
+                {
+                    Debug.Log("회복할 체력이 없습니다.");
+                    return;
+                }
+                //버튼 쿨타임 활성화
+                consumableBtn_1.OnClick();
+                //플레이어 체력 갱신
+                playerStats.PlusStatsByComsumableItem(consumableItem_One);
+
+                //퀵슬롯 정보 갱신
+                consumableItem_One.quantity -= 1;
+                if (consumableItem_One.quantity == 0) 
+                {
+                    //만약 해당 소비 아이템을 전부 사용했을 경우
+                    //인벤토리에 해당 아이템을 제거하고 null로 퀵슬롯 UI를 갱신
+                    playerInventory.SaveDeleteItemToInventory(consumableItem_One);
+                    consumableItem_One = null;
+                }
+                quickSlotUI.UpdateConsumeSlotUI(consumableItem_One);
+            }
+            else
+            {
+                Debug.Log("아이템 사용 불가");
             }
         }
     }

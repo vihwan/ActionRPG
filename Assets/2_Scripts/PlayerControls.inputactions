@@ -253,6 +253,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "ConsumeItem",
+                    "type": "Button",
+                    "id": "52f37016-a1f4-4e29-aae2-0bd92691aa71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -407,6 +415,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "LockOn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "63254c5e-70c7-4aa3-bdc8-7de53067a8a8",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConsumeItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -106,12 +106,18 @@ namespace SG
             gameObject.SetActive(false);
         }
 
+        public bool GetIsArmed()
+        {
+            return this.isArmed;
+        }
+
         public void SelectSlot()
         {
-            contentList.DeSelectAllSlots();
+            contentList.SetAllSlotsDeselect();
             isSelect = true;
             ChangeBackgroundColor();
         }
+
         public void UpdateSlot(ConsumableItem consumableItem)
         {
             isArmed = consumableItem.isArmed;

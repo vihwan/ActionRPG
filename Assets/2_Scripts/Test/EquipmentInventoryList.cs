@@ -126,9 +126,9 @@ namespace SG
                 count++;
             }
 
-            DeSelectAllSlots();
+            SetAllSlotsDeselect();
         }
-        public void DeSelectAllSlots()
+        public void SetAllSlotsDeselect()
         {
             foreach (EquipmentInventorySlot slot in equipmentInventorySlots)
             {

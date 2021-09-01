@@ -8,7 +8,6 @@ namespace SG
     public class HealthBar : MonoBehaviour
     {
         private Slider slider;
-
         public void Init()
         {
             slider = GetComponent<Slider>();

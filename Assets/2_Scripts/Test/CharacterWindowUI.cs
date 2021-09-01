@@ -139,7 +139,7 @@ namespace SG
         {
             if(weaponInventoryList.gameObject.activeSelf == true)
             {
-                weaponInventoryList.DeSelectAllSlots();
+                weaponInventoryList.SetAllSlotsDeselect();
                 //weaponPanel.playerInventory.SortWeaponInventory(weaponPanel.playerInventory.currentWeapon);
                 OpenWeaponPanel();
                 weaponInventoryList.gameObject.SetActive(false);
@@ -151,7 +151,7 @@ namespace SG
 
             if(equipmentInventoryList.gameObject.activeSelf == true)
             {
-                equipmentInventoryList.DeSelectAllSlots();
+                equipmentInventoryList.SetAllSlotsDeselect();
                 equipmentInventoryList.gameObject.SetActive(false);
                 equipmentPanel.CloseLeftEquipmentInventory();
                 equipmentPanel.openLeftInventoryBtn.gameObject.SetActive(true);

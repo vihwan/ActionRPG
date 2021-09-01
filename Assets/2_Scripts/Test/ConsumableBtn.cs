@@ -13,7 +13,7 @@ namespace SG
         private Image buttonIcon;
         private Image cooldownImage;
         private SkillTimer timer;
-        private bool isAct = false;
+        public bool isAct = false;
 
         [SerializeField]
         private float coolTime = 5f;
@@ -42,9 +42,17 @@ namespace SG
             quantityText = UtilHelper.Find<TMP_Text>(transform, "QuantityText");
         }
 
-        private void SetQuantityText(int count)
+        public void SetQuantityText(ConsumableItem consumableItem)
         {
-            quantityText.text = count.ToString();
+            if (consumableItem != null) 
+            {
+                quantityText.gameObject.SetActive(true);
+                quantityText.text = consumableItem.quantity.ToString();
+            }
+            else
+            {
+                quantityText.gameObject.SetActive(false);
+            }
         }
         private void SetCoolTime(int time)
         {
@@ -75,12 +83,21 @@ namespace SG
                 isAct = true;
                 SetCoolTime(consumableItem.coolTime);
                 SetConsumableBtnIcon(consumableItem);
-                SetQuantityText(consumableItem.quantity);
+                SetQuantityText(consumableItem);
             }
             else
             {
                 isAct = false;
                 SetConsumableBtnIcon(consumableItem);
+                SetQuantityText(consumableItem);
+            }
+        }
+
+        public void UseConsumableItem(ConsumableItem consumableItem)
+        {
+            if(consumableItem != null)
+            {
+
             }
         }
 

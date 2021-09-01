@@ -55,15 +55,38 @@ namespace SG
         }
         public void SetParameter(InventoryContentSlot slot)
         {
-            if(slot.weaponItem != null)
+            if (slot.weaponItem != null)
                 SetParameterInfoPanel(slot.weaponItem);
             else if (slot.equipItem != null)
                 SetParameterInfoPanel(slot.equipItem);
-            else if(slot.consumableItem != null)
+            else if (slot.consumableItem != null)
                 SetParameterInfoPanel(slot.consumableItem);
-            else if(slot.ingredientItem != null)
+            else if (slot.ingredientItem != null)
                 SetParameterInfoPanel(slot.ingredientItem);
         }
+
+        public void SetParameter(Item item, string type)
+        {
+            switch (type)
+            {
+                case "Weapon":
+                    SetParameterInfoPanel(item as WeaponItem);
+                    break;
+                case "Equip":
+                    SetParameterInfoPanel(item as EquipItem);
+                    break;
+                case "Consume":
+                    SetParameterInfoPanel(item as ConsumableItem);
+                    break;
+                case "Ingredient":
+                    SetParameterInfoPanel(item as IngredientItem);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
         private void SetParameterInfoPanel(WeaponItem weaponItem)
         {
             itemName.text = weaponItem.itemName;
@@ -267,7 +290,7 @@ namespace SG
             tMP_Text.fontSize = 28;
         }
         private void SetItemStatusText(TMP_Text tMP_Text, IngredientItem ingredientItem)
-        {    
+        {
             sb.Length = 0;
             AddIngredientText(ingredientItem.kind);
 
@@ -370,7 +393,7 @@ namespace SG
             {
                 default: break;
                 case "광석": sb.Append("사용처 : 대장간"); break;
-                case "소재": 
+                case "소재":
                     sb.Append("사용처 : 캐릭터 육성");
                     sb.AppendLine();
                     sb.Append("사용처 : 아이템 제작");

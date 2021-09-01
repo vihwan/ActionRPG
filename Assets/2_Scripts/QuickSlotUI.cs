@@ -51,7 +51,7 @@ namespace SG
                 UpdateSkillSlotsUI(2, skillManager.playerSkill_Two);
                 UpdateSkillSlotsUI(3, skillManager.playerSkill_Three);
                 UpdateSkillSlotsUI(4, skillManager.playerSkill_Ult);
-                UpdateQuickSlotUI(skillManager.consumableItem_One);
+                UpdateConsumeSlotUI(skillManager.consumableItem_One);
             }
         }
 
@@ -79,7 +79,7 @@ namespace SG
         }
 
         //퀵슬롯 아이콘(ex. 소비템)을 갱신하는 함수
-        public void UpdateQuickSlotUI(ConsumableItem consumableItem)
+        public void UpdateConsumeSlotUI(ConsumableItem consumableItem)
         {
             consumesSlot.SetActiveBtn(consumableItem);
         }
