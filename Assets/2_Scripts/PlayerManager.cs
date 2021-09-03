@@ -55,9 +55,20 @@ namespace SG
             playerLocomotion.HandleJumping();
 
             //CheckForInteractable();
+            CheckOpenUI();
         }
 
-
+        private void CheckOpenUI()
+        {
+/*            if (GUIManager.instance.IsActiveUIWindows())
+            {
+                inputHandler.enabled = false;
+            }
+            else
+            {
+                inputHandler.enabled = true;
+            }*/
+        }
 
         private void FixedUpdate()
         {
@@ -99,6 +110,12 @@ namespace SG
                 playerLocomotion.inAirTimer += Time.deltaTime;
             }
         }
+
+        public void EnableInputHandler()
+        {
+            inputHandler.enabled = false;
+        }
+
 
         //public void CheckForInteractable()
         //{

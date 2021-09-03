@@ -100,7 +100,6 @@ namespace SG
             consumableItem = null;
             ingredientItem = null;
 
-            icon.enabled = false;
             icon.sprite = null;
             isArmed = false;
             gameObject.SetActive(false);

@@ -51,6 +51,7 @@ namespace SG
         public ItemType itemType;
         [TextArea]
         public string itemDescription;
+        public int price;
     }
 
     [System.Serializable]

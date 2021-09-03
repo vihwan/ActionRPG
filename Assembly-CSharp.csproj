@@ -101,6 +101,9 @@
     <Compile Include="Assets\2_Scripts\SerializableDictionary.cs" />
     <Compile Include="Assets\2_Scripts\Skill.cs" />
     <Compile Include="Assets\2_Scripts\Test\InteractNPC.cs" />
+    <Compile Include="Assets\2_Scripts\Test\ShopListSlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\ShopPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Shop_InfoPanel.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterMenuSpringBoard.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterUI_DataPanel.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterUI_EquipmentPanel.cs" />
@@ -315,6 +318,7 @@
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal One Eyed Bat\Read me.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiUVDistortion.cginc" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\Read me.txt" />
+    <None Include="Assets\3_Models\Genshin\요이미야\YoimiyaMMD4.xml" />
     <None Include="Assets\3_Models\Genshin\다이루크\使用规则.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDissolve.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />

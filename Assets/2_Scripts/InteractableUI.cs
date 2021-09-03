@@ -11,8 +11,6 @@ namespace SG
         [SerializeField] private TMP_Text interactText;
         [SerializeField] private GameObject interactionBG;
         [SerializeField] private RawImage interactObjectImage;
-
-
         public TMP_Text InteractText { get => interactText; }
         public GameObject InteractionBG { get => interactionBG; }
 

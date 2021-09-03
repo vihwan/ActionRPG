@@ -108,6 +108,11 @@ namespace SG
 
         public void TickInput(float delta)
         {
+            HandleMenuInput();
+
+            if (guiManager.IsActiveUIWindows())
+                return;
+
             HandleMoveInput(delta);
             HandleRollInput(delta);
             HandleAttackInput(delta);
@@ -115,7 +120,6 @@ namespace SG
             HandleSkillAttackInput(delta);
             HandleInteractingInput();
             HandleJumpingInput();
-            HandleMenuInput();
             HandleLockOnInput();
             HandleConsumeItemInput();
         }

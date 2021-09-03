@@ -27,6 +27,9 @@ namespace SG
     //플레이어가 소지하고 있는 아이템을 저장하고 관리하는 인벤토리 스크립트 입니다.
     public class PlayerInventory : MonoBehaviour
     {
+        [Header("Current Gold")]
+        [SerializeField] private int currentGold;
+
         [Header("Current Equipping")]
         public WeaponItem currentWeapon;
         public WeaponItem unarmedWeapon;
@@ -51,6 +54,17 @@ namespace SG
         private WeaponSlotManager weaponSlotManager;
         private PlayerStats playerStats;
 
+        public int CurrentGold
+        {
+            get => currentGold;
+            private set
+            {
+                currentGold = value;
+                if (currentGold < 0)
+                    currentGold = 0;
+            }
+        }
+
         private void Awake()
         {
             //Default Weapon Set
@@ -69,22 +83,10 @@ namespace SG
             AddEquipmentInventoryListToDictionary();
 
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
+
+            GetGold(99999);
         }
 
-        //private void OnValidate()
-        //{
-        //    if (currentWeapon != null)
-        //        currentWeapon.isArmed = true;
-
-        //    for (int i = 0; i < currentEquipmentSlots.Length; i++)
-        //    {
-        //        if (currentEquipmentSlots[i] != null)
-        //            currentEquipmentSlots[i].isArmed = true;
-        //    }
-
-        //    if (currentConsumable != null)
-        //        currentConsumable.isArmed = true;
-        //}
         private void LoadWeaponInventoryList()
         {
             WeaponItem[] items;
@@ -255,15 +257,96 @@ namespace SG
         }
 
         //아이템 획득 시 처리하는 함수
-        public void SaveGetItemToInventory()
+        public void SaveGetItemToInventory(Item item, int count = 1)
         {
-
+            switch (item.itemType)
+            {
+                case ItemType.Tops: GetItem(item as EquipItem); break;
+                case ItemType.Bottoms: goto case ItemType.Tops;
+                case ItemType.Gloves: goto case ItemType.Tops;
+                case ItemType.Shoes: goto case ItemType.Tops;
+                case ItemType.Accessory: goto case ItemType.Tops;
+                case ItemType.SpecialEquip: goto case ItemType.Tops;
+                case ItemType.Weapon: GetItem(item as WeaponItem); break;
+                case ItemType.Consumable: GetItem(item as ConsumableItem, count); break;
+                case ItemType.Ingredient: GetItem(item as IngredientItem, count); break;
+            }
         }
+        private void GetItem(WeaponItem weaponItem)
+        {
+            weaponsInventory.Add(weaponItem);
+        }
+        private void GetItem(EquipItem equipItem)
+        {
+            switch (equipItem.itemType)
+            {
+                case ItemType.Tops: topsInventory.Add(equipItem); break;
+                case ItemType.Bottoms: bottomsInventory.Add(equipItem); break;
+                case ItemType.Gloves: glovesInventory.Add(equipItem); break;
+                case ItemType.Shoes: shoesInventory.Add(equipItem); break;
+                case ItemType.Accessory: accessoryInventory.Add(equipItem); break;
+                case ItemType.SpecialEquip: specialEquipInventory.Add(equipItem); break;
+            }
+        }
+        private void GetItem(ConsumableItem consumableItem, int count)
+        {
+            //탐색을 돌려서 만약에 같은 이름의 아이템이 이미 있다면, 갯수만 늘리고 종료
+            for (int i = 0; i < consumableInventory.Count; i++)
+            {
+                if (consumableInventory[i].itemName == consumableItem.itemName)
+                {
+                    consumableInventory[i].quantity += count;
+                    return;
+                }
+            }
+
+            //탐색을 돌려도 없을 경우, 새로 아이템을 생성하고 인벤토리에 추가.
+            ConsumableItem newItem = consumableItem;
+            newItem.quantity = count;
+            consumableInventory.Add(newItem);
+        }
+        private void GetItem(IngredientItem ingredientItem, int count)
+        {
+            //탐색을 돌려서 만약에 같은 이름의 아이템이 이미 있다면, 갯수만 늘리고 종료
+            for (int i = 0; i < ingredientInventory.Count; i++)
+            {
+                if (ingredientInventory[i].itemName == ingredientItem.itemName)
+                {
+                    ingredientInventory[i].quantity += count;
+                    return;
+                }
+            }
+
+            //탐색을 돌려도 없을 경우, 새로 아이템을 생성하고 인벤토리에 추가.
+            IngredientItem newItem = ingredientItem;
+            newItem.quantity = count;
+            ingredientInventory.Add(newItem);
+        }
+
+        //골드 획득
+        public void GetGold(int money)
+        {
+            CurrentGold += money;
+        }
+
+        public void UseGold(int money)
+        {
+            CurrentGold -= money;
+        }
+
+        public bool HaveGold(int money)
+        {
+            if (CurrentGold >= money)
+                return true;
+            else
+            {
+                return false;
+            }
+        }
+
 
         //아이템 버릴 시(삭제 시) 처리하는 함수
         //객체 파괴와 동시에 Inventory를 정리
-
-
         #region Delete Items
         public void SaveDeleteItemToInventory(Item item, int count = 0)
         {
@@ -289,7 +372,7 @@ namespace SG
             {
                 if (weaponsInventory[i] == weaponItem)
                 {
-                    
+
                     Destroy(weaponsInventory[i]);
                     weaponsInventory.RemoveAt(i);
                     // weaponsInventory.RemoveAll(item => item = null);

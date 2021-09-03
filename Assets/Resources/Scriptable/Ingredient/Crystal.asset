@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 8
   itemDescription: "\uAC00\uACF5\uB418\uC9C0 \uC54A\uC740 \uC218\uC815\uCCB4. \uC138\uACF5\uC744
     \uD574\uC57C \uC9C4\uC815\uD55C \uAC00\uCE58\uB97C \uC54C \uC218 \uC788\uB2E4."
+  price: 500
   kind: "\uAD11\uC11D"
   quantity: 0
   rarity: 4

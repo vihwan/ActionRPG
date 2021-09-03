@@ -8,6 +8,7 @@ namespace SG
     {
         public float radius = 0.6f;
         public string interactableText;
+        public string shopNameText;
         public bool canInteract;
 
         private GameObject player;
@@ -17,11 +18,11 @@ namespace SG
             player = GameObject.FindGameObjectWithTag("Player");
         }
 
-        private void OnDrawGizmosSelected()
+/*        private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
             Gizmos.DrawWireSphere(transform.position, radius);
-        }
+        }*/
 
         public virtual void Interact(PlayerManager playerManager)
         {

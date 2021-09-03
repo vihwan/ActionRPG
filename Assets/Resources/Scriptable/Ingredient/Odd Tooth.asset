@@ -17,6 +17,7 @@ MonoBehaviour:
   itemType: 8
   itemDescription: "\uB204\uAD70\uAC00\uC758 \uC774\uBE68\uC774\uB2E4. \uADFC\uB370
     \uCC38 \uAE30\uC774\uD558\uAC8C \uC0DD\uACBC\uB2E4."
+  price: 200
   kind: "\uC18C\uC7AC"
   quantity: 0
   rarity: 1

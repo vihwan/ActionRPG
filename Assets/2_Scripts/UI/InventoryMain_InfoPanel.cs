@@ -67,6 +67,8 @@ namespace SG
 
         public void SetParameter(Item item, string type)
         {
+            currentEquipObject.SetActive(false);
+
             switch (type)
             {
                 case "Weapon":
@@ -80,9 +82,6 @@ namespace SG
                     break;
                 case "Ingredient":
                     SetParameterInfoPanel(item as IngredientItem);
-                    break;
-
-                default:
                     break;
             }
         }
