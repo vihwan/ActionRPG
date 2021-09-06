@@ -23,13 +23,11 @@ namespace SG
         private Button closeBtn;
 
         [Header("Need Component"), HideInInspector]
-        internal PlayerInventory playerInventory;
         private InputHandler inputHandler;
 
         public void Init()
         {
-            playerInventory = FindObjectOfType<PlayerInventory>();
-            inputHandler = playerInventory.GetComponent<InputHandler>();
+            inputHandler = FindObjectOfType<InputHandler>();
 
             Transform t = transform.Find("Main Contents");
             titleText = UtilHelper.Find<TMP_Text>(t, "TitleText");
@@ -50,12 +48,12 @@ namespace SG
         public void SetShopPanel(string shopName)
         {
             titleText.text = shopName;
-            userGoldText.text = playerInventory.CurrentGold.ToString();
+            userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
         }
 
         public void UpdateUserGoldText()
         {
-            userGoldText.text = playerInventory.CurrentGold.ToString();
+            userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
         }
         public void CreateItemList(List<Item> itemsList)
         {

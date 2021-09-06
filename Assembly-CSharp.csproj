@@ -100,7 +100,14 @@
     <Compile Include="Assets\2_Scripts\ScreenshotHandler.cs" />
     <Compile Include="Assets\2_Scripts\SerializableDictionary.cs" />
     <Compile Include="Assets\2_Scripts\Skill.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Dialogue.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DialogueChoiceBox.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DialogueManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DialogueTrigger.cs" />
     <Compile Include="Assets\2_Scripts\Test\InteractNPC.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Message_GetItem.cs" />
+    <Compile Include="Assets\2_Scripts\Test\MessagesList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\PopUpGenerator.cs" />
     <Compile Include="Assets\2_Scripts\Test\ShopListSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\ShopPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\Shop_InfoPanel.cs" />

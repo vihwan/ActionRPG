@@ -19,7 +19,7 @@ namespace SG
                 CharacterUI_WeaponPanel weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
                 itemBtn.onClick.AddListener(() => weaponPanel.SetParameter(item));
                 itemBtn.onClick.AddListener(SelectSlot);
-                itemBtn.onClick.AddListener(() => CheckSlotIsCurrentWeapon(weaponInventoryList.playerInventory.currentWeapon));
+                itemBtn.onClick.AddListener(() => CheckSlotIsCurrentWeapon(PlayerInventory.Instance.currentWeapon));
             }
             icon = UtilHelper.Find<Image>(itemBtn.transform, "Image");
 

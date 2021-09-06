@@ -21,6 +21,10 @@ namespace SG
         [SerializeField] private SelectMenu selectMenu;
         [SerializeField] internal WindowPanel windowPanel;
         [SerializeField] internal ShopPanel shopPanel;
+        [SerializeField] public GameObject dialogObject;
+
+        [Header("PopUp Generator")]
+        [SerializeField] internal PopUpGenerator popUpGenerator;
 
 
         // Start is called before the first frame update
@@ -56,6 +60,10 @@ namespace SG
             shopPanel = GetComponentInChildren<ShopPanel>(true);
             if (shopPanel != null)
                 shopPanel.Init();
+
+            popUpGenerator = GetComponent<PopUpGenerator>();
+            if (popUpGenerator != null)
+                popUpGenerator.Init();
 
             CloseSelectMenuWindow();
         }

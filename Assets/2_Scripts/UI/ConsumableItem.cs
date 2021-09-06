@@ -10,7 +10,6 @@ namespace SG
     {
         [Header("Consumable Status")]
         public string kind;
-        public int quantity;
         [Range(1, 5)] public int rarity = 1;
         public int coolTime; //재사용 쿨타임
         public bool isArmed;

@@ -29,13 +29,11 @@ namespace SG
 
         private PlayerAttackAnimation playerAttacker;
         private QuickSlotUI quickSlotUI;
-        private PlayerInventory playerInventory;
         private PlayerStats playerStats;
 
         private void Start()
         {
             playerAttacker = GetComponent<PlayerAttackAnimation>();
-            playerInventory = GetComponent<PlayerInventory>();
             playerStats = GetComponent<PlayerStats>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             try
@@ -52,7 +50,7 @@ namespace SG
                 Debug.LogError(e);
             }
 
-            SetPlayerHUDConsumableSlot(playerInventory.currentConsumable);
+            SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumable);
         }
 
         public void SetPlayerHUDSkillSlot(List<SkillSlot_Current> skillList)
@@ -161,7 +159,11 @@ namespace SG
                 {
                     //만약 해당 소비 아이템을 전부 사용했을 경우
                     //인벤토리에 해당 아이템을 제거하고 null로 퀵슬롯 UI를 갱신
-                    playerInventory.SaveDeleteItemToInventory(consumableItem_One);
+                    bool allDelete = false;
+                    PlayerInventory.Instance.SaveDeleteItemToInventoryConsIngred(consumableItem_One, out allDelete);
+                    if (allDelete.Equals(true))
+                        Debug.Log("인벤토리에서 성공적으로 제거되었습니다.");
+
                     consumableItem_One = null;
                 }
                 quickSlotUI.UpdateConsumeSlotUI(consumableItem_One);

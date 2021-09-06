@@ -16,8 +16,6 @@ namespace SG
         private Transform weaponInventorySlotsParent;
         [SerializeField] private WeaponInventorySlot[] weaponInventorySlots;
 
-        [Header("Need Component")]
-        private PlayerInventory playerInventory;
 
         public void Init()
         {
@@ -37,8 +35,6 @@ namespace SG
                 inventoryWindow.Init();
                 inventoryWindow.gameObject.SetActive(false);
             }
-
-            playerInventory = FindObjectOfType<PlayerInventory>();
         }
 
         public void UpdateUI()
@@ -46,16 +42,16 @@ namespace SG
             #region Weapon Inventory Slot
             for (int i = 0; i < weaponInventorySlots.Length; i++)
             {
-                if (i < playerInventory.weaponsInventory.Count)
+                if (i < PlayerInventory.Instance.weaponsInventory.Count)
                 {
-                    if (weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
+                    if (weaponInventorySlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
                     {
                         Instantiate(Resources.Load<GameObject>("Prefab/InventorySlots/WeaponInventorySlotPrefab")
                                     , weaponInventorySlotsParent);
 
                         weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(true);
                     }
-                    weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
+                    weaponInventorySlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
                 }
                 else
                 {

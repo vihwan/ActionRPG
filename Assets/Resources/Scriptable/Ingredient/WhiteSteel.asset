@@ -19,18 +19,5 @@ MonoBehaviour:
     \uAC00\uBA74 \uBE5B\uC744 \uBC1C\uD560 \uC218 \uC788\uB2E4.\r"
   price: 300
   kind: "\uAD11\uC11D"
-  quantity: 0
+  quantity: 1
   rarity: 2
-  itemAttributes:
-  - attribute: 0
-    value: 0
-  - attribute: 1
-    value: 0
-  - attribute: 2
-    value: 0
-  - attribute: 3
-    value: 0
-  - attribute: 4
-    value: 0
-  - attribute: 5
-    value: 0

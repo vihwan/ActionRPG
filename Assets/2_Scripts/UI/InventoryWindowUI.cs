@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,9 @@ namespace SG
     {
         [Header("SpringBoard")]
         [SerializeField] private InventoryMenuSpringBoard springBoardMenu;
+
+        [Header("Text")]
+        [SerializeField] private TMP_Text userGoldText;
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
@@ -30,6 +34,8 @@ namespace SG
             if (springBoardMenu != null)
                 springBoardMenu.Init();
 
+            userGoldText = UtilHelper.Find<TMP_Text>(transform, "UserGold/priceText");
+
             mainContents = GetComponentInChildren<InventoryMainContents>();
             if (mainContents != null)
                 mainContents.Init();
@@ -45,6 +51,8 @@ namespace SG
             rightArrowBtn = UtilHelper.Find<Button>(transform, "RightArrowBtn");
             if (rightArrowBtn != null)
                 rightArrowBtn.onClick.AddListener(SetActiveRightList);
+
+            PlayerInventory.Instance.AddUpdateGoldText(() => UpdateGoldText());
         }
 
         private void OnEnable()
@@ -52,22 +60,26 @@ namespace SG
             for (int i = 0; i < mainContents.ContentLists.Count; i++)
             {
                 mainContents.ContentLists[i].UpdateUI();
-                if(mainContents.ContentLists[i].inventoryContentSlots.Length != 0)
+                if (mainContents.ContentLists[i].inventoryContentSlots.Length != 0)
                     mainContents.infoPanel.SetParameter(mainContents.ContentLists[i].inventoryContentSlots[0]);
             }
 
+            userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
             mainContents.SetFalseAllContentList();
             springBoardMenu.ChangeSpringButtonColor(springBoardMenu.SpringMenuBtns[0]);
             mainContents.SetActiveContentList(mainContents.WeaponList, true);
             mainContents.infoPanel.SetParameter(mainContents.WeaponList.inventoryContentSlots[0]);
         }
 
-        private void OnDisable()
+        private void UpdateGoldText()
         {
-            playerSkillManager.SetPlayerHUDConsumableSlot(mainContents.playerInventory.currentConsumable);
+            userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
         }
 
-
+        private void OnDisable()
+        {
+            playerSkillManager.SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumable);
+        }
         private void SetActiveLeftList()
         {
             for (int i = 0; i < mainContents.ContentLists.Count; i++)

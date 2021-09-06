@@ -37,7 +37,6 @@ namespace SG
         [SerializeField] internal Button comparisonWeaponBtn;
 
         [Header("Need Component")]
-        [SerializeField] internal PlayerInventory playerInventory;
         private CharacterWindowUI characterWindowUI; //상위 계층 
 
         private StringBuilder sb = new StringBuilder();
@@ -85,9 +84,6 @@ namespace SG
             #endregion
 
             #region Component Initialize
-            playerInventory = FindObjectOfType<PlayerInventory>();
-            if (playerInventory == null)
-                Debug.LogWarning("playerInventory를 찾지 못했습니다.");
 
             characterWindowUI = GetComponentInParent<CharacterWindowUI>();
             #endregion
@@ -97,14 +93,14 @@ namespace SG
 
         public void OnEnable()
         {
-            SetParameter(playerInventory.currentWeapon);
+            SetParameter(PlayerInventory.Instance.currentWeapon);
         }
 
 
         //무기 교체 버튼을 눌렀을 경우 발생하는 이벤트 함수
         private void ChangeWeaponBtnEvent(WeaponItem selectWeapon)
         {
-            playerInventory.ChangeCurrentWeapon(selectWeapon);
+            PlayerInventory.Instance.ChangeCurrentWeapon(selectWeapon);
             SetCurrentStateObjects(selectWeapon.isArmed);
             characterWindowUI.weaponInventoryList.UpdateSlots();
         }
@@ -246,7 +242,7 @@ namespace SG
         {
             canOpenComparisonPanel = !canOpenComparisonPanel;
             comparisonPanel.SetActive(state);
-            SetParameter_Comparision(playerInventory.currentWeapon);
+            SetParameter_Comparision(PlayerInventory.Instance.currentWeapon);
         }
 
         public void CloseComparisonPanel()

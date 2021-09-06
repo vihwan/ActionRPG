@@ -27,13 +27,11 @@ namespace SG
         [SerializeField] private GameObject RareStar;
 
         private InventoryMainContents mainContents;
-        private PlayerInventory playerInventory;
 
         private readonly StringBuilder sb = new StringBuilder();
         public void Init()
         {
             mainContents = GetComponentInParent<InventoryMainContents>();
-            playerInventory = FindObjectOfType<PlayerInventory>();
 
             itemName = UtilHelper.Find<TMP_Text>(transform, "Name");
             itemKind = UtilHelper.Find<TMP_Text>(transform, "Kind");
@@ -161,7 +159,7 @@ namespace SG
             //클릭하면
             //장착중인 아이템표시 변경
             //퀵슬롯에 해당 아이템 등록
-            mainContents.playerInventory.ChangeCurrentConsumable(consumableItem);
+            PlayerInventory.Instance.ChangeCurrentConsumable(consumableItem);
             SetCurrentStateObjects(consumableItem.isArmed);
             mainContents.ConsumableList.UpdateSlots();
         }

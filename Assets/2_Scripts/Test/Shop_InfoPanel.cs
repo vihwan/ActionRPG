@@ -48,20 +48,22 @@ namespace SG
             buyBtn = UtilHelper.Find<Button>(transform, "BuyBtn");
             if (buyBtn != null)
                 buyBtn.onClick.AddListener(null); //해당 아이템 구입
+
+            PlayerInventory.Instance.AddUpdateGoldText(() => shopPanel.UpdateUserGoldText());
         }
         public void SetParameter(Item item)
         {
             switch (item.itemType)
             {
-                case ItemType.Tops:         SetParameterInfoPanel(item as EquipItem);  break;
-                case ItemType.Bottoms:      goto case ItemType.Tops;
-                case ItemType.Gloves:       goto case ItemType.Tops;
-                case ItemType.Shoes:        goto case ItemType.Tops;
-                case ItemType.Accessory:    goto case ItemType.Tops;
+                case ItemType.Tops: SetParameterInfoPanel(item as EquipItem); break;
+                case ItemType.Bottoms: goto case ItemType.Tops;
+                case ItemType.Gloves: goto case ItemType.Tops;
+                case ItemType.Shoes: goto case ItemType.Tops;
+                case ItemType.Accessory: goto case ItemType.Tops;
                 case ItemType.SpecialEquip: goto case ItemType.Tops;
-                case ItemType.Weapon:       SetParameterInfoPanel(item as WeaponItem);          break;
-                case ItemType.Consumable:   SetParameterInfoPanel(item as ConsumableItem);      break;
-                case ItemType.Ingredient:   SetParameterInfoPanel(item as IngredientItem);      break;
+                case ItemType.Weapon: SetParameterInfoPanel(item as WeaponItem); break;
+                case ItemType.Consumable: SetParameterInfoPanel(item as ConsumableItem); break;
+                case ItemType.Ingredient: SetParameterInfoPanel(item as IngredientItem); break;
             }
 
             buyBtn.onClick.RemoveAllListeners();
@@ -69,31 +71,71 @@ namespace SG
         }
         private void OnClickBuyBtn(Item item)
         {
-            //아이템 구매 확인 팝업창
-
-
-            //아이템 획득 : 플레이어 인벤토리에 추가, 골드 소모, 현재 골드 텍스트 업데이트
-            if(shopPanel.playerInventory.HaveGold(item.price))
-            {
-                shopPanel.playerInventory.SaveGetItemToInventory(item);
-                shopPanel.playerInventory.UseGold(item.price);
-                shopPanel.UpdateUserGoldText();
-                SetParameter(item);
-                Debug.Log("아이템 구매 완료");
-            }
-            else
+            //최소 소지 골드 사전 검사
+            if (PlayerInventory.Instance.CurrentGold < item.price)
             {
                 Debug.Log("돈이 없다.");
+                return;
             }
+
+            //아이템 구매 확인 팝업창
+            PopUpMultiSelection popUpMulti =
+                PopUpGenerator.Instance.CreatePopupMultiSelection(this.transform.parent, item, item.itemType, "구매");
+
+            popUpMulti.SetYesCallback(num =>
+            {
+                OpenPopupMessage(item, num, popUpMulti.gameObject);
+            });
+
+            popUpMulti.SetNoCallback(() =>
+            {
+                Destroy(popUpMulti.gameObject);
+            });
         }
+
+        private void OpenPopupMessage(Item item, int num, GameObject popupMulti)
+        {
+            PopUpMessage popUp =
+                PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
+                                                           , "정말 구매하시겠습니까? \n" + item.itemName + ": " + num + "개"
+                                                           , "확인"
+                                                           , "취소");
+            popUp.SetYesCallback(() =>
+            {
+                //아이템 획득 : 플레이어 인벤토리에 추가, 골드 소모, 현재 골드 텍스트 업데이트
+                if (PlayerInventory.Instance.HaveGold(item.price * num))
+                {
+                    PlayerInventory.Instance.SaveGetItemToInventory(item, num);
+                    PlayerInventory.Instance.UseGold(item.price * num);
+                    PlayerInventory.Instance.InvokeUpdateGoldText();
+                    SetParameter(item);
+
+                    Debug.Log("아이템 구매 완료");
+                }
+                else
+                {
+                    Debug.Log("돈이 없다.");
+                }
+
+                Destroy(popupMulti);
+                Destroy(popUp.gameObject);
+            });
+
+            popUp.SetNoCallback(() =>
+            {
+                Destroy(popupMulti);
+                Destroy(popUp.gameObject);
+            });
+        }
+
         private int GetCurrentAmountText(ConsumableItem consumableItem)
         {
             int count = 0;
-            for (int i = 0; i < shopPanel.playerInventory.consumableInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.consumableInventory.Count; i++)
             {
-                if(shopPanel.playerInventory.consumableInventory[i].itemName == consumableItem.itemName)
+                if (PlayerInventory.Instance.consumableInventory[i].itemName == consumableItem.itemName)
                 {
-                    count = shopPanel.playerInventory.consumableInventory[i].quantity;
+                    count = PlayerInventory.Instance.consumableInventory[i].quantity;
                     break;
                 }
             }
@@ -102,11 +144,11 @@ namespace SG
         private int GetCurrentAmountText(IngredientItem ingredientItem)
         {
             int count = 0;
-            for (int i = 0; i < shopPanel.playerInventory.ingredientInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.ingredientInventory.Count; i++)
             {
-                if (shopPanel.playerInventory.ingredientInventory[i].itemName == ingredientItem.itemName)
+                if (PlayerInventory.Instance.ingredientInventory[i].itemName == ingredientItem.itemName)
                 {
-                    count = shopPanel.playerInventory.ingredientInventory[i].quantity;
+                    count = PlayerInventory.Instance.ingredientInventory[i].quantity;
                     break;
                 }
             }

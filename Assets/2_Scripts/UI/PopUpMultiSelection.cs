@@ -146,23 +146,41 @@ namespace SG
         {
             slider.maxValue = amount;
         }
-        public void SetOpenAmountInputPopup(ConsumableItem item)
+        public void SetOpenAmountInputPopup(ConsumableItem item, string tradeType)
         {
-            maxAmount = item.quantity;
             inputField.text = "1";
             slider.value = 1;
-
-            SetSliderMaxValue(item.quantity);
             itemNameText.text = item.itemName;
+
+            if(tradeType.Equals("판매"))
+            {
+                SetSliderMaxValue(item.quantity);
+                maxAmount = item.quantity;
+            }
+            else if (tradeType.Equals("구매"))
+            {
+                int count = PlayerInventory.Instance.CurrentGold / item.price;
+                SetSliderMaxValue(count);
+                maxAmount = count;
+            }
         }
-        public void SetOpenAmountInputPopup(IngredientItem item)
+        public void SetOpenAmountInputPopup(IngredientItem item, string tradeType)
         {
-            maxAmount = item.quantity;
             inputField.text = "1";
             slider.value = 1;
-
-            SetSliderMaxValue(item.quantity);
             itemNameText.text = item.itemName;
+
+            if (tradeType.Equals("판매"))
+            {
+                SetSliderMaxValue(item.quantity);
+                maxAmount = item.quantity;
+            }
+            else if (tradeType.Equals("구매"))
+            {
+                int count = PlayerInventory.Instance.CurrentGold / item.price;
+                SetSliderMaxValue(count);
+                maxAmount = count;
+            }
         }
         public void SetYesCallback(Action<int> okCallback) { OnAmountInputOK += okCallback; }
         public void SetNoCallback(MultiSelectCallBack listener) { noMultiSelectCallBack += listener; }

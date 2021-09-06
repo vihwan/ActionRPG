@@ -11,12 +11,14 @@ namespace SG
         [SerializeField] private TMP_Text textMsg;
         [SerializeField] private TMP_Text yesText;
         [SerializeField] private TMP_Text noText;
+        [SerializeField] private TMP_Text addText;
         [SerializeField] private Button yesBtn;
         [SerializeField] private Button noBtn;
 
         public TMP_Text TextMsg { get => textMsg; set => textMsg = value; }
         public TMP_Text YesText { get => yesText; set => yesText = value; }
         public TMP_Text NoText { get => noText; set => noText = value; }
+        public TMP_Text AddText { get => addText; set => addText = value; }
 
         public delegate void YesNoCallBack();
         private event YesNoCallBack yesCallBack;
@@ -37,14 +39,17 @@ namespace SG
                 noText = UtilHelper.Find<TMP_Text>(noBtn.transform, "NoText");
                 noBtn.onClick.AddListener(OnNo);
             }
+
+            addText = UtilHelper.Find<TMP_Text>(transform, "AddText");
         }
         public void SetYesCallback(YesNoCallBack listener) { yesCallBack += listener; }
         public void SetNoCallback(YesNoCallBack listener) { noCallBack += listener; }
-        public void SetOpenMessagePopup(string textMsg, string yesText, string noText)
+        public void SetOpenMessagePopup(string textMsg, string yesText, string noText, string addText = null)
         {
             this.textMsg.text = textMsg;
             this.yesText.text = yesText;
             this.noText.text = noText;
+            this.addText.text = addText;
         }
         private void OnYes() { yesCallBack?.Invoke(); }
         private void OnNo() { noCallBack?.Invoke(); }

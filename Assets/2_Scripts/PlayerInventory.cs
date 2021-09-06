@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 namespace SG
 {
@@ -27,8 +28,11 @@ namespace SG
     //플레이어가 소지하고 있는 아이템을 저장하고 관리하는 인벤토리 스크립트 입니다.
     public class PlayerInventory : MonoBehaviour
     {
+        public static PlayerInventory Instance;
+
         [Header("Current Gold")]
         [SerializeField] private int currentGold;
+
 
         [Header("Current Equipping")]
         public WeaponItem currentWeapon;
@@ -54,6 +58,9 @@ namespace SG
         private WeaponSlotManager weaponSlotManager;
         private PlayerStats playerStats;
 
+        //Delegate
+        public delegate void UpdateGoldText();
+        private event UpdateGoldText updateGoldText;
         public int CurrentGold
         {
             get => currentGold;
@@ -67,6 +74,8 @@ namespace SG
 
         private void Awake()
         {
+            Instance = this;
+
             //Default Weapon Set
             weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             playerStats = GetComponent<PlayerStats>();
@@ -82,11 +91,15 @@ namespace SG
             //개별 장비 리스트를 딕셔너리에 추가
             AddEquipmentInventoryListToDictionary();
 
-            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
 
-            GetGold(99999);
+            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
+        #region delegate Func
+        public void AddUpdateGoldText(UpdateGoldText listener) { updateGoldText += listener; }
+        public void InvokeUpdateGoldText() { updateGoldText?.Invoke(); }
+
+        #endregion
         private void LoadWeaponInventoryList()
         {
             WeaponItem[] items;
@@ -261,22 +274,25 @@ namespace SG
         {
             switch (item.itemType)
             {
-                case ItemType.Tops: GetItem(item as EquipItem); break;
+                case ItemType.Tops: GetItem(item as EquipItem, count); break;
                 case ItemType.Bottoms: goto case ItemType.Tops;
                 case ItemType.Gloves: goto case ItemType.Tops;
                 case ItemType.Shoes: goto case ItemType.Tops;
                 case ItemType.Accessory: goto case ItemType.Tops;
                 case ItemType.SpecialEquip: goto case ItemType.Tops;
-                case ItemType.Weapon: GetItem(item as WeaponItem); break;
+                case ItemType.Weapon: GetItem(item as WeaponItem, count); break;
                 case ItemType.Consumable: GetItem(item as ConsumableItem, count); break;
                 case ItemType.Ingredient: GetItem(item as IngredientItem, count); break;
             }
+
+            //아이템 팝업 출력
+            PopUpGenerator.Instance.GetMessageGetItemObject(item, count);
         }
-        private void GetItem(WeaponItem weaponItem)
+        private void GetItem(WeaponItem weaponItem, int count = 1)
         {
             weaponsInventory.Add(weaponItem);
         }
-        private void GetItem(EquipItem equipItem)
+        private void GetItem(EquipItem equipItem, int count = 1)
         {
             switch (equipItem.itemType)
             {
@@ -327,6 +343,7 @@ namespace SG
         public void GetGold(int money)
         {
             CurrentGold += money;
+            PopUpGenerator.Instance.GetMessageGetGold(money);
         }
 
         public void UseGold(int money)
@@ -348,23 +365,31 @@ namespace SG
         //아이템 버릴 시(삭제 시) 처리하는 함수
         //객체 파괴와 동시에 Inventory를 정리
         #region Delete Items
-        public void SaveDeleteItemToInventory(Item item, int count = 0)
+        public void SaveDeleteItemToInventory(Item item)
         {
             switch (item.itemType)
             {
-                case ItemType.Tops: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.Bottoms: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.Gloves: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.Shoes: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.Accessory: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.SpecialEquip: SaveDeleteItemToInventory(item as EquipItem); break;
-                case ItemType.Weapon: SaveDeleteItemToInventory(item as WeaponItem); break;
-                case ItemType.Consumable: SaveDeleteItemToInventory(item as ConsumableItem, count); break;
-                case ItemType.Ingredient: SaveDeleteItemToInventory(item as IngredientItem, count); break;
+                case ItemType.Tops:       SaveDeleteItemToInventoryEquip(item as EquipItem); break;
+                case ItemType.Bottoms:      goto case ItemType.Tops;
+                case ItemType.Gloves:       goto case ItemType.Tops;
+                case ItemType.Shoes:        goto case ItemType.Tops;
+                case ItemType.Accessory:    goto case ItemType.Tops;
+                case ItemType.SpecialEquip: goto case ItemType.Tops;
+                case ItemType.Weapon:     SaveDeleteItemToInventoryWeapon(item as WeaponItem); break;
                 default: break;
             }
         }
-        public void SaveDeleteItemToInventory(WeaponItem weaponItem)
+        public void SaveDeleteItemToInventoryConsIngred(Item item, out bool allDelete , int count = 1)
+        {
+            allDelete = false;
+            switch (item.itemType)
+            {
+                case ItemType.Consumable: allDelete = SaveDeleteItemToInventoryConsumable(item as ConsumableItem, count); break;
+                case ItemType.Ingredient: allDelete = SaveDeleteItemToInventoryIngredient(item as IngredientItem, count); break;
+                default: break;
+            }
+        }
+        public void SaveDeleteItemToInventoryWeapon(WeaponItem weaponItem)
         {
 
 
@@ -381,7 +406,7 @@ namespace SG
             }
             Debug.Log("아이템 제거 완료");
         }
-        public void SaveDeleteItemToInventory(EquipItem equipItem)
+        public void SaveDeleteItemToInventoryEquip(EquipItem equipItem)
         {
             for (int i = 0; i < equipmentsInventory[equipItem.itemType].Count; i++)
             {
@@ -393,7 +418,7 @@ namespace SG
                 }
             }
         }
-        public void SaveDeleteItemToInventory(ConsumableItem consumableItem, int count)
+        public bool SaveDeleteItemToInventoryConsumable(ConsumableItem consumableItem, int count)
         {
 
             for (int i = 0; i < consumableInventory.Count; i++)
@@ -407,12 +432,14 @@ namespace SG
                         //consumableInventory.Remove(equipmentsInventory[equipItem.itemType][i]);
                         Destroy(consumableInventory[i]);
                         consumableInventory.RemoveAt(i);
+                        return true;
                     }
-
                 }
             }
+
+            return false;
         }
-        public void SaveDeleteItemToInventory(IngredientItem ingredientItem, int count)
+        public bool SaveDeleteItemToInventoryIngredient(IngredientItem ingredientItem, int count)
         {
             for (int i = 0; i < ingredientInventory.Count; i++)
             {
@@ -425,9 +452,11 @@ namespace SG
                         //ingredientInventory.Remove(equipmentsInventory[equipItem.itemType][i]);
                         Destroy(ingredientInventory[i]);
                         ingredientInventory.RemoveAt(i);
+                        return true;
                     }
                 }
             }
+            return false;
         }
         #endregion
 

@@ -30,5 +30,10 @@ namespace SG
         public int enhanceLevel = 0; //강화 수치
 
         //public SetItem setItem;
+
+        private void OnValidate()
+        {
+            if (quantity != 1) quantity = 1;
+        }
     }
 }

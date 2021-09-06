@@ -27,8 +27,6 @@ namespace SG
         [Header("Text")]
         [SerializeField] private TMP_Text noneText;
 
-        [Header("Need Component"), HideInInspector]
-        internal PlayerInventory playerInventory;
         public List<InventoryMain_ContentList> ContentLists { get => contentLists; private set => contentLists = value; }
         public InventoryMain_ContentList WeaponList { get => weaponList; private set => weaponList = value; }
         public InventoryMain_ContentList TopsList { get => topsList; private set => topsList = value; }
@@ -122,7 +120,6 @@ namespace SG
             if (noneText != null)
                 noneText.gameObject.SetActive(false);
 
-            playerInventory = FindObjectOfType<PlayerInventory>();
         }
 
         public void SetActiveContentList(InventoryMain_ContentList list, bool state)

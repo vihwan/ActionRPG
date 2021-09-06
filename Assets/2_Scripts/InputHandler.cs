@@ -41,10 +41,8 @@ namespace SG
 
         private PlayerControls inputActions;
         private PlayerAttackAnimation playerAttacker;
-        private PlayerInventory playerInventory;
         private PlayerManager playerManager;
         private PlayerSkillManager playerSkillManager;
-        private GUIManager guiManager;
         private CameraHandler cameraHandler;
         private ActiveWeaponObject activeWeaponObject;
 
@@ -67,10 +65,8 @@ namespace SG
             if (playerAttacker == null)
                 Debug.LogWarning("playerAttacker Component is Null");
 
-            playerInventory = GetComponent<PlayerInventory>();
             playerManager = GetComponent<PlayerManager>();
             playerSkillManager = GetComponent<PlayerSkillManager>();
-            guiManager = FindObjectOfType<GUIManager>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
         }
@@ -106,12 +102,29 @@ namespace SG
             inputActions.Disable();
         }
 
+        public void StopMovement()
+        {
+            Horizontal = 0f;
+            Vertical = 0f;
+            MoveAmount = 0f;
+            MouseX = 0f;
+            MouseY = 0f;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+        }
+
         public void TickInput(float delta)
         {
+
+            if (GUIManager.instance.dialogObject.activeSelf.Equals(true))
+                return;
+
             HandleMenuInput();
 
-            if (guiManager.IsActiveUIWindows())
+            if (GUIManager.instance.IsActiveUIWindows())
+            {
+                StopMovement();
                 return;
+            }
 
             HandleMoveInput(delta);
             HandleRollInput(delta);
@@ -173,7 +186,7 @@ namespace SG
                 if (playerManager.canDoCombo)
                 {
                     comboFlag = true;
-                    playerAttacker.HandleWeaponCombo(playerInventory.currentWeapon);
+                    playerAttacker.HandleWeaponCombo(PlayerInventory.Instance.currentWeapon);
                     comboFlag = false;
                 }
                 else
@@ -184,7 +197,7 @@ namespace SG
                     if (playerManager.canDoCombo)
                         return;
 
-                    playerAttacker.HandleLightAttack(playerInventory.currentWeapon);
+                    playerAttacker.HandleLightAttack(PlayerInventory.Instance.currentWeapon);
                 }
             }
 
@@ -257,7 +270,7 @@ namespace SG
         public void HandleMenuFlag()
         {
             menuFlag = !menuFlag;
-            guiManager.SetActiveGUIMenu(menuFlag);
+            GUIManager.instance.SetActiveGUIMenu(menuFlag);
         }
 
         private void HandleLockOnInput()

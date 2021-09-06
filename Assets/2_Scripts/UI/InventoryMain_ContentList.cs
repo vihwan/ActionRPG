@@ -59,6 +59,10 @@ namespace SG
             //첫번째 있는 인벤토리 슬롯을 이전에 선택한 슬롯으로 정하고 선택표시 및 아이템 정보를 출력합니다.
             //선택한 적이 있는 경우, 그 선택한 아이템의 슬롯 표시 및 정보를 출력합니다.
 
+            SortInventoryListToGANADA();
+            itemSort_Dropdown.value = 0;
+            itemSort_Dropdown.RefreshShownValue();
+
             if (beforeSelectSlotItem != null)
             {
                 if (this.gameObject.name == "WeaponList")
@@ -89,10 +93,6 @@ namespace SG
                 {
                     if (inventoryContentSlots[0] != null)
                     {
-                        SortInventoryListToGANADA();
-                        itemSort_Dropdown.value = 0;
-                        itemSort_Dropdown.RefreshShownValue();
-
                         beforeSelectSlot = inventoryContentSlots[0];
                         beforeSelectSlot.isSelect = true;
                         beforeSelectSlot.ChangeBackgroundColor();
@@ -133,9 +133,9 @@ namespace SG
         public void UpdateSlots()
         {
             //List<EquipItem> tempList = playerInventory.equipmentsInventory[selectEquipType];
-            for (int i = 0; i < inventoryMainContents.playerInventory.consumableInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.consumableInventory.Count; i++)
             {
-                inventoryContentSlots[i].UpdateSlot(inventoryMainContents.playerInventory.consumableInventory[i]);
+                inventoryContentSlots[i].UpdateSlot(PlayerInventory.Instance.consumableInventory[i]);
             }
 
             Debug.Log("소비 아이콘 색상 갱신 완료");
@@ -164,9 +164,9 @@ namespace SG
         public void UpdateUIWeapon()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if (inventoryContentSlots.Length < inventoryMainContents.playerInventory.weaponsInventory.Count)
+            if (inventoryContentSlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
             {
-                int diff = inventoryMainContents.playerInventory.weaponsInventory.Count - inventoryContentSlots.Length;
+                int diff = PlayerInventory.Instance.weaponsInventory.Count - inventoryContentSlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<InventoryContentSlot>("Prefabs/InventorySlots/InventoryContentSlotPrefab")
@@ -176,30 +176,30 @@ namespace SG
             }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.weaponsInventory.Count;
+                int diff = inventoryContentSlots.Length - PlayerInventory.Instance.weaponsInventory.Count;
                 for (int i = 0; i < diff; i++)
                 {
                     inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
             }
 
-            if (inventoryMainContents.playerInventory.weaponsInventory.Count == 0)
+            if (PlayerInventory.Instance.weaponsInventory.Count == 0)
             {
                 SetNoneContentList(true);
                 return;
             }
 
             //각 인벤토리 슬롯에 아이템 정보를 추가한다.
-            for (int i = 0; i < inventoryMainContents.playerInventory.weaponsInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
             {
-                if (inventoryMainContents.playerInventory.weaponsInventory[i].isArmed)
+                if (PlayerInventory.Instance.weaponsInventory[i].isArmed)
                 {
-                    inventoryContentSlots[0].AddItem(inventoryMainContents.playerInventory.weaponsInventory[i]);
+                    inventoryContentSlots[0].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
                     continue;
                 }
                 else
                 {
-                    inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.weaponsInventory[i]);
+                    inventoryContentSlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
                 }
             }
 
@@ -208,9 +208,9 @@ namespace SG
         public void UpdateUIEquipment(ItemType itemType)
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if (inventoryContentSlots.Length < inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count)
+            if (inventoryContentSlots.Length < PlayerInventory.Instance.equipmentsInventory[itemType].Count)
             {
-                int diff = inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count - inventoryContentSlots.Length;
+                int diff = PlayerInventory.Instance.equipmentsInventory[itemType].Count - inventoryContentSlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<InventoryContentSlot>("Prefabs/InventorySlots/InventoryContentSlotPrefab")
@@ -220,21 +220,21 @@ namespace SG
             }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count;
+                int diff = inventoryContentSlots.Length - PlayerInventory.Instance.equipmentsInventory[itemType].Count;
                 for (int i = 0; i < diff; i++)
                 {
                     inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
             }
 
-            if (inventoryMainContents.playerInventory.equipmentsInventory[itemType].Count == 0)
+            if (PlayerInventory.Instance.equipmentsInventory[itemType].Count == 0)
             {
                 SetNoneContentList(true);
                 return;
             }
 
             int count = 0;
-            foreach (EquipItem item in inventoryMainContents.playerInventory.equipmentsInventory[itemType])
+            foreach (EquipItem item in PlayerInventory.Instance.equipmentsInventory[itemType])
             {
                 inventoryContentSlots[count].AddItem(item);
                 count++;
@@ -246,9 +246,9 @@ namespace SG
         public void UpdateUIConsumable()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if (inventoryContentSlots.Length < inventoryMainContents.playerInventory.consumableInventory.Count)
+            if (inventoryContentSlots.Length < PlayerInventory.Instance.consumableInventory.Count)
             {
-                int diff = inventoryMainContents.playerInventory.consumableInventory.Count - inventoryContentSlots.Length;
+                int diff = PlayerInventory.Instance.consumableInventory.Count - inventoryContentSlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<InventoryContentSlot>("Prefabs/InventorySlots/InventoryContentSlotPrefab")
@@ -258,29 +258,29 @@ namespace SG
             }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.consumableInventory.Count;
+                int diff = inventoryContentSlots.Length - PlayerInventory.Instance.consumableInventory.Count;
                 for (int i = 0; i < diff; i++)
                 {
                     inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
             }
 
-            if (inventoryMainContents.playerInventory.consumableInventory.Count == 0)
+            if (PlayerInventory.Instance.consumableInventory.Count == 0)
             {
                 SetNoneContentList(true);
                 return;
             }
 
-            for (int i = 0; i < inventoryMainContents.playerInventory.consumableInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.consumableInventory.Count; i++)
             {
-                if (inventoryMainContents.playerInventory.consumableInventory[i].isArmed)
+                if (PlayerInventory.Instance.consumableInventory[i].isArmed)
                 {
-                    inventoryContentSlots[0].AddItem(inventoryMainContents.playerInventory.consumableInventory[i]);
+                    inventoryContentSlots[0].AddItem(PlayerInventory.Instance.consumableInventory[i]);
                     continue;
                 }
                 else
                 {
-                    inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.consumableInventory[i]);
+                    inventoryContentSlots[i].AddItem(PlayerInventory.Instance.consumableInventory[i]);
                 }
             }
 
@@ -289,9 +289,9 @@ namespace SG
         public void UpdateUIIngredient()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if (inventoryContentSlots.Length < inventoryMainContents.playerInventory.ingredientInventory.Count)
+            if (inventoryContentSlots.Length < PlayerInventory.Instance.ingredientInventory.Count)
             {
-                int diff = inventoryMainContents.playerInventory.ingredientInventory.Count - inventoryContentSlots.Length;
+                int diff = PlayerInventory.Instance.ingredientInventory.Count - inventoryContentSlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<InventoryContentSlot>("Prefabs/InventorySlots/InventoryContentSlotPrefab")
@@ -301,22 +301,22 @@ namespace SG
             }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = inventoryContentSlots.Length - inventoryMainContents.playerInventory.ingredientInventory.Count;
+                int diff = inventoryContentSlots.Length - PlayerInventory.Instance.ingredientInventory.Count;
                 for (int i = 0; i < diff; i++)
                 {
                     inventoryContentSlots[inventoryContentSlots.Length - 1 - i].ClearItem();
                 }
             }
 
-            if (inventoryMainContents.playerInventory.ingredientInventory.Count == 0)
+            if (PlayerInventory.Instance.ingredientInventory.Count == 0)
             {
                 SetNoneContentList(true);
                 return;
             }
 
-            for (int i = 0; i < inventoryMainContents.playerInventory.ingredientInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.ingredientInventory.Count; i++)
             {
-                inventoryContentSlots[i].AddItem(inventoryMainContents.playerInventory.ingredientInventory[i]);
+                inventoryContentSlots[i].AddItem(PlayerInventory.Instance.ingredientInventory[i]);
             }
 
             SetNoneContentList(false);
@@ -351,93 +351,102 @@ namespace SG
 
             switch (this.gameObject.name)
             {
-                case "WeaponList": CreatePopupMessage(index); break;
-                case "TopsList": CreatePopupMessage(index); break;
-                case "BottomsList": CreatePopupMessage(index); break;
-                case "GlovesList": CreatePopupMessage(index); break;
-                case "ShoesList": CreatePopupMessage(index); break;
-                case "AccessoryList": CreatePopupMessage(index); break;
-                case "SpecialEquipList": CreatePopupMessage(index); break;
-                case "ConsumableList": CreatePopupAmountInputPopup(index); break;
-                case "IngredientList": CreatePopupAmountInputPopup(index); break;
+                case "WeaponList": OpenPopupMessage(index); break;
+                case "TopsList": OpenPopupMessage(index); break;
+                case "BottomsList": OpenPopupMessage(index); break;
+                case "GlovesList": OpenPopupMessage(index); break;
+                case "ShoesList": OpenPopupMessage(index); break;
+                case "AccessoryList": OpenPopupMessage(index); break;
+                case "SpecialEquipList": OpenPopupMessage(index); break;
+                case "ConsumableList": OpenPopupMultiSelection(index); break;
+                case "IngredientList": OpenPopupMultiSelection(index); break;
                 default: break;
             }
         }
 
         //소비, 재료용 다중선택 팝업
-        private void CreatePopupAmountInputPopup(int index)
+        private void OpenPopupMultiSelection(int index)
         {
-            GameObject popupObj = Instantiate(Resources.Load<GameObject>("Prefabs/MultiSelectionPopup"), this.transform.parent, false);
-            popupObj.SetActive(true);
-
-            PopUpMultiSelection popUpMulti = popupObj.GetComponent<PopUpMultiSelection>();
-            popUpMulti.SetOpenAmountInputPopup(beforeSelectSlotItem as ConsumableItem);
+            PopUpMultiSelection popUpMulti = PopUpGenerator.Instance.CreatePopupMultiSelection(this.transform.parent,
+                                                                       beforeSelectSlotItem,
+                                                                       beforeSelectSlotItem.itemType);
             popUpMulti.SetYesCallback(num =>
             {
-                CreatePopupMessage(index, num, popupObj);
+                OpenPopupMessage(index, num, popUpMulti.gameObject);
             });
             popUpMulti.SetNoCallback(() =>
             {
                 Debug.Log("취소합니다.");
-                Destroy(popupObj);
+                Destroy(popUpMulti.gameObject);
             });
         }
 
         // 무기, 장비용 함수
-        private void CreatePopupMessage(int index)
+        private void OpenPopupMessage(int index)
         {
-            GameObject popupObj = Instantiate(Resources.Load<GameObject>("Prefabs/PopUpMsg"), this.transform.parent, false);
-            popupObj.SetActive(true);
-
-            PopUpMessage popUpMessage = popupObj.GetComponent<PopUpMessage>();
-            popUpMessage.SetOpenMessagePopup("정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName,
-                                             "예스",
-                                             "노");
+            PopUpMessage popUpMessage = PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
+                                              , "정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName
+                                              , "확인"
+                                              , "취소"
+                                              , "※ 버린 아이템은 골드로 환전됩니다.");
             popUpMessage.TextMsg.fontSize -= 3;
-
             popUpMessage.SetYesCallback(() =>
             {
                 Debug.Log(beforeSelectSlotItem.itemName + "를 버립니다.");
-                inventoryMainContents.playerInventory.SaveDeleteItemToInventory(beforeSelectSlotItem);
+
+                PlayerInventory.Instance.SaveDeleteItemToInventory(beforeSelectSlotItem);
+                //버린 아이템을 골드로 환전
+                PlayerInventory.Instance.GetGold(Mathf.FloorToInt(beforeSelectSlotItem.price * 0.5f));
+                PlayerInventory.Instance.InvokeUpdateGoldText();
                 UpdateUI();
+
                 SetIndexMinusOneItemAppear(index);
-                Destroy(popupObj);
+
+                Destroy(popUpMessage.gameObject);
             });
             popUpMessage.SetNoCallback(() =>
             {
                 Debug.Log("취소합니다.");
-                Destroy(popupObj);
+                Destroy(popUpMessage.gameObject);
             });
         }
 
         //소비, 재료용 함수
-        private void CreatePopupMessage(int index, int amount, GameObject popUpMulti)
+        private void OpenPopupMessage(int index, int amount, GameObject popUpMulti)
         {
-            GameObject popupObj = Instantiate(Resources.Load<GameObject>("Prefabs/PopUpMsg"), this.transform.parent, false);
-            popupObj.SetActive(true);
+            PopUpMessage popUpMessage = PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
+                                              , "정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName + ": " + amount + "개"
+                                              , "확인"
+                                              , "취소"
+                                              , "※ 버린 아이템은 골드로 환전됩니다.");
 
-            PopUpMessage popUpMessage = popupObj.GetComponent<PopUpMessage>();
-            popUpMessage.SetOpenMessagePopup("정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName + ": " + amount + "개",
-                                             "예스",
-                                             "노");
             popUpMessage.TextMsg.fontSize -= 3;
-
             popUpMessage.SetYesCallback(() =>
             {
                 Debug.Log(beforeSelectSlotItem.itemName + "를 버립니다.");
-                inventoryMainContents.playerInventory.SaveDeleteItemToInventory(beforeSelectSlotItem, amount);
+                bool allDelete = false;
+                PlayerInventory.Instance.SaveDeleteItemToInventoryConsIngred(beforeSelectSlotItem, out allDelete, amount);
+                //버린 아이템을 골드로 환전
+                PlayerInventory.Instance.GetGold(Mathf.FloorToInt(beforeSelectSlotItem.price * 0.5f * amount));
+                PlayerInventory.Instance.InvokeUpdateGoldText();
                 UpdateUI();
 
-                if(beforeSelectSlotItem == null)
+                //아이템의 전체 삭제 여부에 따라 표시 여부를 다르게 한다.
+                if (allDelete.Equals(true))
                     SetIndexMinusOneItemAppear(index);
+                else
+                {
+                    inventoryContentSlots[index].isSelect = true;
+                    inventoryContentSlots[index].ChangeBackgroundColor();
+                }
 
-                Destroy(popupObj);
+                Destroy(popUpMessage.gameObject);
                 Destroy(popUpMulti);
             });
             popUpMessage.SetNoCallback(() =>
             {
                 Debug.Log("취소합니다.");
-                Destroy(popupObj);
+                Destroy(popUpMessage.gameObject);
                 Destroy(popUpMulti);
             });
         }
@@ -479,39 +488,39 @@ namespace SG
             switch (this.gameObject.name)
             {
                 case "WeaponList":
-                    inventoryMainContents.playerInventory.SortWeaponInventoryListToGANADA();
+                    PlayerInventory.Instance.SortWeaponInventoryListToGANADA();
                     break;
 
                 case "TopsList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.Tops);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.Tops);
                     break;
 
                 case "BottomsList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.Bottoms);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.Bottoms);
                     break;
 
                 case "GlovesList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.Gloves);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.Gloves);
                     break;
 
                 case "ShoesList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.Shoes);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.Shoes);
                     break;
 
                 case "AccessoryList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.Accessory);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.Accessory);
                     break;
 
                 case "SpecialEquipList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToGANADA(ItemType.SpecialEquip);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(ItemType.SpecialEquip);
                     break;
 
                 case "ConsumableList":
-                    inventoryMainContents.playerInventory.SortConsumableInventoryListToGANADA();
+                    PlayerInventory.Instance.SortConsumableInventoryListToGANADA();
                     break;
 
                 case "IngredientList":
-                    inventoryMainContents.playerInventory.SortIngredientInventoryListToGANADA();
+                    PlayerInventory.Instance.SortIngredientInventoryListToGANADA();
                     break;
 
                 default:
@@ -525,39 +534,39 @@ namespace SG
             switch (this.gameObject.name)
             {
                 case "WeaponList":
-                    inventoryMainContents.playerInventory.SortWeaponInventoryListToRarity();
+                    PlayerInventory.Instance.SortWeaponInventoryListToRarity();
                     break;
 
                 case "TopsList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.Tops);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.Tops);
                     break;
 
                 case "BottomsList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.Bottoms);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.Bottoms);
                     break;
 
                 case "GlovesList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.Gloves);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.Gloves);
                     break;
 
                 case "ShoesList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.Shoes);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.Shoes);
                     break;
 
                 case "AccessoryList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.Accessory);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.Accessory);
                     break;
 
                 case "SpecialEquipList":
-                    inventoryMainContents.playerInventory.SortEquipmentInventoryListToRarity(ItemType.SpecialEquip);
+                    PlayerInventory.Instance.SortEquipmentInventoryListToRarity(ItemType.SpecialEquip);
                     break;
 
                 case "ConsumableList":
-                    inventoryMainContents.playerInventory.SortConsumableInventoryListToRarity();
+                    PlayerInventory.Instance.SortConsumableInventoryListToRarity();
                     break;
 
                 case "IngredientList":
-                    inventoryMainContents.playerInventory.SortIngredientInventoryListToRarity();
+                    PlayerInventory.Instance.SortIngredientInventoryListToRarity();
                     break;
 
                 default:

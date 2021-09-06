@@ -13,7 +13,7 @@ namespace SG
 
         private GameObject player;
 
-        private void Start()
+        public virtual void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }

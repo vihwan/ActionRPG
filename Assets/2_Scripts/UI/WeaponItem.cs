@@ -38,6 +38,12 @@ namespace SG
         public string OneHanded_LightAttack2 = "Light_Attack_2";
         public string OneHanded_LightAttack3 = "Light_Attack_3";
         public string OneHanded_HeavyAttack1 = "Heavy_Attack_1";
+
+
+        private void OnValidate()
+        {
+            if(quantity != 1) quantity = 1;
+        }
     }
 }
 

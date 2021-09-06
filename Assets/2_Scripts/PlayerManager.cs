@@ -12,7 +12,7 @@ namespace SG
         private CameraHandler cameraHandler;
         private PlayerLocomotion playerLocomotion;
         private InteractableUI interactableUI;
-        private Interactable interactableObject;
+        [SerializeField] private Interactable interactableObject;
         private AnimationLayerHandler animationLayerHandler;
 
         public bool isInteracting;
@@ -173,7 +173,7 @@ namespace SG
             this.interactableObject.Interact(this);
         }
 
-        public void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.tag == "Interactable")
             {
@@ -187,12 +187,20 @@ namespace SG
             }
         }
 
-        public void OnTriggerExit(Collider other)
+        private void OnTriggerExit(Collider other)
         {
             if (other.gameObject.tag == "Interactable")
             {
                 if (interactableUI.InteractionBG != null)
                     interactableUI.InteractionBG.SetActive(false);
+
+                
+                if(interactableObject != null)
+                {
+                    Interactable interactable = other.GetComponent<Interactable>();
+                    if (interactable == interactableObject)
+                        interactableObject = null;
+                }
             }
         }
     }

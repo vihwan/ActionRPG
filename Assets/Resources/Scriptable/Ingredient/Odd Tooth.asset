@@ -19,18 +19,5 @@ MonoBehaviour:
     \uCC38 \uAE30\uC774\uD558\uAC8C \uC0DD\uACBC\uB2E4."
   price: 200
   kind: "\uC18C\uC7AC"
-  quantity: 0
+  quantity: 1
   rarity: 1
-  itemAttributes:
-  - attribute: 0
-    value: 0
-  - attribute: 1
-    value: 0
-  - attribute: 2
-    value: 0
-  - attribute: 3
-    value: 0
-  - attribute: 4
-    value: 0
-  - attribute: 5
-    value: 0

@@ -14,7 +14,6 @@ namespace SG
         private TMP_Dropdown itemSort_Dropdown;
 
         [Header("Need Component")]
-        internal PlayerInventory playerInventory;
         internal CharacterUI_WeaponPanel weaponPanel;
         public override void Init()
         {
@@ -26,8 +25,6 @@ namespace SG
                 InitDropdown();
                 itemSort_Dropdown.onValueChanged.AddListener(OnClickSortInventoryList);
             }
-
-            playerInventory = FindObjectOfType<PlayerInventory>();
             weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
         }
 
@@ -64,7 +61,7 @@ namespace SG
         {
             for (int i = 0; i < weaponInventorySlots.Length; i++)
             {
-                weaponInventorySlots[i].UpdateSlot(playerInventory.weaponsInventory[i]);
+                weaponInventorySlots[i].UpdateSlot(PlayerInventory.Instance.weaponsInventory[i]);
             }
 
             Debug.Log("무기 아이콘 색상 갱신 완료");
@@ -74,9 +71,9 @@ namespace SG
         public void UpdateUI()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if(weaponInventorySlots.Length < playerInventory.weaponsInventory.Count)
+            if(weaponInventorySlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
             {
-                int diff = playerInventory.weaponsInventory.Count - weaponInventorySlots.Length;
+                int diff = PlayerInventory.Instance.weaponsInventory.Count - weaponInventorySlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
                     Instantiate(Resources.Load<WeaponInventorySlot>("Prefabs/InventorySlots/WeaponInventorySlotPrefab")
@@ -86,7 +83,7 @@ namespace SG
             }       
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = weaponInventorySlots.Length - playerInventory.weaponsInventory.Count;
+                int diff = weaponInventorySlots.Length - PlayerInventory.Instance.weaponsInventory.Count;
                 for (int i = 0; i < diff; i++)
                 {
                     weaponInventorySlots[weaponInventorySlots.Length - 1 - i].ClearInventorySlot();
@@ -94,16 +91,16 @@ namespace SG
             }
            
 
-            for (int i = 0; i < playerInventory.weaponsInventory.Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
             {
-                if (playerInventory.weaponsInventory[i].isArmed)
+                if (PlayerInventory.Instance.weaponsInventory[i].isArmed)
                 {
-                    weaponInventorySlots[0].AddItem(playerInventory.weaponsInventory[i]);
+                    weaponInventorySlots[0].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
                     continue;
                 }
                 else
                 {
-                    weaponInventorySlots[i].AddItem(playerInventory.weaponsInventory[i]);
+                    weaponInventorySlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
                 }
             }
 
@@ -122,20 +119,20 @@ namespace SG
                     break;
             }
 
-            weaponPanel.SetParameter(playerInventory.currentWeapon);
+            weaponPanel.SetParameter(PlayerInventory.Instance.currentWeapon);
             if (weaponPanel.comparisonPanel.activeSelf == true)
                 weaponPanel.comparisonPanel.SetActive(false);
         }
 
         private void SortInventoryListToGANADA()
         {
-            playerInventory.SortWeaponInventoryListToGANADA();
+            PlayerInventory.Instance.SortWeaponInventoryListToGANADA();
             UpdateUI();
         }
 
         private void SortInventoryListToRarity()
         {
-            playerInventory.SortWeaponInventoryListToRarity();
+            PlayerInventory.Instance.SortWeaponInventoryListToRarity();
             UpdateUI();
         }
     }

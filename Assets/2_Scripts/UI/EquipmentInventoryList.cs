@@ -14,7 +14,6 @@ namespace SG
         private TMP_Dropdown itemSort_Dropdown;
 
         [Header("Need Component")]
-        internal PlayerInventory playerInventory;
         internal CharacterUI_EquipmentPanel equipPanel;
 
         public override void Init()
@@ -28,7 +27,6 @@ namespace SG
                 itemSort_Dropdown.onValueChanged.AddListener(OnClickSortInventoryList);
             }
 
-            playerInventory = FindObjectOfType<PlayerInventory>();
             equipPanel = FindObjectOfType<CharacterUI_EquipmentPanel>();
         }
 
@@ -76,22 +74,22 @@ namespace SG
 
         private void SortInventoryListToGANADA()
         {
-            playerInventory.SortEquipmentInventoryListToGANADA(selectEquipType);
+            PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(selectEquipType);
             UpdateUI(selectEquipType);
         }
 
         private void SortInventoryListToRarity()
         {
-            playerInventory.SortEquipmentInventoryListToRarity(selectEquipType);
+            PlayerInventory.Instance.SortEquipmentInventoryListToRarity(selectEquipType);
             UpdateUI(selectEquipType);
         }
 
         public void UpdateSlots()
         {
             //List<EquipItem> tempList = playerInventory.equipmentsInventory[selectEquipType];
-            for (int i = 0; i < playerInventory.equipmentsInventory[selectEquipType].Count; i++)
+            for (int i = 0; i < PlayerInventory.Instance.equipmentsInventory[selectEquipType].Count; i++)
             {
-                equipmentInventorySlots[i].UpdateSlot(playerInventory.equipmentsInventory[selectEquipType][i]);
+                equipmentInventorySlots[i].UpdateSlot(PlayerInventory.Instance.equipmentsInventory[selectEquipType][i]);
             }
 
             Debug.Log("장비 아이콘 색상 갱신 완료");
@@ -100,9 +98,9 @@ namespace SG
         private void UpdateUI(ItemType itemType)
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if (equipmentInventorySlots.Length < playerInventory.equipmentsInventory[itemType].Count)
+            if (equipmentInventorySlots.Length < PlayerInventory.Instance.equipmentsInventory[itemType].Count)
             {
-                int dex = playerInventory.equipmentsInventory[itemType].Count - equipmentInventorySlots.Length;
+                int dex = PlayerInventory.Instance.equipmentsInventory[itemType].Count - equipmentInventorySlots.Length;
                 for (int i = 0; i < dex; i++)
                 {
                     Instantiate(Resources.Load<EquipmentInventorySlot>("Prefabs/InventorySlots/EquipmentInventorySlotPrefab")
@@ -112,7 +110,7 @@ namespace SG
             }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
-                int diff = equipmentInventorySlots.Length - playerInventory.equipmentsInventory[itemType].Count;
+                int diff = equipmentInventorySlots.Length - PlayerInventory.Instance.equipmentsInventory[itemType].Count;
                 for (int i = 0; i < diff; i++)
                 {
                     equipmentInventorySlots[equipmentInventorySlots.Length - 1 - i].ClearInventorySlot();
@@ -120,7 +118,7 @@ namespace SG
             }
 
             int count = 0;
-            foreach (EquipItem item in playerInventory.equipmentsInventory[itemType])
+            foreach (EquipItem item in PlayerInventory.Instance.equipmentsInventory[itemType])
             {
                 equipmentInventorySlots[count].AddItem(item);
                 count++;
