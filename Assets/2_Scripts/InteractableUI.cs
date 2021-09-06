@@ -9,25 +9,29 @@ namespace SG
     public class InteractableUI : MonoBehaviour
     {
         [SerializeField] private TMP_Text interactText;
-        [SerializeField] private GameObject interactionBG;
-        [SerializeField] private RawImage interactObjectImage;
+        [SerializeField] private GameObject interactionPopup;
+        [SerializeField] private Image interactObjectImage;
         public TMP_Text InteractText { get => interactText; }
-        public GameObject InteractionBG { get => interactionBG; }
+        public GameObject InteractionPopup { get => interactionPopup; }
+        public Image InteractObjectImage { get => interactObjectImage; set => interactObjectImage = value; }
 
         public void Init()
         {
-            interactionBG = transform.Find("Interaction Popup").gameObject;
-            if (InteractionBG != null)
+            interactionPopup = transform.Find("Interaction Popup").gameObject;
+            if (InteractionPopup != null)
             {
-                InteractionBG.SetActive(false);
+                InteractionPopup.SetActive(false);
             }
             interactText = GetComponentInChildren<TMP_Text>(true);
-            interactObjectImage = GetComponentInChildren<RawImage>(true);
+
+            InteractObjectImage = UtilHelper.Find<Image>(interactionPopup.transform, "Image");
+            if (interactObjectImage != null)
+                interactObjectImage.preserveAspect = true;
         }
 
         public void SetActiveInteractUI(bool status)
         {
-            interactionBG.SetActive(status);
+            interactionPopup.SetActive(status);
         }
     }
 }

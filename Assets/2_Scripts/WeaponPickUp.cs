@@ -11,8 +11,6 @@ namespace SG
 
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             //PickUp The Weapon and Add It
             PickUpItem(playerManager);
         }

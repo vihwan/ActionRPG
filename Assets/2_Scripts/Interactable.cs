@@ -6,7 +6,10 @@ namespace SG
 {
     public class Interactable : MonoBehaviour
     {
-        public float radius = 0.6f;
+        [Header("Attribute")]
+        public string interactName;
+        public Sprite interactIcon;
+
         public string interactableText;
         public string shopNameText;
         public bool canInteract;
@@ -17,13 +20,6 @@ namespace SG
         {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-
-/*        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, radius);
-        }*/
-
         public virtual void Interact(PlayerManager playerManager)
         {
             //Called when Player Interact

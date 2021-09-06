@@ -1,0 +1,656 @@
+fileFormatVersion: 2
+guid: dc22aae5e2448854e8a61eb2fb42d71a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1945651857295383452
+    second: HaruEstia_Face_0
+  - first:
+      213: -4732199022511157991
+    second: HaruEstia_Face_1
+  - first:
+      213: 849110926382405595
+    second: HaruEstia_Face_2
+  - first:
+      213: -52080375881310729
+    second: HaruEstia_Face_3
+  - first:
+      213: -4997230572243557983
+    second: HaruEstia_Face_4
+  - first:
+      213: -8280857704995846464
+    second: HaruEstia_Face_5
+  - first:
+      213: 5715902210479569215
+    second: HaruEstia_Face_6
+  - first:
+      213: -7232070822277310854
+    second: HaruEstia_Face_7
+  - first:
+      213: 4545685764048771799
+    second: HaruEstia_Face_8
+  - first:
+      213: 1595478734389655684
+    second: HaruEstia_Face_9
+  - first:
+      213: 616452063931996428
+    second: HaruEstia_Face_10
+  - first:
+      213: 1896047931041282800
+    second: HaruEstia_Face_11
+  - first:
+      213: 385909309042460185
+    second: HaruEstia_Face_12
+  - first:
+      213: 8714487434595692054
+    second: HaruEstia_Face_13
+  - first:
+      213: 6745728379428841030
+    second: HaruEstia_Face_14
+  - first:
+      213: 6950571603163474570
+    second: HaruEstia_Face_15
+  - first:
+      213: 270913414101507383
+    second: HaruEstia_Face_16
+  - first:
+      213: 4392861388870110484
+    second: HaruEstia_Face_17
+  - first:
+      213: -4479691581873558379
+    second: HaruEstia_Face_18
+  - first:
+      213: 9039409024430890012
+    second: HaruEstia_Face_19
+  - first:
+      213: 1936184854249361676
+    second: HaruEstia_Face_20
+  - first:
+      213: 8945625298312281902
+    second: HaruEstia_Face_21
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HaruEstia_Face_0
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 544
+        width: 171
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464645db1f7aff4e0800000000000000
+      internalID: -1945651857295383452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_1
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 540
+        width: 180
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91d85c0bf0ad35eb0800000000000000
+      internalID: -4732199022511157991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_2
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 540
+        width: 180
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd71de583e5a8cb00800000000000000
+      internalID: 849110926382405595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_3
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 543
+        width: 184
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fd53df8c29f64ff0800000000000000
+      internalID: -52080375881310729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_4
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 543
+        width: 181
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a163b0654546aab0800000000000000
+      internalID: -4997230572243557983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_5
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 547
+        width: 171
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c68a2a8acb741d80800000000000000
+      internalID: -8280857704995846464
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_6
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 549
+        width: 171
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39318ab6c6f25f40800000000000000
+      internalID: 5715902210479569215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_7
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 287
+        width: 194
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7691bf77e582ab90800000000000000
+      internalID: -7232070822277310854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_8
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 284
+        width: 194
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7da5daa4e15851f30800000000000000
+      internalID: 4545685764048771799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_9
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 283
+        width: 181
+        height: 249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4883cf9a477442610800000000000000
+      internalID: 1595478734389655684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_10
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 286
+        width: 184
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0919b3d2e31e8800800000000000000
+      internalID: 616452063931996428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_11
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 291
+        width: 172
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0fa74de2c8d105a10800000000000000
+      internalID: 1896047931041282800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_12
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 286
+        width: 184
+        height: 253
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9160ef0d8760b5500800000000000000
+      internalID: 385909309042460185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_13
+      rect:
+        serializedVersion: 2
+        x: 1541
+        y: 288
+        width: 172
+        height: 252
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61e6ea2862410f870800000000000000
+      internalID: 8714487434595692054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_14
+      rect:
+        serializedVersion: 2
+        x: 1759
+        y: 288
+        width: 147
+        height: 243
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 646a02f7834ad9d50800000000000000
+      internalID: 6745728379428841030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_15
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 24
+        width: 184
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8ae9702c04657060800000000000000
+      internalID: 6950571603163474570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_16
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 24
+        width: 180
+        height: 259
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73d9864905a72c300800000000000000
+      internalID: 270913414101507383
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_17
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 24
+        width: 184
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41dc127a82496fc30800000000000000
+      internalID: 4392861388870110484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_18
+      rect:
+        serializedVersion: 2
+        x: 789
+        y: 27
+        width: 184
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59c6e1f9d30f4d1c0800000000000000
+      internalID: -4479691581873558379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_19
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 27
+        width: 180
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1cd9a86d9e627d70800000000000000
+      internalID: 9039409024430890012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_20
+      rect:
+        serializedVersion: 2
+        x: 1305
+        y: 27
+        width: 184
+        height: 256
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c015609ddd5beda10800000000000000
+      internalID: 1936184854249361676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HaruEstia_Face_21
+      rect:
+        serializedVersion: 2
+        x: 1542
+        y: 27
+        width: 171
+        height: 250
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2fb6a710de352c70800000000000000
+      internalID: 8945625298312281902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

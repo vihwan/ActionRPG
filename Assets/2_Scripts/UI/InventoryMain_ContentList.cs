@@ -192,15 +192,7 @@ namespace SG
             //각 인벤토리 슬롯에 아이템 정보를 추가한다.
             for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
             {
-                if (PlayerInventory.Instance.weaponsInventory[i].isArmed)
-                {
-                    inventoryContentSlots[0].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
-                    continue;
-                }
-                else
-                {
-                    inventoryContentSlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
-                }
+                inventoryContentSlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
             }
 
             SetNoneContentList(false);
@@ -273,15 +265,7 @@ namespace SG
 
             for (int i = 0; i < PlayerInventory.Instance.consumableInventory.Count; i++)
             {
-                if (PlayerInventory.Instance.consumableInventory[i].isArmed)
-                {
-                    inventoryContentSlots[0].AddItem(PlayerInventory.Instance.consumableInventory[i]);
-                    continue;
-                }
-                else
-                {
-                    inventoryContentSlots[i].AddItem(PlayerInventory.Instance.consumableInventory[i]);
-                }
+                inventoryContentSlots[i].AddItem(PlayerInventory.Instance.consumableInventory[i]);
             }
 
             SetNoneContentList(false);

@@ -8,11 +8,12 @@ namespace SG
 {
     public class InteractNPC : Interactable
     {
+        [Header("Shop Item List")]
         public List<Item> itemLists;
+
         private TextMesh textMesh;
         private DialogueTrigger dialogueTrigger;
-
-        InputHandler inputHandler;
+        private InputHandler inputHandler;
 
         public override void Start()
         {
@@ -35,8 +36,6 @@ namespace SG
         }
         public override void Interact(PlayerManager playerManager)
         {
-            base.Interact(playerManager);
-
             //NPC와 대화 및 메뉴 선택
             TalkNPC(playerManager);
         }

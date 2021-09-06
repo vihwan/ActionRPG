@@ -175,26 +175,26 @@ namespace SG
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Interactable")
+            if (other.gameObject.CompareTag("Interactable"))
             {
                 interactableObject = other.GetComponent<Interactable>();
                 if (InteractableObject.canInteract)
                 {
                     string interactText = InteractableObject.interactableText;
                     interactableUI.InteractText.text = interactText;
-                    interactableUI.InteractionBG.SetActive(true);
+                    interactableUI.InteractObjectImage.sprite = InteractableObject.interactIcon;
+                    interactableUI.InteractionPopup.SetActive(true);
                 }
             }
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Interactable")
+            if (other.gameObject.CompareTag("Interactable"))
             {
-                if (interactableUI.InteractionBG != null)
-                    interactableUI.InteractionBG.SetActive(false);
-
-                
+                if (interactableUI.InteractionPopup != null)
+                    interactableUI.InteractionPopup.SetActive(false);
+        
                 if(interactableObject != null)
                 {
                     Interactable interactable = other.GetComponent<Interactable>();
