@@ -9,7 +9,7 @@ namespace SG
     //각 UI 요소들을 참조하여 초기화하고 각 요소의 활성/비활성을 담당합니다.
     public class GUIManager : MonoBehaviour
     {
-        public static GUIManager instance;
+        public static GUIManager instance; //Singleton
 
         [Header("HUD Windows")]
         [SerializeField] private GameObject hudWindows;
@@ -71,8 +71,8 @@ namespace SG
         public bool IsActiveUIWindows()
         {
             if (selectMenu.gameObject.activeSelf == true ||
-               windowPanel.characterWindow.gameObject.activeSelf == true ||
-               windowPanel.inventoryWindow.gameObject.activeSelf == true ||
+               windowPanel.characterWindowUI.gameObject.activeSelf == true ||
+               windowPanel.inventoryWindowUI.gameObject.activeSelf == true ||
                shopPanel.gameObject.activeSelf == true)
             {
                 return true;
@@ -96,6 +96,7 @@ namespace SG
                 CloseSelectMenuWindow();
                 windowPanel.CloseCharacterWindowPanel();
                 windowPanel.CloseInventoryWindowPanel();
+                windowPanel.CloseEnforceWindowPanel();
                 shopPanel.CloseShopPanel();
             }
         }

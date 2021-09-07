@@ -15,8 +15,9 @@ namespace SG
         public string kind;
         public int currentDurability;
         public int maxDurability;
-        [Range(1, 5)]
-        public int rarity = 1;
+        [Range(0, 5)]
+        public int enforceLevel = 0; //강화 수치
+
         public List<ItemAttribute> itemAttributes = new List<ItemAttribute>()
         {
             new ItemAttribute(){attribute = Attribute.Hp, value = 0 },
@@ -26,6 +27,7 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.CriticalDamage, value = 0},
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
+
 
 
         //나중에 무기에 따라 다르게 설정되도록 프로퍼티로 세팅하는 것이 좋겠다.

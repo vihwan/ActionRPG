@@ -20,24 +20,21 @@ namespace SG {
 
         [SerializeField] private TMP_Text guideText;
 
-        private GUIManager guiManager;
-
         // Start is called before the first frame update
         public void Init()
         {
-            guiManager = GetComponentInParent<GUIManager>();
             characterButton = UtilHelper.Find<Button>(transform, "Select Character");
             if (characterButton != null)
             {
-                characterButton.onClick.AddListener(guiManager.windowPanel.OpenCharacterWindowPanel);
-                characterButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
+                characterButton.onClick.AddListener(GUIManager.instance.windowPanel.OpenCharacterWindowPanel);
+                characterButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
             }
 
             inventoryButton = UtilHelper.Find<Button>(transform, "Select Inventory");    
             if (inventoryButton != null)
             {
-                inventoryButton.onClick.AddListener(guiManager.windowPanel.OpenInventoryWindowPanel);
-                inventoryButton.onClick.AddListener(guiManager.CloseSelectMenuWindow);
+                inventoryButton.onClick.AddListener(GUIManager.instance.windowPanel.OpenInventoryWindowPanel);
+                inventoryButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
             }
 
             worldmapButton = UtilHelper.Find<Button>(transform, "Select WorldMap");

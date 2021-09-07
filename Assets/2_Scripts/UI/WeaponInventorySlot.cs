@@ -56,11 +56,10 @@ namespace SG
             ChangeBackgroundColor();
         }
 
-        public void UpdateSlot(WeaponItem weaponItem)
+        public void UpdateSlotIsArmed(WeaponItem weaponItem)
         {
             isArmed = weaponItem.isArmed;
             ChangeBackgroundColor();
-            Debug.Log(weaponItem.name + "의 isArmed : " + weaponItem.isArmed);
         }
 
         private void CheckSlotIsCurrentWeapon(WeaponItem currentWeapon)

@@ -26,7 +26,6 @@ namespace SG
         [SerializeField] private Button closeBtn;
         [SerializeField] internal Button backBtn;
 
-        [SerializeField] private GUIManager guiManager;
         [SerializeField] private PlayerSkillManager playerSkillManager;
         [SerializeField] private InputHandler inputHandler;
 
@@ -34,7 +33,6 @@ namespace SG
         {
             WindowPanel windowPanel = GetComponentInParent<WindowPanel>();
 
-            guiManager = GetComponentInParent<GUIManager>();
             playerSkillManager = FindObjectOfType<PlayerSkillManager>();
             inputHandler = playerSkillManager.gameObject.GetComponent<InputHandler>();
 

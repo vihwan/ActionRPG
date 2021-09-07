@@ -104,6 +104,13 @@
     <Compile Include="Assets\2_Scripts\Test\DialogueChoiceBox.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueTrigger.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceItemSlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceMaterialSelectList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceMenuSpringBoard.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceUI_RightPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnforceWindowUI.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EquipmentEnforceList.cs" />
     <Compile Include="Assets\2_Scripts\Test\InteractNPC.cs" />
     <Compile Include="Assets\2_Scripts\Test\Message_GetItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\MessagesList.cs" />
@@ -111,6 +118,7 @@
     <Compile Include="Assets\2_Scripts\Test\ShopListSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\ShopPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\Shop_InfoPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\WeaponEnforceList.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterMenuSpringBoard.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterUI_DataPanel.cs" />
     <Compile Include="Assets\2_Scripts\UI\CharacterUI_EquipmentPanel.cs" />

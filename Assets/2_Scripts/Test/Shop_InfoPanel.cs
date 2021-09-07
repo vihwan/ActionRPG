@@ -172,7 +172,7 @@ namespace SG
         {
             itemName.text = equipItem.itemName;
             itemKind.text = equipItem.kind;
-            itemEnhanceLevel.text = "+" + equipItem.enhanceLevel;
+            itemEnhanceLevel.text = "+" + equipItem.enforceLevel;
             itemDurabilityTitle.SetActive(true);
             itemDurability.text = equipItem.maxDurability + " / " + equipItem.maxDurability;
             itemExplain.text = equipItem.itemDescription;

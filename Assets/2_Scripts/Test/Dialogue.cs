@@ -16,6 +16,7 @@ namespace SG
     {
         OpenShop,
         OpenQuest,
+        OpenEnforce,
         EndDialog,
     }
 

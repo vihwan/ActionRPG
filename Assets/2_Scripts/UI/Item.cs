@@ -53,6 +53,7 @@ namespace SG
         [TextArea]
         public string itemDescription;
         public int price;
+        [Range(1, 5)] public int rarity = 1;
     }
 
     [System.Serializable]

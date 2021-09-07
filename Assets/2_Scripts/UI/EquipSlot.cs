@@ -60,14 +60,14 @@ namespace SG
             item = equipItem;
             icon.sprite = equipItem.itemIcon;
             isArmed = equipItem.isArmed;
-            enhanceLevelText.text = "+" + equipItem.enhanceLevel;
+            enhanceLevelText.text = "+" + equipItem.enforceLevel;
 
             if (icon.sprite == null)
                 icon.enabled = false;
             else
                 icon.enabled = true;
 
-            if (equipItem.enhanceLevel == 0)
+            if (equipItem.enforceLevel == 0)
                 enhanceFrame.gameObject.SetActive(false);
             else
                 enhanceFrame.gameObject.SetActive(true);

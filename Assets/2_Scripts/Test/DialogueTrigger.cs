@@ -38,6 +38,11 @@ namespace SG
                     {
 
                     }
+                    else if (dialogueChoices[i].dialogChoiceType.Equals(DialogChoiceType.OpenEnforce))
+                    {
+                        dialogueChoices[i].AddListener(() => interactNPC.OpenEnforceItem());
+                        continue;
+                    }
                     else if (dialogueChoices[i].dialogChoiceType.Equals(DialogChoiceType.EndDialog))
                     {
                         dialogueChoices[i].AddListener(() => interactNPC.EndDialogue());

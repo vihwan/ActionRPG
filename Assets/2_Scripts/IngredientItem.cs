@@ -10,7 +10,6 @@ namespace SG
     {
         [Header("Ingredient Status")]
         public string kind;
-        [Range(1, 5)] public int rarity = 1;
         private void OnValidate()
         {
             if (quantity < 0)

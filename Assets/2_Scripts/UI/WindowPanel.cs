@@ -9,78 +9,65 @@ namespace SG
     public class WindowPanel : MonoBehaviour
     {
         [Header("Window GameObject")]
-        [SerializeField] internal CharacterWindowUI characterWindow;
-        [SerializeField] internal InventoryWindowUI inventoryWindow;
-
-        [Header("Weapon Inventory")]
-        private Transform weaponInventorySlotsParent;
-        [SerializeField] private WeaponInventorySlot[] weaponInventorySlots;
-
+        [SerializeField] internal CharacterWindowUI characterWindowUI;
+        [SerializeField] internal InventoryWindowUI inventoryWindowUI;
+        [SerializeField] internal EnforceWindowUI enforceWindowUI;
 
         public void Init()
         {
-            weaponInventorySlotsParent = transform.Find("Inventory Slot Parent");
-            weaponInventorySlots = GetComponentsInChildren<WeaponInventorySlot>(true);
 
-            characterWindow = UtilHelper.Find<CharacterWindowUI>(transform, "Character Window");
-            if (characterWindow != null)
+            characterWindowUI = UtilHelper.Find<CharacterWindowUI>(transform, "Character Window");
+            if (characterWindowUI != null)
             {
-                characterWindow.Init();
-                characterWindow.gameObject.SetActive(false);
+                characterWindowUI.Init();
+                characterWindowUI.gameObject.SetActive(false);
             }
 
-            inventoryWindow = UtilHelper.Find<InventoryWindowUI>(transform, "Inventory Window");
-            if(inventoryWindow != null)
+            inventoryWindowUI = UtilHelper.Find<InventoryWindowUI>(transform, "Inventory Window");
+            if(inventoryWindowUI != null)
             {
-                inventoryWindow.Init();
-                inventoryWindow.gameObject.SetActive(false);
+                inventoryWindowUI.Init();
+                inventoryWindowUI.gameObject.SetActive(false);
             }
-        }
 
-        public void UpdateUI()
-        {
-            #region Weapon Inventory Slot
-            for (int i = 0; i < weaponInventorySlots.Length; i++)
+            enforceWindowUI = UtilHelper.Find<EnforceWindowUI>(transform, "Enforce Window");
+            if (enforceWindowUI != null)
             {
-                if (i < PlayerInventory.Instance.weaponsInventory.Count)
-                {
-                    if (weaponInventorySlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
-                    {
-                        Instantiate(Resources.Load<GameObject>("Prefab/InventorySlots/WeaponInventorySlotPrefab")
-                                    , weaponInventorySlotsParent);
-
-                        weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(true);
-                    }
-                    weaponInventorySlots[i].AddItem(PlayerInventory.Instance.weaponsInventory[i]);
-                }
-                else
-                {
-                    weaponInventorySlots[i].ClearInventorySlot();
-                }
+                enforceWindowUI.Init();
+                enforceWindowUI.gameObject.SetActive(false);
             }
-            #endregion
         }
 
         #region Panel Window Controls
         public void OpenCharacterWindowPanel()
         {
-            characterWindow.gameObject.SetActive(true);
-            characterWindow.OpenStatusPanel();
+            characterWindowUI.gameObject.SetActive(true);
+            characterWindowUI.OpenStatusPanel();
         }
 
         public void CloseCharacterWindowPanel()
         {
-            characterWindow.gameObject.SetActive(false);
+            characterWindowUI.gameObject.SetActive(false);
         }
 
         public void OpenInventoryWindowPanel()
         {
-            inventoryWindow.gameObject.SetActive(true);
+            inventoryWindowUI.gameObject.SetActive(true);
         }
 
         public void CloseInventoryWindowPanel()
         {
-            inventoryWindow.gameObject.SetActive(false);
+            inventoryWindowUI.gameObject.SetActive(false);
+        }
+
+        public void OpenEnforceWindowPanel()
+        {
+            enforceWindowUI.gameObject.SetActive(true);
+        }
+
+        public void CloseEnforceWindowPanel()
+        {
+            enforceWindowUI.gameObject.SetActive(false);
         }
 
         #endregion

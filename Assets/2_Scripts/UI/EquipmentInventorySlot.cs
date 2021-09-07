@@ -59,7 +59,7 @@ namespace SG
             ChangeBackgroundColor();
             gameObject.SetActive(false);
         }
-        public void UpdateSlot(EquipItem equipItem)
+        public void UpdateSlotIsArmed(EquipItem equipItem)
         {
             isArmed = equipItem.isArmed;
             ChangeBackgroundColor();

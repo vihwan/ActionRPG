@@ -13,6 +13,9 @@ namespace SG
         [SerializeField] internal WeaponInventorySlot[] weaponInventorySlots;
         private TMP_Dropdown itemSort_Dropdown;
 
+        [Header("Prefab")]
+        [SerializeField] private WeaponInventorySlot weaponInventorySlotPrefab;
+
         [Header("Need Component")]
         internal CharacterUI_WeaponPanel weaponPanel;
         public override void Init()
@@ -26,6 +29,8 @@ namespace SG
                 itemSort_Dropdown.onValueChanged.AddListener(OnClickSortInventoryList);
             }
             weaponPanel = FindObjectOfType<CharacterUI_WeaponPanel>();
+
+            weaponInventorySlotPrefab = Resources.Load<WeaponInventorySlot>("Prefabs/InventorySlots/WeaponInventorySlotPrefab");
         }
 
         private void InitDropdown()
@@ -61,7 +66,7 @@ namespace SG
         {
             for (int i = 0; i < weaponInventorySlots.Length; i++)
             {
-                weaponInventorySlots[i].UpdateSlot(PlayerInventory.Instance.weaponsInventory[i]);
+                weaponInventorySlots[i].UpdateSlotIsArmed(PlayerInventory.Instance.weaponsInventory[i]);
             }
 
             Debug.Log("무기 아이콘 색상 갱신 완료");
@@ -71,16 +76,15 @@ namespace SG
         public void UpdateUI()
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
-            if(weaponInventorySlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
+            if (weaponInventorySlots.Length < PlayerInventory.Instance.weaponsInventory.Count)
             {
                 int diff = PlayerInventory.Instance.weaponsInventory.Count - weaponInventorySlots.Length;
                 for (int i = 0; i < diff; i++)
                 {
-                    Instantiate(Resources.Load<WeaponInventorySlot>("Prefabs/InventorySlots/WeaponInventorySlotPrefab")
-                                    , weaponInventorySlotsParent);
+                    Instantiate(weaponInventorySlotPrefab, weaponInventorySlotsParent);
                 }
                 weaponInventorySlots = weaponInventorySlotsParent.GetComponentsInChildren<WeaponInventorySlot>(true);
-            }       
+            }
             else
             { //인벤토리 슬롯이 너무 많아서 잉여분이 생긴다면 파괴시키는 대신 비활성화를 해주는 것이 좋겠다.
                 int diff = weaponInventorySlots.Length - PlayerInventory.Instance.weaponsInventory.Count;
@@ -89,7 +93,7 @@ namespace SG
                     weaponInventorySlots[weaponInventorySlots.Length - 1 - i].ClearInventorySlot();
                 }
             }
-           
+
 
             for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
             {

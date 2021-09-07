@@ -65,6 +65,17 @@ namespace SG
             inputHandler.menuFlag = !inputHandler.menuFlag;
         }
 
+        internal void OpenEnforceItem()
+        {
+            DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
+            dialogueManager.EndDialogue();
+
+            //강화하기 UI를 활성화시킴
+
+            GUIManager.instance.windowPanel.OpenEnforceWindowPanel();
+            inputHandler.menuFlag = !inputHandler.menuFlag;
+        }
+
         internal void EndDialogue()
         {
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();

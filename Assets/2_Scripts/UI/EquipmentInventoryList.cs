@@ -13,6 +13,9 @@ namespace SG
         [SerializeField] internal EquipmentInventorySlot[] equipmentInventorySlots;
         private TMP_Dropdown itemSort_Dropdown;
 
+        [Header("Prefab")]
+        [SerializeField] private EquipmentInventorySlot equipmentInventorySlotPrefab;
+
         [Header("Need Component")]
         internal CharacterUI_EquipmentPanel equipPanel;
 
@@ -28,6 +31,7 @@ namespace SG
             }
 
             equipPanel = FindObjectOfType<CharacterUI_EquipmentPanel>();
+            equipmentInventorySlotPrefab = Resources.Load<EquipmentInventorySlot>("Prefabs/InventorySlots/EquipmentInventorySlotPrefab");
         }
 
         public override void OnEnable()
@@ -89,7 +93,7 @@ namespace SG
             //List<EquipItem> tempList = playerInventory.equipmentsInventory[selectEquipType];
             for (int i = 0; i < PlayerInventory.Instance.equipmentsInventory[selectEquipType].Count; i++)
             {
-                equipmentInventorySlots[i].UpdateSlot(PlayerInventory.Instance.equipmentsInventory[selectEquipType][i]);
+                equipmentInventorySlots[i].UpdateSlotIsArmed(PlayerInventory.Instance.equipmentsInventory[selectEquipType][i]);
             }
 
             Debug.Log("장비 아이콘 색상 갱신 완료");
@@ -103,8 +107,7 @@ namespace SG
                 int dex = PlayerInventory.Instance.equipmentsInventory[itemType].Count - equipmentInventorySlots.Length;
                 for (int i = 0; i < dex; i++)
                 {
-                    Instantiate(Resources.Load<EquipmentInventorySlot>("Prefabs/InventorySlots/EquipmentInventorySlotPrefab")
-                                    , equipmentInventorySlotsParent);
+                    Instantiate(equipmentInventorySlotPrefab, equipmentInventorySlotsParent);
                 }
                 equipmentInventorySlots = equipmentInventorySlotsParent.GetComponentsInChildren<EquipmentInventorySlot>(true);
             }
