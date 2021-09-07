@@ -14,15 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIcon: {fileID: 21300000, guid: df93d674ba4548e42a34db9ece16f692, type: 3}
   itemName: "\uC554\uD751\uC220\uC0AC\uC758 \uC815\uC218"
+  itemType: 5
+  quantity: 1
   itemDescription: "\uC554\uD751\uC220\uC0AC\uC758 \uD798\uC774 \uB2F4\uACA8\uC838
     \uC788\uB294 \uC2EC\uC7A5\r"
+  price: 1
+  rarity: 5
   modelPrefab: {fileID: 0}
   isArmed: 0
-  itemType: 5
   kind: "\uD2B9\uC218\uC7A5\uBE44"
   currentDurability: 15
   maxDurability: 15
-  rarity: 5
+  enforceLevel: 0
   itemAttributes:
   - attribute: 0
     value: 0
@@ -36,4 +39,3 @@ MonoBehaviour:
     value: 40
   - attribute: 5
     value: 0
-  enhanceLevel: 0

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Random = UnityEngine.Random;
 
 namespace SG
 {
@@ -101,6 +101,20 @@ namespace SG
         {
             return 100 * Mathf.Pow(rarity, 2) + 3000;
         }
-
+        internal bool TryEnforceItem()
+        {
+            Debug.Log("현재 강화 성공 확률 : " + successProb);
+            float r = Random.Range(0f, 100f);
+            if(r <= successProb)
+            {
+                Debug.Log("강화 성공");
+                return true;
+            }
+            else
+            {
+                Debug.Log("강화 실패");
+                return false;
+            }
+        }
     }
 }

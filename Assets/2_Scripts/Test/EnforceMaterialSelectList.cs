@@ -11,7 +11,7 @@ namespace SG
     public class EnforceMaterialSelectList : MonoBehaviour
     {
         [Header("Selected Item")]
-        [SerializeField] private Item item;
+        [SerializeField] private Item selectedItem;
 
         [Header("Material Slot")]
         [SerializeField] internal EnforceItemSlot[] enforceItemSlots;
@@ -29,6 +29,7 @@ namespace SG
         [SerializeField] private TMP_Text itemDurability;
         [SerializeField] private Button selectBtn;
         [SerializeField] private readonly int statusFontSize = 32;
+        [SerializeField] private TMP_Text nontListText;
 
 
         [SerializeField] private Button backBtn;
@@ -54,6 +55,8 @@ namespace SG
             itemDurability = UtilHelper.Find<TMP_Text>(materialInfoPanel.transform, "Durability/Text");
             itemRarityTransform = materialInfoPanel.transform.Find("Rarity").transform;
             selectBtn = UtilHelper.Find<Button>(materialInfoPanel.transform, "SelectBtn");
+            nontListText = UtilHelper.Find<TMP_Text>(transform, "NoneListText");
+
 
             backBtn = UtilHelper.Find<Button>(transform, "BackBtn");
             if (backBtn != null)
@@ -62,6 +65,7 @@ namespace SG
             enforceItemSlotPrefab = Resources.Load<EnforceItemSlot>("Prefabs/InventorySlots/EnforceItemSlotPrefab");
             RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
 
+            materialInfoPanel.SetActive(false);
             this.gameObject.SetActive(false);
         }
 
@@ -74,9 +78,12 @@ namespace SG
         public void OpenList(Item item)
         {
             this.gameObject.SetActive(true);
-            this.item = item;
+            this.selectedItem = item;
 
-            if(this.item.itemType == ItemType.Weapon)
+            if (materialInfoPanel.activeSelf.Equals(true))
+                materialInfoPanel.SetActive(false);
+
+            if(this.selectedItem.itemType == ItemType.Weapon)
             {
                 UpdateListWeapon(item as WeaponItem);
             }
@@ -87,23 +94,29 @@ namespace SG
         }
         private void UpdateListWeapon(WeaponItem weaponItem)
         {
-            tempItems.Clear();
             //리스트로 보여줘야할 아이템과 인벤토리 안에 있는 이름이 같은 아이템의 갯수를 구한다.
+            // *주의* 선택한 장비는 리스트에 미포함시켜야한다.
+            // 1. 인벤토리를 탐색하여, 추가해야할 슬롯의 갯수를 구합니다.
+            // 2. 구한 슬롯의 갯수에 따라 아이템 슬롯을 활성화/비활성화 합니다.
+            // 3. 슬롯의 갯수가 0개인지를 확인합니다.
+            // 4. 슬롯의 갯수가 0개가 아니라면, 각 슬롯을 설정하고 버튼 이벤트를 추가합니다.
+
+            tempItems.Clear();
             int slotNum = 0;
             for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
             {
                 if (PlayerInventory.Instance.weaponsInventory[i].itemName == weaponItem.itemName)
                 {
+                    if(PlayerInventory.Instance.weaponsInventory[i] == selectedItem)
+                    {
+                        continue;
+                    }
                     tempItems.Add(PlayerInventory.Instance.weaponsInventory[i]);
                     slotNum++;
                 }
             }
 
-            if(slotNum == 0)
-            {
-                Debug.Log("동일한 아이템이 존재하지 않습니다.");
-                return;
-            }
+
 
             //동일한 아이템의 갯수에 따라 
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -125,34 +138,51 @@ namespace SG
                 }
             }
 
+            //만약 슬롯의 갯수가 0개라면 리턴
+            if (slotNum == 0)
+            {
+                Debug.Log("동일한 아이템이 존재하지 않습니다.");
+                nontListText.gameObject.SetActive(true);
+                return;
+            }
+            else
+                nontListText.gameObject.SetActive(false);
+
             //위의 생성된 슬롯들을 토대로 임시 저장한 리스트에서 가져와 아이템을 세팅
             for (int i = 0; i < slotNum; i++)
             {
-                enforceItemSlots[i].SetEnforceItemSlot(tempItems[i]);
-                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(tempItems[i] as WeaponItem));
+                Item slotItem = tempItems[i];
+                enforceItemSlots[i].SetEnforceItemSlot(slotItem);
+                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(slotItem as WeaponItem));
             }
 
             SetAllSlotsDeselect();
         }
         private void UpdateListEquipment(EquipItem equipItem)
         {
-            tempItems.Clear();
             //리스트로 보여줘야할 아이템과 인벤토리 안에 있는 이름이 같은 아이템의 갯수를 구한다.
+            // *주의* 선택한 장비는 리스트에 미포함시켜야한다.
+            // 1. 인벤토리를 탐색하여, 추가해야할 슬롯의 갯수를 구합니다.
+            // 2. 구한 슬롯의 갯수에 따라 아이템 슬롯을 활성화/비활성화 합니다.
+            // 3. 슬롯의 갯수가 0개인지를 확인합니다.
+            // 4. 슬롯의 갯수가 0개가 아니라면, 각 슬롯을 설정하고 버튼 이벤트를 추가합니다.
+
+            tempItems.Clear();
             int slotNum = 0;
             for (int i = 0; i < PlayerInventory.Instance.equipmentsInventory[equipItem.itemType].Count; i++)
             {
                 if (PlayerInventory.Instance.equipmentsInventory[equipItem.itemType][i].itemName == equipItem.itemName)
                 {
+                    if (PlayerInventory.Instance.equipmentsInventory[equipItem.itemType][i] == selectedItem)
+                    {
+                        continue;
+                    }
+
                     tempItems.Add(PlayerInventory.Instance.equipmentsInventory[equipItem.itemType][i]);
                     slotNum++;
                 }
             }
 
-            if (slotNum == 0)
-            {
-                Debug.Log("동일한 아이템이 존재하지 않습니다.");
-                return;
-            }
 
             //동일한 아이템의 갯수에 따라 
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -174,11 +204,23 @@ namespace SG
                 }
             }
 
+            //만약 슬롯의 갯수가 0개라면 리턴
+            if (slotNum == 0)
+            {
+                Debug.Log("동일한 아이템이 존재하지 않습니다.");
+                nontListText.gameObject.SetActive(true);
+                return;
+            }
+            else
+                nontListText.gameObject.SetActive(false);
+
+
             //위의 생성된 슬롯들을 토대로 임시 저장한 리스트에서 가져와 아이템을 세팅
             for (int i = 0; i < slotNum; i++)
             {
-                enforceItemSlots[i].SetEnforceItemSlot(tempItems[i]);
-                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(tempItems[i] as EquipItem));
+                Item slotItem = tempItems[i];
+                enforceItemSlots[i].SetEnforceItemSlot(slotItem);
+                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(slotItem as EquipItem));
             }
 
             SetAllSlotsDeselect();
@@ -195,6 +237,9 @@ namespace SG
 
         private void SetParameterPanel(WeaponItem weaponItem)
         {
+            if (materialInfoPanel.gameObject.activeSelf.Equals(false))
+                materialInfoPanel.gameObject.SetActive(true);
+
             nameText.text = weaponItem.itemName;
             kindText.text = weaponItem.kind;
             enforceLevelText.text = "+" + weaponItem.enforceLevel;
@@ -204,16 +249,13 @@ namespace SG
             CreateRarityStar(itemRarityTransform, rareStars, weaponItem);
 
             selectBtn.onClick.RemoveAllListeners();
-            selectBtn.onClick.AddListener(OnClickSelectBtn);
+            selectBtn.onClick.AddListener(()=> OnClickSelectBtn(weaponItem));
         }
-
-        private void OnClickSelectBtn()
-        {
-            //enforceWindowUI.enforceUI_RightPanel에 아이템을 추가.
-        }
-
         private void SetParameterPanel(EquipItem equipItem)
         {
+            if (materialInfoPanel.gameObject.activeSelf.Equals(false))
+                materialInfoPanel.gameObject.SetActive(true);
+
             nameText.text = equipItem.itemName;
             kindText.text = equipItem.kind;
             enforceLevelText.text = "+" + equipItem.enforceLevel;
@@ -221,6 +263,17 @@ namespace SG
 
             SetItemStatusText(itemStatus, equipItem);
             CreateRarityStar(itemRarityTransform, rareStars, equipItem);
+
+            selectBtn.onClick.RemoveAllListeners();
+            selectBtn.onClick.AddListener(() => OnClickSelectBtn(equipItem));
+        }
+
+        private void OnClickSelectBtn(Item item)
+        {
+            //enforceWindowUI.enforceUI_RightPanel에 아이템을 추가.
+            Debug.Log("enforceWindowUI.enforceUI_RightPanel 에 아이템을 추가.");
+            enforceWindowUI.enforceUI_RightPanel.SetMaterialSlot(item);
+            this.gameObject.SetActive(false);
         }
 
         private void CreateRarityStar(Transform transform, List<GameObject> rareStarsList, WeaponItem playerWeapon)

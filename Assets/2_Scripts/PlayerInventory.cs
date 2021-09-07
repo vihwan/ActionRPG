@@ -290,18 +290,26 @@ namespace SG
         }
         private void GetItem(WeaponItem weaponItem, int count = 1)
         {
-            weaponsInventory.Add(weaponItem);
+            for (int i = 0; i < count; i++)
+            {
+                WeaponItem newItem = Instantiate(weaponItem);
+                weaponsInventory.Add(newItem);
+            }      
         }
         private void GetItem(EquipItem equipItem, int count = 1)
         {
-            switch (equipItem.itemType)
+            for (int i = 0; i < count; i++)
             {
-                case ItemType.Tops: topsInventory.Add(equipItem); break;
-                case ItemType.Bottoms: bottomsInventory.Add(equipItem); break;
-                case ItemType.Gloves: glovesInventory.Add(equipItem); break;
-                case ItemType.Shoes: shoesInventory.Add(equipItem); break;
-                case ItemType.Accessory: accessoryInventory.Add(equipItem); break;
-                case ItemType.SpecialEquip: specialEquipInventory.Add(equipItem); break;
+                EquipItem newItem = Instantiate(equipItem);
+                switch (equipItem.itemType)
+                {
+                    case ItemType.Tops: topsInventory.Add(newItem); break;
+                    case ItemType.Bottoms: bottomsInventory.Add(newItem); break;
+                    case ItemType.Gloves: glovesInventory.Add(newItem); break;
+                    case ItemType.Shoes: shoesInventory.Add(newItem); break;
+                    case ItemType.Accessory: accessoryInventory.Add(newItem); break;
+                    case ItemType.SpecialEquip: specialEquipInventory.Add(newItem); break;
+                }
             }
         }
         private void GetItem(ConsumableItem consumableItem, int count)
@@ -317,7 +325,7 @@ namespace SG
             }
 
             //탐색을 돌려도 없을 경우, 새로 아이템을 생성하고 인벤토리에 추가.
-            ConsumableItem newItem = consumableItem;
+            ConsumableItem newItem = Instantiate(consumableItem);
             newItem.quantity = count;
             consumableInventory.Add(newItem);
         }
@@ -334,7 +342,7 @@ namespace SG
             }
 
             //탐색을 돌려도 없을 경우, 새로 아이템을 생성하고 인벤토리에 추가.
-            IngredientItem newItem = ingredientItem;
+            IngredientItem newItem = Instantiate(ingredientItem);
             newItem.quantity = count;
             ingredientInventory.Add(newItem);
         }

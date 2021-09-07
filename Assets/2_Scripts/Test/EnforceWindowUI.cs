@@ -84,6 +84,7 @@ namespace SG
         {
             weaponEnforceList.gameObject.SetActive(false);
             equipmentEnforceList.gameObject.SetActive(false);
+            enforceUI_RightPanel.gameObject.SetActive(false);
 
             if (itemType == ItemType.Weapon)
             {

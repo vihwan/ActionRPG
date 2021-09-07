@@ -43,6 +43,7 @@ namespace SG
             if (closeBtn != null)
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag()); //닫기 기능 수행
 
+            PlayerInventory.Instance.AddUpdateGoldText(() => UpdateUserGoldText());
             CloseShopPanel();
         }
         public void SetShopPanel(string shopName)

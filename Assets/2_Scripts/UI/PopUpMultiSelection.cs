@@ -146,6 +146,42 @@ namespace SG
         {
             slider.maxValue = amount;
         }
+        public void SetOpenAmountInputPopup(WeaponItem item, string tradeType)
+        {
+            inputField.text = "1";
+            slider.value = 1;
+            itemNameText.text = item.itemName;
+
+            if (tradeType.Equals("판매"))
+            {
+                SetSliderMaxValue(item.quantity);
+                maxAmount = item.quantity;
+            }
+            else if (tradeType.Equals("구매"))
+            {
+                int count = 5;
+                SetSliderMaxValue(count);
+                maxAmount = count;
+            }
+        }
+        public void SetOpenAmountInputPopup(EquipItem item, string tradeType)
+        {
+            inputField.text = "1";
+            slider.value = 1;
+            itemNameText.text = item.itemName;
+
+            if (tradeType.Equals("판매"))
+            {
+                SetSliderMaxValue(item.quantity);
+                maxAmount = item.quantity;
+            }
+            else if (tradeType.Equals("구매"))
+            {
+                int count = 5;
+                SetSliderMaxValue(count);
+                maxAmount = count;
+            }
+        }
         public void SetOpenAmountInputPopup(ConsumableItem item, string tradeType)
         {
             inputField.text = "1";

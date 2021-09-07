@@ -136,20 +136,20 @@ namespace SG
 
             switch (itemType)
             {
-                case ItemType.Consumable:
-                    popUpMulti.SetOpenAmountInputPopup(item as ConsumableItem, tradeType);
-                    break;
-                case ItemType.Ingredient:
-                    popUpMulti.SetOpenAmountInputPopup(item as IngredientItem, tradeType);
-                    break;
-                default:
-                    Debug.LogWarning("버그남");
-                    break;
+                case ItemType.Tops: popUpMulti.SetOpenAmountInputPopup(item as EquipItem, tradeType);  break;
+                case ItemType.Bottoms:  goto case ItemType.Tops;
+                case ItemType.Gloves:   goto case ItemType.Tops;
+                case ItemType.Shoes:  goto case ItemType.Tops;
+                case ItemType.Accessory:   goto case ItemType.Tops;
+                case ItemType.SpecialEquip:    goto case ItemType.Tops;
+                case ItemType.Weapon:   popUpMulti.SetOpenAmountInputPopup(item as WeaponItem, tradeType);   break;
+                case ItemType.Consumable:   popUpMulti.SetOpenAmountInputPopup(item as ConsumableItem, tradeType);       break;
+                case ItemType.Ingredient:    popUpMulti.SetOpenAmountInputPopup(item as IngredientItem, tradeType);     break;
+                default:     Debug.LogWarning("버그남");     break;
             }
 
             return popUpMulti;
         }
-
 
         //소비, 재료용 함수
         public PopUpMessage CreatePopupMessage(Transform parent, string title, string yesText, string noText, string addText = null)

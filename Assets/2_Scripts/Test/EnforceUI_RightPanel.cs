@@ -23,7 +23,7 @@ namespace SG
         [SerializeField] private Button enforceBtn;
 
         [Header("Selected Material Item")]
-        [SerializeField] private Item selectedItem;
+        [SerializeField] private Item selectMaterialItem;
 
         private StringBuilder sb = new StringBuilder();
         private EnforceWindowUI enforceWindowUI;
@@ -50,22 +50,37 @@ namespace SG
 
         private void OnEnable()
         {
-            if (selectedItem != null)
+            if (selectMaterialItem != null)
                 ClearSelectedItem();
         }
         private void OnClickEnforceBtn()
         {
-            //강화하기 실행
+            Debug.Log("강화하기 실행");
+            if(selectMaterialItem == null)
+            {
+                Debug.LogWarning("강화재료가 없는데 강화를 시도했다.");
+                return;
+            }
+
+            //EnforceManager에서 강화를 시도
+            if (EnforceManager.Instance.TryEnforceItem())
+            {
+                //강화 성공시 실행할 메소드
+            }
+            else
+            {
+                //강화 실패시 실행할 메소드
+            }
         }
         public void SetMaterialSlot(Item item)
         {
-            selectedItem = item;
-            materialSlotIcon.sprite = selectedItem.itemIcon;
+            selectMaterialItem = item;
+            materialSlotIcon.sprite = selectMaterialItem.itemIcon;
             enforceBtn.enabled = true;
         }
         private void ClearSelectedItem()
         {
-            selectedItem = null;
+            selectMaterialItem = null;
             materialSlotIcon.sprite = null;
             materialSlotBtn.onClick.RemoveAllListeners();
             enforceBtn.enabled = false;
@@ -74,6 +89,7 @@ namespace SG
         public void SetRightPanel(Item item)
         {
             EnforceManager.Instance.SetEnforceItem(item);
+            ClearSelectedItem();
 
             if (item.itemType == ItemType.Weapon)
             {

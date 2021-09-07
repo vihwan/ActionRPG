@@ -26,13 +26,10 @@ namespace SG
         [Header("Prefab")]
         [SerializeField] private GameObject RareStar;
 
-        private ShopPanel shopPanel;
         private readonly StringBuilder sb = new StringBuilder();
 
         public void Init()
         {
-            shopPanel = GetComponentInParent<ShopPanel>();
-
             itemName = UtilHelper.Find<TMP_Text>(transform, "Name");
             itemKind = UtilHelper.Find<TMP_Text>(transform, "Kind");
             itemEnhanceLevel = UtilHelper.Find<TMP_Text>(transform, "EnhanceLevel");
@@ -48,8 +45,6 @@ namespace SG
             buyBtn = UtilHelper.Find<Button>(transform, "BuyBtn");
             if (buyBtn != null)
                 buyBtn.onClick.AddListener(null); //해당 아이템 구입
-
-            PlayerInventory.Instance.AddUpdateGoldText(() => shopPanel.UpdateUserGoldText());
         }
         public void SetParameter(Item item)
         {
