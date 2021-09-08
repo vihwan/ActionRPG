@@ -14,6 +14,7 @@ namespace SG
         [SerializeField] private TMP_Text weaponKind;
         [SerializeField] private TMP_Text weaponStatus;
         [SerializeField] private TMP_Text weaponDurability;
+        [SerializeField] private TMP_Text weaponEnforceLevel;
         [SerializeField] private Transform weaponRarityTransform;
         [SerializeField] private GameObject RareStar;
         [SerializeField] private List<GameObject> rareStars;
@@ -26,6 +27,7 @@ namespace SG
         [SerializeField] private TMP_Text weaponKind_Cf;
         [SerializeField] private TMP_Text weaponStatus_Cf;
         [SerializeField] private TMP_Text weaponDurability_Cf;
+        [SerializeField] private TMP_Text weaponEnforceLevel_Cf;
         [SerializeField] private Transform weaponRarityTransform_Cf;
         [SerializeField] private List<GameObject> rareStars_Cf;
         [SerializeField] private TMP_Text weaponExplain_Cf;
@@ -47,6 +49,7 @@ namespace SG
             weaponKind = UtilHelper.Find<TMP_Text>(transform, "UI Background/Kind");
             weaponStatus = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/Text");
             weaponDurability = UtilHelper.Find<TMP_Text>(transform, "UI Background/Durability/Text");
+            weaponEnforceLevel = UtilHelper.Find<TMP_Text>(transform, "UI Background/EnforceLevel");
             weaponRarityTransform = transform.Find("UI Background/Rarity");
             weaponExplain = UtilHelper.Find<TMP_Text>(transform, "UI Background/Explain/ExplainText");
             currentEquipObject = transform.Find("UI Background/CurrentState").gameObject;
@@ -59,6 +62,7 @@ namespace SG
             weaponKind_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Kind");
             weaponStatus_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Status/Text");
             weaponDurability_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Durability/Text");
+            weaponEnforceLevel_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/EnforceLevel");
             weaponRarityTransform_Cf = transform.Find("UI Background Comparison/Rarity");
             weaponExplain_Cf = UtilHelper.Find<TMP_Text>(transform, "UI Background Comparison/Explain/ExplainText");
             #endregion
@@ -170,8 +174,8 @@ namespace SG
 
             SetItemStatusText(weaponStatus, playerWeapon);
 
-            weaponDurability.text =
-                playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
+            weaponDurability.text = playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
+            weaponEnforceLevel.text = playerWeapon.enforceLevel.ToString() + "단계";
 
             CreateRarityStar(weaponRarityTransform, rareStars , playerWeapon);
             weaponExplain.text = playerWeapon.itemDescription;
@@ -191,8 +195,8 @@ namespace SG
 
             SetItemStatusText(weaponStatus_Cf, currentWeapon);
 
-            weaponDurability_Cf.text =
-                currentWeapon.currentDurability.ToString() + " / " + currentWeapon.maxDurability.ToString();
+            weaponDurability_Cf.text = currentWeapon.currentDurability.ToString() + " / " + currentWeapon.maxDurability.ToString();
+            weaponEnforceLevel_Cf.text = currentWeapon.enforceLevel.ToString() + "단계";
 
             CreateRarityStar(weaponRarityTransform_Cf, rareStars_Cf , currentWeapon);
             weaponExplain_Cf.text = currentWeapon.itemDescription;

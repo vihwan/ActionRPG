@@ -15,7 +15,6 @@ namespace SG
         public bool canInteract;
 
         private GameObject player;
-
         public virtual void Start()
         {
             player = GameObject.FindGameObjectWithTag("Player");

@@ -27,14 +27,30 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.CriticalDamage, value = 0},
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
-
-
-
-        //public SetItem setItem;
-
         private void OnValidate()
         {
-            if (quantity != 1) quantity = 1;
+            if (itemType.Equals(ItemType.Weapon) || 
+                itemType.Equals(ItemType.Consumable) ||
+                itemType.Equals(ItemType.Ingredient))
+            {
+                itemType = ItemType.Tops;
+            }
+
+             if (quantity != 1) quantity = 1;
+        }
+        public bool IsMaxEnforceLevel()
+        {
+            if (enforceLevel == 5)
+                return true;
+
+            return false;
+        }
+        public void IncreaseAttribute(int count)
+        {
+            for (int i = 0; i < itemAttributes.Count; i++)
+            {
+                itemAttributes[i].value += count;
+            }
         }
     }
 }

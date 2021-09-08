@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 2465438526482408189}
   - component: {fileID: 1405246298}
   - component: {fileID: 2465438526482408187}
+  - component: {fileID: 1810074811}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -121,9 +122,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1f3c17ba53d6a45a732cdc9922e39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 30
+  healthLevel: 50
   maxHealth: 0
   currentHealth: 0
+--- !u!114 &1810074811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2465438526482408191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 233ef07618af78d4fbc28bb79e0233a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemTable:
+  - item: {fileID: 11400000, guid: afdfc54b18a4ebf47869bd577f1f1bac, type: 2}
+    itemMaxAmount: 20
+    dropChance: 70
+  - item: {fileID: 11400000, guid: 157b51418a1181041a535d38ef5d6b4c, type: 2}
+    itemMaxAmount: 30
+    dropChance: 100
+  - item: {fileID: 11400000, guid: f841ebe5377cfd6449fe4899fa655e16, type: 2}
+    itemMaxAmount: 5
+    dropChance: 5
+  dropItems: []
 --- !u!1 &2465438526892724224
 GameObject:
   m_ObjectHideFlags: 0

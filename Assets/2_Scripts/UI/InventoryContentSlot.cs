@@ -10,6 +10,14 @@ namespace SG
     {
         [SerializeField] private bool isArmed;
         [SerializeField] private TMP_Text quantityText;
+        [SerializeField] private Transform rarityTransform;
+        [SerializeField] private List<GameObject> rareStars;
+        [Header("Prefab")]
+        [SerializeField] private GameObject RareStar;
+
+        [Header("Enforce Image")]
+        [SerializeField] private Image enforceImage;
+        [SerializeField] private TMP_Text enforceText;
 
         [Header("Reference Item")]
         [SerializeField] internal WeaponItem weaponItem;
@@ -31,8 +39,13 @@ namespace SG
                 itemBtn.onClick.AddListener(() => contentList.SetBeforeSelectSlot(this));
                 itemBtn.onClick.AddListener(SelectSlot);
             }
-            icon = UtilHelper.Find<Image>(itemBtn.transform, "Image");
+            icon = UtilHelper.Find<Image>(itemBtn.transform, "ItemIcon");
             quantityText = UtilHelper.Find<TMP_Text>(itemBtn.transform, "QuantityText");
+            rarityTransform = itemBtn.transform.Find("RarityTransform").transform;
+            RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
+
+            enforceImage = UtilHelper.Find<Image>(itemBtn.transform, "EnforceImage");
+            enforceText = UtilHelper.Find<TMP_Text>(enforceImage.transform, "EnforceText");
         }
 
         public void AddItem(WeaponItem weaponItem)
@@ -46,6 +59,9 @@ namespace SG
             isArmed = weaponItem.isArmed;
 
             quantityText.gameObject.SetActive(false);
+            enforceImage.gameObject.SetActive(true);
+            enforceText.text = weaponItem.enforceLevel.ToString();
+            CreateRarityStar(rarityTransform, rareStars, weaponItem);
             ChangeBackgroundColor();
         }
 
@@ -60,6 +76,9 @@ namespace SG
             isArmed = equipItem.isArmed;
 
             quantityText.gameObject.SetActive(false);
+            enforceImage.gameObject.SetActive(true);
+            enforceText.text = equipItem.enforceLevel.ToString();
+            CreateRarityStar(rarityTransform, rareStars, equipItem);
             ChangeBackgroundColor();
         }
 
@@ -75,6 +94,8 @@ namespace SG
 
             quantityText.text = consumableItem.quantity.ToString();
             quantityText.gameObject.SetActive(true);
+            enforceImage.gameObject.SetActive(false);
+            CreateRarityStar(rarityTransform, rareStars, consumableItem);
             ChangeBackgroundColor();
         }
 
@@ -90,7 +111,29 @@ namespace SG
 
             quantityText.text = ingredientItem.quantity.ToString();
             quantityText.gameObject.SetActive(true);
+            enforceImage.gameObject.SetActive(false);
+            CreateRarityStar(rarityTransform, rareStars, ingredientItem);
             ChangeBackgroundColor();
+        }
+
+        private void CreateRarityStar(Transform transform, List<GameObject> rareStarsList, Item item)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+            rareStarsList.Clear();
+
+            int rarityCount = 0;
+            if (rarityCount < item.rarity)
+            {
+                while (rarityCount < item.rarity)
+                {
+                    GameObject star = Instantiate(RareStar, transform);
+                    rareStarsList.Add(star);
+                    rarityCount++;
+                }
+            }
         }
 
         public void ClearItem()

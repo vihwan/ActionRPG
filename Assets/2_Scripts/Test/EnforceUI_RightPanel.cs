@@ -14,6 +14,7 @@ namespace SG
         [SerializeField] private TMP_Text nameText;
         [SerializeField] private TMP_Text enforceLevelText;
         [SerializeField] private TMP_Text statusText;
+        [SerializeField] private GameObject nextStatusObject;
         [SerializeField] private TMP_Text nextStatusText;
         [SerializeField] private TMP_Text nextUpStatusText;
         [SerializeField] private Button materialSlotBtn;
@@ -21,24 +22,33 @@ namespace SG
         [SerializeField] private TMP_Text successProbText;
         [SerializeField] private TMP_Text needGoldText;
         [SerializeField] private Button enforceBtn;
+        [SerializeField] private TMP_Text disableMaxLevelText;
 
-        [Header("Selected Material Item")]
+        [Header("Item")]
+        [SerializeField] private Item currentSelectItem;
         [SerializeField] private Item selectMaterialItem;
 
         private StringBuilder sb = new StringBuilder();
         private EnforceWindowUI enforceWindowUI;
+
+        public Item CurrentSelectItem { get => currentSelectItem; private set => currentSelectItem = value; }
+        public Item SelectMaterialItem { get => selectMaterialItem; private set => selectMaterialItem = value; }
+
+
         public void Init()
         {
             Transform t = transform.Find("UI Background").transform;
             nameText = UtilHelper.Find<TMP_Text>(t, "Name");
             enforceLevelText = UtilHelper.Find<TMP_Text>(t, "EnforceLevel");
             statusText = UtilHelper.Find<TMP_Text>(t, "Status/Text");
+            nextStatusObject = t.Find("NextLevelStatus").gameObject;
             nextStatusText = UtilHelper.Find<TMP_Text>(t, "NextLevelStatus/Text");
             nextUpStatusText = UtilHelper.Find<TMP_Text>(t, "NextLevelStatus/UpStatusText");
             successProbText = UtilHelper.Find<TMP_Text>(t, "SuccessProb");
             needGoldText = UtilHelper.Find<TMP_Text>(t, "NeedGold/priceText");
             materialSlotIcon = UtilHelper.Find<Image>(t, "MaterialSlotBtn/Icon");
             materialSlotBtn = UtilHelper.Find<Button>(t, "MaterialSlotBtn");
+            disableMaxLevelText = UtilHelper.Find<TMP_Text>(t, "DisableTextMaxLevel");
             enforceBtn = UtilHelper.Find<Button>(t, "EnforceBtn");
             if (enforceBtn != null)
                 enforceBtn.onClick.AddListener(OnClickEnforceBtn);
@@ -50,37 +60,38 @@ namespace SG
 
         private void OnEnable()
         {
-            if (selectMaterialItem != null)
-                ClearSelectedItem();
+            if (SelectMaterialItem != null)
+                ClearSelectMaterialItem();
         }
         private void OnClickEnforceBtn()
         {
             Debug.Log("강화하기 실행");
-            if(selectMaterialItem == null)
+            if (SelectMaterialItem == null)
             {
                 Debug.LogWarning("강화재료가 없는데 강화를 시도했다.");
                 return;
             }
 
-            //EnforceManager에서 강화를 시도
-            if (EnforceManager.Instance.TryEnforceItem())
+            //강화 비용이상 소지하고 있다면 강화 가능
+            if (PlayerInventory.Instance.HaveGold(EnforceManager.Instance.EnforceNeedGold))
             {
-                //강화 성공시 실행할 메소드
+                //EnforceManager에서 강화를 시도
+                if (EnforceManager.Instance.TryEnforceItem()) enforceWindowUI.SuccessEnforce();
+                else enforceWindowUI.FailEnforce();
             }
-            else
-            {
-                //강화 실패시 실행할 메소드
-            }
+            else 
+                Debug.Log("<color=#B51717>소지한 골드가 부족합니다.</color>");
+
         }
         public void SetMaterialSlot(Item item)
         {
-            selectMaterialItem = item;
-            materialSlotIcon.sprite = selectMaterialItem.itemIcon;
+            SelectMaterialItem = item;
+            materialSlotIcon.sprite = SelectMaterialItem.itemIcon;
             enforceBtn.enabled = true;
         }
-        private void ClearSelectedItem()
+        internal void ClearSelectMaterialItem()
         {
-            selectMaterialItem = null;
+            SelectMaterialItem = null;
             materialSlotIcon.sprite = null;
             materialSlotBtn.onClick.RemoveAllListeners();
             enforceBtn.enabled = false;
@@ -88,16 +99,20 @@ namespace SG
 
         public void SetRightPanel(Item item)
         {
+            CurrentSelectItem = item;
             EnforceManager.Instance.SetEnforceItem(item);
-            ClearSelectedItem();
+            ClearSelectMaterialItem();
 
-            if (item.itemType == ItemType.Weapon)
+            if (CurrentSelectItem != null)
             {
-                SetRightPanelAsWeapon(item as WeaponItem);
-            }
-            else
-            {
-                SetRightPanelAsEquipment(item as EquipItem);
+                if (CurrentSelectItem.itemType == ItemType.Weapon)
+                {
+                    SetRightPanelAsWeapon(CurrentSelectItem as WeaponItem);
+                }
+                else
+                {
+                    SetRightPanelAsEquipment(CurrentSelectItem as EquipItem);
+                }
             }
         }
         private void SetRightPanelAsWeapon(WeaponItem weaponItem)
@@ -105,30 +120,60 @@ namespace SG
             nameText.text = weaponItem.itemName;
             enforceLevelText.text = "< " + weaponItem.enforceLevel + "단계 >";
             SetitemStatusText(statusText, weaponItem);
-            SetitemStatusText(nextStatusText, weaponItem , isRiseStatus: true);
+            SetitemStatusText(nextStatusText, weaponItem, isRiseStatus: true);
             SetItemUpStatusText(nextUpStatusText, weaponItem);
 
-            SetSuccessProbText();      
+            SetSuccessProbText();
             SetNeedGoldText();
 
-            materialSlotBtn.onClick.RemoveAllListeners();
-            materialSlotBtn.onClick.AddListener(() => OnClickMaterialSlotBtn(weaponItem));
+            /* 최고등급 아이템 구별 */
+            if (weaponItem.IsMaxEnforceLevel())
+            {
+                disableMaxLevelText.gameObject.SetActive(true);
+                materialSlotBtn.gameObject.SetActive(false);
+                nextStatusObject.SetActive(false);
+                nextStatusText.text = null;
+                nextUpStatusText.text = null;
+                successProbText.text = null;
+                needGoldText.text = "0";
+            }
+            else
+            {
+                disableMaxLevelText.gameObject.SetActive(false);
+                nextStatusObject.SetActive(true);
+                materialSlotBtn.gameObject.SetActive(true);
+                materialSlotBtn.onClick.RemoveAllListeners();
+                materialSlotBtn.onClick.AddListener(() => OnClickMaterialSlotBtn(weaponItem));
+            }
         }
-
-
         private void SetRightPanelAsEquipment(EquipItem equipItem)
         {
             nameText.text = equipItem.itemName;
             enforceLevelText.text = "< " + equipItem.enforceLevel + "단계 >";
             SetitemStatusText(statusText, equipItem);
-            SetitemStatusText(nextStatusText, equipItem, isRiseStatus : true);
+            SetitemStatusText(nextStatusText, equipItem, isRiseStatus: true);
             SetItemUpStatusText(nextUpStatusText, equipItem);
 
             SetSuccessProbText();
             SetNeedGoldText();
 
-            materialSlotBtn.onClick.RemoveAllListeners();
-            materialSlotBtn.onClick.AddListener(() => OnClickMaterialSlotBtn(equipItem));
+            /* 최고등급 아이템 구별 */
+            if (equipItem.IsMaxEnforceLevel())
+            {
+                disableMaxLevelText.gameObject.SetActive(true);
+                materialSlotBtn.gameObject.SetActive(false);
+                nextStatusText.text = null;
+                nextUpStatusText.text = null;
+                successProbText.text = null;
+                needGoldText.text = "0";
+            }
+            else
+            {
+                disableMaxLevelText.gameObject.SetActive(false);
+                materialSlotBtn.gameObject.SetActive(true);
+                materialSlotBtn.onClick.RemoveAllListeners();
+                materialSlotBtn.onClick.AddListener(() => OnClickMaterialSlotBtn(equipItem));
+            }
         }
 
         private void OnClickMaterialSlotBtn(Item item)
@@ -136,7 +181,6 @@ namespace SG
             //Enforce Material List를 열기
             enforceWindowUI.enforceMaterialSelectList.OpenList(item);
         }
-
         private void SetSuccessProbText()
         {
             successProbText.text = "성공확률 : " + EnforceManager.Instance.SuccessProb + "%";
@@ -144,7 +188,13 @@ namespace SG
         private void SetNeedGoldText()
         {
             needGoldText.text = EnforceManager.Instance.EnforceNeedGold.ToString();
+            if (PlayerInventory.Instance.HaveGold(EnforceManager.Instance.EnforceNeedGold))
+                needGoldText.color = Color.white;
+            else
+                needGoldText.color = Color.red;
         }
+
+        #region SetStatus Text Functions 
         private void SetitemStatusText(TMP_Text tmpText, WeaponItem weaponItem, bool isRiseStatus = false)
         {
             sb.Length = 0;
@@ -250,7 +300,7 @@ namespace SG
         }
         private void AddUpStatusText(int value, bool isPercent = false)
         {
-            if(value > 0)
+            if (value > 0)
             {
                 if (sb.Length > 0)
                     sb.AppendLine();
@@ -262,6 +312,8 @@ namespace SG
                 sb.Append(")");
             }
         }
+
+        #endregion
     }
 
 }

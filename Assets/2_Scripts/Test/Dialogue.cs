@@ -18,6 +18,7 @@ namespace SG
         OpenQuest,
         OpenEnforce,
         EndDialog,
+        GetMoney, //디버그용
     }
 
     [System.Serializable]

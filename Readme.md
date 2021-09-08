@@ -101,35 +101,51 @@ Resources 폴더에 Fonts 폴더 생성
 
 **Memo**
 
- <Inventory Menu 제작중>
+ 
+<생성한 클래스>
 
-	1) SpringBoardMenu
+- EnforceManager
 
-	- 무기, 상의, 하의, 장갑, 신발, 악세사리, 특수장비, 소비, 재료
-	- 버튼 클릭 표시
+	강화 수치에 따른 확률 조정, 필요 골드, 상승 수치 등을 관리하는 매니저
+	싱글톤으로 선언
+	강화확률 그래프 : https://www.desmos.com/calculator/l4gti3ecyu?lang=ko
 
-	2) CloseBtn
+- EnforceWindowUI
 
-	- 닫기 버튼. 클릭하면 윈도우 메뉴 전체가 닫힘
+	GUIManager의 하위 오브젝트로, 강화와 관련된 UI들을 통솔하는 클래스
 
-	3) Left,Right Arrow Btn
+- WeaponEnforceList : InventoryList
+- EquipmentEnforceList : InventoryList
 
-	- 클릭하면, 현재 표시중인 List를 false 다음 List 목록을 true
+	무기, 장비 강화 리스트를 출력하는 클래스. EnforceItemSlot을 활용하여 리스트를 보여준다.
 
-	4) InventoryContentSlotPrefab
+- EnforceItemSlot
 
-	- Main Contents의 리스트 밑에 생성되는 아이템슬롯 칸
-	- 아이템 정보를 외부에서 받아와 저장.
+	아이템 정보
+	아이템 아이콘
+	아이템 레어도 이미지
+	아이템 강화 수치 텍스트
+	아이템 클릭 이벤트
+	강화제한 이미지
+	강화제한 이미지 텍스트
 
-	5) Main Contents
+	위의 내용을 담은 프리팹
 
-	- 각 버튼에 해당하는 목록들을 생성
 
-		WeaponList, TopsList, BottomsList, GlovesList, ShoesList, AccessoryList, SpecialEquipList, ConsumableList, IngredientList
+- Enforce_SpringBoardMenu
 
-	- Info Background
-		
-		각 목록에 생성되는 ContentSlot의 정보를 받아 표시하는 정보창
+	버튼 : 무기, 장비들 => 클릭하면 해당 리스트가 출력되도록 하는 클래스
+
+- Enforce_InfoPanel
+
+	EnforceItemSlot을 클릭하면, 해당 아이템의 강화 수치 및
+	스테이터스 전 후 비교 표시를 위 / 아래로 나눠서 표시
+	빈슬롯 버튼 아이콘
+
+- Enforce Material List
+
+	InfoPanel의 빈 슬롯 버튼 아이콘을 클릭하면 나오는 재료 선택 리스트 클래스
+	같은 동일한 아이템
 
 //추후 생각
 
@@ -144,34 +160,24 @@ Resources 폴더에 Fonts 폴더 생성
 
 
 
-
-
 -------------------------------
 
 ## Last Update
 
-## 2021.09.06 (월)
+## 2021.09.08 (수)
 
 < UI/UX 명세 확인 및 제작 >
 
 1. 아이템 강화
 
-- (완료) 아이템 강화 UI를 배치
-- (완료) EnforceItemSlot에 아이템 레어도 표시를 추가
-- (완료) 강화 전용 NPC에게 강화하기 버튼을 클릭
-- (완료) SpringBoard 클릭을 통해 리스트 전환하기 및 리스트 업데이트
-- (완료) LeftPanel 인벤토리 리스트 (무기,상의,하의,장갑,신발,악세사리,특수장비)에서 아이템을 선택
-- (완료) 선택한 아이템의 정보가 오른쪽 Panel에 출력 및 동일한 아이템을 집어 넣으라는 빈슬롯이 생김
-- (완료) 아이템 강화 전과 후의 Info를 보여줌
-- (완료) 빈슬롯을 누르면, 클릭한 아이템과 동일한 아이템(재료로 사용할 아이템) 리스트를 화면에 보여줌
-- (완료) 사용할 아이템을 사용하면, 그 리스트를 끄고 재료 슬롯에 아이템이 들어감. 이에 따라 강화버튼이 활성화됨.
-- 강화버튼을 누르면, 강화 실행.
-- 아이템이 강화되면 강화되었다는 메시지와 함께, 강화 결과물을 보여줌.
-- 강화에 실패하면, 강화가 실패되었다는 메시지와 함께, 강화 실패 결과물을 보여줌.
+- (완료) 강화버튼을 누르면, 강화 실행.
+- (완료) 아이템이 강화되면 강화되었다는 메시지와 함께, 강화 결과물을 보여줌.
+- (완료)강화에 실패하면, 강화가 실패되었다는 메시지와 함께, 강화 실패 결과물을 보여줌.
 
 > - 강화 성공 시
 
 강화 성공 이펙트(애니메이션) 실행
+강화에 사용된 골드 사용 및 업데이트
 강화한 아이템의 스테이터스 변경
 소재로 사용한 아이템 삭제
 WeaponEnforceList, EquipmentEnforceList 업데이트
@@ -180,76 +186,65 @@ EnforceRightPanel 업데이트
 > - 강화 실패 시
 
 강화 성공 이펙트(애니메이션) 실행
+강화에 사용된 골드 사용 및 업데이트
 소재로 사용한 아이템 삭제
 WeaponEnforceList, EquipmentEnforceList 업데이트
 EnforceRightPanel 업데이트
 
 
-- EnforceItemSlot을 클릭하면, 클릭한 슬롯인지 확인할 수 있는 메소드 생성
+- (완료) EnforceItemSlot을 클릭하면, 클릭한 슬롯인지 확인할 수 있게 이벤트 함수 수정
+
+- (완료) 강화 실행 이후 재료 슬롯버튼을 클릭하면 MaterialList가 Open되지 않고 있음.
+
+> RightPanel의 SetRightPanel 함수가 세팅 전 이미 재료 슬롯을 초기화하기 때문에 따로 두번 선언할 필요가 없다.
+
+- (완료) 강화 윈도우가 켜져있는 동안, TickInput이 동작되지않음.
+
+- (완료) 최고등급 아이템을 클릭하면 다르게 표시되도록 RightPanel를 개선.
+
+	> 최고등급의 아이템
+
+		1. 다음 강화 효과 false
+		2. 재료 슬롯 false
+		3. 강화 확률 false
+		4. 최고 등급의 아이템이라는 텍스트 오브젝트 true
+		5. 필요 골드 텍스트를 0으로 표기
+
+- (완료) 강화 실행시 골드 사용 제한이 동작하지 않고 있음 -> HaveMoney 함수를 사용할 것.
+
+- (완료) 인벤토리 InfoPanel 수정 -> 강화 단계 표시
+
+- (완료) 아이템 슬롯들 개편
+
+	>모든 아이템 슬롯 안에 레어도 표시 및 강화단계 표시를 할 수 있게 수정
 
 
-<생성한 클래스>
 
-- **EnforceManager
+2. 아이템 획득 - 몬스터 드랍
 
-	강화 수치에 따른 확률 조정, 필요 골드, 상승 수치 등을 관리하는 매니저
-	싱글톤으로 선언
-	강화확률 그래프 : https://www.desmos.com/calculator/l4gti3ecyu?lang=ko
+	- (완료) 몬스터 인벤토리 생성
+	- (완료) 몬스터 아이템 테이블 드랍 확률, 드랍 아이템 갯수 설정
+	- (완료) 몬스터 사망 시, 드랍 확률에 따라 몬스터 자리에 아이템이 생성
+	- (완료) 재료 아이템 스크립트 오브젝트 좀 더 만들기
 
-- **EnforceWindowUI
+	- (완료) 플레이어가 TriggerEnter로 아이템을 인식하여 주워야한다.
 
-	GUIManager의 하위 오브젝트로, 강화와 관련된 UI들을 통솔하는 클래스
+		> Interact하는 방식으로 만들어야할까? 아니면 TriggerEnter로 바로 줍도록 해야할까
+		
+			후자가 좀 더 나아보임
 
-- **WeaponEnforceList : InventoryList
-- **EquipmentEnforceList : InventoryList
+	- (완료) 아이템 드랍이 한 지점에 겹쳐서 나옴. 겹치지 않게 분산시켜서 드랍되게 만들어야겠다.
 
-	무기, 장비 강화 리스트를 출력하는 클래스. EnforceItemSlot을 활용하여 리스트를 보여준다.
-
-- **EnforceItemSlot
-
-	아이템 정보
-	아이템 아이콘
-	아이템 레어도 이미지
-	아이템 강화 수치 텍스트
-	아이템 클릭 이벤트
-	강화제한 이미지
-	강화제한 이미지 텍스트
-
-	위의 내용을 담은 프리팹
-
-
-- **Enforce_SpringBoardMenu
-
-	버튼 : 무기, 장비들 => 클릭하면 해당 리스트가 출력되도록 하는 클래스
-
-- **Enforce_InfoPanel
-
-	EnforceItemSlot을 클릭하면, 해당 아이템의 강화 수치 및
-	스테이터스 전 후 비교 표시를 위 / 아래로 나눠서 표시
-	빈슬롯 버튼 아이콘
-
-- **Enforce Material List
-
-	InfoPanel의 빈 슬롯 버튼 아이콘을 클릭하면 나오는 재료 선택 리스트 클래스
-	같은 동일한 아이템
-
-
-2. 버그 수정
-
-- (완료) 무기, 장비 아이템 구매 시, 여러개 구매 기능이 제대로 적용되지 않는 버그
-- (완료) 무기, 장비 아이템 여러개 구매 시, 인벤토리에 이상하게 추가되는 버그
-- (완료) 기타 자잘한 버그들 수정
+	- (완료) 몬스터에게 데미지를 줄 때, 플레이어의 공격력이 들어가게끔 한다.
 
 
 **다음 목표**
 
-아이템 획득
-아이템 강화
 아이템 수리
 
 퀘스트 
-모델링 개편
 
+모델링 개편
 
 -------------------------------
 
@@ -313,6 +308,98 @@ EnforceRightPanel 업데이트
 -------------------------------
 
 ## 이전 개발 일지
+
+
+### 2021.09.07 (화)
+
+< UI/UX 명세 확인 및 제작 >
+
+1. 아이템 강화
+
+- (완료) 아이템 강화 UI를 배치
+- (완료) EnforceItemSlot에 아이템 레어도 표시를 추가
+- (완료) 강화 전용 NPC에게 강화하기 버튼을 클릭
+- (완료) SpringBoard 클릭을 통해 리스트 전환하기 및 리스트 업데이트
+- (완료) LeftPanel 인벤토리 리스트 (무기,상의,하의,장갑,신발,악세사리,특수장비)에서 아이템을 선택
+- (완료) 선택한 아이템의 정보가 오른쪽 Panel에 출력 및 동일한 아이템을 집어 넣으라는 빈슬롯이 생김
+- (완료) 아이템 강화 전과 후의 Info를 보여줌
+- (완료) 빈슬롯을 누르면, 클릭한 아이템과 동일한 아이템(재료로 사용할 아이템) 리스트를 화면에 보여줌
+- (완료) 사용할 아이템을 사용하면, 그 리스트를 끄고 재료 슬롯에 아이템이 들어감. 이에 따라 강화버튼이 활성화됨.
+- 강화버튼을 누르면, 강화 실행.
+- 아이템이 강화되면 강화되었다는 메시지와 함께, 강화 결과물을 보여줌.
+- 강화에 실패하면, 강화가 실패되었다는 메시지와 함께, 강화 실패 결과물을 보여줌.
+
+> - 강화 성공 시
+
+강화 성공 이펙트(애니메이션) 실행
+강화한 아이템의 스테이터스 변경
+소재로 사용한 아이템 삭제
+WeaponEnforceList, EquipmentEnforceList 업데이트
+EnforceRightPanel 업데이트
+
+> - 강화 실패 시
+
+강화 성공 이펙트(애니메이션) 실행
+소재로 사용한 아이템 삭제
+WeaponEnforceList, EquipmentEnforceList 업데이트
+EnforceRightPanel 업데이트
+
+
+- EnforceItemSlot을 클릭하면, 클릭한 슬롯인지 확인할 수 있는 메소드 생성
+
+
+<생성한 클래스>
+
+- EnforceManager
+
+	강화 수치에 따른 확률 조정, 필요 골드, 상승 수치 등을 관리하는 매니저
+	싱글톤으로 선언
+	강화확률 그래프 : https://www.desmos.com/calculator/l4gti3ecyu?lang=ko
+
+- EnforceWindowUI
+
+	GUIManager의 하위 오브젝트로, 강화와 관련된 UI들을 통솔하는 클래스
+
+- WeaponEnforceList : InventoryList
+- EquipmentEnforceList : InventoryList
+
+	무기, 장비 강화 리스트를 출력하는 클래스. EnforceItemSlot을 활용하여 리스트를 보여준다.
+
+- EnforceItemSlot
+
+	아이템 정보
+	아이템 아이콘
+	아이템 레어도 이미지
+	아이템 강화 수치 텍스트
+	아이템 클릭 이벤트
+	강화제한 이미지
+	강화제한 이미지 텍스트
+
+	위의 내용을 담은 프리팹
+
+
+- Enforce_SpringBoardMenu
+
+	버튼 : 무기, 장비들 => 클릭하면 해당 리스트가 출력되도록 하는 클래스
+
+- Enforce_InfoPanel
+
+	EnforceItemSlot을 클릭하면, 해당 아이템의 강화 수치 및
+	스테이터스 전 후 비교 표시를 위 / 아래로 나눠서 표시
+	빈슬롯 버튼 아이콘
+
+- Enforce Material List
+
+	InfoPanel의 빈 슬롯 버튼 아이콘을 클릭하면 나오는 재료 선택 리스트 클래스
+	같은 동일한 아이템
+
+
+2. 버그 수정
+
+- (완료) 무기, 장비 아이템 구매 시, 여러개 구매 기능이 제대로 적용되지 않는 버그
+- (완료) 무기, 장비 아이템 여러개 구매 시, 인벤토리에 이상하게 추가되는 버그
+- (완료) 기타 자잘한 버그들 수정
+
 
 
 ### 2021.09.06 (월)

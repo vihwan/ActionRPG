@@ -193,7 +193,9 @@ MonoBehaviour:
   enforceText: {fileID: 0}
   restrictImage: {fileID: 0}
   restrictText: {fileID: 0}
-  RarityTransform: {fileID: 0}
+  rarityTransform: {fileID: 0}
+  rareStars: []
+  RareStar: {fileID: 0}
 --- !u!1 &6127170772759299385
 GameObject:
   m_ObjectHideFlags: 0

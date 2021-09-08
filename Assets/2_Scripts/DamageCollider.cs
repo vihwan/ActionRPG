@@ -7,19 +7,22 @@ namespace SG
     public class DamageCollider : MonoBehaviour
     {
         private Collider damageCollider;
-        private int currentWeaponDamage = 20;
-
+        private int currentWeaponDamage = 0;
+        private PlayerStats playerStats;
         private void Awake()
         {
             damageCollider = GetComponent<Collider>();
             damageCollider.gameObject.SetActive(true);
             damageCollider.isTrigger = true;
             damageCollider.enabled = false;
+
+            playerStats = FindObjectOfType<PlayerStats>();
         }
 
         public void EnableDamageCollider()
         {
             damageCollider.enabled = true;
+            currentWeaponDamage = playerStats.Attack;
         }
 
         public void DisableDamageCollider()

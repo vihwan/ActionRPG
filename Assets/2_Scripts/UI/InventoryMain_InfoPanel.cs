@@ -88,7 +88,7 @@ namespace SG
         {
             itemName.text = weaponItem.itemName;
             itemKind.text = weaponItem.kind;
-            itemEnhanceLevel.text = null;
+            itemEnhanceLevel.text = weaponItem.enforceLevel + "단계";
             itemDurabilityTitle.SetActive(true);
             itemDurability.text = weaponItem.currentDurability + " / " + weaponItem.maxDurability;
             itemExplain.text = weaponItem.itemDescription;
@@ -102,7 +102,7 @@ namespace SG
         {
             itemName.text = equipItem.itemName;
             itemKind.text = equipItem.kind;
-            itemEnhanceLevel.text = "+" + equipItem.enforceLevel;
+            itemEnhanceLevel.text = equipItem.enforceLevel + "단계";
             itemDurabilityTitle.SetActive(true);
             itemDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
             itemExplain.text = equipItem.itemDescription;

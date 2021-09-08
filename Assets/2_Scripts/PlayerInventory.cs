@@ -369,6 +369,52 @@ namespace SG
             }
         }
 
+        //소유하고 있는 아이템의 스테이터스를 관리하는 함수들
+        #region Status Manage
+
+        //무기, 장비 함수만 적용
+        public void SetItemEnforceStatusItem(Item item, int increaseCount)
+        {
+            switch (item.itemType)
+            {
+                case ItemType.Tops: SetItemEnforceStatusEquip(item as EquipItem, increaseCount); break;
+                case ItemType.Bottoms: goto case ItemType.Tops;
+                case ItemType.Gloves: goto case ItemType.Tops;
+                case ItemType.Shoes: goto case ItemType.Tops;
+                case ItemType.Accessory: goto case ItemType.Tops;
+                case ItemType.SpecialEquip: goto case ItemType.Tops;
+                case ItemType.Weapon: SetItemEnforceStatusWeapon(item as WeaponItem, increaseCount); break;
+                default: break;
+            }
+        }
+
+        public void SetItemEnforceStatusWeapon(WeaponItem weaponItem, int increaseCount)
+        {
+            for (int i = 0; i < weaponsInventory.Count; i++)
+            {
+                if(weaponsInventory[i] == weaponItem)
+                {
+                    //능력치 증가, 강화단계 상승
+                    weaponsInventory[i].IncreaseAttribute(increaseCount);
+                    weaponsInventory[i].enforceLevel += 1;
+                    return;
+                }
+            }
+        }
+
+        public void SetItemEnforceStatusEquip(EquipItem equipItem, int increaseCount)
+        {
+            for (int i = 0; i < equipmentsInventory[equipItem.itemType].Count; i++)
+            {
+                if (equipmentsInventory[equipItem.itemType][i] == equipItem)
+                {
+                    equipmentsInventory[equipItem.itemType][i].IncreaseAttribute(increaseCount);
+                    equipmentsInventory[equipItem.itemType][i].enforceLevel += 1;
+                }
+            }
+        }
+
+        #endregion
 
         //아이템 버릴 시(삭제 시) 처리하는 함수
         //객체 파괴와 동시에 Inventory를 정리

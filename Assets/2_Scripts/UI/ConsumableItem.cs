@@ -30,6 +30,9 @@ namespace SG
 
         private void OnValidate()
         {
+            if (itemType != ItemType.Consumable)
+                itemType = ItemType.Consumable;
+
             if (coolTime < 0)
                 coolTime = 0;
 

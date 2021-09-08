@@ -104,6 +104,8 @@
     <Compile Include="Assets\2_Scripts\Test\DialogueChoiceBox.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueTrigger.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DropItem.cs" />
+    <Compile Include="Assets\2_Scripts\Test\EnemyInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnforceItemSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnforceManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnforceMaterialSelectList.cs" />
@@ -112,6 +114,8 @@
     <Compile Include="Assets\2_Scripts\Test\EnforceWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\EquipmentEnforceList.cs" />
     <Compile Include="Assets\2_Scripts\Test\InteractNPC.cs" />
+    <Compile Include="Assets\2_Scripts\Test\ItemDropManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\LootTable.cs" />
     <Compile Include="Assets\2_Scripts\Test\Message_GetItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\MessagesList.cs" />
     <Compile Include="Assets\2_Scripts\Test\PopUpGenerator.cs" />

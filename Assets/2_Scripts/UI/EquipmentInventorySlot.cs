@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,15 @@ namespace SG
     {
         [SerializeField] internal EquipItem item;
         [SerializeField] private bool isArmed;
+        [SerializeField] private Transform rarityTransform;
+        [SerializeField] private List<GameObject> rareStars;
+
+        [Header("Prefab")]
+        [SerializeField] private GameObject RareStar;
+
+        [Header("Enforce Image")]
+        [SerializeField] private Image enforceImage;
+        [SerializeField] private TMP_Text enforceText;
 
         private EquipmentInventoryList equipmentInventoryList;
         private CharacterUI_EquipmentPanel equipPanel;
@@ -21,9 +31,13 @@ namespace SG
             {
                 itemBtn.onClick.AddListener(() => equipPanel.SetParameterIndividualEquipItem(item));
                 itemBtn.onClick.AddListener(SelectSlot);
-               // itemBtn.onClick.AddListener(() => CheckSlotIsCurrentEquipment());
             }
-            icon = UtilHelper.Find<Image>(itemBtn.transform, "Image");
+            icon = UtilHelper.Find<Image>(itemBtn.transform, "ItemIcon");
+            rarityTransform = itemBtn.transform.Find("RarityTransform").transform;
+            RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
+
+            enforceImage = UtilHelper.Find<Image>(itemBtn.transform, "EnforceImage");
+            enforceText = UtilHelper.Find<TMP_Text>(enforceImage.transform, "EnforceText");
 
             equipmentInventoryList = GetComponentInParent<EquipmentInventoryList>();
         }
@@ -34,10 +48,32 @@ namespace SG
             item = equipItem;
             icon.sprite = equipItem.itemIcon;
             icon.enabled = true;
+            CreateRarityStar(rarityTransform, rareStars, item);
             isArmed = equipItem.isArmed;
+
+            enforceImage.gameObject.SetActive(true);
+            enforceText.text = equipItem.enforceLevel.ToString();
             ChangeBackgroundColor();
         }
+        private void CreateRarityStar(Transform transform, List<GameObject> rareStarsList, Item item)
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+            rareStarsList.Clear();
 
+            int rarityCount = 0;
+            if (rarityCount < item.rarity)
+            {
+                while (rarityCount < item.rarity)
+                {
+                    GameObject star = Instantiate(RareStar, transform);
+                    rareStarsList.Add(star);
+                    rarityCount++;
+                }
+            }
+        }
         public void SelectSlot()
         {
             foreach (EquipmentInventorySlot slot in equipmentInventoryList.equipmentInventorySlots)

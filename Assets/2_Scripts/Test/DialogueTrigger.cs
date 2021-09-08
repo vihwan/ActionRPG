@@ -48,6 +48,12 @@ namespace SG
                         dialogueChoices[i].AddListener(() => interactNPC.EndDialogue());
                         continue;
                     }
+                    //디버그용 함수
+                    else if (dialogueChoices[i].dialogChoiceType.Equals(DialogChoiceType.GetMoney))
+                    {
+                        dialogueChoices[i].AddListener(() => PlayerInventory.Instance.GetGold(500000));
+                        continue;
+                    }
                 }
             }
         }

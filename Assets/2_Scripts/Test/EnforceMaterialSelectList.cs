@@ -100,7 +100,6 @@ namespace SG
             // 2. 구한 슬롯의 갯수에 따라 아이템 슬롯을 활성화/비활성화 합니다.
             // 3. 슬롯의 갯수가 0개인지를 확인합니다.
             // 4. 슬롯의 갯수가 0개가 아니라면, 각 슬롯을 설정하고 버튼 이벤트를 추가합니다.
-
             tempItems.Clear();
             int slotNum = 0;
             for (int i = 0; i < PlayerInventory.Instance.weaponsInventory.Count; i++)
@@ -115,8 +114,6 @@ namespace SG
                     slotNum++;
                 }
             }
-
-
 
             //동일한 아이템의 갯수에 따라 
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
@@ -148,12 +145,13 @@ namespace SG
             else
                 nontListText.gameObject.SetActive(false);
 
-            //위의 생성된 슬롯들을 토대로 임시 저장한 리스트에서 가져와 아이템을 세팅
-            for (int i = 0; i < slotNum; i++)
+            int count = 0;
+            foreach (Item item in tempItems)
             {
-                Item slotItem = tempItems[i];
-                enforceItemSlots[i].SetEnforceItemSlot(slotItem);
-                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(slotItem as WeaponItem));
+                EnforceItemSlot slot = enforceItemSlots[count];
+                slot.SetEnforceItemSlot(item);
+                if(!slot.isArmed) slot.SetBtnListener(() => OnClickEnforceItemSlot(slot, item));
+                count++;
             }
 
             SetAllSlotsDeselect();
@@ -216,14 +214,29 @@ namespace SG
 
 
             //위의 생성된 슬롯들을 토대로 임시 저장한 리스트에서 가져와 아이템을 세팅
-            for (int i = 0; i < slotNum; i++)
+            int count = 0;
+            foreach (Item item in tempItems)
             {
-                Item slotItem = tempItems[i];
-                enforceItemSlots[i].SetEnforceItemSlot(slotItem);
-                enforceItemSlots[i].AddBtnListener(() => SetParameterPanel(slotItem as EquipItem));
+                EnforceItemSlot slot = enforceItemSlots[count];
+                slot.SetEnforceItemSlot(item);
+                if (!slot.isArmed) slot.SetBtnListener(() => OnClickEnforceItemSlot(slot, item));
+                count++;
             }
 
             SetAllSlotsDeselect();
+        }
+
+        //추가된 재료 리스트 슬롯들의 클릭 이벤트 함수
+        private void OnClickEnforceItemSlot(EnforceItemSlot slot, Item item)
+        {
+
+            SetAllSlotsDeselect();
+            slot.SetIsSelectSlot(true);
+            materialInfoPanel.SetActive(true);
+            if (item.itemType == ItemType.Weapon)
+                SetParameterPanel(item as WeaponItem);
+            else
+                SetParameterPanel(item as EquipItem);
         }
 
         public void SetAllSlotsDeselect()

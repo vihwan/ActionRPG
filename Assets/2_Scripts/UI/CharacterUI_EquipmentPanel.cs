@@ -22,7 +22,7 @@ namespace SG
         [SerializeField] internal GameObject individualPanel;
         [SerializeField] private TMP_Text equipName;
         [SerializeField] private TMP_Text equipKind;
-        [SerializeField] private TMP_Text equipEnhanceLevel;
+        [SerializeField] private TMP_Text equipEnforceLevel;
         [SerializeField] private TMP_Text equipSetName;
         [SerializeField] private TMP_Text equipStatus;
         [SerializeField] private TMP_Text equipDurability;
@@ -35,7 +35,7 @@ namespace SG
         [SerializeField] internal GameObject comparisonPanel;
         [SerializeField] private TMP_Text equipName_Cf;
         [SerializeField] private TMP_Text equipKind_Cf;
-        [SerializeField] private TMP_Text equipEnhanceLevel_Cf;
+        [SerializeField] private TMP_Text equipEnforceLevel_Cf;
         [SerializeField] private TMP_Text equipSetName_Cf;
         [SerializeField] private TMP_Text equipStatus_Cf;
         [SerializeField] private TMP_Text equipDurability_Cf;
@@ -85,7 +85,7 @@ namespace SG
                 t = individualPanel.transform;
                 equipName = UtilHelper.Find<TMP_Text>(t, "Name");
                 equipKind = UtilHelper.Find<TMP_Text>(t, "Kind");
-                equipEnhanceLevel = UtilHelper.Find<TMP_Text>(t, "EnhanceLevel");
+                equipEnforceLevel = UtilHelper.Find<TMP_Text>(t, "EnforceLevel");
                 equipSetName = UtilHelper.Find<TMP_Text>(t, "SetName");
                 equipStatus = UtilHelper.Find<TMP_Text>(t, "Status/Text");
                 equipDurability = UtilHelper.Find<TMP_Text>(t, "Durability/Text");
@@ -100,7 +100,7 @@ namespace SG
                 t = comparisonPanel.transform;
                 equipName_Cf = UtilHelper.Find<TMP_Text>(t, "Name");
                 equipKind_Cf = UtilHelper.Find<TMP_Text>(t, "Kind");
-                equipEnhanceLevel_Cf = UtilHelper.Find<TMP_Text>(t, "EnhanceLevel");
+                equipEnforceLevel_Cf = UtilHelper.Find<TMP_Text>(t, "EnforceLevel");
                 equipSetName_Cf = UtilHelper.Find<TMP_Text>(t, "SetName");
                 equipStatus_Cf = UtilHelper.Find<TMP_Text>(t, "Status/Text");
                 equipDurability_Cf = UtilHelper.Find<TMP_Text>(t, "Durability/Text");
@@ -212,7 +212,7 @@ namespace SG
         {
             equipName.text = equipItem.itemName;
             equipKind.text = equipItem.kind;
-            equipEnhanceLevel.text = "+" + equipItem.enforceLevel;
+            equipEnforceLevel.text = "+" + equipItem.enforceLevel;
             equipSetName.text = null;
             equipDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
             equipExplain.text = equipItem.itemDescription;
@@ -235,7 +235,7 @@ namespace SG
         {
             equipName_Cf.text = equipItem.itemName;
             equipKind_Cf.text = equipItem.kind;
-            equipEnhanceLevel_Cf.text = "+" + equipItem.enforceLevel;
+            equipEnforceLevel_Cf.text = "+" + equipItem.enforceLevel;
             equipSetName_Cf.text = null;
             equipDurability_Cf.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
             equipExplain_Cf.text = equipItem.itemDescription;

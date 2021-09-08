@@ -186,6 +186,15 @@ namespace SG
                     interactableUI.InteractionPopup.SetActive(true);
                 }
             }
+
+            if (other.gameObject.CompareTag("DropItem"))
+            {
+                interactableObject = other.GetComponent<Interactable>();
+                if (InteractableObject.canInteract)
+                {
+                    ExecuteInteract();
+                }
+            }
         }
 
         private void OnTriggerExit(Collider other)

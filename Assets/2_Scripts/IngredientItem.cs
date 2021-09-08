@@ -12,6 +12,9 @@ namespace SG
         public string kind;
         private void OnValidate()
         {
+            if (itemType != ItemType.Ingredient)
+                itemType = ItemType.Ingredient;
+
             if (quantity < 0)
                 quantity = 0;
         }

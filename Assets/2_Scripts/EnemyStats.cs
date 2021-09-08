@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace SG
 {
+    [RequireComponent(typeof(EnemyManager))]
     public class EnemyStats : MonoBehaviour
     {
         public int healthLevel = 10;
@@ -11,10 +12,12 @@ namespace SG
         public int currentHealth;
 
         private Animator animator;
+        private EnemyManager enemyManager;
 
-        private void Awake()
+        public void Init()
         {
             animator = GetComponentInChildren<Animator>();
+            enemyManager = GetComponent<EnemyManager>();
         }
 
         private void Start()
@@ -33,13 +36,12 @@ namespace SG
         {
             currentHealth = currentHealth - damage;
             animator.Play("Take Damage");
-            Debug.Log("데미지를 입힌다!");
-
+            Debug.Log(damage + " 데미지를 입힌다!");
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
                 animator.Play("Die");
-                //Handle Enemy Death
+                enemyManager.Die();
             }
         }
     }

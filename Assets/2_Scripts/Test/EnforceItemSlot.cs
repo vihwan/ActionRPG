@@ -10,7 +10,7 @@ namespace SG
     public class EnforceItemSlot : InventorySlot
     {
         [SerializeField] private Item item;
-        [SerializeField] private bool isArmed;
+        [SerializeField] public bool isArmed;
         [SerializeField] private Image enforceImage;
         [SerializeField] private TMP_Text enforceText;
         [SerializeField] private Image restrictImage;
@@ -31,7 +31,7 @@ namespace SG
             private set
             {
                 item = value;
-                if(item != null)
+                if (item != null)
                 {
                     if (item.itemType == ItemType.Weapon)
                     {
@@ -49,7 +49,15 @@ namespace SG
                 }
             }
         }
-
+        public bool IsSelect
+        {
+            get => isSelect;
+            private set
+            {
+                isSelect = value;
+                ChangeBackgroundColor();
+            }
+        }
         private void Awake()
         {
             itemBtn = GetComponentInChildren<Button>();
@@ -70,9 +78,13 @@ namespace SG
         {
             btnAction?.Invoke();
         }
-        public void AddBtnListener(Action action)
+        public void SetBtnListener(Action action)
         {
             btnAction = action;
+        }
+        public void SetIsSelectSlot(bool status)
+        {
+            IsSelect = status;
         }
         public void SetEnforceItemSlot(Item item)
         {
@@ -152,8 +164,7 @@ namespace SG
             icon.sprite = null;
             icon.enabled = false;
             isArmed = false;
-
-            ChangeBackgroundColor();
+            IsSelect = false;
             gameObject.SetActive(false);
         }
 

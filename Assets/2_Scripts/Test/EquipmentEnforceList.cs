@@ -19,8 +19,14 @@ namespace SG
         [Header("Prefab")]
         [SerializeField] private EnforceItemSlot enforceItemSlotPrefab;
 
+        [Header("Current Select Slot")]
+        [SerializeField] private EnforceItemSlot currentSelectSlot;
+
         [Header("Need Component")]
         private EnforceWindowUI enforceWindowUI;
+
+        public EnforceItemSlot CurrentSelectSlot { get => currentSelectSlot; private set => currentSelectSlot = value; }
+
         public override void Init()
         {
             enforceWindowUI = GetComponentInParent<EnforceWindowUI>();
@@ -41,13 +47,10 @@ namespace SG
             itemSort_Dropdown.value = 0;
             itemSort_Dropdown.RefreshShownValue();
         }
-
         public void SetEquipItemTypeToView(ItemType selectType)
         {
             selectEquipType = selectType;
         }
-
-
         private void InitDropdown()
         {
             itemSort_Dropdown.ClearOptions();
@@ -60,8 +63,7 @@ namespace SG
             itemSort_Dropdown.value = 0;
             itemSort_Dropdown.RefreshShownValue();
         }
-
-        private void UpdateUI(ItemType itemType)
+        public void UpdateUI(ItemType itemType)
         {
             //인벤토리 슬롯이 부족한 경우, 인벤토리 슬롯을 새로 생성하여 추가한다.
             if (enforceItemSlots.Length < PlayerInventory.Instance.equipmentsInventory[itemType].Count)
@@ -85,16 +87,19 @@ namespace SG
             int count = 0;
             foreach (EquipItem item in PlayerInventory.Instance.equipmentsInventory[itemType])
             {
-                enforceItemSlots[count].SetEnforceItemSlot(item);
-                enforceItemSlots[count].AddBtnListener(() => OnClickEnforceItemSlot(item));
+                EnforceItemSlot slot = enforceItemSlots[count];
+                slot.SetEnforceItemSlot(item);
+                slot.SetBtnListener(() => OnClickEnforceItemSlot(slot,item));
                 count++;
             }
 
             SetAllSlotsDeselect();
         }
-
-        private void OnClickEnforceItemSlot(EquipItem equipItem)
+        private void OnClickEnforceItemSlot(EnforceItemSlot slot, EquipItem equipItem)
         {
+            CurrentSelectSlot = slot;
+            SetAllSlotsDeselect();
+            slot.SetIsSelectSlot(true);
             enforceWindowUI.enforceUI_RightPanel.gameObject.SetActive(true);
             enforceWindowUI.enforceUI_RightPanel.SetRightPanel(equipItem);
         }
@@ -106,7 +111,6 @@ namespace SG
                 slot.ChangeBackgroundColor();
             }
         }
-
         internal override void OnClickSortInventoryList(int value)
         {
             switch (value)
@@ -123,18 +127,15 @@ namespace SG
             //if (equipPanel.comparisonPanel.activeSelf == true)
             //    equipPanel.comparisonPanel.SetActive(false);
         }
-
         private void SortInventoryListToGANADA()
         {
             PlayerInventory.Instance.SortEquipmentInventoryListToGANADA(selectEquipType);
             UpdateUI(selectEquipType);
         }
-
         private void SortInventoryListToRarity()
         {
             PlayerInventory.Instance.SortEquipmentInventoryListToRarity(selectEquipType);
             UpdateUI(selectEquipType);
         }
-
     }
 }

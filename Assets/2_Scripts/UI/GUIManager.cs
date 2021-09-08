@@ -70,10 +70,11 @@ namespace SG
 
         public bool IsActiveUIWindows()
         {
-            if (selectMenu.gameObject.activeSelf == true ||
-               windowPanel.characterWindowUI.gameObject.activeSelf == true ||
-               windowPanel.inventoryWindowUI.gameObject.activeSelf == true ||
-               shopPanel.gameObject.activeSelf == true)
+            if (selectMenu.gameObject.activeSelf.Equals(true) ||
+               windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true) ||
+               windowPanel.inventoryWindowUI.gameObject.activeSelf.Equals(true) ||
+               windowPanel.enforceWindowUI.gameObject.activeSelf.Equals(true) ||
+               shopPanel.gameObject.activeSelf.Equals(true))
             {
                 return true;
             }

@@ -42,9 +42,26 @@ namespace SG
         public string OneHanded_HeavyAttack1 = "Heavy_Attack_1";
 
 
+        public void IncreaseAttribute(int count)
+        {
+            for (int i = 0; i < itemAttributes.Count; i++)
+            {
+                itemAttributes[i].value += count;
+            }
+        }
+        public bool IsMaxEnforceLevel()
+        {
+            if (enforceLevel == 5)
+                return true;
+
+            return false;
+        }
         private void OnValidate()
         {
-            if(quantity != 1) quantity = 1;
+            if (itemType != ItemType.Weapon)
+                itemType = ItemType.Weapon;
+
+            if (quantity != 1) quantity = 1;
         }
     }
 }

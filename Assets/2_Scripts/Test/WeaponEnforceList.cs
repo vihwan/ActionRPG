@@ -16,8 +16,13 @@ namespace SG
         [Header("Prefab")]
         [SerializeField] private EnforceItemSlot enforceItemSlotPrefab;
 
+        [Header("Current Select Slot")]
+        [SerializeField] private EnforceItemSlot currentSelectSlot;
+
         [Header("Need Component")]
         private EnforceWindowUI enforceWindowUI;
+
+        public EnforceItemSlot CurrentSelectSlot { get => currentSelectSlot; private set => currentSelectSlot = value; }
 
         public override void Init()
         {
@@ -78,15 +83,19 @@ namespace SG
             int count = 0;
             foreach (WeaponItem item in PlayerInventory.Instance.weaponsInventory)
             {
-                enforceItemSlots[count].SetEnforceItemSlot(item);
-                enforceItemSlots[count].AddBtnListener(() => OnClickEnforceItemSlot(item));
+                EnforceItemSlot slot = enforceItemSlots[count];
+                slot.SetEnforceItemSlot(item);
+                slot.SetBtnListener(() => OnClickEnforceItemSlot(slot, item));
                 count++;
             }
 
             SetAllSlotsDeselect();
         }
-        private void OnClickEnforceItemSlot(WeaponItem weaponItem)
+        private void OnClickEnforceItemSlot(EnforceItemSlot slot, WeaponItem weaponItem)
         {
+            CurrentSelectSlot = slot;
+            SetAllSlotsDeselect();
+            slot.SetIsSelectSlot(true);
             enforceWindowUI.enforceUI_RightPanel.gameObject.SetActive(true);
             enforceWindowUI.enforceUI_RightPanel.SetRightPanel(weaponItem);
         }
