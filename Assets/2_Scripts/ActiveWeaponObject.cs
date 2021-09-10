@@ -9,6 +9,7 @@ namespace SG
     {
         public GameObject handWeaponObject;
         public GameObject unequipWeaponObject;
+        public bool isHandActivate;
 
         public void Initailize(GameObject weaponGo, bool state)
         {
@@ -20,7 +21,6 @@ namespace SG
             handWeaponObject.SetActive(!state);
             unequipWeaponObject.SetActive(state);
         }
-
         public void SetActiveHandWeapon(int num)
         {
             bool status = false;
@@ -30,6 +30,14 @@ namespace SG
             else if(num == 1)
                 status = false;
 
+            isHandActivate = status;
+            handWeaponObject.SetActive(status);
+            unequipWeaponObject.SetActive(!status);
+        }
+
+        public void SetActiveHandWeapon(bool status)
+        {
+            isHandActivate = status;
             handWeaponObject.SetActive(status);
             unequipWeaponObject.SetActive(!status);
         }

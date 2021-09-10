@@ -155,7 +155,6 @@ namespace SG
             itemKind.text = weaponItem.kind;
             itemEnhanceLevel.text = null;
             itemDurabilityTitle.SetActive(true);
-            itemDurability.text = weaponItem.maxDurability + " / " + weaponItem.maxDurability;
             itemExplain.text = weaponItem.itemDescription;
 
             SetItemStatusText(itemStatus, weaponItem);
@@ -168,8 +167,6 @@ namespace SG
             itemName.text = equipItem.itemName;
             itemKind.text = equipItem.kind;
             itemEnhanceLevel.text = "+" + equipItem.enforceLevel;
-            itemDurabilityTitle.SetActive(true);
-            itemDurability.text = equipItem.maxDurability + " / " + equipItem.maxDurability;
             itemExplain.text = equipItem.itemDescription;
 
             SetItemStatusText(itemStatus, equipItem);

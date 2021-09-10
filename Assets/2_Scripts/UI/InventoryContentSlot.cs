@@ -143,7 +143,6 @@ namespace SG
             consumableItem = null;
             ingredientItem = null;
 
-            icon.sprite = null;
             isArmed = false;
             gameObject.SetActive(false);
         }

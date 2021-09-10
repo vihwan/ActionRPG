@@ -256,7 +256,9 @@ namespace SG
             nameText.text = weaponItem.itemName;
             kindText.text = weaponItem.kind;
             enforceLevelText.text = "+" + weaponItem.enforceLevel;
-            itemDurability.text = weaponItem.currentDurability + " / " + weaponItem.maxDurability;
+
+            itemDurability.text = null;
+           // itemDurability.text = weaponItem.currentDurability + " / " + weaponItem.maxDurability;
 
             SetItemStatusText(itemStatus, weaponItem);
             CreateRarityStar(itemRarityTransform, rareStars, weaponItem);
@@ -272,7 +274,9 @@ namespace SG
             nameText.text = equipItem.itemName;
             kindText.text = equipItem.kind;
             enforceLevelText.text = "+" + equipItem.enforceLevel;
-            itemDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
+
+            itemDurability.text = null;
+            //  itemDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
 
             SetItemStatusText(itemStatus, equipItem);
             CreateRarityStar(itemRarityTransform, rareStars, equipItem);

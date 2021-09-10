@@ -29,7 +29,6 @@ namespace SG
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
-
         private void Start()
         {
             if (CameraHandler.Instance != null)
@@ -173,6 +172,14 @@ namespace SG
             this.interactableObject.Interact(this);
         }
 
+        internal void OpenChestInteraction()
+        {
+            //플레이어가 미끄러지는 것을 막는다.
+            playerLocomotion.Rigidbody.velocity = Vector3.zero;
+
+            //플레이어가 상자 여는 애니메이션을 넣고 싶다면 여기에 넣자.
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Interactable"))
@@ -184,15 +191,6 @@ namespace SG
                     interactableUI.InteractText.text = interactText;
                     interactableUI.InteractObjectImage.sprite = InteractableObject.interactIcon;
                     interactableUI.InteractionPopup.SetActive(true);
-                }
-            }
-
-            if (other.gameObject.CompareTag("DropItem"))
-            {
-                interactableObject = other.GetComponent<Interactable>();
-                if (InteractableObject.canInteract)
-                {
-                    ExecuteInteract();
                 }
             }
         }

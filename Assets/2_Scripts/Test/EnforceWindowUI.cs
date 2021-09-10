@@ -55,8 +55,8 @@ namespace SG
             if (enforceUI_RightPanel != null)
                 enforceUI_RightPanel.Init();
 
-            enforceMaterialSelectList = GetComponentInChildren<EnforceMaterialSelectList>(true );
-            if(enforceMaterialSelectList != null)
+            enforceMaterialSelectList = GetComponentInChildren<EnforceMaterialSelectList>(true);
+            if (enforceMaterialSelectList != null)
                 enforceMaterialSelectList.Init();
 
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
@@ -80,7 +80,6 @@ namespace SG
                 enforceMenuSpringBoard.ChangeSpringButtonColor(enforceMenuSpringBoard.weaponBtn);
             }
         }
-
         private void UpdateGoldText()
         {
             userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
@@ -99,11 +98,11 @@ namespace SG
 
             switch (itemType)
             {
-                case ItemType.Tops:         equipmentEnforceList.SetEquipItemTypeToView(ItemType.Tops); break;
-                case ItemType.Bottoms:      equipmentEnforceList.SetEquipItemTypeToView(ItemType.Bottoms); break;
-                case ItemType.Gloves:       equipmentEnforceList.SetEquipItemTypeToView(ItemType.Gloves); break;
-                case ItemType.Shoes:        equipmentEnforceList.SetEquipItemTypeToView(ItemType.Shoes); break;
-                case ItemType.Accessory:    equipmentEnforceList.SetEquipItemTypeToView(ItemType.Accessory); break;
+                case ItemType.Tops: equipmentEnforceList.SetEquipItemTypeToView(ItemType.Tops); break;
+                case ItemType.Bottoms: equipmentEnforceList.SetEquipItemTypeToView(ItemType.Bottoms); break;
+                case ItemType.Gloves: equipmentEnforceList.SetEquipItemTypeToView(ItemType.Gloves); break;
+                case ItemType.Shoes: equipmentEnforceList.SetEquipItemTypeToView(ItemType.Shoes); break;
+                case ItemType.Accessory: equipmentEnforceList.SetEquipItemTypeToView(ItemType.Accessory); break;
                 case ItemType.SpecialEquip: equipmentEnforceList.SetEquipItemTypeToView(ItemType.SpecialEquip); break;
             }
 
@@ -159,7 +158,7 @@ namespace SG
             {
                 PlayerInventory.Instance.SetItemEnforceStatusItem(enforceUI_RightPanel.CurrentSelectItem, EnforceManager.Instance.EnforceRiseStatus);
                 equipmentEnforceList.UpdateUI(enforceUI_RightPanel.SelectMaterialItem.itemType);
-                weaponEnforceList.CurrentSelectSlot.SetIsSelectSlot(true);
+                equipmentEnforceList.CurrentSelectSlot.SetIsSelectSlot(true);
             }
             enforceUI_RightPanel.SetRightPanel(enforceUI_RightPanel.CurrentSelectItem);
         }
@@ -175,10 +174,15 @@ namespace SG
 
             //아이템 타입에 따라 강화할 아이템 리스트 업데이트
             if (enforceUI_RightPanel.SelectMaterialItem.itemType == ItemType.Weapon)
+            {
                 weaponEnforceList.UpdateUI();
+                weaponEnforceList.CurrentSelectSlot.SetIsSelectSlot(true);
+            }
             else
+            {
                 equipmentEnforceList.UpdateUI(enforceUI_RightPanel.SelectMaterialItem.itemType);
-
+                equipmentEnforceList.CurrentSelectSlot.SetIsSelectSlot(true);
+            }
             enforceUI_RightPanel.SetRightPanel(enforceUI_RightPanel.CurrentSelectItem);
         }
         #endregion

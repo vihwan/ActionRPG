@@ -8,8 +8,6 @@ namespace SG
     [CreateAssetMenu(menuName = "Items/Ingredient Item")]
     public class IngredientItem : Item
     {
-        [Header("Ingredient Status")]
-        public string kind;
         private void OnValidate()
         {
             if (itemType != ItemType.Ingredient)

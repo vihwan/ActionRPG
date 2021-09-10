@@ -33,13 +33,11 @@ namespace SG
         [Header("Current Gold")]
         [SerializeField] private int currentGold;
 
-
         [Header("Current Equipping")]
         public WeaponItem currentWeapon;
         public WeaponItem unarmedWeapon;
         public EquipItem[] currentEquipmentSlots = new EquipItem[6];
-        public ConsumableItem currentConsumable;
-        //소비템칸 하나
+        public ConsumableItem currentConsumableItem;         //소비템칸 하나
 
         [Header("Inventory")]
         public List<WeaponItem> weaponsInventory;
@@ -201,8 +199,8 @@ namespace SG
                 consumeItem.quantity = Random.Range(1, 6);
             }
 
-            currentConsumable = consumableInventory[0];
-            currentConsumable.isArmed = true;
+            currentConsumableItem = consumableInventory[0];
+            currentConsumableItem.isArmed = true;
         }
         private void LoadIngredientInventoryList()
         {
@@ -264,9 +262,9 @@ namespace SG
         //장착중인 소비 아이템을 교체하는 함수
         public void ChangeCurrentConsumable(ConsumableItem consumableItem)
         {
-            currentConsumable.isArmed = false;
-            currentConsumable = consumableItem;
-            currentConsumable.isArmed = true;
+            currentConsumableItem.isArmed = false;
+            currentConsumableItem = consumableItem;
+            currentConsumableItem.isArmed = true;
         }
 
         //아이템 획득 시 처리하는 함수
@@ -287,6 +285,8 @@ namespace SG
 
             //아이템 팝업 출력
             PopUpGenerator.Instance.GetMessageGetItemObject(item, count);
+            //퀵슬롯 현재 장착 소비 아이템 갱신
+            GUIManager.instance.quickSlotUI.ConsumesSlot.SetActiveBtn(currentConsumableItem);
         }
         private void GetItem(WeaponItem weaponItem, int count = 1)
         {
@@ -625,7 +625,7 @@ namespace SG
             if (consumableInventory.Count == 0)
                 return;
 
-            SortConsumableInventory(currentConsumable);
+            SortConsumableInventory(currentConsumableItem);
             List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
             //List<ConsumableItem> tempList = consumableInventory.ToList();
             tempList = tempList.OrderBy(consumableItem => consumableItem.itemName).ToList();
@@ -642,7 +642,7 @@ namespace SG
             if (consumableInventory.Count == 0)
                 return;
 
-            SortConsumableInventory(currentConsumable);
+            SortConsumableInventory(currentConsumableItem);
             List<ConsumableItem> tempList = consumableInventory.Skip(1).ToList();
             //List<ConsumableItem> tempList = consumableInventory.ToList();
             tempList = tempList.OrderByDescending(consumableItem => consumableItem.rarity).ToList();

@@ -78,7 +78,7 @@ namespace SG
 
         private void OnDisable()
         {
-            playerSkillManager.SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumable);
+            playerSkillManager.SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumableItem);
         }
         private void SetActiveLeftList()
         {

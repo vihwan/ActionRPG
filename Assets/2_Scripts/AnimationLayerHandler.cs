@@ -23,6 +23,7 @@ namespace SG
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Base Layer UnEquip"), 1f);
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override Equip"), 0f);
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override UnEquip"), 1f);
+            animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Both Hand"), 1f);
             animatorHandler.Anim.SetBool("isUnEquip", true);
 
             if(inputHandler.MoveAmount > 0)
@@ -33,8 +34,6 @@ namespace SG
             {
                 animatorHandler.PlayTargetAnimation("WeaponChange_UnEquip", false);
             }
-
-           // Debug.Log(animatorHandler.Anim.GetLayerName(1) + "의 Weight : " + animatorHandler.Anim.GetLayerWeight(1));
         }
 
         public void HandlePlayerEquip()
@@ -43,10 +42,8 @@ namespace SG
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Base Layer UnEquip"), 0f);
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override Equip"), 1f);
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override UnEquip"), 0f);
+            animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Both Hand"), 0f);
             animatorHandler.Anim.SetBool("isUnEquip", false);
-
-            //Debug.Log(animatorHandler.Anim.GetLayerName(1) + "의 Weight : " + animatorHandler.Anim.GetLayerWeight(1) + "\n"
-            //    + animatorHandler.Anim.GetLayerName(2) + "의 Weight : " + animatorHandler.Anim.GetLayerWeight(2));
         }
     }
 }

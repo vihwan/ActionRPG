@@ -174,7 +174,8 @@ namespace SG
 
             SetItemStatusText(weaponStatus, playerWeapon);
 
-            weaponDurability.text = playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
+            weaponDurability.text = null;
+           // weaponDurability.text = playerWeapon.currentDurability.ToString() + " / " + playerWeapon.maxDurability.ToString();
             weaponEnforceLevel.text = playerWeapon.enforceLevel.ToString() + "단계";
 
             CreateRarityStar(weaponRarityTransform, rareStars , playerWeapon);
@@ -195,7 +196,8 @@ namespace SG
 
             SetItemStatusText(weaponStatus_Cf, currentWeapon);
 
-            weaponDurability_Cf.text = currentWeapon.currentDurability.ToString() + " / " + currentWeapon.maxDurability.ToString();
+            weaponDurability_Cf.text = null;
+          //  weaponDurability_Cf.text = currentWeapon.currentDurability.ToString() + " / " + currentWeapon.maxDurability.ToString();
             weaponEnforceLevel_Cf.text = currentWeapon.enforceLevel.ToString() + "단계";
 
             CreateRarityStar(weaponRarityTransform_Cf, rareStars_Cf , currentWeapon);

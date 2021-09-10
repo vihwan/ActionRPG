@@ -30,7 +30,7 @@ namespace SG
         public bool sk_Ult_Input;
 
         //소비 아이템 사용 : C
-        public bool consume_Input; 
+        public bool consume_Input;
 
         public float rollInputTimer;
         public bool rollFlag;
@@ -139,7 +139,7 @@ namespace SG
 
         private void HandleConsumeItemInput()
         {
-            if(consume_Input)
+            if (consume_Input)
             {
                 //아이템 소비
                 playerSkillManager.UseConsumeItem();
@@ -243,7 +243,7 @@ namespace SG
 
         private void HandleInteractingInput()
         {
-            inputActions.PlayerActions.A.performed += i => a_Input = true;
+            inputActions.PlayerActions.A.canceled += i => a_Input = true;
 
             //Set the UI to the Interactable Object's Text
             //Set the Text Popup to true
@@ -319,12 +319,11 @@ namespace SG
 
         private void ChangePlayerMotionToEquip()
         {
-            if (playerManager.isUnEquip == true)
-            {
-                playerManager.isUnEquip = false;
-                playerManager.AnimationLayerHandler.HandlePlayerEquip();
-                activeWeaponObject.SetActiveHandWeapon(0); //0 => SetHand true
-            }
+            playerManager.isUnEquip = false;
+            playerManager.AnimationLayerHandler.HandlePlayerEquip();
+            //문제
+            //activeWeaponObject.SetActiveHandWeapon(0); //0 => SetHand true
+            activeWeaponObject.SetActiveHandWeapon(true);
         }
     }
 }

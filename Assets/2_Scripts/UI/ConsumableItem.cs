@@ -9,7 +9,6 @@ namespace SG
     public class ConsumableItem : Item
     {
         [Header("Consumable Status")]
-        public string kind;
         public int coolTime; //재사용 쿨타임
         public bool isArmed;
 

@@ -39,6 +39,11 @@ namespace SG {
 
             worldmapButton = UtilHelper.Find<Button>(transform, "Select WorldMap");
             questButton = UtilHelper.Find<Button>(transform, "Select Quest");
+            if(questButton != null)
+            {
+                questButton.onClick.AddListener(GUIManager.instance.questPanel.OpenQuestPanelEvent);
+                questButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+            }
             achieveButton = UtilHelper.Find<Button>(transform, "Select Achivement");
             screenshotButton = UtilHelper.Find<Button>(transform, "Select Screenshot");
             optionButton = UtilHelper.Find<Button>(transform, "Select GameOptions");

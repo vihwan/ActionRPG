@@ -12,9 +12,8 @@ namespace SG
         public bool isArmed;
 
         [Header("Equipment Status")]
-        public string kind;
-        public int currentDurability;
-        public int maxDurability;
+       // public int currentDurability;
+       // public int maxDurability;
         [Range(0, 5)]
         public int enforceLevel = 0; //강화 수치
 

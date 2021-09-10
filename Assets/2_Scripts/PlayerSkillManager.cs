@@ -50,7 +50,7 @@ namespace SG
                 Debug.LogError(e);
             }
 
-            SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumable);
+            SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumableItem);
         }
 
         public void SetPlayerHUDSkillSlot(List<SkillSlot_Current> skillList)

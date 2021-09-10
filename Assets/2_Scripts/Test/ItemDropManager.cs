@@ -9,7 +9,7 @@ namespace SG
         public static ItemDropManager Instance;
 
         [Header("DropItem Prefabs")]
-        [SerializeField] private DropItem dropItemPrefab;
+        [SerializeField] private DropItemBox dropItemPrefab;
 
         [Header("Rarity Material")]
         public Material rare1_material;
@@ -21,7 +21,7 @@ namespace SG
         {
             Instance = this;
 
-            dropItemPrefab = Resources.Load<DropItem>("Prefabs/DropItem");
+            dropItemPrefab = Resources.Load<DropItemBox>("Prefabs/DropItemBox");
 
             rare1_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star1");
             rare2_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star2");
@@ -29,12 +29,11 @@ namespace SG
             rare4_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star4");
             rare5_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star5");
         }
-
-        public void GenerateDropItem(Item item, Transform dropTransfom)
+        public void GenerateDropItemBox(List<Item> items, Transform dropTransfom)
         {
-            DropItem newDropItem = Instantiate(dropItemPrefab, GetRandomPosition(dropTransfom.position), Quaternion.identity);
-            newDropItem.SetItem(item);
-            newDropItem.GetComponentInChildren<MeshRenderer>().material = SetDropItemRarity(item);
+            DropItemBox newDropItem = Instantiate(dropItemPrefab, GetRandomPosition(dropTransfom.position), Quaternion.identity);
+            newDropItem.SetItem(items);
+            newDropItem.GetComponentInChildren<MeshRenderer>().material = SetDropItemRarity(items);
         }
 
         private Vector3 GetRandomPosition(Vector3 position)
@@ -48,9 +47,18 @@ namespace SG
             return position;
         }
 
-        private Material SetDropItemRarity(Item item)
+        private Material SetDropItemRarity(List<Item> items)
         {
-            switch (item.rarity)
+            int rarity = 0;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if(rarity < items[i].rarity)
+                {
+                    rarity = items[i].rarity;
+                }
+            }
+
+            switch (rarity)
             {
                 case 1: return rare1_material;
                 case 2: return rare2_material;

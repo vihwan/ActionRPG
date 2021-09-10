@@ -214,7 +214,8 @@ namespace SG
             equipKind.text = equipItem.kind;
             equipEnforceLevel.text = "+" + equipItem.enforceLevel;
             equipSetName.text = null;
-            equipDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
+            equipDurability.text = null;
+           // equipDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
             equipExplain.text = equipItem.itemDescription;
 
             SetItemStatusText(equipStatus, equipItem);
@@ -237,7 +238,8 @@ namespace SG
             equipKind_Cf.text = equipItem.kind;
             equipEnforceLevel_Cf.text = "+" + equipItem.enforceLevel;
             equipSetName_Cf.text = null;
-            equipDurability_Cf.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
+            equipDurability_Cf = null;
+          //  equipDurability_Cf.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
             equipExplain_Cf.text = equipItem.itemDescription;
 
             SetItemStatusText(equipStatus_Cf, equipItem);

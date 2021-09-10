@@ -14,9 +14,6 @@ namespace SG
         private int horizontal;
         public bool canRotate;
         public Animator Anim { get => anim; private set => anim = value; }
-
-        private InputHandler inputHandler;
-
         public void Initalize()
         {
             playerManager = GetComponentInParent<PlayerManager>();
@@ -24,8 +21,6 @@ namespace SG
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
-
-            inputHandler = GetComponentInParent<InputHandler>();
         }
 
         public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
@@ -99,19 +94,6 @@ namespace SG
                 Anim.CrossFade("Locomotion", 0.3f);
             }
         }
-/*        IEnumerator CheckAnimationUnEquip_NotMove()
-        {
-            while(!Anim.GetCurrentAnimatorStateInfo(0).IsName("WeaponChange_UnEquip_NotMove"))
-            {
-                if(inputHandler.MoveAmount > 0)
-                {
-                    Debug.Log("동작동작");
-                    Anim.Play("Locomotion");
-                    break;
-                }
-                yield return null;
-            }
-        }*/
 
         public void CanRotate()
         {

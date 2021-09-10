@@ -49,6 +49,7 @@ namespace SG
         public Sprite itemIcon;
         public string itemName;
         public ItemType itemType;
+        public string kind;
         public int quantity;
         [TextArea]
         public string itemDescription;

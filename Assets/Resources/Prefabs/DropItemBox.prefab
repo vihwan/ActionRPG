@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 1425504954687950844}
   - component: {fileID: 1425504954687950846}
   m_Layer: 0
-  m_Name: DropItem
-  m_TagString: DropItem
+  m_Name: DropItemBox
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1425504954687950846
 MonoBehaviour:
@@ -59,11 +59,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactName: 
-  interactIcon: {fileID: 0}
-  interactableText: 
+  interactIcon: {fileID: 21300000, guid: a84c186e3c3244e7dbb22262123759a9, type: 3}
+  interactableText: "\uC544\uC774\uD15C \uD68D\uB4DD"
   shopNameText: 
-  canInteract: 0
-  item: {fileID: 0}
+  canInteract: 1
+  items: []
 --- !u!1 &2410771412778194661
 GameObject:
   m_ObjectHideFlags: 0

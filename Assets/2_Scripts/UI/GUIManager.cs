@@ -14,14 +14,16 @@ namespace SG
         [Header("HUD Windows")]
         [SerializeField] private GameObject hudWindows;
         [SerializeField] private HealthBar healthBar;
-        [SerializeField] private QuickSlotUI quickSlotUI;
+        [SerializeField] internal QuickSlotUI quickSlotUI;
         [SerializeField] private InteractableUI interactableUI;
 
         [Header("UI Windows")]
         [SerializeField] private SelectMenu selectMenu;
         [SerializeField] internal WindowPanel windowPanel;
         [SerializeField] internal ShopPanel shopPanel;
+        [SerializeField] internal QuestPanel questPanel;
         [SerializeField] public GameObject dialogObject;
+        [SerializeField] internal LootWindowUI lootWindow;
 
         [Header("PopUp Generator")]
         [SerializeField] internal PopUpGenerator popUpGenerator;
@@ -53,17 +55,25 @@ namespace SG
             if (windowPanel != null)
                 windowPanel.Init();
 
-            selectMenu = GetComponentInChildren<SelectMenu>(true);
-            if (selectMenu != null)
-                selectMenu.Init();
-
             shopPanel = GetComponentInChildren<ShopPanel>(true);
             if (shopPanel != null)
                 shopPanel.Init();
 
+            questPanel = GetComponentInChildren<QuestPanel>(true);
+            if (questPanel != null)
+                questPanel.Init();
+
+            lootWindow = GetComponentInChildren<LootWindowUI>(true);
+            if (lootWindow != null)
+                lootWindow.Init();
+
             popUpGenerator = GetComponent<PopUpGenerator>();
             if (popUpGenerator != null)
                 popUpGenerator.Init();
+
+            selectMenu = GetComponentInChildren<SelectMenu>(true);
+            if (selectMenu != null)
+                selectMenu.Init();
 
             CloseSelectMenuWindow();
         }
@@ -74,7 +84,10 @@ namespace SG
                windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true) ||
                windowPanel.inventoryWindowUI.gameObject.activeSelf.Equals(true) ||
                windowPanel.enforceWindowUI.gameObject.activeSelf.Equals(true) ||
-               shopPanel.gameObject.activeSelf.Equals(true))
+               shopPanel.gameObject.activeSelf.Equals(true) ||
+               lootWindow.gameObject.activeSelf.Equals(true) ||
+               questPanel.gameObject.activeSelf.Equals(true)
+               )
             {
                 return true;
             }
@@ -99,6 +112,7 @@ namespace SG
                 windowPanel.CloseInventoryWindowPanel();
                 windowPanel.CloseEnforceWindowPanel();
                 shopPanel.CloseShopPanel();
+                questPanel.CloseQuestPanel();
             }
         }
         public void SetActiveHudWindows(bool status)
