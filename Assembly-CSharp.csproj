@@ -125,11 +125,13 @@
     <Compile Include="Assets\2_Scripts\Test\Quest\ObjectiveDisplay.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\PlayerQuestInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\Quest.cs" />
-    <Compile Include="Assets\2_Scripts\Test\Quest\QuestDetail.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestDisplay.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestEditor.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestObjective.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Quest\QuestTarget.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Quest\RewardItemSlot.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Quest\RewardItem_InfoPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\ShopListSlot.cs" />
     <Compile Include="Assets\2_Scripts\Test\ShopPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\Shop_InfoPanel.cs" />

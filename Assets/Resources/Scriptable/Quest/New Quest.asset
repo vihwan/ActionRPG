@@ -15,16 +15,32 @@ MonoBehaviour:
   questName: "\uC9D1\uC5D0 \uAC00\uACE0 \uC2F6\uB2E4."
   description: "\uB2E4 \uB54C\uB824\uCE58\uACE0 \uC9D1\uAC00\uC11C \uC790\uACE0\uC2F6\uB2E4."
   currentQuestObjective:
-    index: 0
-    title: 
+    index: 1
+    title: "\uCE68\uB300\uC5D0 \uB215\uAE30"
     kind: 0
-    state: 0
-  currentObjectiveState: 0
+    objectiveTarget: 
+    state: 1
+    progress: 0
+    currentProgressCount: 0
+    maxProgressCount: 1
   objectives:
   - index: 0
-    title: "\uC9D1\uC5D0 \uB3C4\uCC29\uD558\uAE30"
+    title: "\uBAAC\uC2A4\uD130 \uC0AC\uB0E5"
+    kind: 1
+    objectiveTarget: "\uC2A4\uD1A4 \uACE8\uB818"
+    state: 2
+    progress: 1
+    currentProgressCount: 1
+    maxProgressCount: 1
+  - index: 1
+    title: "\uCE68\uB300\uC5D0 \uB215\uAE30"
     kind: 0
-    state: 0
+    objectiveTarget: 
+    state: 1
+    progress: 0
+    currentProgressCount: 0
+    maxProgressCount: 1
   rewardExp: 10000
   rewardGold: 300
-  rewardItemList: []
+  rewardItemList:
+  - {fileID: 11400000, guid: 223b31672848b724f90d9d0c782648ec, type: 2}

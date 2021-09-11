@@ -23,11 +23,11 @@ namespace SG
         public void SetObjectiveDisplay(QuestObjective questObjective)
         {
             titleText.text = questObjective.title;
-            countText.text = questObjective.progress * 100 + "%";
+            countText.text = questObjective.Progress * 100 + "%";
         }
         public void UpdateCountText(QuestObjective questObjective)
         {
-            countText.text = questObjective.progress * 100 + "%";
+            countText.text = questObjective.Progress * 100 + "%";
         }
     }
 }

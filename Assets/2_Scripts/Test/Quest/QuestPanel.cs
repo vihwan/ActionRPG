@@ -9,11 +9,12 @@ namespace SG
 {
     public class QuestPanel : MonoBehaviour
     {
-
         [SerializeField] private Button closeBtn;
 
         [Header("Quest List")]
-        private List<Quest> questPanelList = new List<Quest>();
+        private List<QuestDisplay> questPanelList = new List<QuestDisplay>();
+        private List<ObjectiveDisplay> objectiveDisplays = new List<ObjectiveDisplay>();
+        private List<RewardItemSlot> rewardSlots = new List<RewardItemSlot>();
 
         [Header("GameObjects")]
         public GameObject detailsObject;
@@ -28,9 +29,10 @@ namespace SG
         [Header("Prefabs")]
         [SerializeField] public QuestDisplay questDisplayPrefab;
         [SerializeField] public ObjectiveDisplay objectiveDisplayPrefab;
-        [SerializeField] public InventoryContentSlot inventoryContentSlotPrefab;
+        [SerializeField] public RewardItemSlot rewardItemSlotPrefab;
 
         private InputHandler inputHandler;
+        public RewardItem_InfoPanel infoPanel;
         public void Init()
         {
             inputHandler = FindObjectOfType<InputHandler>();
@@ -57,6 +59,10 @@ namespace SG
             if (rewardExpGoldText == null)
                 rewardExpGoldText = UtilHelper.Find<TMP_Text>(t, "Details/Bottom/RewardExpGoldText");
 
+            infoPanel = GetComponentInChildren<RewardItem_InfoPanel>(true);
+            if (infoPanel != null)
+                infoPanel.Init();
+
             CloseQuestPanel();
         }
 
@@ -65,6 +71,7 @@ namespace SG
             SetQuestPanel();
             OpenQuestPanel();
             detailsObject.SetActive(false);
+            infoPanel.gameObject.SetActive(false);
         }
 
         public void OpenQuestPanel()
@@ -79,14 +86,25 @@ namespace SG
 
         private void SetQuestPanel()
         {
+            //세팅 초기화. 
+            if(questPanelList.Count > 0)
+            {
+                for (int i = 0; i < questPanelList.Count; i++)
+                {
+                    Destroy(questPanelList[i].gameObject);
+                }
+                questPanelList.Clear();
+            }
+
             //플레이어가 소유중인 퀘스트의 수만큼 QuestDisplay를 생성
             for (int i = 0; i < PlayerQuestInventory.Instance.Quests.Count; i++)
             {
                 Quest quest = PlayerQuestInventory.Instance.Quests[i];
                 QuestDisplay qd = Instantiate(questDisplayPrefab, questListTransform) as QuestDisplay;
-                qd.Initialize();
+                qd.Init();
                 qd.SetQuestDisplay(quest);
                 qd.AddClickBtnAction(() => QuestPanelAction(quest));
+                questPanelList.Add(qd);
             }
         }
 
@@ -99,22 +117,46 @@ namespace SG
 
         private void SetObjectiveDisplay(Quest quest)
         {
-            for (int i = 0; i < quest.objectives.Count; i++)
+            if(objectiveDisplays.Count > 0)
             {
-                ObjectiveDisplay od = Instantiate(objectiveDisplayPrefab, objectiveDisplayTransform) as ObjectiveDisplay;
-                od.Initailize();
-                od.SetObjectiveDisplay(quest.objectives[i]);
+                for (int i = 0; i < objectiveDisplays.Count; i++)
+                {
+                    Destroy(objectiveDisplays[i].gameObject);
+                }
+                objectiveDisplays.Clear();
             }
 
+            for (int i = 0; i < quest.objectives.Count; i++)
+            {
+                if(quest.objectives[i].state.Equals(QuestObjectiveState.Active) || 
+                   quest.objectives[i].state.Equals(QuestObjectiveState.Complete))
+                {
+                    ObjectiveDisplay od = Instantiate(objectiveDisplayPrefab, objectiveDisplayTransform) as ObjectiveDisplay;
+                    od.Initailize();
+                    od.SetObjectiveDisplay(quest.objectives[i]);
+                    objectiveDisplays.Add(od);
+                }
+            }
             detailsDescriptionText.gameObject.transform.SetAsLastSibling();
             detailsDescriptionText.text = quest.description;
         }
-
         private void SetRewardListDisplay(Quest quest)
         {
+            if(rewardSlots.Count > 0)
+            {
+                for (int i = 0; i < rewardSlots.Count; i++)
+                {
+                    Destroy(rewardSlots[i].gameObject);
+                }
+                rewardSlots.Clear();
+            }
+
             for (int i = 0; i < quest.rewardItemList.Count; i++)
             {
-                InventoryContentSlot ics = Instantiate(inventoryContentSlotPrefab, rewardListTransform) as InventoryContentSlot;
+                RewardItemSlot ris = Instantiate(rewardItemSlotPrefab, rewardListTransform) as RewardItemSlot;
+                ris.Init();
+                ris.AddItem(quest.rewardItemList[i]);
+                rewardSlots.Add(ris);
             }
             SetRewardExpGoldText(quest);
         }
@@ -128,6 +170,11 @@ namespace SG
         private void OpenDetails()
         {
             detailsObject.SetActive(true);
+        }
+
+        public void CloseDetails()
+        {
+            detailsObject.SetActive(false);
         }
     }
 }

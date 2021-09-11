@@ -19,7 +19,7 @@ namespace SG
 
         private Action clickBtnAction;
         // Start is called before the first frame update
-        public void Initialize()
+        public void Init()
         {
             icon = UtilHelper.Find<Image>(transform, "Icon");
             titleText = UtilHelper.Find<TMP_Text>(transform, "Title");

@@ -7,6 +7,8 @@ namespace SG
 {
     public class PlayerManager : CharacterManager
     {
+        public static PlayerManager Instance;
+
         private InputHandler inputHandler;
         private Animator anim;
         private CameraHandler cameraHandler;
@@ -29,6 +31,13 @@ namespace SG
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
+
+        private void Awake()
+        {
+            if(Instance == null)
+                Instance = this;
+        }
+
         private void Start()
         {
             if (CameraHandler.Instance != null)
