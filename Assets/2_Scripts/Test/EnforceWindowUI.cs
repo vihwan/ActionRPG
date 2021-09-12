@@ -34,6 +34,7 @@ namespace SG
         [SerializeField] internal Button backBtn;
 
         [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private PlayerInventory playerInventory;
 
         public void Init()
         {
@@ -69,9 +70,11 @@ namespace SG
             animText = UtilHelper.Find<TMP_Text>(transform, "EnforceText");
             if (animText != null) animText.gameObject.SetActive(false);
 
-            PlayerInventory.Instance.AddUpdateGoldText(() => UpdateGoldText());
+
+            playerInventory = inputHandler.GetComponent<PlayerInventory>();
+            playerInventory.AddUpdateGoldText(() => UpdateGoldText());
         }
-        private void OnEnable()
+        public void OnOpenPanel()
         {
             userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
             if (weaponEnforceList != null)

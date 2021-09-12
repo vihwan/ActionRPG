@@ -9,7 +9,7 @@ namespace SG
         private AnimatorHandler animatorHandler;
         private InputHandler inputHandler;
 
-        private void Awake()
+        public void Init()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             inputHandler = GetComponent<InputHandler>();

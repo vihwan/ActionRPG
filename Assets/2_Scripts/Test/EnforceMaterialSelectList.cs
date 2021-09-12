@@ -62,7 +62,7 @@ namespace SG
             if (backBtn != null)
                 backBtn.onClick.AddListener(OnClickBackBtn);
 
-            enforceItemSlotPrefab = Resources.Load<EnforceItemSlot>("Prefabs/InventorySlots/EnforceItemSlotPrefab");
+            enforceItemSlotPrefab = Database.Instance.prefabDatabase.enforceItemSlot;
             RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
 
             materialInfoPanel.SetActive(false);

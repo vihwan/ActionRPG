@@ -19,13 +19,13 @@ namespace SG
         OpenEnforce,
         EndDialog,
         GetMoney, //디버그용
+        Yes,  //확인, 수락 등의 선택지
+        No,   //취소, 거절 등의 선택지
     }
 
     [System.Serializable]
     public class Dialogue
     {
-        public string characterName;
-        public Sprite image;
         public Sentences[] sentences;
     }
 

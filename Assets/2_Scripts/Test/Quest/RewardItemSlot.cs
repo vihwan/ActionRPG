@@ -43,10 +43,11 @@ namespace SG
 
             questPanel = GetComponentInParent<QuestPanel>();
         }
-        public void AddItem(Item item)
+        public void AddItem(Item item, int itemCount)
         {
             this.item = item;
             icon.sprite = item.itemIcon;
+            quantityText.text = itemCount.ToString();
 
             if (item.GetType().Equals(typeof(ConsumableItem)) ||
                 item.GetType().Equals(typeof(IngredientItem))

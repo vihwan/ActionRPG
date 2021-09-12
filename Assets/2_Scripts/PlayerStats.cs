@@ -114,14 +114,11 @@ namespace SG
         public int CriticalDamage { get => criticalDamage; private set => criticalDamage = value; }
 
 
-        private void Awake()
+        public void Init()
         {
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             playerManager = GetComponent<PlayerManager>();
-        }
 
-        private void Start()
-        {
             MaxHealth = SetMaxHealthFromHealthLevel();
             CurrentHealth = MaxHealth;
             MaxMana = 100;

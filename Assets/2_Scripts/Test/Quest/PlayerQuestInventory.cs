@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,8 +13,10 @@ namespace SG
         // 플레이어가 가지고 있는 퀘스트를 관리하는 매니저입니다.
         [SerializeField] private List<Quest> quests;
 
-        [SerializeField,ReadOnly] 
-        internal EnemyManager recentKilledEnemy;
+        [Header("Recent Get Info")]
+        [SerializeField, ReadOnly] internal EnemyManager recentKilledEnemy;
+        [SerializeField, ReadOnly] internal GoalPosition reachGoalPosition;
+        [SerializeField, ReadOnly] internal NPCManager recentTalkNpc;
 
         public delegate void QuestManagerDelegate(PlayerQuestInventory sender);
         public delegate void QuestAddedDelegate(Quest addedQuest);
@@ -32,20 +35,16 @@ namespace SG
         }
 
         // Start is called before the first frame update
-        private void Awake()
+        public void Init()
         {
             if (Instance == null)
                 Instance = this;
-        }
 
-        private void Start()
-        {
             for (int i = 0; i < quests.Count; i++)
             {
                 quests[i].Init();
             }
         }
-
         private void Update()
         {
             for (int i = 0; i < quests.Count; i++)
@@ -53,7 +52,14 @@ namespace SG
                 quests[i].currentQuestObjective.UpdateObjective();
             }
         }
+        public void AddQuest(Quest quest)
+        {
+            quest.Init();
+            Quests.Add(quest);
+            Debug.Log("퀘스트가 등록되었습니다. : " + quest.questName);
+        }
 
+        #region SetRecent Variables
         public void SetRecentKilledEnemy(EnemyManager enemyManager)
         {
             recentKilledEnemy = enemyManager;
@@ -63,6 +69,33 @@ namespace SG
         {
             return recentKilledEnemy;
         }
+
+        public void SetReachGoalPosition(GoalPosition goalPosition)
+        {
+            reachGoalPosition = goalPosition;
+        }
+
+        public GoalPosition GetReachGoalPosition()
+        {
+            return reachGoalPosition;
+        }
+
+        internal void DestroyReachGoalObject()
+        {
+            Destroy(reachGoalPosition.gameObject);
+        }
+
+        public void SetRecentTalkNpc(NPCManager npc)
+        {
+            recentTalkNpc = npc;
+        }
+
+        internal NPCManager GetRecentTalkNpc()
+        {
+            return recentTalkNpc;
+        }
+
+        #endregion
     }
 }
 

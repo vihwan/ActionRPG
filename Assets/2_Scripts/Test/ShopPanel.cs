@@ -24,6 +24,7 @@ namespace SG
 
         [Header("Need Component"), HideInInspector]
         private InputHandler inputHandler;
+        private PlayerInventory playerInventory;
 
         public void Init()
         {
@@ -33,7 +34,7 @@ namespace SG
             titleText = UtilHelper.Find<TMP_Text>(t, "TitleText");
             userGoldText = UtilHelper.Find<TMP_Text>(t, "UserGold/priceText");
             shopListSlotCreateTransform = t.Find("ItemList/Scroll View/Viewport/Content").transform;
-            shopListSlotPrefab = Resources.Load<ShopListSlot>("Prefabs/ShopSlots/ShopListSlot");
+            shopListSlotPrefab = Database.Instance.prefabDatabase.shopListSlot;
 
             infoPanel = GetComponentInChildren<Shop_InfoPanel>(true);
             if (infoPanel != null)
@@ -43,7 +44,9 @@ namespace SG
             if (closeBtn != null)
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag()); //닫기 기능 수행
 
-            PlayerInventory.Instance.AddUpdateGoldText(() => UpdateUserGoldText());
+
+            playerInventory = inputHandler.GetComponent<PlayerInventory>();
+            playerInventory.AddUpdateGoldText(() => UpdateUserGoldText());
             CloseShopPanel();
         }
         public void SetShopPanel(string shopName)

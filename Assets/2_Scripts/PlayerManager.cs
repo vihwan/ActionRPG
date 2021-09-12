@@ -9,10 +9,16 @@ namespace SG
     {
         public static PlayerManager Instance;
 
+        [SerializeField] public string playerName;
+
         private InputHandler inputHandler;
         private Animator anim;
         private CameraHandler cameraHandler;
         private PlayerLocomotion playerLocomotion;
+        private PlayerStats playerStats;
+        private PlayerInventory playerInventory;
+        private PlayerSkillManager playerSkillManager;
+        private PlayerQuestInventory playerQuestInventory;
         private InteractableUI interactableUI;
         [SerializeField] private Interactable interactableObject;
         private AnimationLayerHandler animationLayerHandler;
@@ -32,9 +38,9 @@ namespace SG
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
 
-        private void Awake()
+        public void Awake()
         {
-            if(Instance == null)
+            if (Instance == null)
                 Instance = this;
         }
 
@@ -42,12 +48,41 @@ namespace SG
         {
             if (CameraHandler.Instance != null)
                 cameraHandler = CameraHandler.Instance;
+        }
 
+        public void Init()
+        {
             inputHandler = GetComponent<InputHandler>();
-            anim = GetComponentInChildren<Animator>();
+            if (inputHandler != null)
+                inputHandler.Init();
+
             playerLocomotion = GetComponent<PlayerLocomotion>();
+            if (playerLocomotion != null)
+                playerLocomotion.Init();
+
+            playerInventory = GetComponent<PlayerInventory>();
+            if (playerInventory != null)
+                playerInventory.Init();
+
+            playerStats = GetComponent<PlayerStats>();
+            if (playerStats != null)
+                playerStats.Init();
+
+            playerSkillManager = GetComponent<PlayerSkillManager>();
+            if (playerSkillManager != null)
+                playerSkillManager.Init();
+
+            playerQuestInventory = GetComponent<PlayerQuestInventory>();
+            if (playerQuestInventory != null)
+                playerQuestInventory.Init();
+
+            anim = GetComponentInChildren<Animator>();
+
             interactableUI = FindObjectOfType<InteractableUI>();
+
             animationLayerHandler = GetComponent<AnimationLayerHandler>();
+            if (animationLayerHandler != null)
+                animationLayerHandler.Init();
         }
 
         private void Update()

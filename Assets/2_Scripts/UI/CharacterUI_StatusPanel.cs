@@ -43,7 +43,7 @@ namespace SG
             playerStats = FindObjectOfType<PlayerStats>();
         }
 
-        public void OnEnable()
+        public void OnOpenPanel()
         {
             SetParameter();
         }

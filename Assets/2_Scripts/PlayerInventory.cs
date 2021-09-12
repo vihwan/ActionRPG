@@ -70,17 +70,15 @@ namespace SG
             }
         }
 
-        private void Awake()
+        public void Init()
         {
             Instance = this;
 
-            //Default Weapon Set
-            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
             playerStats = GetComponent<PlayerStats>();
             if (playerStats == null)
                 Debug.LogWarning("PlayerStats가 참조되지 않았습니다.");
 
-            //아이템 생성 및 초기화
+            //아이템 생성 및 초기화 (임시)
             LoadWeaponInventoryList();
             LoadEquipmentInventoryList();
             LoadConsumableInventoryList();
@@ -89,6 +87,10 @@ namespace SG
             //개별 장비 리스트를 딕셔너리에 추가
             AddEquipmentInventoryListToDictionary();
 
+            //Default Weapon Set
+            weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();
+            if (weaponSlotManager != null)
+                weaponSlotManager.Init();
 
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
@@ -100,15 +102,14 @@ namespace SG
         #endregion
         private void LoadWeaponInventoryList()
         {
-            WeaponItem[] items;
-            items = Resources.LoadAll<WeaponItem>("Scriptable/Weapon");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.weaponItems.Count; i++)
             {
-                WeaponItem weaponItem = Instantiate(items[i]);
-                weaponsInventory.Add(weaponItem);
+                WeaponItem weaponItem = Instantiate(Database.GetItemByID(ItemType.Weapon, i)) as WeaponItem;
+                weaponItem.quantity = 1;
                 weaponItem.isArmed = false;
+                weaponsInventory.Add(weaponItem);
             }
-
+          
             //기본무기를 드래곤블레이드로 - "임시"
             for (int i = 0; i < weaponsInventory.Count; i++)
             {
@@ -124,51 +125,44 @@ namespace SG
         }
         private void LoadEquipmentInventoryList()
         {
-            EquipItem[] items;
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Tops");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.topsItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Tops, i)) as EquipItem;
                 topsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Bottoms");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.bottomsItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Bottoms, i)) as EquipItem;
                 bottomsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Gloves");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.glovesItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Gloves, i)) as EquipItem;
                 glovesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Shoes");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.shoesItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Shoes, i)) as EquipItem;
                 shoesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/Accessory");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.accessoryItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Accessory, i)) as EquipItem;
                 accessoryInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            items = Resources.LoadAll<EquipItem>("Scriptable/Equipment/SpecialEquip");
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < Database.Instance.itemDataBase.specialEquipItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(items[i]);
+                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.SpecialEquip, i)) as EquipItem;
                 specialEquipInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
@@ -188,12 +182,9 @@ namespace SG
         }
         private void LoadConsumableInventoryList()
         {
-            ConsumableItem[] items;
-            items = Resources.LoadAll<ConsumableItem>("Scriptable/Consumable");
-
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
-                ConsumableItem consumeItem = Instantiate(items[i]);
+                ConsumableItem consumeItem = Instantiate(Database.GetItemByID(ItemType.Consumable, i)) as ConsumableItem;
                 consumableInventory.Add(consumeItem);
                 consumeItem.isArmed = false;
                 consumeItem.quantity = Random.Range(1, 6);
@@ -204,12 +195,9 @@ namespace SG
         }
         private void LoadIngredientInventoryList()
         {
-            IngredientItem[] items;
-            items = Resources.LoadAll<IngredientItem>("Scriptable/Ingredient");
-
-            for (int i = 0; i < items.Length; i++)
+            for (int i = 0; i < 3; i++)
             {
-                IngredientItem ingredientItem = Instantiate(items[i]);
+                IngredientItem ingredientItem = Instantiate(Database.GetItemByID(ItemType.Ingredient, i)) as IngredientItem;
                 ingredientInventory.Add(ingredientItem);
                 ingredientItem.quantity = Random.Range(1, 30);
             }
@@ -345,6 +333,33 @@ namespace SG
             IngredientItem newItem = Instantiate(ingredientItem);
             newItem.quantity = count;
             ingredientInventory.Add(newItem);
+        }
+
+        public int GetHaveItem(ConsumableItem consumableItem)
+        {
+            //탐색을 돌려서 만약에 같은 이름의 아이템이 이미 있다면, 갯수만 늘리고 종료
+            for (int i = 0; i < consumableInventory.Count; i++)
+            {
+                if (consumableInventory[i].itemName == consumableItem.itemName)
+                {
+                    return consumableInventory[i].quantity;
+                }
+            }
+
+            return 0;
+        }
+
+        public int GetHaveItem(IngredientItem ingredientItem)
+        {
+            //탐색을 돌려서 만약에 같은 이름의 아이템이 이미 있다면, 갯수만 늘리고 종료
+            for (int i = 0; i < ingredientInventory.Count; i++)
+            {
+                if (ingredientInventory[i].itemName == ingredientItem.itemName)
+                {
+                    return ingredientInventory[i].quantity;
+                }
+            }
+            return 0;
         }
 
         //골드 획득

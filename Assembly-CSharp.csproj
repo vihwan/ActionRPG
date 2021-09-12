@@ -74,6 +74,7 @@
     <Compile Include="Assets\2_Scripts\EnemyManager.cs" />
     <Compile Include="Assets\2_Scripts\EnemyStats.cs" />
     <Compile Include="Assets\2_Scripts\EnumComparer.cs" />
+    <Compile Include="Assets\2_Scripts\GameManager.cs" />
     <Compile Include="Assets\2_Scripts\IngredientItem.cs" />
     <Compile Include="Assets\2_Scripts\InputHandler.cs" />
     <Compile Include="Assets\2_Scripts\Interactable.cs" />
@@ -100,9 +101,13 @@
     <Compile Include="Assets\2_Scripts\ScreenshotHandler.cs" />
     <Compile Include="Assets\2_Scripts\SerializableDictionary.cs" />
     <Compile Include="Assets\2_Scripts\Skill.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Database\Database.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Database\ItemDataBase.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Database\PrefabDataBase.cs" />
     <Compile Include="Assets\2_Scripts\Test\Dialogue.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueChoiceBox.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueManager.cs" />
+    <Compile Include="Assets\2_Scripts\Test\DialogueQuestTrigger.cs" />
     <Compile Include="Assets\2_Scripts\Test\DialogueTrigger.cs" />
     <Compile Include="Assets\2_Scripts\Test\DropItemBox.cs" />
     <Compile Include="Assets\2_Scripts\Test\EnemyInventory.cs" />
@@ -121,13 +126,16 @@
     <Compile Include="Assets\2_Scripts\Test\LootWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\Test\Message_GetItem.cs" />
     <Compile Include="Assets\2_Scripts\Test\MessagesList.cs" />
+    <Compile Include="Assets\2_Scripts\Test\NPCManager.cs" />
     <Compile Include="Assets\2_Scripts\Test\PopUpGenerator.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Quest\GoalPosition.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\ObjectiveDisplay.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\PlayerQuestInventory.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\Quest.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestDisplay.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestEditor.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestObjective.cs" />
+    <Compile Include="Assets\2_Scripts\Test\Quest\QuestObjectivePropertyDrawer.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestPanel.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\QuestTarget.cs" />
     <Compile Include="Assets\2_Scripts\Test\Quest\RewardItemSlot.cs" />
@@ -174,6 +182,7 @@
     <Compile Include="Assets\2_Scripts\UI\WeaponInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\UI\WeaponItem.cs" />
     <Compile Include="Assets\2_Scripts\UI\WindowPanel.cs" />
+    <Compile Include="Assets\2_Scripts\Util\CustomDrawer.cs" />
     <Compile Include="Assets\2_Scripts\Util\ReadOnlyDrawer.cs" />
     <Compile Include="Assets\2_Scripts\Util\UtilHelper.cs" />
     <Compile Include="Assets\2_Scripts\WeaponHolderSlot.cs" />
@@ -228,6 +237,7 @@
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\FollowTrackingCamera.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonCharacter.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonUserControl.cs" />
+    <Compile Include="Assets\Terasurware\Classes\Entity_item1.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />

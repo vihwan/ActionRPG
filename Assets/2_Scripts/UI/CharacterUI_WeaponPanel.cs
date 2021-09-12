@@ -95,7 +95,7 @@ namespace SG
             comparisonPanel.SetActive(false);
         }
 
-        public void OnEnable()
+        public void OnOpenPanel()
         {
             SetParameter(PlayerInventory.Instance.currentWeapon);
         }

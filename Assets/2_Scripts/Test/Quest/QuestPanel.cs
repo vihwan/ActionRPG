@@ -63,6 +63,8 @@ namespace SG
             if (infoPanel != null)
                 infoPanel.Init();
 
+            rewardItemSlotPrefab = Database.Instance.prefabDatabase.rewardItemSlot;
+
             CloseQuestPanel();
         }
 
@@ -155,7 +157,7 @@ namespace SG
             {
                 RewardItemSlot ris = Instantiate(rewardItemSlotPrefab, rewardListTransform) as RewardItemSlot;
                 ris.Init();
-                ris.AddItem(quest.rewardItemList[i]);
+                ris.AddItem(quest.rewardItemList[i].rewardItem, quest.rewardItemList[i].itemCount);
                 rewardSlots.Add(ris);
             }
             SetRewardExpGoldText(quest);

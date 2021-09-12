@@ -23,7 +23,7 @@ namespace SG
 
             dropItemPrefab = Resources.Load<DropItemBox>("Prefabs/DropItemBox");
 
-            rare1_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star1");
+            rare1_material = Database.Instance.prefabDatabase.materials[0];
             rare2_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star2");
             rare3_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star3");
             rare4_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star4");

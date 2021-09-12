@@ -95,31 +95,35 @@ namespace SG
         {
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
-            //UpdateCharacterWindowUI();
+            statusPanel.OnOpenPanel();
         }
 
         public void OpenWeaponPanel()
         {
             CloseAllRightPanel();
             weaponPanel.gameObject.SetActive(true);
+            weaponPanel.OnOpenPanel();
         }
 
         public void OpenEquipmentPanel()
         {
             CloseAllRightPanel();
             equipmentPanel.gameObject.SetActive(true);
+            equipmentPanel.OnOpenPanel();
         }
 
         public void OpenSkillPanel()
         {
             CloseAllRightPanel();
             skillPanel.gameObject.SetActive(true);
+            skillPanel.OnOpenPanel();
         }
 
         public void OpenDataPanel()
         {
             CloseAllRightPanel();
             dataPanel.gameObject.SetActive(true);
+            dataPanel.OnOpenPanel();
         }
         public void CloseAllRightPanel()
         {

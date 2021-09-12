@@ -24,9 +24,11 @@ namespace SG
             characterStatus = UtilHelper.Find<TMP_Text>(t, "Status/Text");
             characterExplain = UtilHelper.Find<TMP_Text>(t, "Explain/ExplainText");
 
+        }
+        public void OnOpenPanel()
+        {
             SetCharacterDataPanel();
         }
-
         private void SetCharacterDataPanel()
         {
             characterName.text = "Diluc";

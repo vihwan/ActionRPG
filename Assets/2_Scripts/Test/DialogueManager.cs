@@ -45,12 +45,14 @@ namespace SG
 
             dialogueObject.SetActive(false);
         }
-        internal void StartDialogue(Dialogue dialogue, DialogueChoice[] choices)
+        internal void StartDialogue(NPCManager npcManager, Dialogue dialogue, DialogueChoice[] choices)
         {
-            Debug.Log("대화 시작 " + dialogue.characterName);
+            Debug.Log("대화 시작 " + npcManager.npcName);
             dialogueObject.SetActive(true);
-            SetDialogue(dialogue);
+
+            SetDialogue(npcManager,dialogue);
             SetDialogueChoices(choices);
+
             GUIManager.instance.SetActiveHudWindows(false);
 
             sentences.Clear();
@@ -61,10 +63,10 @@ namespace SG
 
             DisplayNextSentences();
         }
-        private void SetDialogue(Dialogue dialogue)
+        private void SetDialogue(NPCManager npcManager, Dialogue dialogue)
         {
-            characterImage.sprite = dialogue.image;
-            nameText.text = dialogue.characterName;
+            characterImage.sprite = npcManager.dialoguePortrait;
+            nameText.text = npcManager.npcName;
         }
         private void SetDialogueChoices(DialogueChoice[] choices)
         {
@@ -77,12 +79,17 @@ namespace SG
             }
             dialogue_Choices.Clear();
 
-            for (int i = 0; i < choices.Length; i++)
+            if (choices != null)
             {
-                GameObject go = Instantiate(choiceDialogue_Prefab, choicePanelTransform).gameObject;
-                go.GetComponent<DialogueChoiceBox>().SetDialogChoice(choices[i].selectText, choices[i].icon, choices[i].action);
-                dialogue_Choices.Add(go);
+                for (int i = 0; i < choices.Length; i++)
+                {
+                    GameObject go = Instantiate(choiceDialogue_Prefab, choicePanelTransform).gameObject;
+                    go.GetComponent<DialogueChoiceBox>().SetDialogChoice(choices[i].selectText, choices[i].icon, choices[i].action);
+                    dialogue_Choices.Add(go);
+                }
             }
+            else
+                return;
 
             for (int i = 0; i < dialogue_Choices.Count; i++)
             {

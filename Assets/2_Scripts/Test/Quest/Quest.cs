@@ -8,22 +8,30 @@ using UnityEngine;
 namespace SG
 {
     [System.Serializable]
+    public class RewardItem
+    {
+        public Item rewardItem;
+        public int itemCount;
+    }
+
+    [System.Serializable]
     [CreateAssetMenu(menuName = "Quest/New Quest")]
     public class Quest : ScriptableObject
     {
-        [Header("Quest Basics")]
+        [Header("< Quest Basics >")]
         public string questName;
         [Multiline]
         public string description;
 
-        [Header("Objective Status")]
-        [SerializeField ,ReadOnly] public QuestObjective currentQuestObjective;
+        [Header("< Objective Status >")]
+        [SerializeField ,Disable] public QuestObjective currentQuestObjective;
         public List<QuestObjective> objectives = new List<QuestObjective>();
 
-        [Header("Quest Reward")]
+        [Space(10)]
+        [Header("< Quest Reward >")]
         public int rewardExp;
         public int rewardGold;
-        public List<Item> rewardItemList = new List<Item>();
+        public List<RewardItem> rewardItemList = new List<RewardItem>();
 
         public delegate void QuestCompletedDelegate(Quest sender);
         public event QuestCompletedDelegate OnCompleted; //퀘스트가 완료될 때 실행되는 이벤트
@@ -36,6 +44,7 @@ namespace SG
                 {
                     objectives[i].ParentScript = this;
                     objectives[i].state = QuestObjectiveState.Inactive;
+                    objectives[i].currentProgressCount = 0;
                 }
 
                 Debug.Log("Objectives Found");

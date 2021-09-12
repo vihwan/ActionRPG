@@ -19,7 +19,7 @@ namespace SG
         private ActiveWeaponObject activeWeaponObject;
         private PlayerManager playerManager;
 
-        private void Awake()
+        public void Init()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
             foreach (WeaponHolderSlot item in weaponHolderSlots)

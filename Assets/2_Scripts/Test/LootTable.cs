@@ -17,7 +17,7 @@ namespace SG
                 float roll_CreateItem = Random.Range(0f, 100f);
                 if (roll_CreateItem <= loot.dropChance)
                 {
-                    int roll_ItemAmount = Random.Range(1, loot.itemMaxAmount + 1);
+                    int roll_ItemAmount = Random.Range(1, loot.itemAmount + 1);
                     loot.item.quantity = roll_ItemAmount;
 
                     dropItemList.Add(loot.item);

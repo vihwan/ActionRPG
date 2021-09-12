@@ -46,6 +46,7 @@ namespace SG
     public class Item : ScriptableObject
     {
         [Header("Item Information")]
+        public int itemId;
         public Sprite itemIcon;
         public string itemName;
         public ItemType itemType;

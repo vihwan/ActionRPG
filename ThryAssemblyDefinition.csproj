@@ -292,6 +292,21 @@
     <Reference Include="MMD4Mecanim">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Extensions/MMD4Mecanim/Scripts/MMD4Mecanim.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Terasurware/Editor/npoi/ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Terasurware/Editor/npoi/NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Terasurware/Editor/npoi/NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Terasurware/Editor/npoi/NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats">
+      <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Terasurware/Editor/npoi/NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>

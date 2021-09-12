@@ -17,11 +17,11 @@ namespace SG
         {
             interactNPC = GetComponent<InteractNPC>();
         }
-        public void TriggerDialouge()
+        public void TriggerDialouge(NPCManager npcManager)
         {
             SetDialogueChoicesAction();
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
-            dialogueManager.StartDialogue(dialogue, dialogueChoices);
+            dialogueManager.StartDialogue(npcManager, dialogue, dialogueChoices);
         }
         private void SetDialogueChoicesAction()
         {
@@ -36,7 +36,8 @@ namespace SG
                     }
                     else if (dialogueChoices[i].dialogChoiceType.Equals(DialogChoiceType.OpenQuest))
                     {
-
+                        dialogueChoices[i].AddListener(() => interactNPC.OpenQuest());
+                        continue;
                     }
                     else if (dialogueChoices[i].dialogChoiceType.Equals(DialogChoiceType.OpenEnforce))
                     {

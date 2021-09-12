@@ -59,7 +59,7 @@ namespace SG
         public float MouseY { get => mouseY; private set => mouseY = value; }
         #endregion
 
-        private void Start()
+        public void Init()
         {
             playerAttacker = GetComponent<PlayerAttackAnimation>();
             if (playerAttacker == null)

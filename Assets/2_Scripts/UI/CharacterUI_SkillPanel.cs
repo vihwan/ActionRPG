@@ -84,7 +84,7 @@ namespace SG
                 currentSkillList[i].Init();
             }
         }
-        private void OnEnable()
+        public void OnOpenPanel()
         {
             //스킬 정보창이 디폴트 상태라면, 맨 첫번째 스킬 슬롯의 정보를 보여줍니다.
             if (skillName.text.Equals("스킬 이름"))

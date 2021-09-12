@@ -30,7 +30,7 @@ namespace SG
 
 
         // Start is called before the first frame update
-        void Awake()
+        public void Init()
         {
             if (instance == null)
                 instance = this;

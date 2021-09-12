@@ -43,7 +43,7 @@ namespace SG
         public Rigidbody Rigidbody { get => rigidbody; private set => rigidbody = value; }
 
         // Start is called before the first frame update
-        private void Start()
+        public void Init()
         {
             playerManager = GetComponent<PlayerManager>();
             Rigidbody = GetComponent<Rigidbody>();

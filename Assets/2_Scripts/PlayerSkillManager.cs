@@ -31,7 +31,7 @@ namespace SG
         private QuickSlotUI quickSlotUI;
         private PlayerStats playerStats;
 
-        private void Start()
+        public void Init()
         {
             playerAttacker = GetComponent<PlayerAttackAnimation>();
             playerStats = GetComponent<PlayerStats>();

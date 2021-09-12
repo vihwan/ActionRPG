@@ -27,14 +27,15 @@ namespace SG
     {
         [ReadOnly] public int index;
         public string title;
-        public QuestObjectiveType kind;
-        [Tooltip("이름으로 목표 달성 여부를 비교하기 때문에, 정확히 기입하셔야 합니다.")]
+        public QuestObjectiveType type;
+        [Tooltip("string으로 비교하는 것이기에 정확히 입력해야합니다.")]
         public string objectiveTarget;
+        public Item objectiveItem;
         public QuestObjectiveState state;
         public QuestObjective nextObjective;
 
         [Header("Progress")]
-        [SerializeField , ReadOnly] private float progress = 0f; //목표 진행도
+        [SerializeField, ReadOnly] private float progress = 0f; //목표 진행도
         public int currentProgressCount;
         public int maxProgressCount;
 
@@ -45,6 +46,8 @@ namespace SG
             private set
             {
                 progress = value;
+                if (progress >= 1f)
+                    progress = 1f;
             }
         }
 
@@ -72,13 +75,13 @@ namespace SG
         public void UpdateObjective()
         {
             //목표 진행중일 경우, 진행도를 계산한다.
-            if (state == QuestObjectiveState.Active)
+            if (state.Equals(QuestObjectiveState.Active))
             {
-                if (kind.Equals(QuestObjectiveType.Destroy))
+                if (type.Equals(QuestObjectiveType.Destroy))
                 {
-                    if(PlayerQuestInventory.Instance.recentKilledEnemy != null)
+                    if (PlayerQuestInventory.Instance.recentKilledEnemy != null)
                     {
-                        if (PlayerQuestInventory.Instance.GetRecentKilledEnemy().enemyName == objectiveTarget)
+                        if (PlayerQuestInventory.Instance.GetRecentKilledEnemy().enemyName.Equals(objectiveTarget))
                         {
                             currentProgressCount++;
                             PlayerQuestInventory.Instance.recentKilledEnemy = null;
@@ -86,10 +89,51 @@ namespace SG
                         }
                     }
                 }
+                else if (type.Equals(QuestObjectiveType.Travel))
+                {
+                    if (PlayerQuestInventory.Instance.reachGoalPosition != null)
+                    {
+                        if (PlayerQuestInventory.Instance.GetReachGoalPosition().goalName.Equals(objectiveTarget))
+                        {
+                            currentProgressCount++;
+                            Debug.Log("목표지점 도달. 카운트 증가!");
+                            PlayerQuestInventory.Instance.DestroyReachGoalObject();
+                            PlayerQuestInventory.Instance.reachGoalPosition = null;
+                        }
+                    }
+                }
+                else if (type.Equals(QuestObjectiveType.Collect))
+                {
+                    //특정 아이템을 지정하고, 아이템 타입에 따라 인벤토리를 탐색하여 해당 아이템의 수량을 가져온다.
+                    switch (objectiveItem.itemType)
+                    {
+                        case ItemType.Consumable:
+                            currentProgressCount = PlayerInventory.Instance.GetHaveItem(objectiveItem as ConsumableItem);
+                            break;
+                        case ItemType.Ingredient:
+                            currentProgressCount = PlayerInventory.Instance.GetHaveItem(objectiveItem as IngredientItem);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else if (type.Equals(QuestObjectiveType.Talk))
+                {
+                    //최근에 대화한 상대가 퀘스트에서 대화해야하는 상대와 일치하면 카운트를 늘린다.
+                    if (PlayerQuestInventory.Instance.recentTalkNpc != null)
+                    {
+                        if (PlayerQuestInventory.Instance.GetRecentTalkNpc().npcName.Equals(objectiveTarget))
+                        {
+                            currentProgressCount++;
+                            Debug.Log("NPC와 대화. 카운트 증가!");
+                            PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
+                        }
+                    }
+                }
 
-                Progress = (float) currentProgressCount / maxProgressCount;
+                Progress = (float)currentProgressCount / maxProgressCount;
                 //진행도가 1에 근접하고 완료 상태가 아니면 완료 상태로 전환되고 OnCompleted 이벤트가 실행된다.
-                if (Mathf.Approximately(1f, Progress) && state != QuestObjectiveState.Complete)
+                if ((Mathf.Approximately(1f, Progress) || Progress >= 1) && state != QuestObjectiveState.Complete)
                 {
                     state = QuestObjectiveState.Complete;
                     Debug.Log("목표 달성");
@@ -108,6 +152,10 @@ namespace SG
                 ParentScript.currentQuestObjective = nextObjective;
                 ParentScript.currentQuestObjective.state = QuestObjectiveState.Active;
                 ParentScript.currentQuestObjective.Initialize();
+                if(ParentScript.currentQuestObjective.type.Equals(QuestObjectiveType.Talk))
+                {
+                    PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
+                }
             }
             else
             {
@@ -116,15 +164,5 @@ namespace SG
             }
             Debug.Log(string.Format("completed objective: {0}", title));
         }
-
-        //internal void SetObjectTargetType<T>()
-        //{
-        //    var t = typeof(T);
-
-        //    if(t.GetType().Equals(typeof(Item)))
-        //    {
-        //        objectiveTarget = (Item)objectiveTarget;
-        //    }          
-        //}
     }
 }

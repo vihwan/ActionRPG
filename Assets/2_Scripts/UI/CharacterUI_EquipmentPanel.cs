@@ -145,7 +145,7 @@ namespace SG
             #endregion
         }
 
-        private void OnEnable()
+        public void OnOpenPanel()
         {
             SetParameterMain(playerInventory.currentEquipmentSlots);
             SetAllEquipSlots(playerInventory.currentEquipmentSlots);

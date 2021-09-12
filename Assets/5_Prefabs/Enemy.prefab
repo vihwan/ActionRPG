@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 1732222629}
+  enemyName: "\uC2A4\uD1A4 \uACE8\uB818"
 --- !u!114 &2465438526482408187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,13 +140,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemTable:
   - item: {fileID: 11400000, guid: afdfc54b18a4ebf47869bd577f1f1bac, type: 2}
-    itemMaxAmount: 20
+    itemAmount: 12
     dropChance: 70
   - item: {fileID: 11400000, guid: 157b51418a1181041a535d38ef5d6b4c, type: 2}
-    itemMaxAmount: 30
+    itemAmount: 14
     dropChance: 100
   - item: {fileID: 11400000, guid: f841ebe5377cfd6449fe4899fa655e16, type: 2}
-    itemMaxAmount: 5
+    itemAmount: 6
     dropChance: 5
   dropItems: []
 --- !u!1 &2465438526892724224

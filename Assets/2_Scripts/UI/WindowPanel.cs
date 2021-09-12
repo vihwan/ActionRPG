@@ -53,15 +53,18 @@ namespace SG
         public void OpenInventoryWindowPanel()
         {
             inventoryWindowUI.gameObject.SetActive(true);
+            inventoryWindowUI.OnOpenPanel();
         }
 
         public void CloseInventoryWindowPanel()
         {
+            inventoryWindowUI.OnClosePanel();
             inventoryWindowUI.gameObject.SetActive(false);
         }
 
         public void OpenEnforceWindowPanel()
         {
+            enforceWindowUI.OnOpenPanel();
             enforceWindowUI.gameObject.SetActive(true);
         }
 

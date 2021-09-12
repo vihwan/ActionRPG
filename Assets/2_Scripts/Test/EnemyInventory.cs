@@ -12,7 +12,7 @@ namespace SG
     {
         public Item item;
         [Range(1, 30)] 
-        public int itemMaxAmount;
+        public int itemAmount;
         public float dropChance;
     }
     public class EnemyInventory : MonoBehaviour

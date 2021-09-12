@@ -25,10 +25,11 @@ namespace SG
         [Header("Need Component")]
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private PlayerSkillManager playerSkillManager;
+        [SerializeField] private PlayerInventory playerInventory;
         public void Init()
         {
             inputHandler = FindObjectOfType<InputHandler>();
-            playerSkillManager = FindObjectOfType<PlayerSkillManager>();
+
 
             springBoardMenu = GetComponentInChildren<InventoryMenuSpringBoard>();
             if (springBoardMenu != null)
@@ -52,10 +53,12 @@ namespace SG
             if (rightArrowBtn != null)
                 rightArrowBtn.onClick.AddListener(SetActiveRightList);
 
-            PlayerInventory.Instance.AddUpdateGoldText(() => UpdateGoldText());
+            playerSkillManager = FindObjectOfType<PlayerSkillManager>();
+            playerInventory = playerSkillManager.GetComponent<PlayerInventory>();
+            playerInventory.AddUpdateGoldText(() => UpdateGoldText());
         }
 
-        private void OnEnable()
+        public void OnOpenPanel()
         {
             for (int i = 0; i < mainContents.ContentLists.Count; i++)
             {
@@ -76,7 +79,7 @@ namespace SG
             userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
         }
 
-        private void OnDisable()
+        public void OnClosePanel()
         {
             playerSkillManager.SetPlayerHUDConsumableSlot(PlayerInventory.Instance.currentConsumableItem);
         }
