@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,19 +9,21 @@ namespace SG
     [RequireComponent(typeof(InteractNPC))]
     public class DialogueTrigger : MonoBehaviour
     {
-        public Dialogue dialogue;
+        public List<Dialogue> dialogueList = new List<Dialogue>();
         public DialogueChoice[] dialogueChoices;
         private InteractNPC interactNPC;
+        private NPCManager nPCManager;
 
         private void Start()
         {
             interactNPC = GetComponent<InteractNPC>();
+            nPCManager = GetComponent<NPCManager>();
         }
-        public void TriggerDialouge(NPCManager npcManager)
+        public void TriggerDialouge()
         {
             SetDialogueChoicesAction();
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
-            dialogueManager.StartDialogue(npcManager, dialogue, dialogueChoices);
+            dialogueManager.SetDialougeList(nPCManager,dialogueList, dialogueChoices);
         }
         private void SetDialogueChoicesAction()
         {

@@ -11,6 +11,10 @@ namespace SG
         private Database database;
         private PlayerManager playerManager;
         private GUIManager guiManager;
+        private ItemDropManager itemDropManager;
+        private DialogueManager dialogueManager;
+        private EnforceManager enforceManager;
+        private QuestManager questManager;
         private void Awake()
         {
             if (Instance == null)
@@ -28,6 +32,21 @@ namespace SG
             if (playerManager != null)
                 playerManager.Init();
 
+            itemDropManager = GetComponentInChildren<ItemDropManager>();
+            if (itemDropManager != null)
+                itemDropManager.Init();
+
+            dialogueManager = GetComponentInChildren<DialogueManager>();
+            if (dialogueManager != null)
+                dialogueManager.Init();
+
+            enforceManager = GetComponentInChildren<EnforceManager>();
+            if (enforceManager != null)
+                enforceManager.Init();
+
+            questManager = GetComponentInChildren<QuestManager>();
+            if (questManager != null)
+                questManager.Init();
 
             DontDestroyOnLoad(this.gameObject);
         }

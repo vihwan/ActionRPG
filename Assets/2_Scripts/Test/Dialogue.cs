@@ -26,6 +26,8 @@ namespace SG
     [System.Serializable]
     public class Dialogue
     {
+        public string characterName;
+        public Sprite image;
         public Sentences[] sentences;
     }
 

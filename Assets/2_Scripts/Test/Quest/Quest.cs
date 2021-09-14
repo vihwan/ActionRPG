@@ -14,6 +14,15 @@ namespace SG
         public int itemCount;
     }
 
+
+    [System.Serializable]
+    public enum QuestProgress
+    {
+        NotStarting,  //시작안함
+        Proceeding,   //진행중
+        Completed     //완료됨
+    }
+
     [System.Serializable]
     [CreateAssetMenu(menuName = "Quest/New Quest")]
     public class Quest : ScriptableObject
@@ -22,9 +31,14 @@ namespace SG
         public string questName;
         [Multiline]
         public string description;
+        [SerializeField, ReadOnly, Tooltip("해당 퀘스트를 의뢰한 NPC. 나중에 퀘스트 완료의 대화 내용을 출력하기 위해, 미리 참조해둡니다.")]
+        public NPCManager NPC_Requester;
+        [Tooltip("해당 퀘스트의 클리어 여부를 지정하는 변수입니다.")]
+        public QuestProgress questProgress;
+
 
         [Header("< Objective Status >")]
-        [SerializeField ,Disable] public QuestObjective currentQuestObjective;
+        [SerializeField, Disable] public QuestObjective currentQuestObjective;
         public List<QuestObjective> objectives = new List<QuestObjective>();
 
         [Space(10)]
@@ -33,8 +47,9 @@ namespace SG
         public int rewardGold;
         public List<RewardItem> rewardItemList = new List<RewardItem>();
 
-        public delegate void QuestCompletedDelegate(Quest sender);
-        public event QuestCompletedDelegate OnCompleted; //퀘스트가 완료될 때 실행되는 이벤트
+        //퀘스트 완료 시 수행되는 이벤트
+        public Action OnCompleted;
+
         public void Init()
         {
             // Set the quest and the first objective to active
@@ -55,17 +70,25 @@ namespace SG
                     Debug.Log(objectives[j - 1].title + "의 nextObjective : " + objectives[j - 1].nextObjective.title);
                 }
             }
-
             currentQuestObjective = objectives[0];
             currentQuestObjective.state = QuestObjectiveState.Active;
+
+            OnCompleted += GetQuestReward;
+            OnCompleted += DeleteThisQuest;
+        }
+
+        public void SetNPCRequester(NPCManager npc)
+        {
+            NPC_Requester = npc;
         }
         public void OnObjectivesCompleted()
         {
             Debug.Log(string.Format("completed quest: {0}", questName));
-            currentQuestObjective.state = QuestObjectiveState.Complete;
+            //퀘스트가 클리어되면 클리어 상태로 바꿉니다.
+            questProgress = QuestProgress.Completed;
             if (OnCompleted != null)
             {
-                OnCompleted(this);
+                OnCompleted?.Invoke();
             }
         }
         public void AddObjective()
@@ -80,6 +103,27 @@ namespace SG
 
                 objectives[newObjective.index - 1].nextObjective = newObjective;
             }
+        }
+
+        //퀘스트 보상을 획득하는 함수. OnCompleted Action에 등록
+
+        private void GetQuestReward()
+        {
+            //골드 회득
+            PlayerInventory.Instance.GetGold(rewardGold);
+            //경험치 획득
+            //미구현
+
+            //보상 아이템 획득
+            for (int i = 0; i < rewardItemList.Count; i++)
+            {
+                PlayerInventory.Instance.SaveGetItemToInventory(rewardItemList[i].rewardItem, rewardItemList[i].itemCount);
+            }
+        }
+
+        private void DeleteThisQuest()
+        {
+            PlayerQuestInventory.Instance.DeleteQuest(this);
         }
     }
 }

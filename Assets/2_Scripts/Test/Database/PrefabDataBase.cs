@@ -12,6 +12,7 @@ namespace SG
         public ShopListSlot shopListSlot;
         public RewardItemSlot rewardItemSlot;
         public EnforceItemSlot enforceItemSlot;
+        public DropItemBox dropItemBox;
 
         [Header("Rarity Materials")]
         public List<Material> materials = new List<Material>();
@@ -19,6 +20,20 @@ namespace SG
         public void Init()
         {
             shopListSlot = Resources.Load<ShopListSlot>("Prefabs/ShopSlots/ShopListSlot");
+            dropItemBox = Resources.Load<DropItemBox>("Prefabs/DropItemBox");
+        }
+
+        public Material GetMaterialByName(string name)
+        {
+            for (int i = 0; i < materials.Count; i++)
+            {
+                if (materials[i].name.Equals(name))
+                {
+                    return materials[i];
+                }
+            }
+
+            return null;
         }
     }
 }

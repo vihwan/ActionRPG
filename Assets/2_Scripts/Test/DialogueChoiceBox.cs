@@ -15,7 +15,7 @@ namespace SG
         [SerializeField] private Button choiceBtn;
 
         private Action choiceAction;
-        private void Awake()
+        public void Init()
         {
             choiceText = UtilHelper.Find<TMP_Text>(transform, "Text");
             choiceIcon = UtilHelper.Find<Image>(transform, "Icon");

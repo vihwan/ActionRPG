@@ -14,15 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: "\uC9D1\uC5D0 \uAC00\uACE0 \uC2F6\uB2E4."
   description: "\uB2E4 \uB54C\uB824\uCE58\uACE0 \uC9D1\uAC00\uC11C \uC790\uACE0\uC2F6\uB2E4."
+  NPC_Requester: {fileID: 0}
+  questProgress: 0
   currentQuestObjective:
     index: 0
-    title: "\uB3C4\uB2EC\uD558\uAE30"
-    type: 0
-    objectiveTarget: "\uBAA9\uD45C1"
+    title: "\uD638\uB450\uC640 \uB300\uD654"
+    type: 2
+    objectiveTarget: "\uD638\uB450"
     objectiveItem: {fileID: 0}
-    state: 1
-    progress: 0
-    currentProgressCount: 0
+    state: 2
+    progress: 1
+    currentProgressCount: 1
     maxProgressCount: 1
   objectives:
   - index: 0
@@ -30,37 +32,37 @@ MonoBehaviour:
     type: 0
     objectiveTarget: "\uBAA9\uD45C1"
     objectiveItem: {fileID: 0}
-    state: 1
-    progress: 0
-    currentProgressCount: 0
+    state: 2
+    progress: 1
+    currentProgressCount: 1
     maxProgressCount: 1
   - index: 0
     title: "\uC2A4\uD1A4 \uACE8\uB818 \uC7A1\uAE30"
     type: 1
     objectiveTarget: "\uC2A4\uD1A4 \uACE8\uB818"
     objectiveItem: {fileID: 0}
-    state: 0
+    state: 2
     progress: 1
-    currentProgressCount: 0
+    currentProgressCount: 1
     maxProgressCount: 1
   - index: 0
-    title: "\uBC31\uCCA0 30\uAC1C \uBAA8\uC73C\uAE30"
+    title: "\uBC31\uCCA0 10\uAC1C \uBAA8\uC73C\uAE30"
     type: 3
     objectiveTarget: 
     objectiveItem: {fileID: 11400000, guid: 223b31672848b724f90d9d0c782648ec, type: 2}
-    state: 0
-    progress: 0.07692308
-    currentProgressCount: 0
-    maxProgressCount: 13
+    state: 2
+    progress: 1
+    currentProgressCount: 10
+    maxProgressCount: 10
   - index: 0
     title: "\uD638\uB450\uC640 \uB300\uD654"
     type: 2
     objectiveTarget: "\uD638\uB450"
     objectiveItem: {fileID: 0}
-    state: 0
-    progress: 0.07692308
-    currentProgressCount: 0
-    maxProgressCount: 13
+    state: 2
+    progress: 1
+    currentProgressCount: 1
+    maxProgressCount: 1
   rewardExp: 10000
   rewardGold: 300
   rewardItemList:

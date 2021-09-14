@@ -9,7 +9,7 @@ namespace SG
         public static ItemDropManager Instance;
 
         [Header("DropItem Prefabs")]
-        [SerializeField] private DropItemBox dropItemPrefab;
+        [SerializeField] private DropItemBox dropItemBoxPrefab;
 
         [Header("Rarity Material")]
         public Material rare1_material;
@@ -17,21 +17,22 @@ namespace SG
         public Material rare3_material;
         public Material rare4_material;
         public Material rare5_material;
-        private void Awake()
+        public void Init()
         {
-            Instance = this;
+            if(Instance == null)
+                Instance = this;
 
-            dropItemPrefab = Resources.Load<DropItemBox>("Prefabs/DropItemBox");
+            dropItemBoxPrefab = Database.Instance.prefabDatabase.dropItemBox;
 
-            rare1_material = Database.Instance.prefabDatabase.materials[0];
-            rare2_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star2");
-            rare3_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star3");
-            rare4_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star4");
-            rare5_material = Resources.Load<Material>("Prefabs/Material/DropItemRarity/star5");
+            rare1_material = Database.Instance.prefabDatabase.GetMaterialByName("star1");
+            rare2_material = Database.Instance.prefabDatabase.GetMaterialByName("star2");
+            rare3_material = Database.Instance.prefabDatabase.GetMaterialByName("star3");
+            rare4_material = Database.Instance.prefabDatabase.GetMaterialByName("star4");
+            rare5_material = Database.Instance.prefabDatabase.GetMaterialByName("star5");
         }
         public void GenerateDropItemBox(List<Item> items, Transform dropTransfom)
         {
-            DropItemBox newDropItem = Instantiate(dropItemPrefab, GetRandomPosition(dropTransfom.position), Quaternion.identity);
+            DropItemBox newDropItem = Instantiate(dropItemBoxPrefab, GetRandomPosition(dropTransfom.position), Quaternion.identity);
             newDropItem.SetItem(items);
             newDropItem.GetComponentInChildren<MeshRenderer>().material = SetDropItemRarity(items);
         }

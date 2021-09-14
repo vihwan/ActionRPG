@@ -54,7 +54,7 @@ namespace SG
             }
         }
 
-        void Awake()
+        public void Init()
         {
             if (Instance == null)
                 Instance = this;

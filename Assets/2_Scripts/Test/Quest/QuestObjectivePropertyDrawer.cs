@@ -14,9 +14,6 @@ namespace SG
     //[CustomPropertyDrawer(typeof(QuestObjectiveTypeAttribute))]
     public class QuestObjectiveTypeDrawer : PropertyDrawer
     {
-        GameObject gameObject = null;
-        ScriptableObject scriptableObject = null;
-
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return EditorGUI.GetPropertyHeight(property, label, true);

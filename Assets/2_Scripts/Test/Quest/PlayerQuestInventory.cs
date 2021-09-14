@@ -20,8 +20,8 @@ namespace SG
 
         public delegate void QuestManagerDelegate(PlayerQuestInventory sender);
         public delegate void QuestAddedDelegate(Quest addedQuest);
-        public event QuestManagerDelegate OnChanged;
-        public event QuestAddedDelegate OnQuestAdd;
+        //public event QuestManagerDelegate OnChanged;
+        //public event QuestAddedDelegate OnQuestAdd;
         public List<Quest> Quests
         {
             get
@@ -52,11 +52,24 @@ namespace SG
                 quests[i].currentQuestObjective.UpdateObjective();
             }
         }
-        public void AddQuest(Quest quest)
+        public void AddQuest(Quest quest, NPCManager npc)
         {
             quest.Init();
+            quest.SetNPCRequester(npc);
             Quests.Add(quest);
             Debug.Log("퀘스트가 등록되었습니다. : " + quest.questName);
+        }
+
+        public void DeleteQuest(Quest quest)
+        {
+            for (int i = 0; i < quests.Count; i++)
+            {
+                if(quests[i] == quest)
+                {
+                    quests.RemoveAt(i);
+                    return;
+                }
+            }
         }
 
         #region SetRecent Variables

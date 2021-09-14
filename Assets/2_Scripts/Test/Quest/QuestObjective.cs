@@ -70,8 +70,8 @@ namespace SG
         }
 
         //Objective의 타입에 따라 진행 방식을 다르게 설정
-        //진행도를 Update문으로 검사 할 수 없다..
-        //Monobehavior가 아니라서..
+        //PlayerQuestInventory에서 해당 함수를 Update문으로 돌려 검사합니다.
+
         public void UpdateObjective()
         {
             //목표 진행중일 경우, 진행도를 계산한다.
@@ -122,10 +122,19 @@ namespace SG
                     //최근에 대화한 상대가 퀘스트에서 대화해야하는 상대와 일치하면 카운트를 늘린다.
                     if (PlayerQuestInventory.Instance.recentTalkNpc != null)
                     {
+                        //최근에 대화한 대상이 타겟과 같다면
                         if (PlayerQuestInventory.Instance.GetRecentTalkNpc().npcName.Equals(objectiveTarget))
                         {
+                            //최근에 대화한 NPC의 QuestionMark를 표시가 안되도록 변경시킨다.
+                            PlayerQuestInventory.Instance.GetRecentTalkNpc().ChangeQuestionMark(2);
+                            //퀘스트를 주었던 대상의 EndQuestDialogue 대화의 트리거를 실행시킨다.
+                            ParentScript.NPC_Requester.GetComponent<InteractNPC>().TalkNPC(PlayerManager.Instance, true);
+
+
+                            //퀘스트 진행도를 하나 올린다.
                             currentProgressCount++;
                             Debug.Log("NPC와 대화. 카운트 증가!");
+                            //최근에 대화한 NPC를 Null로 초기화시킨다.
                             PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
                         }
                     }
@@ -155,11 +164,14 @@ namespace SG
                 if(ParentScript.currentQuestObjective.type.Equals(QuestObjectiveType.Talk))
                 {
                     PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
+                    QuestManager.Instance.FindQuestTargetAndChangeQuestionMark( ParentScript.currentQuestObjective.objectiveTarget);
                 }
             }
             else
             {
-                // All objectives complete, end quest
+                // All objectives complete, end quest\
+                ParentScript.currentQuestObjective.state = QuestObjectiveState.Complete;
+                //퀘스트 클리어 이벤트를 실행
                 ParentScript.OnObjectivesCompleted();
             }
             Debug.Log(string.Format("completed objective: {0}", title));

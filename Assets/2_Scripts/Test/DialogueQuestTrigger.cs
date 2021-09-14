@@ -9,12 +9,11 @@ namespace SG
     [RequireComponent(typeof(InteractNPC))]
     public class DialogueQuestTrigger : MonoBehaviour
     {
-        public Dialogue startQuestDialogue;
-        public Dialogue acceptQuestDialouge;
-        public Dialogue refuseQuestDialouge;
-        public Dialogue endQuestDialogue;
+        public List<Dialogue> startQuestDialogue = new List<Dialogue>();
+        public List<Dialogue> acceptQuestDialouge = new List<Dialogue>();
+        public List<Dialogue> refuseQuestDialouge = new List<Dialogue>();
+        public List<Dialogue> endQuestDialogue = new List<Dialogue>();
         public DialogueChoice[] yesNoQuestChoices;
-
 
         private InteractNPC interactNPC;
         private NPCManager npcManager;
@@ -32,12 +31,12 @@ namespace SG
             {
                 case true:
                     //퀘스트 권유 다이얼로그
-                    dialogueManager.StartDialogue(npcManager, startQuestDialogue, yesNoQuestChoices);
+                    dialogueManager.SetDialougeList(npcManager,startQuestDialogue, yesNoQuestChoices);
                     break;
 
                 case false:
                     //퀘스트 완료 다이얼로그
-                    dialogueManager.StartDialogue(npcManager, endQuestDialogue, yesNoQuestChoices);
+                    dialogueManager.SetDialougeList(npcManager,endQuestDialogue, yesNoQuestChoices);
                     break;
             }
         }
@@ -48,12 +47,12 @@ namespace SG
             {
                 case true:
                     //퀘스트 수락 다이얼로그
-                    dialogueManager.StartDialogue(npcManager, acceptQuestDialouge, null);
+                    dialogueManager.SetDialougeList(npcManager,acceptQuestDialouge, null);
                     break;
 
                 case false:
-                    //퀘스트 완료 다이얼로그
-                    dialogueManager.StartDialogue(npcManager, refuseQuestDialouge, null);
+                    //퀘스트 거절 다이얼로그
+                    dialogueManager.SetDialougeList(npcManager,refuseQuestDialouge, null);
                     break;
             }
         }
