@@ -14,31 +14,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   questName: "\uCDE8\uC5C5 \uD558\uACE0 \uC2F6\uB2E4."
   description: "\uB3C8 \uC918 \uBC85\uBC85"
+  NPC_Requester: {fileID: 0}
+  questProgress: 0
   currentQuestObjective:
     index: 0
     title: 
-    kind: 0
-    state: 0
-    progress: 0
-    currentProgressAmount: 0
-    maxProgressAmount: 0
-  currentObjectiveState: 0
+    type: 0
+    objectiveTarget: 
+    objectiveItem: {fileID: 0}
+    state: 1
+    progress: NaN
+    currentProgressCount: 0
+    maxProgressCount: 0
   objectives:
   - index: 0
-    title: 
-    kind: 0
+    title: "\uB3C8\uC744 \uC8FC\uC138\uC694"
+    type: 0
+    objectiveTarget: 
+    objectiveItem: {fileID: 0}
     state: 0
-    progress: 0
-    currentProgressAmount: 0
-    maxProgressAmount: 0
+    progress: NaN
+    currentProgressCount: 0
+    maxProgressCount: 10
   - index: 0
     title: 
-    kind: 0
+    type: 0
+    objectiveTarget: 
+    objectiveItem: {fileID: 0}
     state: 0
     progress: 0
-    currentProgressAmount: 0
-    maxProgressAmount: 0
+    currentProgressCount: 0
+    maxProgressCount: 0
   rewardExp: 10000
   rewardGold: 300
   rewardItemList:
-  - {fileID: 11400000, guid: 223b31672848b724f90d9d0c782648ec, type: 2}
+  - rewardItem: {fileID: 11400000, guid: e214f94ec0e6391478dc02bb3f1169af, type: 2}
+    itemCount: 1

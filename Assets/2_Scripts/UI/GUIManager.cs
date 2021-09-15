@@ -16,6 +16,7 @@ namespace SG
         [SerializeField] private HealthBar healthBar;
         [SerializeField] internal QuickSlotUI quickSlotUI;
         [SerializeField] private InteractableUI interactableUI;
+        [SerializeField] internal QuestAlertUI questAlertUI;
 
         [Header("UI Windows")]
         [SerializeField] private SelectMenu selectMenu;
@@ -50,6 +51,10 @@ namespace SG
             interactableUI = GetComponentInChildren<InteractableUI>(true);
             if (interactableUI != null)
                 interactableUI.Init();
+
+            questAlertUI = GetComponentInChildren<QuestAlertUI>(true);
+            if (questAlertUI != null)
+                questAlertUI.Init();
 
             windowPanel = GetComponentInChildren<WindowPanel>(true);
             if (windowPanel != null)

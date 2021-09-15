@@ -18,6 +18,7 @@ namespace SG
 
         [Header("GameObjects")]
         public GameObject detailsObject;
+        public Button OnQuestUIBtn;
         public TMP_Text detailsDescriptionText;
         public TMP_Text rewardExpGoldText;
 
@@ -64,7 +65,6 @@ namespace SG
                 infoPanel.Init();
 
             rewardItemSlotPrefab = Database.Instance.prefabDatabase.rewardItemSlot;
-
             CloseQuestPanel();
         }
 
@@ -115,6 +115,7 @@ namespace SG
             SetObjectiveDisplay(quest);
             SetRewardListDisplay(quest);
             OpenDetails();
+            OnQuestUIBtn.onClick.AddListener(()=> GUIManager.instance.questAlertUI.OnQuestAlertUI(quest));
         }
 
         private void SetObjectiveDisplay(Quest quest)

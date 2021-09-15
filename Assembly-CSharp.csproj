@@ -105,6 +105,7 @@
      <Compile Include="Assets\2_Scripts\Test\Quest\ObjectiveDisplay.cs" />
      <Compile Include="Assets\2_Scripts\Test\Quest\PlayerQuestInventory.cs" />
      <Compile Include="Assets\2_Scripts\Test\Quest\Quest.cs" />
+     <Compile Include="Assets\2_Scripts\Test\Quest\QuestAlertUI.cs" />
      <Compile Include="Assets\2_Scripts\Test\Quest\QuestDisplay.cs" />
      <Compile Include="Assets\2_Scripts\Test\Quest\QuestEditor.cs" />
      <Compile Include="Assets\2_Scripts\Test\Quest\QuestManager.cs" />
@@ -1006,6 +1007,9 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.InputSystem">
+        <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -1021,17 +1025,14 @@
     <Reference Include="Unity.Rider.Editor">
         <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
         <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-        <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-        <HintPath>D:\입사포트폴리오\포트폴리오\짬뽕액션\ActionRPG\Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
