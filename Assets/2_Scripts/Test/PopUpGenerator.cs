@@ -23,7 +23,7 @@ namespace SG
         public Transform popUp_GetItem_Transform; //에디터 지정
 
         [Header("Component")]
-        [SerializeField] private MessagesList messagesList;
+        [SerializeField] internal MessagesList messagesList;
 
         public void Init()
         {

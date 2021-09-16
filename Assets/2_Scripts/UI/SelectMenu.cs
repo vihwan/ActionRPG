@@ -45,6 +45,11 @@ namespace SG {
                 questButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
             }
             achieveButton = UtilHelper.Find<Button>(transform, "Select Achivement");
+            if(achieveButton != null)
+            {
+                achieveButton.onClick.AddListener(GUIManager.instance.achievePanel.OpenAchievePanelEvent);
+                achieveButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+            }
             screenshotButton = UtilHelper.Find<Button>(transform, "Select Screenshot");
             optionButton = UtilHelper.Find<Button>(transform, "Select GameOptions");
             exitButton = UtilHelper.Find<Button>(transform, "Select Exit");

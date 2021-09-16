@@ -23,6 +23,7 @@ namespace SG
         [SerializeField] internal WindowPanel windowPanel;
         [SerializeField] internal ShopPanel shopPanel;
         [SerializeField] internal QuestPanel questPanel;
+        [SerializeField] internal AchievePanel achievePanel;
         [SerializeField] public GameObject dialogObject;
         [SerializeField] internal LootWindowUI lootWindow;
 
@@ -68,6 +69,10 @@ namespace SG
             if (questPanel != null)
                 questPanel.Init();
 
+            achievePanel = GetComponentInChildren<AchievePanel>(true);
+            if (achievePanel != null)
+                achievePanel.Init();
+
             lootWindow = GetComponentInChildren<LootWindowUI>(true);
             if (lootWindow != null)
                 lootWindow.Init();
@@ -91,7 +96,8 @@ namespace SG
                windowPanel.enforceWindowUI.gameObject.activeSelf.Equals(true) ||
                shopPanel.gameObject.activeSelf.Equals(true) ||
                lootWindow.gameObject.activeSelf.Equals(true) ||
-               questPanel.gameObject.activeSelf.Equals(true)
+               questPanel.gameObject.activeSelf.Equals(true) ||
+               achievePanel.gameObject.activeSelf.Equals(true)
                )
             {
                 return true;
@@ -118,6 +124,7 @@ namespace SG
                 windowPanel.CloseEnforceWindowPanel();
                 shopPanel.CloseShopPanel();
                 questPanel.CloseQuestPanel();
+                achievePanel.CloseAchievePanel();
             }
         }
         public void SetActiveHudWindows(bool status)

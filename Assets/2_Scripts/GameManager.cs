@@ -15,6 +15,8 @@ namespace SG
         private DialogueManager dialogueManager;
         private EnforceManager enforceManager;
         private QuestManager questManager;
+        private AchieveManager achieveManager;
+
         private void Awake()
         {
             if (Instance == null)
@@ -47,6 +49,10 @@ namespace SG
             questManager = GetComponentInChildren<QuestManager>();
             if (questManager != null)
                 questManager.Init();
+
+            achieveManager = GetComponentInChildren<AchieveManager>();
+            if(achieveManager != null)
+                achieveManager.Init();
 
             DontDestroyOnLoad(this.gameObject);
         }
