@@ -9,7 +9,8 @@ namespace SG
     {
         public static PlayerManager Instance;
 
-        [SerializeField] public string playerName;
+        [Header("Basics")]
+        public readonly string playerName = "Diluc Ragnvindr";
 
         private InputHandler inputHandler;
         private Animator anim;
@@ -103,14 +104,14 @@ namespace SG
 
         private void CheckOpenUI()
         {
-/*            if (GUIManager.instance.IsActiveUIWindows())
-            {
-                inputHandler.enabled = false;
-            }
-            else
-            {
-                inputHandler.enabled = true;
-            }*/
+            /*            if (GUIManager.instance.IsActiveUIWindows())
+                        {
+                            inputHandler.enabled = false;
+                        }
+                        else
+                        {
+                            inputHandler.enabled = true;
+                        }*/
         }
 
         private void FixedUpdate()
@@ -118,13 +119,13 @@ namespace SG
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
-           // playerLocomotion.HandleSprintEnd();
+            // playerLocomotion.HandleSprintEnd();
         }
 
         private void LateUpdate()
         {
             float delta = Time.deltaTime;
-            if (!isUnEquip)
+            if (!isUnEquip && GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
                 ChangePlayerToUnEquip(delta);
 
             inputHandler.rollFlag = false;
@@ -141,7 +142,22 @@ namespace SG
 
             isSprinting = inputHandler.b_Input;
 
-           
+
+            if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
+            {
+
+                cameraHandler.HandleCharacterWindowCameraPosition(delta);
+                cameraHandler.Zoom_OnActiveCharacterWindowUI();
+                cameraHandler.DragCharacter_OnActiveCharacterWindowUI();
+                return;
+            }
+            else
+            {
+                cameraHandler.isUpdate = false;
+                cameraHandler.zoomLevel = 0;
+            }
+
+
             if (cameraHandler != null)
             {
                 cameraHandler.FollowTarget(delta);
@@ -158,39 +174,6 @@ namespace SG
         {
             inputHandler.enabled = false;
         }
-
-
-        //public void CheckForInteractable()
-        //{
-        //    RaycastHit hit;
-        //    if (Physics.SphereCast(transform.position, 0.5f, transform.forward, out hit, 1f, cameraHandler.ignoreLayers))
-        //    {
-        //        if (hit.collider.tag == "Interactable")
-        //        {
-        //            Interactable interactableObject = hit.collider.GetComponent<Interactable>();
-        //            if (interactableObject != null)
-        //            {
-        //                string interactText = interactableObject.interactableText;
-        //                InteractableUI.InteractText.text = interactText;
-        //                InteractableUI.SetActiveInteractUI(true);
-
-        //                //Set the UI to the Interactable Object's Text
-        //                //Set the Text Popup to true
-        //                if (inputHandler.a_Input)
-        //                {
-        //                    hit.collider.GetComponent<Interactable>().Interact(this);
-        //                    //interactableObject.Interact(this);
-        //                }
-        //            }
-        //        }
-
-        //    }
-        //    else
-        //    {
-        //        if (InteractableUI.InteractionBG != null)
-        //            InteractableUI.SetActiveInteractUI(false);
-        //    }
-        //}
 
         private void ChangePlayerToUnEquip(float delta)
         {
@@ -224,6 +207,29 @@ namespace SG
             //플레이어가 상자 여는 애니메이션을 넣고 싶다면 여기에 넣자.
         }
 
+        public void SetLevelSystem()
+        {
+            LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+        }
+
+        private void LevelManager_OnLevelChanged(object sender, EventArgs e)
+        {
+            PlayLevelUpParticleEffect();
+            playerStats.SetStatusByLevelUp();
+            playerStats.SetMaxStatusBar();
+        }
+
+        private void PlayLevelUpParticleEffect()
+        {
+            GameObject go = Instantiate(Database.Instance.prefabDatabase.levelUpParticlePrefab,
+                        this.gameObject.transform.position,
+                        Quaternion.identity,
+                        this.transform) as GameObject;
+
+            go.GetComponent<ParticleSystem>().Play();
+            Destroy(go, 5f);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.CompareTag("Interactable"))
@@ -245,8 +251,8 @@ namespace SG
             {
                 if (interactableUI.InteractionPopup != null)
                     interactableUI.InteractionPopup.SetActive(false);
-        
-                if(interactableObject != null)
+
+                if (interactableObject != null)
                 {
                     Interactable interactable = other.GetComponent<Interactable>();
                     if (interactable == interactableObject)

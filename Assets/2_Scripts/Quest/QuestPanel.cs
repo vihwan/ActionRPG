@@ -115,7 +115,13 @@ namespace SG
             SetObjectiveDisplay(quest);
             SetRewardListDisplay(quest);
             OpenDetails();
-            OnQuestHUDBtn.onClick.AddListener(()=> GUIManager.instance.questAlertUI.OnQuestAlertUI(quest));
+            OnQuestHUDBtn.onClick.RemoveAllListeners();
+            OnQuestHUDBtn.onClick.AddListener(()=> OnClickQuestHUDBtn(quest));
+        }
+
+        private void OnClickQuestHUDBtn(Quest quest)
+        {
+            GUIManager.instance.questAlertUI.OnQuestAlertUI(quest);
         }
 
         private void SetObjectiveDisplay(Quest quest)

@@ -76,5 +76,12 @@ namespace SG
             amountText.text = money + " G";
             itemImage.sprite = gold;
         }
+
+        public void SetGetExpMessage(Sprite exp, int expAmount)
+        {
+            nameText.text = "경험치";
+            amountText.text = string.Format("{0} Exp", expAmount);
+            itemImage.sprite = exp;
+        }
     }
 }

@@ -23,11 +23,11 @@ namespace SG
         public void SetObjectiveDisplay(QuestObjective questObjective)
         {
             titleText.text = questObjective.title;
-            countText.text = questObjective.Progress * 100 + "%";
+            countText.text = string.Format("{0} / {1}", questObjective.currentProgressCount, questObjective.maxProgressCount);
         }
         public void UpdateCountText(QuestObjective questObjective)
         {
-            countText.text = questObjective.Progress * 100 + "%";
+            countText.text = string.Format("{0} / {1}", questObjective.currentProgressCount, questObjective.maxProgressCount);
         }
     }
 }

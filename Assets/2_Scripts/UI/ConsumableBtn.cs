@@ -116,7 +116,7 @@ namespace SG
             cooldownImage.gameObject.SetActive(true);
             isUpdate = true;
 
-            print("onClick");
+            print("onClick : 소비템 사용");
 
             if (timer != null)
             {

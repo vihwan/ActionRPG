@@ -6,7 +6,7 @@ namespace SG
 {
     public class AnimationLayerHandler : MonoBehaviour
     {
-        private AnimatorHandler animatorHandler;
+        internal AnimatorHandler animatorHandler;
         private InputHandler inputHandler;
 
         public void Init()
@@ -15,7 +15,7 @@ namespace SG
             inputHandler = GetComponent<InputHandler>();
         }
 
-        
+
         //무기 장착 로코모션 레이어 Weight를 0으로, 무기 미장착 로코모션 레이어 Weight를 1로
         public void HandlePlayerUnEquip()
         {
@@ -26,7 +26,7 @@ namespace SG
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Both Hand"), 1f);
             animatorHandler.Anim.SetBool("isUnEquip", true);
 
-            if(inputHandler.MoveAmount > 0)
+            if (inputHandler.MoveAmount > 0)
             {
                 animatorHandler.PlayTargetAnimation("WeaponChange_UnEquip_NotMove", false);
             }
@@ -44,6 +44,18 @@ namespace SG
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override UnEquip"), 0f);
             animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Both Hand"), 0f);
             animatorHandler.Anim.SetBool("isUnEquip", false);
+        }
+
+        public void HandlePlayerOnWeaponPanelAnimation(bool state)
+        {
+            if (state)
+            {
+                animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override WeaponEquipPanel"), 1f);
+            }
+            else
+            {
+                animatorHandler.Anim.SetLayerWeight(animatorHandler.Anim.GetLayerIndex("Override WeaponEquipPanel"), 0f);
+            }
         }
     }
 }

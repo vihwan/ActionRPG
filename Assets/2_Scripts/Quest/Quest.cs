@@ -86,11 +86,8 @@ namespace SG
             Debug.Log(string.Format("completed quest: {0}", questName));
             //퀘스트가 클리어되면 클리어 상태로 바꿉니다.
             questProgress = QuestProgress.Completed;
-            if (OnCompleted != null)
-            {
-                OnCompleted?.Invoke();
-            }
         }
+        
         public void AddObjective()
         {
             QuestObjective newObjective = new QuestObjective();
@@ -112,8 +109,10 @@ namespace SG
             //골드 회득
             PlayerInventory.Instance.GetGold(rewardGold);
             //경험치 획득
-            //미구현
-
+            LevelManager.Instance.AddExperience(rewardExp);
+            //경험치 획득 팝업 생성
+            PopUpGenerator.Instance.GetMessageGetExp(rewardExp);
+            
             //보상 아이템 획득
             for (int i = 0; i < rewardItemList.Count; i++)
             {

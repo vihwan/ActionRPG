@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SG
 {
@@ -10,6 +11,7 @@ namespace SG
         [SerializeField] public Transform cameraTransform;
         [SerializeField] public Transform cameraPivotTransform;
         private Transform myTransform;
+        private Transform tempTransform;
         private Vector3 cameraTransformPosition;
         public LayerMask ignoreLayers;
         public LayerMask environmentLayer;
@@ -45,8 +47,15 @@ namespace SG
         public Transform rightLockTarget;
         public float maximumLockOnDistance = 30;
 
+        [Header("Camera Zoom")]
+        [SerializeField] internal int zoomLevel;
+
         private InputHandler inputHandler;
         private PlayerManager playerManager;
+        internal bool isTurningCamera;
+        internal bool isUpdate = false;
+
+        public Transform TempTransform { get => tempTransform; private set => tempTransform = value; }
 
         private void Awake()
         {
@@ -62,6 +71,7 @@ namespace SG
             environmentLayer = LayerMask.NameToLayer("Environment");
             inputHandler = FindObjectOfType<InputHandler>();
             playerManager = FindObjectOfType<PlayerManager>();
+
         }
 
         public void FollowTarget(float delta)
@@ -136,6 +146,9 @@ namespace SG
             cameraTransform.localPosition = cameraTransformPosition;
         }
 
+
+
+        //마우스 휠 키를 클릭하여 록온한 대상을 카메라가 계속 고정시켜 보여준다.
         public void HandleLockOn()
         {
             float shortestDistance = Mathf.Infinity;
@@ -210,6 +223,7 @@ namespace SG
             }
         }
 
+        //록온한 대상을 해제하여 원래대로 돌아온다.
         public void ClearLockOnTarget()
         {
             availableTargets.Clear();
@@ -232,6 +246,74 @@ namespace SG
             {
                 cameraPivotTransform.transform.localPosition
                     = Vector3.SmoothDamp(cameraPivotTransform.transform.localPosition, newUnlockedPosition, ref velocity, Time.deltaTime);
+            }
+        }
+
+        public void HandleCharacterWindowCameraPosition(float delta)
+        {
+            if (isUpdate)
+                return;
+
+            Vector3 rotationDirection = cameraTransform.position - playerManager.transform.position;
+            rotationDirection.y = 0;
+            rotationDirection.Normalize();
+            Quaternion tr = Quaternion.LookRotation(rotationDirection);
+            Quaternion targetRotation = Quaternion.Slerp(playerManager.transform.rotation, tr, 10 * delta);
+            playerManager.transform.rotation = targetRotation;
+
+            Quaternion characterWindowUICameraRotation = Quaternion.Euler(0f, 180f, 0f);
+            myTransform.transform.rotation =
+                   Quaternion.Slerp(myTransform.rotation, characterWindowUICameraRotation, 10 * delta);
+
+            Quaternion characterWindowUICameraPivotRotation = Quaternion.Euler(0f, 0f, 0f);
+            cameraPivotTransform.rotation =
+                   Quaternion.Slerp(cameraPivotTransform.rotation, characterWindowUICameraPivotRotation, 10 * delta);
+
+            Invoke(nameof(IsUpdateTrue), 1f);
+        }
+
+        private void IsUpdateTrue()
+        {
+            isUpdate = true;
+        }
+
+        public void DragCharacter_OnActiveCharacterWindowUI()
+        {
+           if(Mouse.current.leftButton.isPressed)
+            {
+                if(Mouse.current.position.ReadValue().x > Mouse.current.position.ReadValueFromPreviousFrame().x)
+                {
+                    myTransform.Rotate(0, 2f, 0);
+                }
+                else if (Mouse.current.position.ReadValue().x < Mouse.current.position.ReadValueFromPreviousFrame().x)
+                {
+                    myTransform.Rotate(0, -2f, 0);
+                }
+            }
+        }
+
+        public void Zoom_OnActiveCharacterWindowUI()
+        {
+            //위로 마우스 휠업을 하면, F버튼 아이콘이 상위 아이템 패널을 가리키게 된다.
+            if (Mouse.current.scroll.y.ReadValue() > 0)
+            {
+                zoomLevel++;
+                if(zoomLevel > 5)
+                {
+                    zoomLevel = 5;
+                    return;
+                }
+                cameraTransform.localPosition += new Vector3(0, 0, 0.3f);
+            }
+            else if (Mouse.current.scroll.y.ReadValue() < 0)
+            {
+                zoomLevel--;
+                if(zoomLevel < -5)
+                {
+                    zoomLevel = -5;
+                    return;
+                }
+                cameraTransform.localPosition -= new Vector3(0, 0, 0.3f);
             }
         }
     }

@@ -321,8 +321,6 @@ namespace SG
         {
             playerManager.isUnEquip = false;
             playerManager.AnimationLayerHandler.HandlePlayerEquip();
-            //문제
-            //activeWeaponObject.SetActiveHandWeapon(0); //0 => SetHand true
             activeWeaponObject.SetActiveHandWeapon(true);
         }
     }

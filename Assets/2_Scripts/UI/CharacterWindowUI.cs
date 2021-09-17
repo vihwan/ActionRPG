@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,10 +25,13 @@ namespace SG
 
         [Header("Button")]
         [SerializeField] private Button closeBtn;
+
         [SerializeField] internal Button backBtn;
 
         [SerializeField] private PlayerSkillManager playerSkillManager;
+        [SerializeField] private LevelManager levelManager;
         [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private AnimationLayerHandler animationLayerHandler;
 
         public void Init()
         {
@@ -35,6 +39,7 @@ namespace SG
 
             playerSkillManager = FindObjectOfType<PlayerSkillManager>();
             inputHandler = playerSkillManager.gameObject.GetComponent<InputHandler>();
+            animationLayerHandler = FindObjectOfType<AnimationLayerHandler>();
 
             springBoardMenu = UtilHelper.Find<CharacterMenuSpringBoard>(transform,"SpringBoardMenu");
             if (springBoardMenu != null)
@@ -96,6 +101,8 @@ namespace SG
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
             statusPanel.OnOpenPanel();
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
+            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
         }
 
         public void OpenWeaponPanel()
@@ -103,6 +110,8 @@ namespace SG
             CloseAllRightPanel();
             weaponPanel.gameObject.SetActive(true);
             weaponPanel.OnOpenPanel();
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
+            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Weapon", false, 0f);
         }
 
         public void OpenEquipmentPanel()
@@ -110,6 +119,7 @@ namespace SG
             CloseAllRightPanel();
             equipmentPanel.gameObject.SetActive(true);
             equipmentPanel.OnOpenPanel();
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
         }
 
         public void OpenSkillPanel()
@@ -117,6 +127,8 @@ namespace SG
             CloseAllRightPanel();
             skillPanel.gameObject.SetActive(true);
             skillPanel.OnOpenPanel();
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
+            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
         }
 
         public void OpenDataPanel()
@@ -124,6 +136,8 @@ namespace SG
             CloseAllRightPanel();
             dataPanel.gameObject.SetActive(true);
             dataPanel.OnOpenPanel();
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
+            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
         }
         public void CloseAllRightPanel()
         {
@@ -132,6 +146,7 @@ namespace SG
             equipmentPanel.gameObject.SetActive(false);
             skillPanel.gameObject.SetActive(false);
             dataPanel.gameObject.SetActive(false);
+            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(false);
         }
         #endregion
 

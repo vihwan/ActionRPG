@@ -14,6 +14,9 @@ namespace SG
         [Header("HUD Windows")]
         [SerializeField] private GameObject hudWindows;
         [SerializeField] private HealthBar healthBar;
+        [SerializeField] private ManaBar manaBar;
+        [SerializeField] private StaminaBar staminaBar;
+        [SerializeField] internal LevelWindow levelWindow;
         [SerializeField] internal QuickSlotUI quickSlotUI;
         [SerializeField] private InteractableUI interactableUI;
         [SerializeField] internal QuestAlertUI questAlertUI;
@@ -44,6 +47,18 @@ namespace SG
             healthBar = GetComponentInChildren<HealthBar>(true);
             if (healthBar != null)
                 healthBar.Init();
+
+            manaBar = GetComponentInChildren<ManaBar>(true);
+            if (manaBar != null)
+                manaBar.Init();
+
+            staminaBar = GetComponentInChildren<StaminaBar>(true);
+            if (staminaBar != null)
+                staminaBar.Init();
+
+            levelWindow = GetComponentInChildren<LevelWindow>(true);
+            if (levelWindow != null)
+                levelWindow.Init();
 
             quickSlotUI = GetComponentInChildren<QuickSlotUI>(true);
             if (quickSlotUI != null)

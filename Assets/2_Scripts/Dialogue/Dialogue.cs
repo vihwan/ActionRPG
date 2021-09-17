@@ -9,7 +9,8 @@ namespace SG
     public enum DialogType
     {
         Normal,
-        Select
+        Select,
+        Finish
     }
 
     public enum DialogChoiceType

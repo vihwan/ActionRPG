@@ -17,8 +17,15 @@ namespace SG
     }
     public class EnemyInventory : MonoBehaviour
     {
+        [Header("Has Experience")]
+        [SerializeField] private int exp;
+
+        [Header("Has Item")]
         [SerializeField] private List<LootItem> itemTable = new List<LootItem>();
         [SerializeField] private List<Item> dropItems;
+
+        public int Exp { get => exp;}
+
         public void Init()
         {
 

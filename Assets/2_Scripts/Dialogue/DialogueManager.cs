@@ -221,6 +221,7 @@ namespace SG
             dialogueObject.SetActive(false);
             GUIManager.instance.SetActiveHudWindows(true);
             endDialogueEvent?.Invoke();
+            endDialogueEvent = null;         
         }
 
         public void SetEndDialogueEvent(Action listener)

@@ -31,7 +31,11 @@ namespace SG
         {
             capsuleCollider.enabled = false;
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);
+            //드롭 아이템 생성
             enemyInventory.CreateDropItem();
+
+            //플레이어 경험치 획득
+            LevelManager.Instance.AddExperience(enemyInventory.Exp);
             Destroy(this.gameObject, 7f);
         }
     }

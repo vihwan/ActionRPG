@@ -37,6 +37,7 @@ namespace SG
                 case false:
                     //퀘스트 완료 다이얼로그
                     dialogueManager.SetDialougeList(npcManager,endQuestDialogue, yesNoQuestChoices);
+                    dialogueManager.SetEndDialogueEvent(npcManager.haveQuest.OnCompleted);
                     break;
             }
         }

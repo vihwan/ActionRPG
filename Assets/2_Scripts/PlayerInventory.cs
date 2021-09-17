@@ -227,7 +227,7 @@ namespace SG
             currentWeapon = weaponItem;
             currentWeapon.isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentWeapon);
-            playerStats.SetMaxHealthBar();
+            playerStats.SetMaxStatusBar();
             weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
         }
 
@@ -244,7 +244,7 @@ namespace SG
             currentEquipmentSlots[(int)temp] = equipItem;
             currentEquipmentSlots[(int)temp].isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentEquipmentSlots[(int)temp]);
-            playerStats.SetMaxHealthBar();
+            playerStats.SetMaxStatusBar();
         }
 
         //장착중인 소비 아이템을 교체하는 함수

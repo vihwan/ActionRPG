@@ -16,6 +16,7 @@ namespace SG
         private EnforceManager enforceManager;
         private QuestManager questManager;
         private AchieveManager achieveManager;
+        private LevelManager levelManager;
 
         private void Awake()
         {
@@ -51,8 +52,12 @@ namespace SG
                 questManager.Init();
 
             achieveManager = GetComponentInChildren<AchieveManager>();
-            if(achieveManager != null)
+            if (achieveManager != null)
                 achieveManager.Init();
+
+            levelManager = GetComponentInChildren<LevelManager>();
+            if (levelManager != null)
+                levelManager.Init();
 
             DontDestroyOnLoad(this.gameObject);
         }

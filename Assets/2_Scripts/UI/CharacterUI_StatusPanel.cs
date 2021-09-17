@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 namespace SG
 {
@@ -25,6 +26,7 @@ namespace SG
 
         [Header("Need Component")]
         [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private LevelManager levelManager;
 
         public void Init()
         {
@@ -41,8 +43,9 @@ namespace SG
             staminaText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/STA/Text");
 
             playerStats = FindObjectOfType<PlayerStats>();
+            //levelManager = FindObjectOfType<LevelManager>();
         }
-
+        
         public void OnOpenPanel()
         {
             SetParameter();
@@ -50,10 +53,11 @@ namespace SG
 
         public void SetParameter()
         {
-            nameText.text = playerStats.playerName;
-            levelText.text = "Lv. " + playerStats.PlayerLevel;
-            expText.text = playerStats.PlayerExp + " / 1000";
-            SetMaxExpSlider();
+            nameText.text = PlayerManager.Instance.playerName;
+            levelText.text = "Lv. " + LevelManager.Instance.GetLevel();
+            expText.text = string.Format("{0} / {1}",
+                            LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.GetLevel()));
+            SetExpSlider();
             hpText.text = playerStats.CurrentHealth + " / " + playerStats.MaxHealth;
             attackText.text = playerStats.Attack.ToString();
             defenseText.text = playerStats.Defense.ToString();
@@ -62,15 +66,9 @@ namespace SG
             staminaText.text = playerStats.CurrentStamina + " / " + playerStats.MaxStamina;
         }
 
-        private void SetMaxExpSlider()
+        private void SetExpSlider()
         {
-            expSlider.maxValue = 1000f;
-            expSlider.value = playerStats.PlayerExp;
-        }
-
-        public void SetCurrentExpSlider()
-        {
-            expSlider.value = playerStats.PlayerExp;
+            expSlider.value = LevelManager.Instance.GetExperienceNormalized();
         }
     }
 }

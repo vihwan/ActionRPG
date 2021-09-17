@@ -15,7 +15,7 @@ namespace SG
         public TMP_Text questObjectiveText;
         public TMP_Text questProgressText;
 
-        public bool isActive = false;
+        [SerializeField] private bool isActive = false;
 
         public void Init()
         {
@@ -30,24 +30,21 @@ namespace SG
             if (currentQuest == null)
             {
                 currentQuest = newQuest;
-                if (questPopup.activeSelf.Equals(true))
-                    isActive = false;
-                else
-                    isActive = true;
+                isActive = true;
+                Debug.Log("퀘스트 UI 신규 등록");
             }
             else
             {
-                if (currentQuest != newQuest)
+                if (currentQuest.questName != newQuest.questName)
                 {
                     currentQuest = newQuest;
                     isActive = true;
+                    Debug.Log("퀘스트 UI 신규 등록");
                 }
                 else
                 {
-                    if (questPopup.activeSelf.Equals(true))
-                        isActive = false;
-                    else
-                        isActive = true;
+                    isActive = !isActive;
+                    Debug.Log("기존 퀘스트 UI : " + isActive);
                 }
             }
 

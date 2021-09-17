@@ -15,6 +15,7 @@ namespace SG
         public GameObject popUpMessage_Prefab;
         public GameObject popUp_MultiSelection_Prefab;
         [SerializeField] private Sprite goldImage;
+        [SerializeField] private Sprite expImage;
 
         [Header("ObjectPool")]
         Queue<GameObject> messageGetItem_OP = new Queue<GameObject>();
@@ -39,6 +40,7 @@ namespace SG
             popUpMessage_Prefab = Resources.Load<GameObject>("Prefabs/PopUpMsg");
             popUp_MultiSelection_Prefab = Resources.Load<GameObject>("Prefabs/MultiSelectionPopup");
             goldImage = Resources.Load<Sprite>("Sprites/Gold");
+            expImage = Resources.Load<Sprite>("Sprites/EXP");
         }
 
         #region ObjectPool
@@ -79,6 +81,28 @@ namespace SG
                 var newObj = Instance.CreateNewObject();
                 newObj.gameObject.SetActive(true);
                 newObj.GetComponent<Message_GetItem>().SetGetGoldMessage(goldImage, amount);
+                newObj.transform.SetParent(messagesList.CreateMessageTransform);
+                messagesList.LocateNewMessage(newObj);
+                return newObj;
+            }
+        }
+
+        public GameObject GetMessageGetExp(int amount)
+        {
+            if(Instance.messageGetItem_OP.Count > 0)
+            {
+                var obj = Instance.messageGetItem_OP.Dequeue();
+                obj.gameObject.SetActive(true);
+                obj.GetComponent<Message_GetItem>().SetGetExpMessage(expImage, amount);
+                obj.transform.SetParent(messagesList.CreateMessageTransform);
+                messagesList.LocateNewMessage(obj);
+                return obj;
+            }
+            else
+            {
+                var newObj = Instance.CreateNewObject();
+                newObj.gameObject.SetActive(true);
+                newObj.GetComponent<Message_GetItem>().SetGetExpMessage(expImage, amount);
                 newObj.transform.SetParent(messagesList.CreateMessageTransform);
                 messagesList.LocateNewMessage(newObj);
                 return newObj;

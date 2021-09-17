@@ -17,6 +17,9 @@ namespace SG
         [Header("Rarity Materials")]
         public List<Material> materials = new List<Material>();
 
+        [Header("Effect Particle")]
+        public GameObject levelUpParticlePrefab;
+
         public void Init()
         {
             shopListSlot = Resources.Load<ShopListSlot>("Prefabs/ShopSlots/ShopListSlot");
