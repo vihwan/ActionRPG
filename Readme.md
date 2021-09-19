@@ -128,54 +128,19 @@ UI - 캐릭터 장착 애니메이션
 
 ## Last Update
 
-## 2021.09.18 (토)
+## 2021.09.19 (일)
 
-1. UI - 캐릭터 장착 애니메이션
-
-	- CharacterWindowUI가 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
-
-	- WeaponPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
-
-	- EquipPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
-
-	- 그 외의 패널이 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
-
-	> 알고리즘
-
-	캐릭터가 Idle 상태에서, WeaponPanel,EquipPanel을 클릭할 경우, WE_Weapon으로 CrossFade
-
-	캐릭터가 WeaponIdle상태에서, StatusPanel, SkillPanel, DataPanel을 클릭할 경우, WE_UnWeapon으로 CrossFade
-
-	- 무기를 교체할 경우, 무기 활성화가 제대로 이루어지지 않는 경우를 수정
+1. 몬스터 A.I - FSM
 
 
-2. 모델링 개편
+> State Pattern을 활용하여 FSM을 만든다
 
-	- 다이루크 모델 개선
-
-	> 얼굴에 생기는 경계선(?) 부분을 제거하려고 노력했으나, 방법을 몰라 실패. 그냥 임시로 Unlit Shader를 이용하여 게임을 만들기로 결정
-
-
-3. 몬스터 AI
-
-	- 몬스터의 이동을 관리하는 EnemyLocomotionManager 클래스를 생성
-
-	- AI FSM 구성
-
-		1. HandleDetection
-		2. HandleMovement
-		3. HandlePathFinding
-		4. Handle
-
-현재 몬스터가 움직이지를 않는다. 왜지?
-velocity가 0으로 고정됨.
-
-
-4. 버그 수정 및 개선
-
-	- (완료) HUD에 Quest 진행판 UI 표시 버튼을 눌러도 제대로 표시되지 않는 버그를 수정
-	- (완료) 퀘스트 목표 진행 상황을 %가 아닌 각 목표에 맞는 카운트로 수정
-	- (완료) 캐릭터 이름을 PlayerManager로 이동 및 수정
+- Idle State
+- Chase Target State
+- Combat Stance State
+- Attack State
+- Ambush State
+-
 
 
 **다음 목표**
@@ -242,17 +207,66 @@ velocity가 0으로 고정됨.
 
 10. 퀘스트
 
+11. 몬스터 - 적 생성
 
-
-
-?. 몬스터 생성
 	- 적절한 몬스터 모델을 가져와 사용
 	- 적절한 몬스터 애니메이션을 가져와 적용
+
+12. 몬스터 - A.I
+
 	- FSM을 활용한 몬스터 AI 작성
 
 -------------------------------
 
 ## 이전 개발 일지
+
+
+### 2021.09.18 (토)
+
+1. UI - 캐릭터 장착 애니메이션
+
+	- CharacterWindowUI가 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
+
+	- WeaponPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
+
+	- EquipPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
+
+	- 그 외의 패널이 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
+
+	> 알고리즘
+
+	캐릭터가 Idle 상태에서, WeaponPanel,EquipPanel을 클릭할 경우, WE_Weapon으로 CrossFade
+
+	캐릭터가 WeaponIdle상태에서, StatusPanel, SkillPanel, DataPanel을 클릭할 경우, WE_UnWeapon으로 CrossFade
+
+	- 무기를 교체할 경우, 무기 활성화가 제대로 이루어지지 않는 경우를 수정
+
+
+2. 모델링 개편
+
+	- 다이루크 모델 개선
+
+	> 얼굴에 생기는 경계선(?) 부분을 제거하려고 노력했으나, 방법을 몰라 실패. 그냥 임시로 Unlit Shader를 이용하여 게임을 만들기로 결정
+
+
+3. 몬스터 A.I
+
+	- 몬스터의 이동을 관리하는 EnemyLocomotionManager 클래스를 생성
+
+	- AI FSM 구성
+
+		1. HandleDetection
+		2. HandleMovement
+		3. HandlePathFinding
+		4. HandleAttack
+
+
+4. 버그 수정 및 개선
+
+	- (완료) HUD에 Quest 진행판 UI 표시 버튼을 눌러도 제대로 표시되지 않는 버그를 수정
+	- (완료) 퀘스트 목표 진행 상황을 %가 아닌 각 목표에 맞는 카운트로 수정
+	- (완료) 캐릭터 이름을 PlayerManager로 이동 및 수정
+
 
 ### 2021.09.17 (금)
 
@@ -493,7 +507,7 @@ public class Dialogue{
 
 
 
-## 2021.09.12 (일)
+### 2021.09.12 (일)
 
 <퀘스트 시스템>
 

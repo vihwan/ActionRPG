@@ -10,6 +10,9 @@ namespace SG
         Transform cameraObject;
         InputHandler inputHandler;
         CameraHandler cameraHandler;
+        public CapsuleCollider characterCollider;
+        public CapsuleCollider characterBlockerCollider;
+
         public Vector3 moveDirection;
 
         [HideInInspector]
@@ -57,6 +60,7 @@ namespace SG
 
             playerManager.isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
+            Physics.IgnoreCollision(characterCollider, characterBlockerCollider, true);
         }
 
         #region Movement

@@ -14,12 +14,10 @@ namespace SG
         [Header("A.I Status")]
         public PlayerStats currentTarget;
         [SerializeField] internal bool isPerformingAction;
+        [SerializeField] public bool isInteracting;
         [SerializeField] public float detectionRadius;
-        [SerializeField] public float distanceFromTarget;
         [SerializeField] public float rotationSpeed = 15f;
         [SerializeField] public float maximumAttackRange = 2f;
-
-        [SerializeField] public float viewableAngle;
 
         [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float minimumDetectionAngle = -50f;
         [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float maximumDetectionAngle = 50f;
@@ -33,14 +31,16 @@ namespace SG
         [SerializeField] private EnemyAnimatorHandler enemyAnimatorHandler;
         [SerializeField] private EnemyInventory enemyInventory;
         [SerializeField] private EnemyStats enemyStats;
+        [SerializeField] private EnemyWeaponSlotManager enemyWeaponSlotManager;
         public NavMeshAgent navMeshAgent;
         public Rigidbody enemyRigidbody;
-        public CapsuleCollider capsuleCollider;
 
 
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
+            if(enemyLocomotionManager != null)
+                enemyLocomotionManager.Init();
 
             enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
             if (enemyAnimatorHandler != null)
@@ -53,17 +53,24 @@ namespace SG
             enemyStats = GetComponent<EnemyStats>();
             if (enemyStats != null)
                 enemyStats.Init();
+            
+            enemyWeaponSlotManager = GetComponentInChildren<EnemyWeaponSlotManager>();
+            if(enemyWeaponSlotManager != null)
+                enemyWeaponSlotManager.Init();
 
             navMeshAgent = GetComponentInChildren<NavMeshAgent>();
             enemyRigidbody = GetComponent<Rigidbody>();
-            capsuleCollider = GetComponent<CapsuleCollider>();
 
             lockOnTransform = UtilHelper.Find<Transform>(transform, "LockOnTransform").transform;
 
-            currentState = GetComponentInChildren<IdleState>();
+            currentState = GetComponentInChildren<AmbushState>();
 
             navMeshAgent.enabled = false;
             enemyRigidbody.isKinematic = false;
+        }
+
+        private void OnDrawGizmos() {
+            
         }
 
         private void FixedUpdate()
@@ -74,6 +81,7 @@ namespace SG
         private void Update()
         {
             HandleRecoveryTimer();
+            isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
         }
 
         private void HandleState()
@@ -86,28 +94,6 @@ namespace SG
                     SwitchToNextState(nextState);
                 }
             }
-
-
-
-            // if (enemyLocomotionManager.currentTarget != null)
-            // {
-            //     enemyLocomotionManager.distanceFromTarget =
-            //         Vector3.Distance(enemyLocomotionManager.currentTarget.transform.position, transform.position);
-            // }
-
-            // if (enemyLocomotionManager.currentTarget == null)
-            // {
-            //     enemyLocomotionManager.HandleDetection();
-            // }
-            // else if (enemyLocomotionManager.distanceFromTarget > enemyLocomotionManager.stoppingDistance)
-            // {
-            //     enemyLocomotionManager.HandleMoveToTarget();
-            // }
-            // else if (enemyLocomotionManager.distanceFromTarget <= enemyLocomotionManager.stoppingDistance)
-            // {
-            //     Handle Our Attacks
-            //     AttackTarget();
-            // }
         }
 
         private void SwitchToNextState(State state)
@@ -134,7 +120,7 @@ namespace SG
         //몬스터 사망 시 실행되는 메소드
         public void Die()
         {
-            capsuleCollider.enabled = false;
+            enemyLocomotionManager.EnableFalseAllCollider();
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);
             //드롭 아이템 생성
             enemyInventory.CreateDropItem();

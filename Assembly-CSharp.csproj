@@ -110,6 +110,8 @@
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyLocomotionManager.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyManager.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyStats.cs" />
+     <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyWeaponSlotManager.cs" />
+     <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\AmbushState.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\AttackState.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\ChaseTargetState.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\CombatStanceState.cs" />

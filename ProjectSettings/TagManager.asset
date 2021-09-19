@@ -15,11 +15,11 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Enemy
   - Character
   - Controller
   - Environment
-  - 
+  - Character Collision Blocker
   - 
   - 
   - 
