@@ -177,7 +177,7 @@ namespace SG
                 Critical += currentWeapon.itemAttributes[(int)Attribute.Critical].value;
                 CriticalDamage += currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
                 MaxStamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
-                CurrentStamina += currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                CurrentStamina = MaxStamina;
             }
         }
 
@@ -192,7 +192,7 @@ namespace SG
                 Critical -= currentWeapon.itemAttributes[(int)Attribute.Critical].value;
                 CriticalDamage -= currentWeapon.itemAttributes[(int)Attribute.CriticalDamage].value;
                 MaxStamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
-                CurrentStamina -= currentWeapon.itemAttributes[(int)Attribute.Stamina].value;
+                CurrentStamina = MaxStamina;
             }
         }
 
@@ -205,7 +205,7 @@ namespace SG
             Critical += currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
             CriticalDamage += currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
             MaxStamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
-            CurrentStamina += currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+            CurrentStamina = MaxStamina;
         }
 
         public void UpdatePlayerStatus_UnEquip(EquipItem currentEquipItem)
@@ -217,7 +217,7 @@ namespace SG
             Critical -= currentEquipItem.itemAttributes[(int)Attribute.Critical].value;
             CriticalDamage -= currentEquipItem.itemAttributes[(int)Attribute.CriticalDamage].value;
             MaxStamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
-            CurrentStamina -= currentEquipItem.itemAttributes[(int)Attribute.Stamina].value;
+            CurrentStamina = MaxStamina;
         }
 
         public void SetMaxStatusBar()

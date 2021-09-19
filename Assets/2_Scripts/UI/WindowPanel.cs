@@ -43,6 +43,7 @@ namespace SG
         {
             characterWindowUI.gameObject.SetActive(true);
             characterWindowUI.OpenStatusPanel();
+            FindObjectOfType<ActiveWeaponObject>().SetActiveHandWeapon(false);
         }
 
         public void CloseCharacterWindowPanel()

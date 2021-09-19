@@ -39,46 +39,13 @@ namespace SG
             unholderSlot = GetComponentInChildren<WeaponUnholderSlot>();
             playerManager = FindObjectOfType<PlayerManager>();
         }
-        public void LoadWeaponOnSlot(WeaponItem weaponItem, bool isLeft)
+        public void LoadWeaponOnSlot(WeaponItem weaponItem)
         {
             GameObject weaponGO;
-
-            if (isLeft)
-            {
-                leftHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
-                LoadLeftWeaponDamageCollider();
-
-                #region Handle Left Weapon Idle Animations
-                if (weaponItem != null)
-                {
-                    animator.CrossFade(weaponItem.left_Hand_Idle, 0.2f);
-                }
-                else
-                {
-                    animator.CrossFade("Left Arm Empty", 0.2f);
-                }
-                #endregion
-            }
-            else
-            {
-                
-                rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
-                LoadRightWeaponDamageCollider();
-                unholderSlot.LoadUnEquipWeaponModel(weaponItem);
-                activeWeaponObject.Initailize(weaponGO, playerManager.isUnEquip);
-
-/*                #region Handle Right Weapon Idle Animations
-                if (weaponItem != null)
-                {
-                    animator.CrossFade(weaponItem.right_Hand_Idle, 0.2f);
-
-                }
-                else
-                {
-                    animator.CrossFade("Right Arm Empty", 0.2f);
-                }
-                #endregion*/
-            }
+            rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
+            LoadRightWeaponDamageCollider();
+            unholderSlot.LoadUnEquipWeaponModel(weaponItem);
+            activeWeaponObject.Initailize(weaponGO, playerManager.isUnEquip);
         }
 
         private void LoadLeftWeaponDamageCollider()

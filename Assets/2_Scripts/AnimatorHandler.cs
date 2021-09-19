@@ -5,19 +5,18 @@ using UnityEngine;
 
 namespace SG
 {
-    public class AnimatorHandler : MonoBehaviour
+    public class AnimatorHandler : AnimatorManager
     {
         PlayerManager playerManager;
-        [SerializeField] private Animator anim;
         [SerializeField] private PlayerLocomotion playerLocomotion;
         private int vertical;
         private int horizontal;
         public bool canRotate;
-        public Animator Anim { get => anim; private set => anim = value; }
+
         public void Initalize()
         {
             playerManager = GetComponentInParent<PlayerManager>();
-            Anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
@@ -77,21 +76,18 @@ namespace SG
                 h = horizontalMovement;
             }
 
-            Anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
-            Anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
+            anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+            anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2f)
+        public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F)
         {
-            Anim.applyRootMotion = isInteracting;
-            Anim.SetBool("isInteracting", isInteracting);
-            Anim.CrossFade(targetAnim, duration);
-            //StartCoroutine(CheckAnimationUnEquip_NotMove());
+            base.PlayTargetAnimation(targetAnim, isInteracting, duration);
 
             /*08월 06일, Override 행동 이후 자연스러운 애니메이션 변화를 위해서 추가**/
             if(targetAnim == "Empty")
             {
-                Anim.CrossFade("Locomotion", 0.3f);
+                anim.CrossFade("Locomotion", 0.3f);
             }
         }
 

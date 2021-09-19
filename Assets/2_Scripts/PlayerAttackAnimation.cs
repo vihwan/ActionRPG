@@ -18,7 +18,7 @@ namespace SG
 
         public void HandleWeaponCombo(WeaponItem weaponItem)
         {
-            animatorHandler.Anim.SetBool("canDoCombo", false);
+            animatorHandler.anim.SetBool("canDoCombo", false);
             if(lastAttack == weaponItem.OneHanded_LightAttack1)
             {
                 animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack2, true);
@@ -49,7 +49,7 @@ namespace SG
             if (playerSkill == null)
                 return;
 
-            animatorHandler.Anim.SetBool("canDoCombo", false);
+            animatorHandler.anim.SetBool("canDoCombo", false);
             animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
         }
     }

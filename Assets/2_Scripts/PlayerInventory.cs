@@ -92,7 +92,7 @@ namespace SG
             if (weaponSlotManager != null)
                 weaponSlotManager.Init();
 
-            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
+            weaponSlotManager.LoadWeaponOnSlot(currentWeapon);
         }
 
         #region delegate Func
@@ -228,7 +228,7 @@ namespace SG
             currentWeapon.isArmed = true;
             playerStats.UpdatePlayerStatus_Equip(currentWeapon);
             playerStats.SetMaxStatusBar();
-            weaponSlotManager.LoadWeaponOnSlot(currentWeapon, false);
+            weaponSlotManager.LoadWeaponOnSlot(currentWeapon);
         }
 
         //장비를 교체하는 함수

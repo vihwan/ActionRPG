@@ -18,9 +18,20 @@ namespace SG
             if (unequipWeaponObject != null)
                 unequipWeaponObject.SetActive(false);
 
-            handWeaponObject.SetActive(!state);
-            unequipWeaponObject.SetActive(state);
+
+            if(GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
+            {
+                handWeaponObject.SetActive(!state);
+                unequipWeaponObject.SetActive(state);
+            }
+            else
+            {
+                handWeaponObject.SetActive(state);
+                unequipWeaponObject.SetActive(!state);
+            }   
         }
+
+        //외부 에디터에서 애니메이션 이벤트로 사용하는 함수
         public void SetActiveHandWeapon(int num)
         {
             bool status = false;

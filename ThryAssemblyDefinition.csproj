@@ -283,14 +283,14 @@
     <Reference Include="UnityEditor.iOS.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
+      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
+    </Reference>
     <Reference Include="MMD4MecanimEditor">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Extensions/MMD4Mecanim/Editor/MMD4MecanimEditor.dll</HintPath>
     </Reference>
     <Reference Include="MMD4Mecanim">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Assets/Extensions/MMD4Mecanim/Scripts/MMD4Mecanim.dll</HintPath>
-    </Reference>
-    <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
-      <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>D:/입사포트폴리오/포트폴리오/짬뽕액션/ActionRPG/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>

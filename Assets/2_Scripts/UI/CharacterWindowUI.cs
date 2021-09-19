@@ -70,6 +70,7 @@ namespace SG
             if (closeBtn != null)
             {
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
+                closeBtn.onClick.AddListener(() => animationLayerHandler.SetAnimaionLayerWeightCloseCharacterPanel());
             }
                 
             backBtn = UtilHelper.Find<Button>(transform, "BackBtn");
@@ -101,8 +102,9 @@ namespace SG
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
             statusPanel.OnOpenPanel();
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
-            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
+            animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
+            animationLayerHandler.SetPlayerAnimationIsUnWeaponOnWeaponEquipPanel();
+            
         }
 
         public void OpenWeaponPanel()
@@ -110,8 +112,8 @@ namespace SG
             CloseAllRightPanel();
             weaponPanel.gameObject.SetActive(true);
             weaponPanel.OnOpenPanel();
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
-            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Weapon", false, 0f);
+            animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
+            animationLayerHandler.SetPlayerAnimationIsWeaponOnWeaponEquipPanel();
         }
 
         public void OpenEquipmentPanel()
@@ -119,7 +121,8 @@ namespace SG
             CloseAllRightPanel();
             equipmentPanel.gameObject.SetActive(true);
             equipmentPanel.OnOpenPanel();
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
+            animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
+            animationLayerHandler.SetPlayerAnimationIsWeaponOnWeaponEquipPanel();
         }
 
         public void OpenSkillPanel()
@@ -127,8 +130,8 @@ namespace SG
             CloseAllRightPanel();
             skillPanel.gameObject.SetActive(true);
             skillPanel.OnOpenPanel();
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
-            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
+            animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
+            animationLayerHandler.SetPlayerAnimationIsUnWeaponOnWeaponEquipPanel();
         }
 
         public void OpenDataPanel()
@@ -136,8 +139,8 @@ namespace SG
             CloseAllRightPanel();
             dataPanel.gameObject.SetActive(true);
             dataPanel.OnOpenPanel();
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(true);
-            animationLayerHandler.animatorHandler.PlayTargetAnimation("WE_Idle", false);
+            animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
+            animationLayerHandler.SetPlayerAnimationIsUnWeaponOnWeaponEquipPanel();
         }
         public void CloseAllRightPanel()
         {
@@ -146,7 +149,6 @@ namespace SG
             equipmentPanel.gameObject.SetActive(false);
             skillPanel.gameObject.SetActive(false);
             dataPanel.gameObject.SetActive(false);
-            animationLayerHandler.HandlePlayerOnWeaponPanelAnimation(false);
         }
         #endregion
 

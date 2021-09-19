@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace SG
 {
+
     public class PlayerManager : CharacterManager
     {
         public static PlayerManager Instance;
