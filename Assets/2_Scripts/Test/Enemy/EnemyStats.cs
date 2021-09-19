@@ -10,13 +10,15 @@ namespace SG
         public int healthLevel = 10;
         public int maxHealth;
         public int currentHealth;
+        public int attack;
+        [SerializeField] private bool isDead;
 
-        private Animator animator;
+        private EnemyAnimatorHandler enemyAnimatorHandler;
         private EnemyManager enemyManager;
 
         public void Init()
         {
-            animator = GetComponentInChildren<Animator>();
+            enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
             enemyManager = GetComponent<EnemyManager>();
         }
 
@@ -34,15 +36,24 @@ namespace SG
 
         public void TakeDamage(int damage)
         {
+            if(isDead)
+                return;
+
             currentHealth = currentHealth - damage;
-            animator.Play("Take Damage");
+            enemyAnimatorHandler.PlayTargetAnimation("Damage_01", true);
             Debug.Log(damage + " 데미지를 입힌다!");
             if (currentHealth <= 0)
             {
                 currentHealth = 0;
-                animator.Play("Die");
+                isDead = true;
+                enemyAnimatorHandler.PlayTargetAnimation("Damage_Die", true);
                 enemyManager.Die();
             }
+        }
+
+        public void PlayTakeDamageAnimationByAttackScore()
+        {
+
         }
     }
 

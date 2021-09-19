@@ -8,38 +8,53 @@ namespace SG
 
     public class EnemyWeaponSlotManager : MonoBehaviour
     {
-        public WeaponItem rightHandWeapon;
+        //public WeaponItem rightHandWeapon;
         public WeaponHolderSlot rightHandSlot;
-        DamageCollider damageCollider;
+        [SerializeField] private EnemyDamageCollider enemyDamageCollider;
 
         public void Init()
         {
-            if(rightHandWeapon != null)
-            {
-                LoadWeaponOnSlot(rightHandWeapon);
-            }
+
+            LoadWeaponDamageCollider();
+
+            // if(rightHandWeapon != null)
+            // {
+            //    // LoadWeaponOnSlot(rightHandWeapon);
+            // }
         }
 
         public void LoadWeaponOnSlot(WeaponItem weaponItem)
         {
             GameObject weaponGO;
             rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
-            LoadWeaponDamageCollider();
         }
 
         public void LoadWeaponDamageCollider()
         {
-            damageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            enemyDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<EnemyDamageCollider>();
         }
 
+        #region  Animation Event Functions
         public void OpenDamageCollider()
         {
-            damageCollider.EnableDamageCollider();
+            enemyDamageCollider.EnableDamageCollider();
         }
 
         public void CloseDamageCollider()
         {
-            damageCollider.DisableDamageCollider();
+            enemyDamageCollider.DisableDamageCollider();
         }
+
+        public void EnableCombo()
+        {
+           
+        }
+
+        public void DisableCombo()
+        {
+            
+        }
+
+        #endregion
     }
 }

@@ -25,6 +25,8 @@ namespace SG
         [SerializeField] private int critical;
         [SerializeField] private int criticalDamage;
 
+        [SerializeField] private bool isDead;
+
         [Header("Need Component")]
         private HealthBar healthBar;
         private ManaBar manaBar;
@@ -248,8 +250,12 @@ namespace SG
 
         public void TakeDamage(int damage)
         {
+            if(isDead)
+                return;
+
             CurrentHealth -= damage;
             OnTakeDamaged?.Invoke();
+            Debug.Log(damage + "의 데미지를 입었다.");
 
             if (playerManager.isUnEquip == false)
                 animatorHandler.PlayTargetAnimation("Damage_01", true);
@@ -259,6 +265,7 @@ namespace SG
             if (CurrentHealth <= 0)
             {
                 CurrentHealth = 0;
+                isDead = true;
 
                 if (playerManager.isUnEquip == false)
                     animatorHandler.PlayTargetAnimation("Damage_Die", true);

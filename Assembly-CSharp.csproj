@@ -106,6 +106,7 @@
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyAction.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyAnimatorHandler.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyAttackAction.cs" />
+     <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyDamageCollider.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyInventory.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyLocomotionManager.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\EnemyManager.cs" />

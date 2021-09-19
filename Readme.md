@@ -69,10 +69,15 @@ ex) 레벨업, 강화, 이펙트, 상점(구매, 판매, 강화, 수리, 제작 
 
 **공격 애니메이션 이벤트 함수**
 
+<PLayer>
 OpenRightHandDamageCollider\
 CloseRightHandDamageCollider\
 EnableCombo\
 DisableCombo\
+
+<Enemy>
+OpenDamageCollider
+CloseDamageCollider
 
 -------------------------------
 
@@ -130,23 +135,43 @@ UI - 캐릭터 장착 애니메이션
 
 ## 2021.09.19 (일)
 
-1. 몬스터 A.I - FSM
+1. Enemy - A.I FSM
 
+	State Pattern을 활용하여 FSM을 만든다
 
-> State Pattern을 활용하여 FSM을 만든다
+	- Idle State
+	- Chase Target State
+	- Combat Stance State
+	- Attack State
+	- Ambush State
 
-- Idle State
-- Chase Target State
-- Combat Stance State
-- Attack State
-- Ambush State
--
+2. Enemy - 공격
+
+	- EnemyAttackAction
+
+	적 공격의 회복 시간, 공격 가능 각도, 공격 가능 사거리 등을 담고 있는 클래스
+	객체로 생성하여 사용. 임시로 ScriptableObject로 생성하여 에디터에서 편집할 수 있도록 설정.
+
+	- EnemyWeaponSlotManager
+
+	적의 무기 슬롯을 관리하는 컴포넌트. 이 클래스 안에 있는 함수들을 애니메이션 이벤트 함수로 활용
+
+	- EnemyDamageCollider
+
+	적의 무기 모델 프리팹 안에 붙어있는 컴포넌트. 
+
+	EnemyStats에 임시로 Attack 변수를 추가하여 데미지를 주도록 설정
+
+	- EnemyStats에, 데미지를 입을 경우, PlayerStats와 별개로 작동하도록 TakeDamage를 수정
+
+	- 플레이어가 사망 시, 더이상 데미지를 입지 않도록 설정.
 
 
 **다음 목표**
 
-모델링 개편
 몬스터 AI
+사망 시 조작
+
 
 -------------------------------
 
