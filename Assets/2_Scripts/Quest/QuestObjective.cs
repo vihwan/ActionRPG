@@ -25,7 +25,7 @@ namespace SG
     [System.Serializable]
     public class QuestObjective
     {
-        [ReadOnly] public int index;
+        public int index;
         public string title;
         public QuestObjectiveType type;
         [Tooltip("string으로 비교하는 것이기에 정확히 입력해야합니다.")]
@@ -35,7 +35,7 @@ namespace SG
         public QuestObjective nextObjective;
 
         [Header("Progress")]
-        [SerializeField, ReadOnly] private float progress = 0f; //목표 진행도
+        [SerializeField] private float progress = 0f; //목표 진행도
         public int currentProgressCount;
         public int maxProgressCount;
 

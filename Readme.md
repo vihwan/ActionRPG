@@ -67,13 +67,15 @@ ex) 레벨업, 강화, 이펙트, 상점(구매, 판매, 강화, 수리, 제작 
 
 -------------------------------
 
-**공격 애니메이션 이벤트 함수**
+**애니메이션 이벤트 함수**
 
 <PLayer>
 OpenRightHandDamageCollider\
 CloseRightHandDamageCollider\
 EnableCombo\
 DisableCombo\
+EnableInvulnerable\
+DisableInvulnerable\
 
 <Enemy>
 OpenDamageCollider
@@ -118,60 +120,29 @@ Resources 폴더에 Fonts 폴더 생성
 
 **Memo**
 
-UI - 캐릭터 장착 애니메이션
+버그 발견
 
-	- CharacterWindowUI가 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
-
-	- WeaponPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
-
-	- EquipPanel이 활성화 될 경우, 캐릭터의 애니메이션을 특정 스탠딩으로 변경
-
-	- 그 외의 패널이 활성화 될 경우, 캐릭터의 애니메이션 스탠딩을 일반으로 변경
-
+- 아이템을 판 이후 연속으로 팔 때, 다중 선택 팝업이 올바르게 표시되지 않음
+- 캐릭터 패널을 닫을 때, 닫기 버튼이 아닌, ESC를 눌렀을 때, Override WeaponEquipPanel의 weight가 0이 되지 않는 현상. 
 
 -------------------------------
 
 ## Last Update
 
-## 2021.09.19 (일)
+## 2021.09.23 (목)
 
-1. Enemy - A.I FSM
+1. 버그 수정
 
-	State Pattern을 활용하여 FSM을 만든다
+	- (완료) 아이템을 판 이후 연속으로 팔 때, 다중 선택 팝업이 올바르게 표시되지 않음
+	- (완료) 캐릭터 패널을 닫을 때, 닫기 버튼이 아닌, ESC를 눌렀을 때, Override WeaponEquipPanel의 weight가 0이 되지 않는 현상. 
 
-	- Idle State
-	- Chase Target State
-	- Combat Stance State
-	- Attack State
-	- Ambush State
-
-2. Enemy - 공격
-
-	- EnemyAttackAction
-
-	적 공격의 회복 시간, 공격 가능 각도, 공격 가능 사거리 등을 담고 있는 클래스
-	객체로 생성하여 사용. 임시로 ScriptableObject로 생성하여 에디터에서 편집할 수 있도록 설정.
-
-	- EnemyWeaponSlotManager
-
-	적의 무기 슬롯을 관리하는 컴포넌트. 이 클래스 안에 있는 함수들을 애니메이션 이벤트 함수로 활용
-
-	- EnemyDamageCollider
-
-	적의 무기 모델 프리팹 안에 붙어있는 컴포넌트. 
-
-	EnemyStats에 임시로 Attack 변수를 추가하여 데미지를 주도록 설정
-
-	- EnemyStats에, 데미지를 입을 경우, PlayerStats와 별개로 작동하도록 TakeDamage를 수정
-
-	- 플레이어가 사망 시, 더이상 데미지를 입지 않도록 설정.
 
 
 **다음 목표**
 
+UI Image 개편
 몬스터 AI
 사망 시 조작
-
 
 -------------------------------
 
@@ -244,6 +215,59 @@ UI - 캐릭터 장착 애니메이션
 -------------------------------
 
 ## 이전 개발 일지
+
+### 2021.09.20 (월)
+
+1. 캐릭터 이동 - 구르기 무적
+
+	- Animator Parameter로 isInvulnerable 추가
+	- PlayerManager에 isInvulnerbale 변수를 추가하고 Animator의 영향을 받음
+	- TakeDamage 함수에서 isInvulnerbale에 따라 데미지를 받지 않게 리턴
+	- 구르기 애니메이션에 이벤트 함수를 추가해 구르는 동안 무적이 되도록 함수를 생성
+
+
+2. 캐릭터 조작 - 스태미나 소모
+
+	- 특수 행동 사용 시, 스태미나 소모
+	- 스태미나 소모 시, 발생해야하는 이벤트 추가
+	- 스태미나 소모 시, 서서히 회복되도록 추가
+	- 스태미나가 부족할 경우, 특수 행동이 불가능하도록 추가
+	- 특수 행동 중에 여러번 입력이 적용되지 않도록 수정
+
+
+### 2021.09.19 (일)
+
+1. Enemy - A.I FSM
+
+	State Pattern을 활용하여 FSM을 만든다
+
+	- Idle State
+	- Chase Target State
+	- Combat Stance State
+	- Attack State
+	- Ambush State
+
+2. Enemy - 공격
+
+	- EnemyAttackAction
+
+	적 공격의 회복 시간, 공격 가능 각도, 공격 가능 사거리 등을 담고 있는 클래스
+	객체로 생성하여 사용. 임시로 ScriptableObject로 생성하여 에디터에서 편집할 수 있도록 설정.
+
+	- EnemyWeaponSlotManager
+
+	적의 무기 슬롯을 관리하는 컴포넌트. 이 클래스 안에 있는 함수들을 애니메이션 이벤트 함수로 활용
+
+	- EnemyDamageCollider
+
+	적의 무기 모델 프리팹 안에 붙어있는 컴포넌트. 
+
+	EnemyStats에 임시로 Attack 변수를 추가하여 데미지를 주도록 설정
+
+	- EnemyStats에, 데미지를 입을 경우, PlayerStats와 별개로 작동하도록 TakeDamage를 수정
+
+	- 플레이어가 사망 시, 더이상 데미지를 입지 않도록 설정.
+
 
 
 ### 2021.09.18 (토)

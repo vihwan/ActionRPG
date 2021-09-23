@@ -20,8 +20,8 @@ namespace SG
         [Header("< Achieve Basics >")]
         public string achieveName;
         public Sprite achieveIcon;
-        [ReadOnly] public float progress;
-        [ReadOnly] public AchieveState achieveState;
+        public float progress;
+        public AchieveState achieveState;
 
         [Header("< Missions >"), Space(10)]
         public List<AchieveMission> achieveMissions = new List<AchieveMission>();

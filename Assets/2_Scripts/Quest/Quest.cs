@@ -31,14 +31,14 @@ namespace SG
         public string questName;
         [Multiline]
         public string description;
-        [SerializeField, ReadOnly, Tooltip("해당 퀘스트를 의뢰한 NPC. 나중에 퀘스트 완료의 대화 내용을 출력하기 위해, 미리 참조해둡니다.")]
+        [SerializeField, Tooltip("해당 퀘스트를 의뢰한 NPC. 나중에 퀘스트 완료의 대화 내용을 출력하기 위해, 미리 참조해둡니다.")]
         public NPCManager NPC_Requester;
         [Tooltip("해당 퀘스트의 클리어 여부를 지정하는 변수입니다.")]
         public QuestProgress questProgress;
 
 
         [Header("< Objective Status >")]
-        [SerializeField, Disable] public QuestObjective currentQuestObjective;
+        [SerializeField] public QuestObjective currentQuestObjective;
         public List<QuestObjective> objectives = new List<QuestObjective>();
 
         [Space(10)]

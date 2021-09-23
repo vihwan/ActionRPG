@@ -43,6 +43,7 @@ namespace SG
         private PlayerAttackAnimation playerAttacker;
         private PlayerManager playerManager;
         private PlayerSkillManager playerSkillManager;
+        private PlayerStats playerStats;
         private CameraHandler cameraHandler;
         private ActiveWeaponObject activeWeaponObject;
 
@@ -67,6 +68,7 @@ namespace SG
 
             playerManager = GetComponent<PlayerManager>();
             playerSkillManager = GetComponent<PlayerSkillManager>();
+            playerStats = GetComponent<PlayerStats>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
         }
@@ -169,10 +171,13 @@ namespace SG
             {
                 if (rollInputTimer > 0 && rollInputTimer < 0.5f)
                 {
-                    sprintFlag = false;
-                    rollFlag = true;
+                    if (playerStats.CurrentStamina >= 15 && !playerManager.isInteracting)
+                    {
+                        sprintFlag = false;
+                        rollFlag = true;
+                        playerStats.UseStamina(15);
+                    }
                 }
-
                 rollInputTimer = 0;
             }
         }
@@ -263,6 +268,9 @@ namespace SG
         {
             if (menu_Input)
             {
+                if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
+                    GetComponent<AnimationLayerHandler>().SetAnimaionLayerWeightCloseCharacterPanel();
+
                 HandleMenuFlag();
             }
         }

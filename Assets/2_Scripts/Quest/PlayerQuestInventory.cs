@@ -14,9 +14,9 @@ namespace SG
         [SerializeField] private List<Quest> quests;
 
         [Header("Recent Get Info")]
-        [SerializeField, ReadOnly] internal EnemyManager recentKilledEnemy;
-        [SerializeField, ReadOnly] internal GoalPosition reachGoalPosition;
-        [SerializeField, ReadOnly] internal NPCManager recentTalkNpc;
+        [SerializeField] internal EnemyManager recentKilledEnemy;
+        [SerializeField] internal GoalPosition reachGoalPosition;
+        [SerializeField] internal NPCManager recentTalkNpc;
 
         public delegate void QuestManagerDelegate(PlayerQuestInventory sender);
         public delegate void QuestAddedDelegate(Quest addedQuest);

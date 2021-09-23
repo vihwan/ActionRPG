@@ -19,20 +19,20 @@ namespace SG
             staminaText = GetComponentInChildren<TMP_Text>(true);
         }
 
-        public void SetMaxStamina(int maxStamina)
+        public void SetMaxStamina(float maxStamina)
         {
             slider.maxValue = maxStamina;
             slider.value = maxStamina;
         }
 
-        public void SetCurrentStamina(int currentStamian)
+        public void SetCurrentStamina(float currentStamian)
         {
             slider.value = currentStamian;
         }
 
-        public void SetStaminaText(int currentStamina, int maxStamina)
+        public void SetStaminaText(float currentStamina, float maxStamina)
         {
-            staminaText.text = string.Format("{0} / {1}", currentStamina, maxStamina);
+            staminaText.text = string.Format("{0:0} / {1:0}", currentStamina, maxStamina);
         }
     }
 }

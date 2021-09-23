@@ -7,9 +7,9 @@ namespace SG
     public class GameManager : MonoBehaviour
     {
         public static GameManager Instance;
-
         private Database database;
         private PlayerManager playerManager;
+        private NPCManager[] npcManagers;
         private GUIManager guiManager;
         private ItemDropManager itemDropManager;
         private DialogueManager dialogueManager;
@@ -31,6 +31,15 @@ namespace SG
             if (guiManager != null)
                 guiManager.Init();
 
+            npcManagers = FindObjectsOfType<NPCManager>();
+            if(npcManagers != null)
+            {
+                for (int i = 0; i < npcManagers.Length; i++)
+                {
+                    npcManagers[i].Init();
+                }
+            }
+            
             playerManager = FindObjectOfType<PlayerManager>();
             if (playerManager != null)
                 playerManager.Init();

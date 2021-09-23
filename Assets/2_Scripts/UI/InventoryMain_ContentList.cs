@@ -440,6 +440,7 @@ namespace SG
             if (index == 0)
                 index = 1; //indexOutofRange
 
+            BeforeSelectSlot = inventoryContentSlots[index - 1];        
             inventoryMainContents.infoPanel.SetParameter(inventoryContentSlots[index - 1]);
             inventoryContentSlots[index - 1].isSelect = true;
             inventoryContentSlots[index - 1].ChangeBackgroundColor();

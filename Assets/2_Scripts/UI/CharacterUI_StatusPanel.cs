@@ -63,7 +63,7 @@ namespace SG
             defenseText.text = playerStats.Defense.ToString();
             criticalText.text = playerStats.Critical + "%";
             criticalDamageText.text = playerStats.CriticalDamage + "%";
-            staminaText.text = playerStats.CurrentStamina + " / " + playerStats.MaxStamina;
+            staminaText.text = string.Format("{0:0} / {1:0}", playerStats.CurrentStamina, playerStats.MaxStamina);
         }
 
         private void SetExpSlider()

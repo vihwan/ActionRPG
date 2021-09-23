@@ -120,6 +120,7 @@ namespace SG
         //몬스터 사망 시 실행되는 메소드
         public void Die()
         {
+            navMeshAgent.enabled = false;
             enemyLocomotionManager.EnableFalseAllCollider();
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);
             //드롭 아이템 생성

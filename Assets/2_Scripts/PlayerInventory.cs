@@ -72,7 +72,8 @@ namespace SG
 
         public void Init()
         {
-            Instance = this;
+            if(Instance == null)
+                Instance = this;
 
             playerStats = GetComponent<PlayerStats>();
             if (playerStats == null)

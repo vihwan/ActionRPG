@@ -85,7 +85,7 @@ namespace SG
             base.PlayTargetAnimation(targetAnim, isInteracting, duration);
 
             /*08월 06일, Override 행동 이후 자연스러운 애니메이션 변화를 위해서 추가**/
-            if(targetAnim == "Empty")
+            if (targetAnim == "Empty")
             {
                 anim.CrossFade("Locomotion", 0.3f);
             }
@@ -101,17 +101,14 @@ namespace SG
             canRotate = false;
         }
 
-        private void OnAnimatorMove()
+        public void EnableInvulnerable()
         {
-            if (playerManager.isInteracting == false)
-                return;
+            anim.SetBool("isInvulnerable", true);
+        }
 
-            float delta = Time.deltaTime;
-            playerLocomotion.Rigidbody.drag = 0;
-            Vector3 deltaPosition = anim.deltaPosition;
-            deltaPosition.y = 0;
-            Vector3 velocity = deltaPosition / delta;
-            playerLocomotion.Rigidbody.velocity = velocity;
+        public void DisableInvulnerable()
+        {
+            anim.SetBool("isInvulnerable", false);
         }
 
         public void EnableCombo()
@@ -122,6 +119,19 @@ namespace SG
         public void DisableCombo()
         {
             anim.SetBool("canDoCombo", false);
+        }
+
+        private void OnAnimatorMove()
+        {
+            if (playerManager.isInteracting == false)
+                return;
+
+            float delta = Time.deltaTime;
+            playerLocomotion.rigidBody.drag = 0;
+            Vector3 deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            Vector3 velocity = deltaPosition / delta;
+            playerLocomotion.rigidBody.velocity = velocity;
         }
     }
 }

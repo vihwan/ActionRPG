@@ -13,7 +13,7 @@ namespace SG
         public Quest haveQuest;
         public QuestionMark mark;
 
-        private void Awake()
+        public void Init()
         {
             lockOnTransform = UtilHelper.Find<Transform>(transform, "LockOnTransform").transform;
 

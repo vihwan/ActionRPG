@@ -33,6 +33,7 @@ namespace SG
         public bool isInAir;
         public bool isGrounded;
         public bool canDoCombo;
+        public bool isInvulnerable;
 
         public float changeWeaponOutWaitTime = 0f;
         [SerializeField] private const float changeWeaponOutLimitTime = 5f;
@@ -94,13 +95,15 @@ namespace SG
             canDoCombo = anim.GetBool("canDoCombo");
             anim.SetBool("isInAir", isInAir);
             isUnEquip = anim.GetBool("isUnEquip");
+            isInvulnerable = anim.GetBool("isInvulnerable");
 
             inputHandler.TickInput(delta);
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
+            playerStats.RegenerationStamina();
 
             //CheckForInteractable();
-            CheckOpenUI();
+            //CheckOpenUI();
         }
 
         private void CheckOpenUI()
@@ -203,7 +206,7 @@ namespace SG
         internal void OpenChestInteraction()
         {
             //플레이어가 미끄러지는 것을 막는다.
-            playerLocomotion.Rigidbody.velocity = Vector3.zero;
+            playerLocomotion.rigidBody.velocity = Vector3.zero;
 
             //플레이어가 상자 여는 애니메이션을 넣고 싶다면 여기에 넣자.
         }

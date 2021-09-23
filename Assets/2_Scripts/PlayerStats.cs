@@ -17,8 +17,9 @@ namespace SG
         [SerializeField] private int maxMana;
         [SerializeField] private int currentMana;
 
-        [SerializeField] private int maxStamina;
-        [SerializeField] private int currentStamina;
+        [SerializeField] private float maxStamina;
+        [SerializeField] private float currentStamina;
+        [SerializeField] private float staminaRegenerationAmount = 1f;
 
         [SerializeField] private int attack;
         [SerializeField] private int defense;
@@ -37,11 +38,12 @@ namespace SG
 
 
         private Action OnTakeDamaged;
+        private Action OnUseStamina;
 
         //Property
         public int MaxHealth
         {
-            get => maxHealth; 
+            get => maxHealth;
             private set
             {
                 maxHealth = value;
@@ -79,7 +81,7 @@ namespace SG
                     currentMana = MaxMana;
             }
         }
-        public int MaxStamina
+        public float MaxStamina
         {
             get => maxStamina;
             private set
@@ -89,7 +91,7 @@ namespace SG
                     CurrentStamina = maxStamina;
             }
         }
-        public int CurrentStamina
+        public float CurrentStamina
         {
             get => currentStamina;
             private set
@@ -132,7 +134,10 @@ namespace SG
             UpdateAllStatusText();
 
             OnTakeDamaged += HealthBar_OnTakeDamaged;
+            OnUseStamina += StaminaBar_OnUseStamina;
         }
+
+
 
         private void InitializeStatusSet()
         {
@@ -156,6 +161,31 @@ namespace SG
         {
             healthBar.SetCurrentHealth(CurrentHealth);
             healthBar.SetHealthText(CurrentHealth, MaxHealth);
+        }
+
+        private void StaminaBar_OnUseStamina()
+        {
+            staminaBar.SetCurrentStamina(CurrentStamina);
+            staminaBar.SetStaminaText(CurrentStamina, MaxStamina);
+        }
+
+
+        public void UseStamina(int amount)
+        {
+            CurrentStamina -= amount;
+            OnUseStamina?.Invoke();
+        }
+
+        public void RegenerationStamina()
+        {
+            if (!playerManager.isInteracting)
+            {
+                if (CurrentStamina < MaxStamina)
+                {
+                    CurrentStamina += staminaRegenerationAmount * Time.deltaTime;
+                    OnUseStamina?.Invoke();
+                }
+            }
         }
 
         public void UpdatePlayerStatus_Initialize()
@@ -235,7 +265,7 @@ namespace SG
         {
             healthBar.SetHealthText(CurrentHealth, MaxHealth);
             manaBar.SetManaText(CurrentMana, MaxMana);
-            staminaBar.SetStaminaText(CurrentStamina,MaxStamina);
+            staminaBar.SetStaminaText(CurrentStamina, MaxStamina);
         }
 
         public void SetStatusByLevelUp()
@@ -250,7 +280,10 @@ namespace SG
 
         public void TakeDamage(int damage)
         {
-            if(isDead)
+            if (playerManager.isInvulnerable) //무적상태
+                return;
+
+            if (isDead)
                 return;
 
             CurrentHealth -= damage;

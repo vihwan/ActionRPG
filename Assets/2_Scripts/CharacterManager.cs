@@ -6,7 +6,7 @@ namespace SG
 {
     public class CharacterManager : MonoBehaviour
     {
-        [SerializeField, ReadOnly] internal Transform lockOnTransform;
+        [SerializeField] internal Transform lockOnTransform;
     }
 }
 

@@ -26,7 +26,7 @@ namespace SG
             animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
 
             //물건을 줍는 동안 플레이어의 움직임은 멈춰야함
-            playerLocomotion.Rigidbody.velocity = Vector3.zero;
+            playerLocomotion.rigidBody.velocity = Vector3.zero;
             animatorHandler.PlayTargetAnimation("Pick Up Item", true);
             playerInventory.weaponsInventory.Add(weapon);
 

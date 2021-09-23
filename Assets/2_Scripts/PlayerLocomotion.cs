@@ -20,7 +20,7 @@ namespace SG
         [HideInInspector]
         public AnimatorHandler animatorHandler;
 
-        [SerializeField] private new Rigidbody rigidbody;
+        public Rigidbody rigidBody;
         // public GameObject normalCamera;
 
         [Header("Ground & Air Detection Stats")]
@@ -43,13 +43,11 @@ namespace SG
         [SerializeField]
         float fallingSpeed = 80;
 
-        public Rigidbody Rigidbody { get => rigidbody; private set => rigidbody = value; }
-
         // Start is called before the first frame update
         public void Init()
         {
             playerManager = GetComponent<PlayerManager>();
-            Rigidbody = GetComponent<Rigidbody>();
+            rigidBody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -106,7 +104,7 @@ namespace SG
             }
 
             Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
-            Rigidbody.velocity = projectedVelocity;
+            rigidBody.velocity = projectedVelocity;
 
 
 
@@ -230,8 +228,8 @@ namespace SG
 
             if (playerManager.isInAir)
             {
-                rigidbody.AddForce(-Vector3.up * fallingSpeed);
-                rigidbody.AddForce(moveDirection * fallingSpeed / 5f);
+                rigidBody.AddForce(-Vector3.up * fallingSpeed);
+                rigidBody.AddForce(moveDirection * fallingSpeed / 5f);
             }
 
             Vector3 dir = moveDirection;
@@ -291,9 +289,9 @@ namespace SG
                             animatorHandler.PlayTargetAnimation("Falling_UnEquip", true);
                     }
 
-                    Vector3 vel = rigidbody.velocity;
+                    Vector3 vel = rigidBody.velocity;
                     vel.Normalize();
-                    rigidbody.velocity = vel * (movementSpeed / 2f);
+                    rigidBody.velocity = vel * (movementSpeed / 2f);
                     playerManager.isInAir = true;
                 }
             }
@@ -359,7 +357,7 @@ namespace SG
             {
                 if (playerManager.isSprinting)
                 {
-                    if (rigidbody.velocity == Vector3.zero)
+                    if (rigidBody.velocity == Vector3.zero)
                     {
                         Debug.Log("Play SprintEnd");
                         animatorHandler.PlayTargetAnimation("SprintEnd_UnEquip", true);

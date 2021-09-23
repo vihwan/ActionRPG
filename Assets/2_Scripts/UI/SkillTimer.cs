@@ -7,7 +7,7 @@ namespace SG
 {
     public class SkillTimer : MonoBehaviour
     {
-        private new Animation animation;
+        [SerializeField] private Animation Animation;
         private TMP_Text tmp_text;
 
         private float time = 1f;     //업데이트가 될 총 시간값
@@ -20,7 +20,7 @@ namespace SG
         // Start is called before the first frame update
         public void Init()
         {
-            animation = GetComponent<Animation>();
+            Animation = GetComponent<Animation>();
             tmp_text = GetComponent<TMP_Text>();
         }
 
@@ -35,7 +35,7 @@ namespace SG
             //텍스트를 활성화하고, 텍스트의 값을 변경한 상태에서 플레이합니다.
             gameObject.SetActive(true);
             tmp_text.text = remain.ToString();
-            animation.Play();
+            Animation.Play();
         }
 
         // Update is called once per frame
@@ -52,7 +52,7 @@ namespace SG
                 remain -= interval;
                 tmp_text.text = remain.ToString();
 
-                animation.Play();
+                Animation.Play();
             }
 
             elapsedTime += Time.deltaTime / time;
