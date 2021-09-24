@@ -335,13 +335,13 @@ namespace SG
 
             switch (this.gameObject.name)
             {
-                case "WeaponList": OpenPopupMessage(index); break;
-                case "TopsList": OpenPopupMessage(index); break;
-                case "BottomsList": OpenPopupMessage(index); break;
-                case "GlovesList": OpenPopupMessage(index); break;
-                case "ShoesList": OpenPopupMessage(index); break;
-                case "AccessoryList": OpenPopupMessage(index); break;
-                case "SpecialEquipList": OpenPopupMessage(index); break;
+                case "WeaponList": OpenPopupMessageToDelete(index); break;
+                case "TopsList": OpenPopupMessageToDelete(index); break;
+                case "BottomsList": OpenPopupMessageToDelete(index); break;
+                case "GlovesList": OpenPopupMessageToDelete(index); break;
+                case "ShoesList": OpenPopupMessageToDelete(index); break;
+                case "AccessoryList": OpenPopupMessageToDelete(index); break;
+                case "SpecialEquipList": OpenPopupMessageToDelete(index); break;
                 case "ConsumableList": OpenPopupMultiSelection(index); break;
                 case "IngredientList": OpenPopupMultiSelection(index); break;
                 default: break;
@@ -356,7 +356,7 @@ namespace SG
                                                                        beforeSelectSlotItem.itemType);
             popUpMulti.SetYesCallback(num =>
             {
-                OpenPopupMessage(index, num, popUpMulti.gameObject);
+                OpenPopupMessageToDelete(index, num, popUpMulti.gameObject);
             });
             popUpMulti.SetNoCallback(() =>
             {
@@ -366,10 +366,10 @@ namespace SG
         }
 
         // 무기, 장비용 함수
-        private void OpenPopupMessage(int index)
-        {
+        private void OpenPopupMessageToDelete(int index)
+        {        
             PopUpMessage popUpMessage = PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
-                                              , "정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName
+                                              , string.Format("정말 버리시겠습니까? \n <size=28> {0}",beforeSelectSlotItem.itemName)
                                               , "확인"
                                               , "취소"
                                               , "※ 버린 아이템은 골드로 환전됩니다.");
@@ -396,10 +396,11 @@ namespace SG
         }
 
         //소비, 재료용 함수
-        private void OpenPopupMessage(int index, int amount, GameObject popUpMulti)
+        private void OpenPopupMessageToDelete(int index, int amount, GameObject popUpMulti)
         {
+            
             PopUpMessage popUpMessage = PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
-                                              , "정말 버리시겠습니까? \n" + beforeSelectSlotItem.itemName + ": " + amount + "개"
+                                              , string.Format("정말 버리시겠습니까? \n <size=28> {0} : {1}개",beforeSelectSlotItem.itemName, amount)
                                               , "확인"
                                               , "취소"
                                               , "※ 버린 아이템은 골드로 환전됩니다.");

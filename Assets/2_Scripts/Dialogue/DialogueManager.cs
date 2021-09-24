@@ -43,6 +43,8 @@ namespace SG
                 nextBtn = UtilHelper.Find<Button>(dialogueObject.transform, "Dialogue/NextButton");
                 if (nextBtn != null)
                     nextBtn.onClick.AddListener(DisplayNextSentences);
+
+                choicePanelTransform = dialogueObject.transform.Find("Choices Panel").transform;
             }
 
             dialogueObject.SetActive(false);

@@ -90,11 +90,17 @@ namespace SG
 
         private void OpenPopupMessage(Item item, int num, GameObject popupMulti)
         {
+            
             PopUpMessage popUp =
                 PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
-                                                           , "정말 구매하시겠습니까? \n" + item.itemName + ": " + num + "개"
+                                                           , string.Format("정말 구매하시겠습니까? \n <size=28> {0} : {1}개",item.itemName,num)
                                                            , "확인"
                                                            , "취소");
+            // PopUpMessage popUp =
+            //     PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
+            //                                                , "정말 구매하시겠습니까? \n" + item.itemName + ": " + num + "개"
+            //                                                , "확인"
+            //                                                , "취소");
             popUp.SetYesCallback(() =>
             {
                 //아이템 획득 : 플레이어 인벤토리에 추가, 골드 소모, 현재 골드 텍스트 업데이트

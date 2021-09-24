@@ -65,23 +65,27 @@ namespace SG
                 infoPanel.Init();
 
             rewardItemSlotPrefab = Database.Instance.prefabDatabase.rewardItemSlot;
-            CloseQuestPanel();
+            CloseQuestPanelGameObject();
         }
 
         public void OpenQuestPanelEvent()
         {
             SetQuestPanel();
-            OpenQuestPanel();
+            OpenQuestPanelGameObject();
             detailsObject.SetActive(false);
             infoPanel.gameObject.SetActive(false);
+            if(questPanelList.Count > 0)
+            {
+                questPanelList[0].OnClickBtn();
+            }
         }
 
-        public void OpenQuestPanel()
+        public void OpenQuestPanelGameObject()
         {
             this.gameObject.SetActive(true);
         }
 
-        public void CloseQuestPanel()
+        public void CloseQuestPanelGameObject()
         {
             this.gameObject.SetActive(false);
         }

@@ -9,8 +9,7 @@ namespace SG
 {
     public class Message_GetItem : MonoBehaviour
     {
-        [SerializeField] private TMP_Text nameText;
-        [SerializeField] private TMP_Text amountText;
+        [SerializeField] private TMP_Text getItemText;
         [SerializeField] private Image itemImage;
         [SerializeField] private Item item;
         [SerializeField] private float moveSpeed = 10f;
@@ -21,8 +20,7 @@ namespace SG
 
         private void Awake()
         {
-            nameText = UtilHelper.Find<TMP_Text>(transform, "NameText");
-            amountText = UtilHelper.Find<TMP_Text>(transform, "AmountText");
+            getItemText = UtilHelper.Find<TMP_Text>(transform, "GetItemText");
             itemImage = UtilHelper.Find<Image>(transform, "IconMask/Icon");        
         }
 
@@ -65,22 +63,24 @@ namespace SG
         public void SetGetItemMessage(Item _item, int amount)
         {
             item = _item;
-            nameText.text = item.itemName;
-            amountText.text = "× " + amount;
+            getItemText.text = string.Format("{0} <size=24> × <size=36> {1} ",item.itemName, amount);
+            //getItemText.text = item.itemName;
+            //amountText.text = "× " + amount;
             itemImage.sprite = item.itemIcon;
         }
 
         public void SetGetGoldMessage(Sprite gold, int money)
         {
-            nameText.text = "골드";
-            amountText.text = money + " G";
+            getItemText.text = string.Format("골드 <size=24> × <size=36> {0} G", money);
+            //getItemText.text = "골드";
+            //amountText.text = money + " G";
             itemImage.sprite = gold;
         }
 
         public void SetGetExpMessage(Sprite exp, int expAmount)
         {
-            nameText.text = "경험치";
-            amountText.text = string.Format("{0} Exp", expAmount);
+            getItemText.text = string.Format("경험치 <size=24> × <size=36> {0} Exp", expAmount);
+            //amountText.text = string.Format("{0} Exp", expAmount);
             itemImage.sprite = exp;
         }
     }

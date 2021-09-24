@@ -138,7 +138,7 @@ namespace SG
                 windowPanel.CloseInventoryWindowPanel();
                 windowPanel.CloseEnforceWindowPanel();
                 shopPanel.CloseShopPanel();
-                questPanel.CloseQuestPanel();
+                questPanel.CloseQuestPanelGameObject();
                 achievePanel.CloseAchievePanel();
             }
         }

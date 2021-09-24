@@ -87,12 +87,14 @@ namespace SG
         {
             SelectMaterialItem = item;
             materialSlotIcon.sprite = SelectMaterialItem.itemIcon;
+            materialSlotIcon.color = new Color(1f,1f,1f,1f);
             enforceBtn.enabled = true;
         }
         internal void ClearSelectMaterialItem()
         {
             SelectMaterialItem = null;
             materialSlotIcon.sprite = null;
+            materialSlotIcon.color = new Color(1f,1f,1f,0f);
             materialSlotBtn.onClick.RemoveAllListeners();
             enforceBtn.enabled = false;
         }

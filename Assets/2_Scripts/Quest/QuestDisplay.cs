@@ -42,7 +42,7 @@ namespace SG
         {
             clickBtnAction = action;
         }
-        private void OnClickBtn()
+        public void OnClickBtn()
         {
             clickBtnAction?.Invoke();
         }

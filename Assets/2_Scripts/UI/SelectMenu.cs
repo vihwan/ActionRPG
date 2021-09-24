@@ -62,8 +62,18 @@ namespace SG {
         public void OnPointerEnter(PointerEventData eventData)
         {
             string enterObject = eventData.pointerCurrentRaycast.gameObject.name;
-            guideText.text = enterObject;
-            if (enterObject == "GuideText")
+            switch (enterObject)
+            {          
+                case "Select Character":   guideText.text = "캐릭터 정보"; break;
+                case "Select Inventory":   guideText.text = "인벤토리"; break;
+                case "Select WorldMap":    guideText.text = "월드맵"; break;
+                case "Select Quest":       guideText.text = "퀘스트"; break;
+                case "Select Achivement":  guideText.text = "업적"; break;
+                case "Select Screenshot":  guideText.text = "스크린샷"; break;
+                case "Select GameOptions": guideText.text = "환경설정"; break;
+                case "Select Exit":        guideText.text = "게임 종료"; break;
+            }
+            if (enterObject.Equals("GuideText"))
                 guideText.text = null;
         }
 

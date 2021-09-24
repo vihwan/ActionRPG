@@ -229,7 +229,7 @@ namespace SG
                         this.gameObject.transform.position,
                         Quaternion.identity,
                         this.transform) as GameObject;
-
+            go.transform.localScale = new Vector3 (.7f,.7f,.7f);
             go.GetComponent<ParticleSystem>().Play();
             Destroy(go, 5f);
         }

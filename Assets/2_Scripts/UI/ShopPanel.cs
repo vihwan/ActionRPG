@@ -51,7 +51,7 @@ namespace SG
         }
         public void SetShopPanel(string shopName)
         {
-            titleText.text = shopName;
+            titleText.text = string.Format("상점 <size=28> / {0}", shopName);
             userGoldText.text = PlayerInventory.Instance.CurrentGold.ToString();
         }
 

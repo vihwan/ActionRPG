@@ -131,10 +131,25 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## 2021.09.23 (목)
 
-1. 버그 수정
+1. UI 이미지 개선
 
-	- (완료) 아이템을 판 이후 연속으로 팔 때, 다중 선택 팝업이 올바르게 표시되지 않음
-	- (완료) 캐릭터 패널을 닫을 때, 닫기 버튼이 아닌, ESC를 눌렀을 때, Override WeaponEquipPanel의 weight가 0이 되지 않는 현상. 
+	- CharacterPanel
+	- InventoryPanel
+	- EnforcePanel
+	- HUD
+	- (완료) ShopPanel
+	- QuestPanel
+	- AchievePanel
+	- (완료) MessageList
+	- (완료) DialogueBox
+	- LootWindow
+	- (완료) PopupWindow
+	- ItemSlot
+
+2. 부분 개선
+
+	- 레벨업 이펙트 스케일을 작게 조절
+	- 퀘스트 창을 열었을 경우, 맨 위쪽 항목의 퀘스트 내용이 출력되도록 설정
 
 
 
@@ -215,6 +230,16 @@ UI Image 개편
 -------------------------------
 
 ## 이전 개발 일지
+
+
+### 2021.09.23 (목)
+
+1. 버그 수정
+
+	- (완료) 아이템을 판 이후 연속으로 팔 때, 다중 선택 팝업이 올바르게 표시되지 않음
+	- (완료) 캐릭터 패널을 닫을 때, 닫기 버튼이 아닌, ESC를 눌렀을 때, Override WeaponEquipPanel의 weight가 0이 되지 않는 현상. 
+
+
 
 ### 2021.09.20 (월)
 
