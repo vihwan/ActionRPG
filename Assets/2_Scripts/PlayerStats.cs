@@ -26,7 +26,7 @@ namespace SG
         [SerializeField] private int critical;
         [SerializeField] private int criticalDamage;
 
-        [SerializeField] private bool isDead;
+        [SerializeField] public bool isDead;
 
         [Header("Need Component")]
         private HealthBar healthBar;
@@ -304,7 +304,9 @@ namespace SG
                     animatorHandler.PlayTargetAnimation("Damage_Die", true);
                 else
                     animatorHandler.PlayTargetAnimation("Damage_Die_UnEquip", true);
+                
                 //Handle Player Death
+                playerManager.SetAllMonsterCurrentTargetToNull();
             }
         }
 

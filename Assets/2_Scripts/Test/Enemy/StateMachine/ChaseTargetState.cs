@@ -6,6 +6,7 @@ namespace SG
 {
     public class ChaseTargetState : State
     {
+        public IdleState idleState;
         public CombatStanceState combatStanceState;
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
@@ -14,6 +15,9 @@ namespace SG
                 enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                 return this;
             }
+
+            if (enemyManager.currentTarget == null)
+                return idleState;
 
             //대상을 추적
             //만약 공격사거리 안에 적이 들어오면 CombatStanceState로 전환

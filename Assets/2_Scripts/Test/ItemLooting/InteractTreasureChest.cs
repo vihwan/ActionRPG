@@ -49,7 +49,7 @@ namespace SG
             playerManager.transform.rotation = targetRotation;
 
             GetItem(playerManager);
-            playerManager.OpenChestInteraction();
+            playerManager.OpenInteractionToVelocityZero();
         }
         private void GetItem(PlayerManager playerManager)
         {

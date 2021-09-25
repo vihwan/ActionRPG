@@ -31,16 +31,14 @@ namespace SG
             {
                 PlayerStats playerStats = colliders[i].transform.GetComponent<PlayerStats>();
 
-                if (playerStats != null)
+                if (playerStats != null && playerStats.isDead.Equals(false))
                 {
                     //check for team id
-
                     Vector3 targetDirection = playerStats.transform.position - transform.position;
                     float viewableAnlge = Vector3.Angle(targetDirection, transform.forward);
                     if (viewableAnlge > enemyManager.minimumDetectionAngle && viewableAnlge < enemyManager.maximumDetectionAngle)
                     {
-                        enemyManager.currentTarget = playerStats;
-                        
+                        enemyManager.currentTarget = playerStats;                        
                     }
                 }
             }

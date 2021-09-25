@@ -21,6 +21,7 @@ namespace SG
         [SerializeField] private Transform itemRarityTransform;
         [SerializeField] private List<GameObject> rareStars;
         [SerializeField] private Button buyBtn;
+        [SerializeField] private GameObject currentItemAmountTextGO;
         [SerializeField] private TMP_Text currentItemAmountText;
 
         [Header("Prefab")]
@@ -39,7 +40,8 @@ namespace SG
             itemExplainCI = UtilHelper.Find<TMP_Text>(transform, "Explain/ExplainTextCI");
             itemRarityTransform = transform.Find("Rarity").transform;
             itemDurabilityTitle = transform.Find("Durability").gameObject;
-            currentItemAmountText = UtilHelper.Find<TMP_Text>(transform, "CurrentAmountImage/CurrentAmountText");
+            currentItemAmountTextGO = transform.Find("CurrentAmountImage").gameObject;
+            currentItemAmountText = UtilHelper.Find<TMP_Text>(currentItemAmountTextGO.transform, "CurrentAmountText");
             RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
 
             buyBtn = UtilHelper.Find<Button>(transform, "BuyBtn");
@@ -90,10 +92,10 @@ namespace SG
 
         private void OpenPopupMessage(Item item, int num, GameObject popupMulti)
         {
-            
+
             PopUpMessage popUp =
                 PopUpGenerator.Instance.CreatePopupMessage(this.transform.parent
-                                                           , string.Format("정말 구매하시겠습니까? \n <size=28> {0} : {1}개",item.itemName,num)
+                                                           , string.Format("정말 구매하시겠습니까? \n <size=28> {0} : {1}개", item.itemName, num)
                                                            , "확인"
                                                            , "취소");
             // PopUpMessage popUp =
@@ -166,6 +168,7 @@ namespace SG
             SetItemStatusText(itemStatus, weaponItem);
             SetActiveExplainText(true);
             CreateRarityStar(itemRarityTransform, rareStars, weaponItem);
+            currentItemAmountTextGO.SetActive(false);
             currentItemAmountText.text = null;
         }
         private void SetParameterInfoPanel(EquipItem equipItem)
@@ -178,6 +181,7 @@ namespace SG
             SetItemStatusText(itemStatus, equipItem);
             SetActiveExplainText(true);
             CreateRarityStar(itemRarityTransform, rareStars, equipItem);
+            currentItemAmountTextGO.SetActive(false);
             currentItemAmountText.text = null;
         }
         private void SetParameterInfoPanel(ConsumableItem consumableItem)
@@ -192,7 +196,8 @@ namespace SG
             SetItemStatusText(itemStatus, consumableItem);
             SetActiveExplainText(false);
             CreateRarityStar(itemRarityTransform, rareStars, consumableItem);
-            currentItemAmountText.text = "현재 갯수 : " + GetCurrentAmountText(consumableItem) + "개";
+            currentItemAmountTextGO.SetActive(true);
+            currentItemAmountText.text = string.Format("현재 갯수 : {0}개", GetCurrentAmountText(consumableItem));
         }
         private void SetParameterInfoPanel(IngredientItem ingredientItem)
         {
@@ -206,7 +211,8 @@ namespace SG
             SetItemStatusText(itemStatus, ingredientItem);
             SetActiveExplainText(false);
             CreateRarityStar(itemRarityTransform, rareStars, ingredientItem);
-            currentItemAmountText.text = "현재 갯수 : " + GetCurrentAmountText(ingredientItem) + "개";
+            currentItemAmountTextGO.SetActive(true);
+            currentItemAmountText.text = string.Format("현재 갯수 : {0}개", GetCurrentAmountText(ingredientItem));
         }
         private void CreateRarityStar(Transform transform, List<GameObject> rareStarsList, WeaponItem playerWeapon)
         {

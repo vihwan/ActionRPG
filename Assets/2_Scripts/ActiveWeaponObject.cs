@@ -19,16 +19,11 @@ namespace SG
                 unequipWeaponObject.SetActive(false);
 
 
-            if(GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
+            if(GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
                 handWeaponObject.SetActive(!state);
                 unequipWeaponObject.SetActive(state);
             }
-            else
-            {
-                handWeaponObject.SetActive(state);
-                unequipWeaponObject.SetActive(!state);
-            }   
         }
 
         //외부 에디터에서 애니메이션 이벤트로 사용하는 함수

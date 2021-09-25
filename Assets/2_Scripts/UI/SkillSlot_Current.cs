@@ -16,7 +16,7 @@ namespace SG
         [SerializeField] private Image skillIcon;
         [SerializeField] private Button slotBtn;
         [SerializeField] private Image slotBtnImage;
-        [SerializeField] private TMP_Text levelText;
+        [SerializeField] private TMP_Text nameText;
         [SerializeField] internal bool isSelect = false;
 
         [SerializeField] private Sprite frameNormal;
@@ -35,7 +35,7 @@ namespace SG
 
             slotBtnImage = slotBtn.GetComponent<Image>();
             skillIcon = UtilHelper.Find<Image>(slotBtn.transform, "Image");
-            levelText = GetComponentInChildren<TMP_Text>();
+            nameText = GetComponentInChildren<TMP_Text>();
 
             frameNormal = Resources.Load<Sprite>("Sprites/Item/Frame/frame_normal");
             frameGold = Resources.Load<Sprite>("Sprites/Item/Frame/frame_select");
@@ -53,7 +53,7 @@ namespace SG
             this.playerSkill = playerSkill;
             skillIcon.color = new Color(1, 1, 1, 1);
             skillIcon.sprite = playerSkill.SkillImage;
-            levelText.text = playerSkill.Level.ToString();
+            nameText.text = string.Format("{0}", playerSkill.SkillName);
         }
 
         public void ClearSkill()
@@ -61,7 +61,7 @@ namespace SG
             this.playerSkill = null;
             skillIcon.sprite = null;
             skillIcon.color = new Color(1, 1, 1, 0);
-            levelText.text = null;
+            nameText.text = null;
         }
 
         public void OpenSkillInformation()

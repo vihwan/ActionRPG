@@ -14,6 +14,11 @@ namespace SG
         public EnforceItemSlot enforceItemSlot;
         public DropItemBox dropItemBox;
 
+        [Header("Sprite")]
+        public Sprite itemSlotNormal;
+        public Sprite itemSlotIsSelect;
+        public Sprite itemSlotIsArmed;
+
         [Header("Rarity Materials")]
         public List<Material> materials = new List<Material>();
 
@@ -35,7 +40,6 @@ namespace SG
                     return materials[i];
                 }
             }
-
             return null;
         }
     }

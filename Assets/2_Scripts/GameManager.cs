@@ -17,6 +17,7 @@ namespace SG
         private QuestManager questManager;
         private AchieveManager achieveManager;
         private LevelManager levelManager;
+        private WorldEventManager worldEventManager;
 
         private void Awake()
         {
@@ -67,6 +68,10 @@ namespace SG
             levelManager = GetComponentInChildren<LevelManager>();
             if (levelManager != null)
                 levelManager.Init();
+
+            worldEventManager = GetComponentInChildren<WorldEventManager>();
+            if(worldEventManager != null)
+                worldEventManager.Init();
 
             DontDestroyOnLoad(this.gameObject);
         }

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: Skill5
   m_EditorClassIdentifier: 
   skillImage: {fileID: 21300000, guid: 99b89a5b734a2a343b69c05a373475ae, type: 3}
-  skillName: "\uC544\uBB34\uD2BC\uC0AC\uC774\uB4DC\uD0A5"
+  skillName: "\uC0AC\uC774\uB4DC \uC2A4\uD15D"
   skillType: 0
   level: 1
-  needMana: 0
+  needMana: 30
   coolTime: 22
-  explainText: "\uC0AC\uC774\uB4DC\uCCB4\uC2A4\uD2B8...\uC544\uB2C8 \uC0AC\uC774\uB4DC\uD0A5."
+  explainText: "\uC608\uB9AC\uD55C \uBC1C \uC2A4\uD15D\uC744 \uD65C\uC6A9\uD558\uC5EC
+    \uC0C1\uB300\uC5D0\uAC8C \uBE60\uB974\uAC8C \uC811\uADFC\uD55C\uB2E4. \uC811\uADFC\uD558\uB294
+    \uB3D9\uC548 \uD68C\uD53C\uC728\uC774 \uD06C\uAC8C \uC0C1\uC2B9\uD55C\uB2E4."
   damageDic:
   - damageName: 
     damage: 0

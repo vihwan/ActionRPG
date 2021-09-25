@@ -14,8 +14,13 @@ namespace SG
         public TMP_Text questTitleText;
         public TMP_Text questObjectiveText;
         public TMP_Text questProgressText;
-
         [SerializeField] private bool isActive = false;
+
+        [Header("Quest Objective Alert")]
+        public TMP_Text questObjectiveAlertText;
+
+
+        private Animator animator;
 
         public void Init()
         {
@@ -23,6 +28,7 @@ namespace SG
             questTitleText = UtilHelper.Find<TMP_Text>(questPopup.transform, "TitleText");
             questObjectiveText = UtilHelper.Find<TMP_Text>(questPopup.transform, "ObjectiveText");
             questProgressText = UtilHelper.Find<TMP_Text>(questPopup.transform, "ProgressText");
+            animator = GetComponent<Animator>();
         }
 
         public void OnQuestAlertUI(Quest newQuest)
@@ -78,6 +84,13 @@ namespace SG
         public void SetActiveQuestAlertUI(bool state)
         {
             questPopup.SetActive(state);
+        }
+
+        public void OnActiveQuestObjectiveAlertText(QuestObjective nextObjective)
+        {
+           // questObjectiveAlertText
+           questObjectiveAlertText.text = string.Format("목표 달성\n다음 목표 활성 : {0}", nextObjective.title);
+           animator.SetTrigger("Play");
         }
     }
 }

@@ -56,7 +56,7 @@ namespace SG {
 
             guideText = GetComponentInChildren<TMP_Text>(true);
             if (guideText != null)
-                guideText.text = "Now Ready";
+                guideText.text = "";
         }
 
         public void OnPointerEnter(PointerEventData eventData)

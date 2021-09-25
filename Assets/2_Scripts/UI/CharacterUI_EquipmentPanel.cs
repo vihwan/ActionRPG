@@ -212,7 +212,7 @@ namespace SG
         {
             equipName.text = equipItem.itemName;
             equipKind.text = equipItem.kind;
-            equipEnforceLevel.text = "+" + equipItem.enforceLevel;
+            equipEnforceLevel.text = equipItem.enforceLevel + "단계";
             equipSetName.text = null;
             equipDurability.text = null;
            // equipDurability.text = equipItem.currentDurability + " / " + equipItem.maxDurability;
@@ -236,7 +236,7 @@ namespace SG
         {
             equipName_Cf.text = equipItem.itemName;
             equipKind_Cf.text = equipItem.kind;
-            equipEnforceLevel_Cf.text = "+" + equipItem.enforceLevel;
+            equipEnforceLevel_Cf.text = equipItem.enforceLevel + "단계";
             equipSetName_Cf.text = null;
             equipDurability_Cf = null;
           //  equipDurability_Cf.text = equipItem.currentDurability + " / " + equipItem.maxDurability;

@@ -66,10 +66,15 @@ namespace SG
             RareStar = Resources.Load<Image>("Prefabs/RarityStar").gameObject;
 
             materialInfoPanel.SetActive(false);
-            this.gameObject.SetActive(false);
+            CloseEnforceMaterialSelectList();
         }
 
         private void OnClickBackBtn()
+        {
+            CloseEnforceMaterialSelectList();
+        }
+
+        public void CloseEnforceMaterialSelectList()
         {
             this.gameObject.SetActive(false);
         }
@@ -257,7 +262,7 @@ namespace SG
             kindText.text = weaponItem.kind;
             enforceLevelText.text = "+" + weaponItem.enforceLevel;
 
-            itemDurability.text = null;
+            //itemDurability.text = string.Format("{0} / {1}", weaponItem.currentDurability, weaponItem.maxDurability);
            // itemDurability.text = weaponItem.currentDurability + " / " + weaponItem.maxDurability;
 
             SetItemStatusText(itemStatus, weaponItem);

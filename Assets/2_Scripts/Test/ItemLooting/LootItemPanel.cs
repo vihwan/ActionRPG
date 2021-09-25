@@ -22,7 +22,7 @@ namespace SG
                 itemIcon.sprite = item.itemIcon;
             }
 
-            SetItemNameColorToRarity(item);
+            //SetItemNameColorToRarity(item);
         }
         private void SetItemNameColorToRarity(Item item)
         {

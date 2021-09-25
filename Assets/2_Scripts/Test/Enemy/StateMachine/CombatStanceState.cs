@@ -6,15 +6,27 @@ namespace SG
 {
     public class CombatStanceState : State
     {
+        public IdleState idleState;
         public ChaseTargetState chaseTargetState;
         public AttackState attackState;
+
+        bool randomDestinationSet = false;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
             //플레이어 주변을 서성이며 공격할 준비를 함     
 
+            if(enemyManager.currentTarget == null)
+                return idleState;
+
             // 공격 사거리를 체크
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+
+            // if(!randomDestinationSet)
+            // {
+            //     randomDestinationSet = true;
+            //     //Decide Circling Action
+            // }
 
             HandleRotateTowardsTarget(enemyManager);
 
@@ -22,9 +34,9 @@ namespace SG
             {
                 enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
             }
-
             if (enemyManager.currentRecoveryTime <= 0 && distanceFromTarget <= enemyManager.maximumAttackRange)
             {   //공격 사거리 안에 들어오면 AttackState를 리턴
+                //randomDestinationSet = false;
                 return attackState;
             }
             else if (distanceFromTarget > enemyManager.maximumAttackRange)
@@ -64,6 +76,11 @@ namespace SG
                                                                    enemyManager.navMeshAgent.transform.rotation,
                                                                    enemyManager.rotationSpeed / Time.deltaTime);
             }
+        }
+    
+        private void WalkAroundTarget(EnemyAnimatorHandler enemyAnimatorHandler)
+        {
+
         }
     }
 }

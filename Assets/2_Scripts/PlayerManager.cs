@@ -203,12 +203,10 @@ namespace SG
             this.interactableObject.Interact(this);
         }
 
-        internal void OpenChestInteraction()
+        internal void OpenInteractionToVelocityZero()
         {
             //플레이어가 미끄러지는 것을 막는다.
             playerLocomotion.rigidBody.velocity = Vector3.zero;
-
-            //플레이어가 상자 여는 애니메이션을 넣고 싶다면 여기에 넣자.
         }
 
         public void SetLevelSystem()
@@ -262,6 +260,15 @@ namespace SG
                     if (interactable == interactableObject)
                         interactableObject = null;
                 }
+            }
+        }
+
+        public void SetAllMonsterCurrentTargetToNull()
+        {
+            EnemyManager[] enemyManagers = GameObject.FindObjectsOfType<EnemyManager>();
+            for (int i = 0; i < enemyManagers.Length; i++)
+            {
+                enemyManagers[i].currentTarget = null;
             }
         }
     }

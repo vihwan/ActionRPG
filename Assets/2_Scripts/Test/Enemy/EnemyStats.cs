@@ -14,18 +14,33 @@ namespace SG
         [SerializeField] private bool isDead;
 
         private EnemyAnimatorHandler enemyAnimatorHandler;
+        private EnemyHealthBarUI enemyHealthBarUI;
+        private EnemyBossHealthBarUI enemyBossHealthBarUI;
         private EnemyManager enemyManager;
 
         public void Init()
         {
-            enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>();
-            enemyManager = GetComponent<EnemyManager>();
-        }
-
-        private void Start()
-        {
             maxHealth = SetMaxHealthFromHealthLevel();
             currentHealth = maxHealth;
+
+            enemyAnimatorHandler = GetComponentInChildren<EnemyAnimatorHandler>(true);
+            enemyManager = GetComponent<EnemyManager>();
+            if (enemyManager != null)
+            {
+                if (enemyManager.isBoss.Equals(true))
+                {
+                    enemyBossHealthBarUI = FindObjectOfType<EnemyBossHealthBarUI>();
+                }
+                else
+                {
+                    enemyHealthBarUI = GetComponentInChildren<EnemyHealthBarUI>(true);
+                    if (enemyHealthBarUI != null)
+                    {
+                        enemyHealthBarUI.Init();
+                        enemyHealthBarUI.SetMaxHealth(maxHealth);
+                    }
+                }
+            }
         }
 
         private int SetMaxHealthFromHealthLevel()
@@ -36,12 +51,19 @@ namespace SG
 
         public void TakeDamage(int damage)
         {
-            if(isDead)
+            if (isDead)
                 return;
 
             currentHealth = currentHealth - damage;
+
+            if (enemyManager.isBoss)
+                enemyBossHealthBarUI.SetBossCurrentHealth(currentHealth);
+            else
+                enemyHealthBarUI.SetHealth(currentHealth);
+
             enemyAnimatorHandler.PlayTargetAnimation("Damage_01", true);
             Debug.Log(damage + " 데미지를 입힌다!");
+
             if (currentHealth <= 0)
             {
                 currentHealth = 0;

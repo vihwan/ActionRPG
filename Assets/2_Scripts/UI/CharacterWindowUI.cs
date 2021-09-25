@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace SG
         [SerializeField] private CharacterUI_StatusPanel statusPanel;
         [SerializeField] private CharacterUI_WeaponPanel weaponPanel;
         [SerializeField] private CharacterUI_EquipmentPanel equipmentPanel;
-        [SerializeField] private CharacterUI_SkillPanel skillPanel;
+        [SerializeField] internal CharacterUI_SkillPanel skillPanel;
         [SerializeField] private CharacterUI_DataPanel dataPanel;
 
         [Header("Button")]
@@ -102,6 +102,7 @@ namespace SG
             CloseAllRightPanel();
             statusPanel.gameObject.SetActive(true);
             statusPanel.OnOpenPanel();
+            springBoardMenu.OnClickBtnChangeColor(springBoardMenu.statusBtn);           
             animationLayerHandler.HandlePlayerOnWeaponEquipPanelAnimation(true);
             animationLayerHandler.SetPlayerAnimationIsUnWeaponOnWeaponEquipPanel();
             

@@ -60,11 +60,14 @@ namespace SG
             if (enforceMaterialSelectList != null)
                 enforceMaterialSelectList.Init();
 
-            closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
+            closeBtn = UtilHelper.Find<Button>(transform, "RightParentPanel/CloseBtn");
             if (closeBtn != null)
+            {
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
+                closeBtn.onClick.AddListener(() => enforceMaterialSelectList.CloseEnforceMaterialSelectList());
+            }
 
-            userGoldText = UtilHelper.Find<TMP_Text>(transform, "UserGold/priceText");
+            userGoldText = UtilHelper.Find<TMP_Text>(transform, "RightParentPanel/UserGold/priceText");
 
             anim = GetComponent<Animator>();
             animText = UtilHelper.Find<TMP_Text>(transform, "EnforceText");

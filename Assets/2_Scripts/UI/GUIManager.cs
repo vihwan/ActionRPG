@@ -20,6 +20,8 @@ namespace SG
         [SerializeField] internal QuickSlotUI quickSlotUI;
         [SerializeField] private InteractableUI interactableUI;
         [SerializeField] internal QuestAlertUI questAlertUI;
+        [SerializeField] internal LevelUpAlertUI levelUpAlertUI;
+        [SerializeField] internal EnemyBossHealthBarUI enemyBossHealthBarUI;
 
         [Header("UI Windows")]
         [SerializeField] private SelectMenu selectMenu;
@@ -71,6 +73,14 @@ namespace SG
             questAlertUI = GetComponentInChildren<QuestAlertUI>(true);
             if (questAlertUI != null)
                 questAlertUI.Init();
+
+            levelUpAlertUI = GetComponentInChildren<LevelUpAlertUI>(true);
+            if (levelUpAlertUI != null)
+                levelUpAlertUI.Init();
+
+            enemyBossHealthBarUI = GetComponentInChildren<EnemyBossHealthBarUI>(true);
+            if(enemyBossHealthBarUI != null)
+                enemyBossHealthBarUI.Init();
 
             windowPanel = GetComponentInChildren<WindowPanel>(true);
             if (windowPanel != null)

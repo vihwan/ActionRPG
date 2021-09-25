@@ -158,13 +158,14 @@ namespace SG
             }
             if (nextObjective != null)
             {
+                GUIManager.instance.questAlertUI.OnActiveQuestObjectiveAlertText(nextObjective);
                 ParentScript.currentQuestObjective = nextObjective;
                 ParentScript.currentQuestObjective.state = QuestObjectiveState.Active;
                 ParentScript.currentQuestObjective.Initialize();
                 if(ParentScript.currentQuestObjective.type.Equals(QuestObjectiveType.Talk))
                 {
                     PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
-                    QuestManager.Instance.FindQuestTargetAndChangeQuestionMark( ParentScript.currentQuestObjective.objectiveTarget);
+                    QuestManager.Instance.FindQuestTargetAndChangeQuestionMark(ParentScript.currentQuestObjective.objectiveTarget);
                 }
             }
             else
@@ -175,6 +176,6 @@ namespace SG
                 ParentScript.OnObjectivesCompleted();
             }
             Debug.Log(string.Format("completed objective: {0}", title));
-        }
+        }  
     }
 }

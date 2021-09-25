@@ -6,17 +6,20 @@ using UnityEngine;
 
 namespace SG
 {
+    [RequireComponent(typeof(BoxCollider))]
+    [RequireComponent(typeof(CapsuleCollider))]
     public class InteractNPC : Interactable
     {
         [Header("Shop Item List")]
         public List<Item> itemLists;
+        [SerializeField] private TextMesh textMesh;
+        [SerializeField] public QuestionMark mark;
 
-        private TextMesh textMesh;
         private NPCManager npcManager;
         private DialogueTrigger dialogueTrigger;
         private InputHandler inputHandler;
 
-        public override void Start()
+        public void Init()
         {
             npcManager = GetComponent<NPCManager>();
             if(npcManager != null)
@@ -24,13 +27,16 @@ namespace SG
                 interactIcon = npcManager.smallIcon;
                 interactName = npcManager.npcName;
             }
-
             dialogueTrigger = GetComponent<DialogueTrigger>();
             textMesh = GetComponentInChildren<TextMesh>(true);
             if (textMesh != null)
             {
                 textMesh.text = "<NPC> "+ npcManager.npcName;
             }
+
+            mark = GetComponentInChildren<QuestionMark>();
+            if (mark != null)
+                mark.Init();
         }
 
         private void Update()
@@ -39,6 +45,12 @@ namespace SG
             {
                 textMesh.transform.LookAt(Camera.main.transform.position);
                 textMesh.transform.Rotate(0f, 180f, 0f);
+            }
+
+            if(mark != null)
+            {
+                mark.transform.LookAt(Camera.main.transform.position);
+                mark.transform.Rotate(0f,180f,0f);
             }
         }
         public override void Interact(PlayerManager playerManager)
@@ -128,5 +140,7 @@ namespace SG
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
             dialogueManager.EndDialogue();
         }
+
+        
     }
 }

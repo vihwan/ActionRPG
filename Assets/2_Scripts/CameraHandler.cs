@@ -279,13 +279,16 @@ namespace SG
 
         public void DragCharacter_OnActiveCharacterWindowUI()
         {
-           if(Mouse.current.leftButton.isPressed)
+            if (GUIManager.instance.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
+                return;
+
+            if (Mouse.current.leftButton.isPressed)
             {
-                if(Mouse.current.position.ReadValue().x > Mouse.current.position.ReadValueFromPreviousFrame().x)
+                if (Mouse.current.position.ReadValue().x > Mouse.current.position.ReadValueFromPreviousFrame().x + 3f)
                 {
                     myTransform.Rotate(0, 2f, 0);
                 }
-                else if (Mouse.current.position.ReadValue().x < Mouse.current.position.ReadValueFromPreviousFrame().x)
+                else if (Mouse.current.position.ReadValue().x < Mouse.current.position.ReadValueFromPreviousFrame().x - 3f)
                 {
                     myTransform.Rotate(0, -2f, 0);
                 }
@@ -294,11 +297,14 @@ namespace SG
 
         public void Zoom_OnActiveCharacterWindowUI()
         {
+            if (GUIManager.instance.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
+                return;
+
             //위로 마우스 휠업을 하면, F버튼 아이콘이 상위 아이템 패널을 가리키게 된다.
             if (Mouse.current.scroll.y.ReadValue() > 0)
             {
                 zoomLevel++;
-                if(zoomLevel > 5)
+                if (zoomLevel > 5)
                 {
                     zoomLevel = 5;
                     return;
@@ -308,7 +314,7 @@ namespace SG
             else if (Mouse.current.scroll.y.ReadValue() < 0)
             {
                 zoomLevel--;
-                if(zoomLevel < -5)
+                if (zoomLevel < -5)
                 {
                     zoomLevel = -5;
                     return;

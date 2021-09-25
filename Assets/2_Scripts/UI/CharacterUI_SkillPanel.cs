@@ -38,7 +38,6 @@ namespace SG
         [SerializeField] private SkillSlot skillSlotPrefab;
 
 
-
         [Header("Need Component")]
         private PlayerSkillInventory playerSkillInventory;
         private CharacterWindowUI characterWindowUI; //상위 계층 

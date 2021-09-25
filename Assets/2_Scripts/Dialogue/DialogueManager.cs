@@ -50,9 +50,9 @@ namespace SG
             dialogueObject.SetActive(false);
         }
 
-        private void Update() 
+        private void Update()
         {
-            if(dialogueObject.activeSelf.Equals(true))
+            if (dialogueObject.activeSelf.Equals(true))
             {
                 PopUpGenerator.Instance.messagesList.gameObject.SetActive(false);
             }
@@ -68,7 +68,7 @@ namespace SG
                 dialoguesQueue.Enqueue(dialogueList[i]);
             }
 
-            if(dialoguesQueue.Count > 0)
+            if (dialoguesQueue.Count > 0)
                 StartTalking(dialoguesQueue);
         }
 
@@ -81,7 +81,6 @@ namespace SG
         {
             Debug.Log("대화 시작 " + dialogue.characterName);
             dialogueObject.SetActive(true);
-
 
             GUIManager.instance.SetActiveHudWindows(false);
 
@@ -97,14 +96,23 @@ namespace SG
             //다음 문장을 보여줌.
             DisplayNextSentences();
         }
-        private void SetDialogue(Dialogue dialogueList)
+        private void SetDialogue(Dialogue dialogue)
         {
-            characterImage.sprite = dialogueList.image;
-            nameText.text = dialogueList.characterName;
+            if (dialogue.image != null)
+            {
+                characterImage.color = new Color(1f, 1f, 1f, 1f);
+                characterImage.sprite = dialogue.image;
+            }
+            else
+            {
+                characterImage.color = new Color(1f, 1f, 1f, 0f);
+                characterImage.sprite = null;
+            }
+            nameText.text = dialogue.characterName;
         }
         private void SetDialogueChoices(NPCManager npc, DialogueChoice[] choices)
         {
-            if(dialogue_Choices.Count > 0)
+            if (dialogue_Choices.Count > 0)
             {
                 for (int i = 0; i < dialogue_Choices.Count; i++)
                 {
@@ -118,7 +126,7 @@ namespace SG
                 for (int i = 0; i < choices.Length; i++)
                 {
                     //만약 NPC의 퀘스트가 아직안함이 아니라면 해당 선택지를 생성하지 않습니다.
-                    if((choices[i].dialogChoiceType == DialogChoiceType.OpenQuest) 
+                    if ((choices[i].dialogChoiceType == DialogChoiceType.OpenQuest)
                     && (npc.haveQuest.questProgress != QuestProgress.NotStarting))
                     {
                         continue;
@@ -136,11 +144,11 @@ namespace SG
             {
                 dialogue_Choices[i].gameObject.SetActive(false);
             }
-        }      
+        }
         public void DisplayNextSentences()
         {
             //nextBtn의 이벤트 리스너
-            
+
             //다음 버튼이 켜져있다면 끄기
             if (nextBtn.gameObject.activeSelf.Equals(true))
             {
@@ -154,11 +162,11 @@ namespace SG
 
             if (sentences.Count == 0)
             {
-                if(dialoguesQueue.Count > 0)
+                if (dialoguesQueue.Count > 0)
                 {
                     StartTalking(dialoguesQueue);
                     return;
-                }              
+                }
                 EndDialogue();
                 return;
             }
@@ -185,7 +193,7 @@ namespace SG
                 }
             }
 
-            if(sentence.dialogType == DialogType.Select)
+            if (sentence.dialogType == DialogType.Select)
             {
                 OpenChoicePanel();
                 isTyping = false;
@@ -199,7 +207,7 @@ namespace SG
         }
         private bool CheckSkipDialogue(Sentences sentence)
         {
-            if (Mouse.current.leftButton.isPressed || 
+            if (Mouse.current.leftButton.isPressed ||
                 Keyboard.current.enterKey.isPressed ||
                 Keyboard.current.spaceKey.isPressed)
             {
@@ -223,7 +231,7 @@ namespace SG
             dialogueObject.SetActive(false);
             GUIManager.instance.SetActiveHudWindows(true);
             endDialogueEvent?.Invoke();
-            endDialogueEvent = null;         
+            endDialogueEvent = null;
         }
 
         public void SetEndDialogueEvent(Action listener)

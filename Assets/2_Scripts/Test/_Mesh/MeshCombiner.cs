@@ -10,31 +10,38 @@ public class MeshCombiner : MonoBehaviour
     void Start()
     {
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
-        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
-
-        int i = 0;
-        while (i < meshFilters.Length)
+        MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
+        
+        if(CheckSampleMaterial(meshRenderers) == true)
         {
-            combine[i].mesh = meshFilters[i].sharedMesh;
-            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.SetActive(false);
-            i++;
+            CombineInstance[] combines = new CombineInstance[meshFilters.Length];
+            int i = 0;
+            while(i < meshFilters.Length)
+            {
+                combines[i].mesh = meshFilters[i].sharedMesh;
+                combines[i].transform = meshFilters[i].transform.localToWorldMatrix;
+                meshFilters[i].gameObject.SetActive(false);
+                i++;
+            }
+            MeshFilter meshFilter = GetComponent<MeshFilter>();
+            MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+            meshRenderer.sharedMaterial = meshRenderers[0].sharedMaterial;
+            meshFilter.mesh = new Mesh();
+            meshFilter.mesh.CombineMeshes(combines);
+            transform.gameObject.SetActive(true);
         }
-        var meshFilter = transform.GetComponent<MeshFilter>();
-        meshFilter.mesh = new Mesh();
-        meshFilter.mesh.CombineMeshes(combine);
-        GetComponent<MeshCollider>().sharedMesh = meshFilter.mesh;
-        transform.gameObject.SetActive(true);
     }
 
-    // Update is called once per frame
-    void Update()
+    private bool CheckSampleMaterial(MeshRenderer[] meshRenderers)
     {
+        Material mtrl = meshRenderers[0].sharedMaterial;
+        int i = 0;
+        for (i = 1; i < meshRenderers.Length; i++)
+        {
+            if(mtrl != meshRenderers[i].sharedMaterial)
+                return false;
+        }
 
-    }
-
-    public void CombineMeshes()
-    {
-
+        return true;
     }
 }

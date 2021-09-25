@@ -26,7 +26,9 @@ namespace SG
 
         [SerializeField] private List<LevelToExperience> levelToExperiences = new List<LevelToExperience>();
 
+        public int Level { get => level; private set => level = value; }
         public int Experience { get => experience; private set => experience = value; }
+
 
         public void Init()
         {
@@ -35,7 +37,7 @@ namespace SG
 
             playerManager = FindObjectOfType<PlayerManager>();
 
-            level = 0;
+            Level = 0;
             Experience = 0;
 
             levelToExperiences = CSVReader.ReadCSV_ExpTable();
@@ -51,10 +53,10 @@ namespace SG
         public void AddExperience(int amount)
         {
             Experience += amount;
-            while (Experience >= GetExperienceNextLevel(level))
+            while (Experience >= GetExperienceNextLevel(Level))
             {
-                Experience -= GetExperienceNextLevel(level);
-                level++;
+                Experience -= GetExperienceNextLevel(Level);
+                Level++;
                 if (OnLevelChanged != null) OnLevelChanged(this, EventArgs.Empty);
             }
             if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
@@ -62,12 +64,12 @@ namespace SG
 
         public int GetLevel()
         {
-            return level;
+            return Level;
         }
 
         public float GetExperienceNormalized()
         {
-            return (float)Experience / GetExperienceNextLevel(level);
+            return (float)Experience / GetExperienceNextLevel(Level);
         }
 
         public int GetExperienceNextLevel(int level)

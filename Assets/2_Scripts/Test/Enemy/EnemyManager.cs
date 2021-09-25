@@ -10,6 +10,7 @@ namespace SG
     {
         [Header("Basic")]
         [SerializeField] public string enemyName;
+        [SerializeField] internal bool isBoss;
 
         [Header("A.I Status")]
         public PlayerStats currentTarget;
@@ -34,8 +35,7 @@ namespace SG
         [SerializeField] private EnemyWeaponSlotManager enemyWeaponSlotManager;
         public NavMeshAgent navMeshAgent;
         public Rigidbody enemyRigidbody;
-
-
+  
         private void Awake()
         {
             enemyLocomotionManager = GetComponent<EnemyLocomotionManager>();
@@ -67,10 +67,6 @@ namespace SG
 
             navMeshAgent.enabled = false;
             enemyRigidbody.isKinematic = false;
-        }
-
-        private void OnDrawGizmos() {
-            
         }
 
         private void FixedUpdate()
@@ -120,6 +116,11 @@ namespace SG
         //몬스터 사망 시 실행되는 메소드
         public void Die()
         {
+            if(isBoss)
+            {
+                WorldEventManager.Instance.IsDefeatedBoss();
+            }
+            
             navMeshAgent.enabled = false;
             enemyLocomotionManager.EnableFalseAllCollider();
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Text;
 
+
 namespace SG
 {
     public class CharacterUI_WeaponPanel : MonoBehaviour

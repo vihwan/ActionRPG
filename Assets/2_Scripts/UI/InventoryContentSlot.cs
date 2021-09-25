@@ -25,6 +25,10 @@ namespace SG
         [SerializeField] internal ConsumableItem consumableItem;
         [SerializeField] internal IngredientItem ingredientItem;
 
+        [Header("Image Source")]
+        [SerializeField] private Sprite selectFrameSprite;
+        [SerializeField] private Sprite isArmedFrameSprite;
+
         [SerializeField] private InventoryMainContents mainContents;
         [SerializeField] private InventoryMain_ContentList contentList;
         private void Awake()
@@ -171,13 +175,20 @@ namespace SG
             //임시적인 방안이므로, 나중에 다른 방법을 사용할 수 있습니다.
             if (isArmed)
             {
-                itemBtn.GetComponent<Image>().color = Color.cyan;
+                itemBtn.GetComponent<Image>().sprite = Database.Instance.prefabDatabase.itemSlotIsArmed;
+                enforceImage.sprite = Database.Instance.prefabDatabase.itemSlotIsArmed;
                 return;
             }
             else if (isSelect)
-                itemBtn.GetComponent<Image>().color = Color.green;
+            {
+                itemBtn.GetComponent<Image>().sprite = Database.Instance.prefabDatabase.itemSlotIsSelect;
+                enforceImage.sprite = Database.Instance.prefabDatabase.itemSlotIsSelect;
+            }               
             else if (!isSelect)
-                itemBtn.GetComponent<Image>().color = Color.white;
+            {
+                itemBtn.GetComponent<Image>().sprite = Database.Instance.prefabDatabase.itemSlotNormal;
+                enforceImage.sprite = Database.Instance.prefabDatabase.itemSlotNormal;
+            }
         }
     }
 }

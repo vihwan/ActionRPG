@@ -7,7 +7,6 @@ namespace SG
 {
     public class AmbushState : State
     {
-
         public bool isSleeping;
         public float detectionRadius = 2f;
         public string sleepAnimation;
@@ -18,15 +17,20 @@ namespace SG
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
-            if (isSleeping && enemyManager.isInteracting.Equals(false))
+            if (enemyManager.currentTarget == null)
             {
-                enemyAnimatorHandler.PlayTargetAnimation(sleepAnimation, true);
+                if (isSleeping && enemyManager.isInteracting.Equals(false))
+                {
+                    enemyAnimatorHandler.PlayTargetAnimation(sleepAnimation, true);
+                }
+
+                HandleTargetDetection(enemyManager, enemyAnimatorHandler);
             }
 
-            HandleTargetDetection(enemyManager, enemyAnimatorHandler);
-
-            if (enemyManager.currentTarget != null)
+            if (enemyManager.currentTarget != null && !isSleeping)
             {
+                // if(enemyAnimatorHandler.anim.GetCurrentAnimatorStateInfo(enemyAnimatorHandler.anim.GetLayerIndex("Action Layer")).IsName("WakeUp"))
+                //     return this;
                 return chaseTargetState;
             }
             else
@@ -49,11 +53,17 @@ namespace SG
                         && viewableAngle < enemyManager.maximumDetectionAngle)
                     {
                         enemyManager.currentTarget = playerStats;
-                        isSleeping = false;
                         enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true);
+                        Invoke(nameof(IsSleepingFalse), 2.7f);
+                        return;
                     }
                 }
             }
+        }
+
+        private void IsSleepingFalse()
+        {
+            isSleeping = false;
         }
     }
 }

@@ -18,6 +18,7 @@ MonoBehaviour:
   level: 1
   needMana: 0
   coolTime: 0
-  explainText: "\uC2E0\uCCB4\uC758 \uB2A5\uB825\uC774 \uC0C1\uC2B9\uD55C\uB2E8\uB2E4."
+  explainText: "\uAE30\uBCF8 \uCCB4\uB825, \uB9C8\uB098, \uC2A4\uD0DC\uBBF8\uB098,
+    \uC2A4\uD0DC\uBBF8\uB098 \uD68C\uBCF5\uB825\uC744 \uC0C1\uC2B9\uC2DC\uD0A8\uB2E4."
   damageDic: []
   skillAnimationName: 
