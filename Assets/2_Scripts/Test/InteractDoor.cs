@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,14 +39,14 @@ namespace SG
 
             for (int i = 0; i < etcObject.Length; i++)
             {
-                Destroy(etcObject[i]);
+                etcObject[i].SetActive(false);
             }
             StartCoroutine(OpenDoor());
         }
 
         private IEnumerator OpenDoor()
         {
-            while (leftDoor.transform.eulerAngles.y < leftDoorOpenRotation.y)
+            while (leftDoor.transform.localEulerAngles.y < leftDoorOpenRotation.y)
             {
                 leftDoor.transform.rotation = Quaternion.Slerp(leftDoor.transform.rotation, Quaternion.Euler(leftDoorOpenRotation), Time.deltaTime);
                 rightDoor.transform.rotation = Quaternion.Slerp(rightDoor.transform.rotation, Quaternion.Euler(rightDoorOpenRotation), Time.deltaTime);

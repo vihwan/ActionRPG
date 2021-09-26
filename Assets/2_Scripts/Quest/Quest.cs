@@ -29,6 +29,8 @@ namespace SG
     {
         [Header("< Quest Basics >")]
         public string questName;
+        public string subQuestName;
+        
         [Multiline]
         public string description;
         [SerializeField, Tooltip("해당 퀘스트를 의뢰한 NPC. 나중에 퀘스트 완료의 대화 내용을 출력하기 위해, 미리 참조해둡니다.")]

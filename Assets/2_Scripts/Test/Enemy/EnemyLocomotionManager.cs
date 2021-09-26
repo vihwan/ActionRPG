@@ -16,10 +16,10 @@ namespace SG
             Physics.IgnoreCollision(characterCollider, characterBlockerCollider, true);
         }
 
-        public void EnableFalseAllCollider()
+        public void EnableIsTriggerAllCollider()
         {
-            characterCollider.enabled = false;
-            characterBlockerCollider.enabled = false;
+            characterCollider.isTrigger = true;
+            characterBlockerCollider.isTrigger = true;
         }
 
     }

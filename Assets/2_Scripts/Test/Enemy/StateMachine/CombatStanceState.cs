@@ -22,13 +22,9 @@ namespace SG
             // 공격 사거리를 체크
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
 
-            // if(!randomDestinationSet)
-            // {
-            //     randomDestinationSet = true;
-            //     //Decide Circling Action
-            // }
 
-            HandleRotateTowardsTarget(enemyManager);
+            if(enemyManager.isInteracting.Equals(false))
+                HandleRotateTowardsTarget(enemyManager);
 
             if (enemyManager.isPerformingAction)
             {

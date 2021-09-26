@@ -11,18 +11,20 @@ namespace SG
         public GameObject unequipWeaponObject;
         public bool isHandActivate;
 
-        public void Initailize(GameObject weaponGo, bool state)
+        public void Initailize(GameObject weaponGo, bool status)
         {
             handWeaponObject = weaponGo;
             unequipWeaponObject = GetComponentInChildren<WeaponUnholderSlot>().currentUnequipWeaponModel;
             if (unequipWeaponObject != null)
                 unequipWeaponObject.SetActive(false);
 
+                handWeaponObject.SetActive(!status);
+                unequipWeaponObject.SetActive(status);
 
             if(GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
-                handWeaponObject.SetActive(!state);
-                unequipWeaponObject.SetActive(state);
+                handWeaponObject.SetActive(true);
+                unequipWeaponObject.SetActive(false);
             }
         }
 

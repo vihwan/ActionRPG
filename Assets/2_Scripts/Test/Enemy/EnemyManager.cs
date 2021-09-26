@@ -63,7 +63,7 @@ namespace SG
 
             lockOnTransform = UtilHelper.Find<Transform>(transform, "LockOnTransform").transform;
 
-            currentState = GetComponentInChildren<AmbushState>();
+            //currentState = GetComponentInChildren<AmbushState>();
 
             navMeshAgent.enabled = false;
             enemyRigidbody.isKinematic = false;
@@ -122,7 +122,7 @@ namespace SG
             }
             
             navMeshAgent.enabled = false;
-            enemyLocomotionManager.EnableFalseAllCollider();
+            enemyLocomotionManager.EnableIsTriggerAllCollider();
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);
             //드롭 아이템 생성
             enemyInventory.CreateDropItem();

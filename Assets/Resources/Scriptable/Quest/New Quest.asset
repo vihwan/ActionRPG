@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd3c32582c5477a40b4ea8e457e57e71, type: 3}
   m_Name: New Quest
   m_EditorClassIdentifier: 
-  questName: "\uC9D1\uC5D0 \uAC00\uACE0 \uC2F6\uB2E4."
-  description: "\uB2E4 \uB54C\uB824\uCE58\uACE0 \uC9D1\uAC00\uC11C \uC790\uACE0\uC2F6\uB2E4."
+  questName: "\uC218\uC0C1\uD55C \uACE8\uB818"
+  subQuestName: "\uC815\uB9D0 \uC9C4\uC9DC \uC218\uC0C1\uD55C"
+  description: "\uCD5C\uADFC, \uADFC\uBC29\uC5D0 \uCD08\uB85D\uBE5B\uC744 \uB0B4\uBFDC\uB294
+    \uC218\uC0C1\uD55C \uACE8\uB818\uC774 \uB098\uD0C0\uB09C\uB2E4\uACE0 \uD55C\uB2E4."
   NPC_Requester: {fileID: 0}
-  questProgress: 0
+  questProgress: 1
   currentQuestObjective:
     index: 0
     title: "\uD638\uB450\uC640 \uB300\uD654"
     type: 2
     objectiveTarget: "\uD638\uB450"
     objectiveItem: {fileID: 0}
-    state: 2
-    progress: 1
-    currentProgressCount: 1
+    state: 1
+    progress: 0
+    currentProgressCount: 0
     maxProgressCount: 1
   objectives:
   - index: 0
@@ -46,27 +48,27 @@ MonoBehaviour:
     currentProgressCount: 1
     maxProgressCount: 1
   - index: 0
-    title: "\uBC31\uCCA0 10\uAC1C \uBAA8\uC73C\uAE30"
+    title: "\uC790\uC218\uC815\uB369\uC774 5\uAC1C \uBAA8\uC73C\uAE30"
     type: 3
     objectiveTarget: 
-    objectiveItem: {fileID: 11400000, guid: 223b31672848b724f90d9d0c782648ec, type: 2}
+    objectiveItem: {fileID: 11400000, guid: 157b51418a1181041a535d38ef5d6b4c, type: 2}
     state: 2
     progress: 1
-    currentProgressCount: 10
+    currentProgressCount: 19
     maxProgressCount: 10
   - index: 0
     title: "\uD638\uB450\uC640 \uB300\uD654"
     type: 2
     objectiveTarget: "\uD638\uB450"
     objectiveItem: {fileID: 0}
-    state: 2
-    progress: 1
-    currentProgressCount: 1
+    state: 1
+    progress: 0
+    currentProgressCount: 0
     maxProgressCount: 1
   rewardExp: 10000
-  rewardGold: 300
+  rewardGold: 25000
   rewardItemList:
-  - rewardItem: {fileID: 11400000, guid: 223b31672848b724f90d9d0c782648ec, type: 2}
-    itemCount: 22
+  - rewardItem: {fileID: 11400000, guid: 64a49424708402448baeb64e29262aa8, type: 2}
+    itemCount: 1
   - rewardItem: {fileID: 11400000, guid: 2941c0fd3ad838a468bf490a35fc6ee3, type: 2}
-    itemCount: 3
+    itemCount: 20

@@ -18,6 +18,7 @@ namespace SG
 
         public void Init()
         {
+            
             LoadWeapon();
             LoadIngredient();
             LoadEquipment();

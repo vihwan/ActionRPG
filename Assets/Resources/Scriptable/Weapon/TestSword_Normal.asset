@@ -12,18 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054e387345c7e1c478f5e2f2110592f2, type: 3}
   m_Name: TestSword_Normal
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 21300000, guid: 9fcd73fdce7bcc245a252f4802af3de2, type: 3}
+  itemId: 0
+  itemIcon: {fileID: 21300000, guid: ec6a0a48225f00b41af8b4c4fdf4987d, type: 3}
   itemName: "\uD14C\uC2A4\uD2B8\uAC80"
   itemType: 6
+  kind: "\uC591\uC190\uAC80"
+  quantity: 1
   itemDescription: "\uD14C\uC2A4\uD2B8\uB85C \uB9CC\uB4E4\uC5B4\uC9C4 \uB300\uD615
     \uBB34\uAE30"
+  price: 0
+  rarity: 1
   modelPrefab: {fileID: 450780483681248534, guid: c4f442eb58ed12840ac1b907f6d50a0c,
     type: 3}
   isArmed: 0
-  kind: "\uC591\uC190\uAC80"
-  currentDurability: 30
-  maxDurability: 30
-  rarity: 1
+  enforceLevel: 0
   itemAttributes:
   - attribute: 0
     value: 0

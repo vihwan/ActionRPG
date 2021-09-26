@@ -9,7 +9,6 @@ namespace SG
     {
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
-
         public CombatStanceState combatStanceState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
@@ -21,15 +20,17 @@ namespace SG
             //CombatStanceState로 return
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection,transform.forward);
-
-            HandleRotateTowardsTarget(enemyManager);
+            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
             if (enemyManager.isPerformingAction)
                 return combatStanceState;
 
+            if (enemyManager.isInteracting.Equals(false))
+                HandleRotateTowardsTarget(enemyManager);
+
             if (currentAttack != null)
             {
+                Debug.Log(distanceFromTarget);
                 if (distanceFromTarget < currentAttack.minimumDistanceNeedToAttack)
                 {
                     return this;
@@ -43,10 +44,7 @@ namespace SG
                         {
                             enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                             enemyAnimatorHandler.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
-                            enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
-                            enemyManager.isPerformingAction = true;
-                            enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
-                            currentAttack = null;
+                            AttackTarget(enemyManager, enemyAnimatorHandler);
                             return combatStanceState;
                         }
                     }
@@ -56,7 +54,7 @@ namespace SG
             {
                 GetNewAttack(enemyManager);
             }
-                 
+
             return combatStanceState;
         }
 
@@ -79,7 +77,7 @@ namespace SG
                 currentAttack = null;
             }
         }
-        
+
         private void GetNewAttack(EnemyManager enemyManager)
         {
             Vector3 targetsDirection = enemyManager.currentTarget.transform.position - this.transform.position;
@@ -132,8 +130,10 @@ namespace SG
 
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
+
             if (enemyManager.isPerformingAction)
             {
+                Debug.Log("회전 PerformingAction");
                 Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
                 direction.y = 0;
                 direction.Normalize();
@@ -148,6 +148,7 @@ namespace SG
             }
             else
             {
+                Debug.Log("회전 else");
                 //Rotate With PathFinding
                 Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
                 Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;

@@ -18,7 +18,7 @@ namespace SG {
         [SerializeField] private Button optionButton;
         [SerializeField] private Button exitButton;
 
-        [SerializeField] private TMP_Text guideText;
+        [SerializeField] internal TMP_Text guideText;
 
         // Start is called before the first frame update
         public void Init()

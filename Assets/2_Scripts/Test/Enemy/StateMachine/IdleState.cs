@@ -25,7 +25,7 @@ namespace SG
 
         private void HandleDetection(EnemyManager enemyManager)
         {
-            Collider[] colliders = Physics.OverlapSphere(transform.position, enemyManager.detectionRadius, detectionLayer);
+            Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, enemyManager.detectionRadius, detectionLayer);
 
             for (int i = 0; i < colliders.Length; i++)
             {
@@ -34,11 +34,13 @@ namespace SG
                 if (playerStats != null && playerStats.isDead.Equals(false))
                 {
                     //check for team id
-                    Vector3 targetDirection = playerStats.transform.position - transform.position;
-                    float viewableAnlge = Vector3.Angle(targetDirection, transform.forward);
-                    if (viewableAnlge > enemyManager.minimumDetectionAngle && viewableAnlge < enemyManager.maximumDetectionAngle)
+                    Vector3 targetDirection = playerStats.transform.position - enemyManager.transform.position;
+                    float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
+                    if (viewableAngle > enemyManager.minimumDetectionAngle && viewableAngle < enemyManager.maximumDetectionAngle)
                     {
-                        enemyManager.currentTarget = playerStats;                        
+                        enemyManager.currentTarget = playerStats;
+                        Debug.Log("목표 발견 : " + enemyManager.currentTarget);
+                        return;                
                     }
                 }
             }

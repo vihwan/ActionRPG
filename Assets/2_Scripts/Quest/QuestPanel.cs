@@ -19,6 +19,7 @@ namespace SG
         [Header("GameObjects")]
         public GameObject detailsObject;
         public Button OnQuestHUDBtn;
+        public TMP_Text detailsQuestNameText;
         public TMP_Text detailsDescriptionText;
         public TMP_Text rewardExpGoldText;
 
@@ -53,6 +54,9 @@ namespace SG
                 closeBtn.onClick.AddListener(() => inputHandler.HandleMenuFlag());
 
             detailsObject = t.Find("Details").gameObject;
+
+            if(detailsQuestNameText == null)
+                detailsQuestNameText = UtilHelper.Find<TMP_Text>(detailsObject.transform, "Top/Title/Text");
 
             if (detailsDescriptionText == null)
                 detailsDescriptionText = UtilHelper.Find<TMP_Text>(detailsObject.transform, "Top/DetailsList/QuestDetail/Description");
@@ -150,6 +154,7 @@ namespace SG
                     objectiveDisplays.Add(od);
                 }
             }
+            detailsQuestNameText.text = string.Format("{0}\n <size=32> {1}",quest.questName, quest.subQuestName);
             detailsDescriptionText.gameObject.transform.SetAsLastSibling();
             detailsDescriptionText.text = quest.description;
         }

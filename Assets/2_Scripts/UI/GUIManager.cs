@@ -162,6 +162,7 @@ namespace SG
         public void OpenSelectMenuWindow()
         {
             selectMenu.gameObject.SetActive(true);
+            selectMenu.guideText.text = null;
         }
 
         public void CloseSelectMenuWindow()

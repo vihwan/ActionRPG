@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054e387345c7e1c478f5e2f2110592f2, type: 3}
+  m_Name: StormBringer
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemIcon: {fileID: 21300000, guid: dbe1b06df5f6041449f68940f1503521, type: 3}
+  itemName: "\uC2A4\uD1B0 \uBE0C\uB9C1\uC5B4"
+  itemType: 6
+  kind: "\uC591\uC190\uAC80"
+  quantity: 1
+  itemDescription: "\uBE44\uC5EC! \uBC14\uB78C\uC774\uC5EC! \uBCBC\uB77D\uC774\uC5EC!"
+  price: 2000
+  rarity: 3
+  modelPrefab: {fileID: 450780483681248534, guid: c130b1d3b483c6d4b86d3029f7b380eb,
+    type: 3}
+  isArmed: 0
+  enforceLevel: 0
+  itemAttributes:
+  - attribute: 0
+    value: 0
+  - attribute: 1
+    value: 10
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 10
+  - attribute: 4
+    value: 30
+  - attribute: 5
+    value: 30
+  right_Hand_Idle: Right_Arm_Idle_01
+  left_Hand_Idle: Left_Arm_Idle_01
+  OneHanded_LightAttack1: Light_Attack_1
+  OneHanded_LightAttack2: Light_Attack_2
+  OneHanded_LightAttack3: Light_Attack_3
+  OneHanded_HeavyAttack1: Heavy_Attack_1

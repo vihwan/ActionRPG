@@ -8,7 +8,6 @@ namespace SG
     public class AmbushState : State
     {
         public bool isSleeping;
-        public float detectionRadius = 2f;
         public string sleepAnimation;
         public string wakeAnimation;
         public LayerMask detectionLayer;
@@ -39,7 +38,7 @@ namespace SG
 
         private void HandleTargetDetection(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler)
         {
-            Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, detectionRadius, detectionLayer);
+            Collider[] colliders = Physics.OverlapSphere(enemyManager.transform.position, enemyManager.detectionRadius, detectionLayer);
             for (int i = 0; i < colliders.Length; i++)
             {
                 PlayerStats playerStats = colliders[i].transform.GetComponent<PlayerStats>();

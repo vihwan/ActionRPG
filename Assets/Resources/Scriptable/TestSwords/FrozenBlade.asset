@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 054e387345c7e1c478f5e2f2110592f2, type: 3}
+  m_Name: FrozenBlade
+  m_EditorClassIdentifier: 
+  itemId: 0
+  itemIcon: {fileID: 21300000, guid: 5b0e65c66e76a2c40a45a834eb7c0536, type: 3}
+  itemName: "\uC5BC\uC74C\uC5EC\uC655\uC758 \uAC80"
+  itemType: 6
+  kind: "\uC591\uC190\uAC80"
+  quantity: 1
+  itemDescription: "\uC27D\uAC8C \uAE68\uC9C8 \uAC83 \uAC19\uC544 \uBCF4\uC774\uB294
+    \uAC80\uC774\uC9C0\uB9CC, \uC0AC\uC2E4\uC740 \uC5C4\uCCAD \uB2E8\uB2E8\uD558\uACE0
+    \uBB34\uAC81\uB2E4."
+  price: 26000
+  rarity: 4
+  modelPrefab: {fileID: 450780483681248534, guid: d1bf2822315bef24cb3f4bee22584da0,
+    type: 3}
+  isArmed: 0
+  enforceLevel: 0
+  itemAttributes:
+  - attribute: 0
+    value: 20
+  - attribute: 1
+    value: 50
+  - attribute: 2
+    value: 0
+  - attribute: 3
+    value: 20
+  - attribute: 4
+    value: 25
+  - attribute: 5
+    value: 0
+  right_Hand_Idle: Right_Arm_Idle_01
+  left_Hand_Idle: Left_Arm_Idle_01
+  OneHanded_LightAttack1: Light_Attack_1
+  OneHanded_LightAttack2: Light_Attack_2
+  OneHanded_LightAttack3: Light_Attack_3
+  OneHanded_HeavyAttack1: Heavy_Attack_1

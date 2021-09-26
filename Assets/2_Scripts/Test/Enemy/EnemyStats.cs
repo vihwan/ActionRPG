@@ -11,7 +11,7 @@ namespace SG
         public int maxHealth;
         public int currentHealth;
         public int attack;
-        [SerializeField] private bool isDead;
+        [SerializeField] internal bool isDead;
 
         private EnemyAnimatorHandler enemyAnimatorHandler;
         private EnemyHealthBarUI enemyHealthBarUI;
