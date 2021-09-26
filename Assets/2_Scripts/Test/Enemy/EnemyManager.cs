@@ -121,6 +121,8 @@ namespace SG
                 WorldEventManager.Instance.IsDefeatedBoss();
             }
             
+            currentTarget = null;
+            currentState = null;
             navMeshAgent.enabled = false;
             enemyLocomotionManager.EnableIsTriggerAllCollider();
             PlayerQuestInventory.Instance.SetRecentKilledEnemy(this);

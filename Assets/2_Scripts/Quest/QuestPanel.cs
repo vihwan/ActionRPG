@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -55,7 +55,7 @@ namespace SG
 
             detailsObject = t.Find("Details").gameObject;
 
-            if(detailsQuestNameText == null)
+            if (detailsQuestNameText == null)
                 detailsQuestNameText = UtilHelper.Find<TMP_Text>(detailsObject.transform, "Top/Title/Text");
 
             if (detailsDescriptionText == null)
@@ -78,7 +78,7 @@ namespace SG
             OpenQuestPanelGameObject();
             detailsObject.SetActive(false);
             infoPanel.gameObject.SetActive(false);
-            if(questPanelList.Count > 0)
+            if (questPanelList.Count > 0)
             {
                 questPanelList[0].OnClickBtn();
             }
@@ -97,7 +97,7 @@ namespace SG
         private void SetQuestPanel()
         {
             //세팅 초기화. 
-            if(questPanelList.Count > 0)
+            if (questPanelList.Count > 0)
             {
                 for (int i = 0; i < questPanelList.Count; i++)
                 {
@@ -124,7 +124,7 @@ namespace SG
             SetRewardListDisplay(quest);
             OpenDetails();
             OnQuestHUDBtn.onClick.RemoveAllListeners();
-            OnQuestHUDBtn.onClick.AddListener(()=> OnClickQuestHUDBtn(quest));
+            OnQuestHUDBtn.onClick.AddListener(() => OnClickQuestHUDBtn(quest));
         }
 
         private void OnClickQuestHUDBtn(Quest quest)
@@ -134,7 +134,7 @@ namespace SG
 
         private void SetObjectiveDisplay(Quest quest)
         {
-            if(objectiveDisplays.Count > 0)
+            if (objectiveDisplays.Count > 0)
             {
                 for (int i = 0; i < objectiveDisplays.Count; i++)
                 {
@@ -145,7 +145,7 @@ namespace SG
 
             for (int i = 0; i < quest.objectives.Count; i++)
             {
-                if(quest.objectives[i].state.Equals(QuestObjectiveState.Active) || 
+                if (quest.objectives[i].state.Equals(QuestObjectiveState.Active) ||
                    quest.objectives[i].state.Equals(QuestObjectiveState.Complete))
                 {
                     ObjectiveDisplay od = Instantiate(objectiveDisplayPrefab, objectiveDisplayTransform) as ObjectiveDisplay;
@@ -154,13 +154,13 @@ namespace SG
                     objectiveDisplays.Add(od);
                 }
             }
-            detailsQuestNameText.text = string.Format("{0}\n <size=32> {1}",quest.questName, quest.subQuestName);
+            detailsQuestNameText.text = string.Format("{0}\n <size=32> {1}", quest.questName, quest.subQuestName);
             detailsDescriptionText.gameObject.transform.SetAsLastSibling();
             detailsDescriptionText.text = quest.description;
         }
         private void SetRewardListDisplay(Quest quest)
         {
-            if(rewardSlots.Count > 0)
+            if (rewardSlots.Count > 0)
             {
                 for (int i = 0; i < rewardSlots.Count; i++)
                 {

@@ -55,7 +55,7 @@ MonoBehaviour:
     state: 2
     progress: 1
     currentProgressCount: 19
-    maxProgressCount: 10
+    maxProgressCount: 5
   - index: 0
     title: "\uD638\uB450\uC640 \uB300\uD654"
     type: 2

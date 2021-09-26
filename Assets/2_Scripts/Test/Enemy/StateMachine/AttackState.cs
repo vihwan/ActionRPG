@@ -30,7 +30,7 @@ namespace SG
 
             if (currentAttack != null)
             {
-                Debug.Log(distanceFromTarget);
+                //Debug.Log(distanceFromTarget);
                 if (distanceFromTarget < currentAttack.minimumDistanceNeedToAttack)
                 {
                     return this;
@@ -148,7 +148,7 @@ namespace SG
             }
             else
             {
-                Debug.Log("회전 else");
+                //Debug.Log("회전 else");
                 //Rotate With PathFinding
                 Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
                 Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;

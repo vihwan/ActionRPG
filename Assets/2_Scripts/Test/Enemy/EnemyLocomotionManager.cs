@@ -18,7 +18,7 @@ namespace SG
 
         public void EnableIsTriggerAllCollider()
         {
-            characterCollider.isTrigger = true;
+            characterCollider.isTrigger = false;
             characterBlockerCollider.isTrigger = true;
         }
 

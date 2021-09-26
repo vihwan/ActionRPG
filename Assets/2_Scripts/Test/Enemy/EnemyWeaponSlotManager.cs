@@ -32,6 +32,10 @@ namespace SG
         public void LoadWeaponDamageCollider()
         {
             enemyDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<EnemyDamageCollider>();
+            if(enemyDamageCollider != null)
+            {
+                enemyDamageCollider.Init();
+            }
         }
 
         #region  Animation Event Functions
