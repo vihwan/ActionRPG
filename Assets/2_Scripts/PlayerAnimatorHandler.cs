@@ -120,6 +120,16 @@ namespace SG
             anim.SetBool("canDoCombo", false);
         }
 
+        public void EnableCheckCounterAttack()
+        {
+            anim.SetBool("canCounter", true);
+        }
+
+        public void DisableCheckCounterAttack()
+        {
+            anim.SetBool("canCounter", false);
+        }
+
         private void OnAnimatorMove()
         {
             if (playerManager.isInteracting == false)

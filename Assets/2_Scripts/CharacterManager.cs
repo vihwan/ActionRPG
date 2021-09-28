@@ -7,6 +7,8 @@ namespace SG
     public class CharacterManager : MonoBehaviour
     {
         [SerializeField] internal Transform lockOnTransform;
+
+        [SerializeField] public bool isParrying;
     }
 }
 

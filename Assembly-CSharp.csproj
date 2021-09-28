@@ -196,7 +196,6 @@
      <Compile Include="Assets\2_Scripts\_OldScripts\Utilities\Helper.cs" />
      <Compile Include="Assets\2_Scripts\_OldScripts\Utilities\KeepBool.cs" />
      <Compile Include="Assets\2_Scripts\_OldScripts\WeaponManager.cs" />
-     <Compile Include="Assets\ExplosiveLLC\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
      <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
      <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
      <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAtData.cs" />
@@ -216,6 +215,7 @@
      <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperStateMachine.cs" />
      <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
      <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Math3d.cs" />
+     <Compile Include="Assets\Extensions\ExplosiveLLCInput\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
      <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\ChangeColor.cs" />
      <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\EffectsScene.cs" />
      <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\MouseOrbit.cs" />
@@ -247,6 +247,11 @@
      <Compile Include="Assets\Extensions\UnityChan\Scripts\SceneLoader.cs" />
      <Compile Include="Assets\Extensions\UnityChan\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Extensions\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
+     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\Spline.cs" />
+     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\SplineControlPoint.cs" />
+     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\VertexPool.cs" />
+     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\XWeaponTrail.cs" />
+     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\XWeaponTrailDemo.cs" />
      <Compile Include="Assets\MT Assets\Easy Mesh Combiner\DemoScene\Scripts\CombineInRuntimeDemo.cs" />
      <Compile Include="Assets\MT Assets\Easy Mesh Combiner\Libraries\MTAssets Editor UI\MTAssetsEditorUi.cs" />
      <Compile Include="Assets\MT Assets\Easy Mesh Combiner\Libraries\MTAssets Mathematics\MTAssetsMathematics.cs" />
@@ -356,6 +361,7 @@
      <None Include="Assets\Extensions\Toon\Shader\ToonColor_ShadingGradeMap_StencilOut.shader" />
      <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Slash_Mesh.shader" />
      <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Demo scene\HDRP and URP(LWRP).txt" />
      <None Include="Assets\Extensions\ProDrawCallOptimizer\VersionHistory.txt" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\ToonColor_ShadingGradeMap_AngelRing_Tess_TransClipping.shader" />
@@ -387,11 +393,13 @@
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiClearCoat.cginc" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiBRDF.cginc" />
      <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Dissolve Texture\Mobile\(Mobile)Shader_DissolveTexture(SimpleFade).shader" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_SlashNonDistortion.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_Light.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_StencilOut.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiWireframe.cginc" />
      <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Dual.txt" />
      <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Shaders\Add_Fresnel.shader" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_SlashNonDistortion_Mesh.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiShadowVert.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Katana.txt" />
@@ -478,6 +486,7 @@
      <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess_Light_StencilOut.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_TransClipping_StencilMask.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiAlphaToCoverage.cginc" />
+     <None Include="Assets\Extensions\XWeaponTrail\Shader\xft_displacement_screen.shader" />
      <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Treant\Read me.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
      <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_ObjectBorder(NormalBorder).shader" />
@@ -530,6 +539,8 @@
      <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_2Handed.txt" />
      <None Include="Assets\Resources\Fonts\Noto_Sans_KR\OFL.txt" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDebug.cginc" />
+     <None Include="Assets\Extensions\XWeaponTrail\readme.txt" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Distortion.shader" />
      <None Include="Assets\Extensions\Perfect RPG MMO 3D Effect FX Pack 2\Shader\Toon_Normal.shader" />
      <None Include="Assets\3_Models\Genshin\케이야\使用规则.txt" />
      <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_RimLight.shader" />
@@ -556,6 +567,7 @@
      <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_StencilMask.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile.shader" />
      <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Demo scene\Readme.txt" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Slash.shader" />
      <None Include="Assets\MT Assets\Easy Mesh Combiner\Third-Party Assets.txt" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Transparent_Tess_StencilOut.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\UCTS_DoubleShadeWithFeather_tess.cginc" />
@@ -585,6 +597,7 @@
      <None Include="Assets\Extensions\ProDrawCallOptimizer\Examples\Example2-CustomShaders\CustomShaders\InterlacePatternAdditive.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMacros.cginc" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_SlashStretch_Mesh.shader" />
      <None Include="Assets\Extensions\FANTASTIC - Dungeon Pack\Information_Readme_QuickStart.txt" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_Light_StencilOut.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\ToonColor_ShadingGradeMap_TransClipping_Tess_StencilOut.shader" />
@@ -611,12 +624,14 @@
      <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiBlending.cginc" />
      <None Include="Assets\Extensions\Toon\Shader\ToonColor_ShadingGradeMap.shader" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Distortion_Mesh.shader" />
      <None Include="Assets\Extensions\Toon\Shader\Tess\ToonColor_ShadingGradeMap_TransClipping_Tess_StencilMask.shader" />
      <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye_blend.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\ThryEditor\Examples\ThryPresetsExample.txt" />
      <None Include="Assets\Extensions\Toon\Shader\Toon_ShadingGradeMap_Mobile_StencilOut.shader" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\ThryEditor\Examples\ThryLabelExample.txt" />
+     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_SlashStretch.shader" />
      <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiMetal.cginc" />
      <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiV2F.cginc" />

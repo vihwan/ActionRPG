@@ -41,11 +41,15 @@ namespace SG
             //         playerStats.TakeDamage(currentWeaponDamage);
             //     }
             // }
-            Debug.Log(other.gameObject.name);
-            if(other.tag == "Enemy")
-            {
-                EnemyStats enemyStats = other.GetComponent<EnemyStats>();
+            CheckColliderEnemy(other);
+        }
 
+        private void CheckColliderEnemy(Collider collider)
+        {
+            Debug.Log(collider.gameObject.name);
+            if(collider.tag.Equals("Enemy"))
+            {
+                EnemyStats enemyStats = collider.GetComponent<EnemyStats>();
                 if(enemyStats != null)
                 {
                     enemyStats.TakeDamage(currentWeaponDamage);

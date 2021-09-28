@@ -35,6 +35,7 @@ namespace SG
         public bool isGrounded;
         public bool canDoCombo;
         public bool isInvulnerable;
+        public bool canCounter;
 
         public float changeWeaponOutWaitTime = 0f;
         [SerializeField] private const float changeWeaponOutLimitTime = 5f;
@@ -95,6 +96,7 @@ namespace SG
             float delta = Time.deltaTime;
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
+            canCounter = anim.GetBool("canCounter");
             anim.SetBool("isInAir", isInAir);
             isUnEquip = anim.GetBool("isUnEquip");
             isInvulnerable = anim.GetBool("isInvulnerable");
@@ -136,6 +138,7 @@ namespace SG
             inputHandler.rollFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
+            inputHandler.lt_Input = false;
             inputHandler.sk_One_Input = false;
             inputHandler.sk_Two_Input = false;
             inputHandler.sk_Three_Input = false;

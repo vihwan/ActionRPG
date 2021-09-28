@@ -175,6 +175,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "LT",
+                    "type": "Button",
+                    "id": "268aaebf-7263-4416-8794-3b5c119b26b0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "RB",
                     "type": "Button",
                     "id": "485403d8-8ae2-4749-bcfc-0071a901a8fa",
@@ -426,6 +434,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ConsumeItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e0802989-0334-4622-87e1-2d821c9ed9f8",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LT",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

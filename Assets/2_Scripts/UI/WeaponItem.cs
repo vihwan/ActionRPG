@@ -41,6 +41,10 @@ namespace SG
         public string OneHanded_LightAttack3 = "Light_Attack_3";
         public string OneHanded_HeavyAttack1 = "Heavy_Attack_1";
 
+        [Header("Guard Animations")]
+        public string Weapon_Guard = "Guard";
+        public string Weapon_CounterAttack = "CounterAttack";
+
 
         public void IncreaseAttribute(int count)
         {

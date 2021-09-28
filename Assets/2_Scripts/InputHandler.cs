@@ -15,8 +15,9 @@ namespace SG
 
         public bool a_Input; //상호작용 : 키보드 F
         public bool b_Input;
-        public bool rb_Input; //약공격 : 키보드 E / 마우스 왼클릭
+        public bool rb_Input; //약공격 : 마우스 왼클릭
         public bool rt_Input; //강공격 : 키보드 R
+        public bool lt_Input; //막기 : 마우스 우클릭
         public bool jump_Input;
         public bool menu_Input; //메뉴 버튼창 열기 : ESC
         public bool lockOn_Input; //타겟 조준 : 마우스 휠 클릭
@@ -38,6 +39,7 @@ namespace SG
         public bool comboFlag;
         public bool menuFlag;
         public bool lockOnFlag;
+        public bool counterFlag;
 
         private PlayerControls inputActions;
         private PlayerAttackAnimation playerAttacker;
@@ -85,6 +87,7 @@ namespace SG
                 inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
+                inputActions.PlayerActions.LT.performed += i => lt_Input = true;
                 inputActions.PlayerActions.Skill_One.performed += i => sk_One_Input = true;
                 inputActions.PlayerActions.Skill_Two.performed += i => sk_Two_Input = true;
                 inputActions.PlayerActions.Skill_Three.performed += i => sk_Three_Input = true;
@@ -188,6 +191,13 @@ namespace SG
             {
                 ChangePlayerMotionToEquip();
 
+                if(counterFlag.Equals(true))
+                {
+                    Debug.Log("counterFlag is true");
+                    playerAttacker.HandleCounterAttack(PlayerInventory.Instance.currentWeapon);
+                    counterFlag = false;
+                }
+
                 if (playerManager.canDoCombo)
                 {
                     comboFlag = true;
@@ -206,12 +216,23 @@ namespace SG
                 }
             }
 
-
             //강공격
             //if (rt_Input)
             //{
             //    playerAttacker.HandleHeavyAttack(playerInventory.rightWeapon);
             //}
+
+            //막기
+            if(lt_Input)
+            {
+                //막기 자세를 취함
+                ChangePlayerMotionToEquip();
+                if(playerManager.isInteracting)
+                    return;
+
+                playerAttacker.HandleGuard(PlayerInventory.Instance.currentWeapon);
+                
+            }
         }
 
         private void HandleQuickSlotInput()

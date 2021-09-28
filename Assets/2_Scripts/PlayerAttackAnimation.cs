@@ -31,7 +31,6 @@ namespace SG
             }
         }
 
-
         public void HandleLightAttack(WeaponItem weaponItem)
         {
             animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack1, true);
@@ -51,6 +50,16 @@ namespace SG
 
             animatorHandler.anim.SetBool("canDoCombo", false);
             animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
+        }
+
+        public void HandleGuard(WeaponItem weaponItem)
+        {
+            animatorHandler.PlayTargetAnimation(weaponItem.Weapon_Guard, true);
+        }
+
+        public void HandleCounterAttack(WeaponItem weaponItem)
+        {
+            animatorHandler.PlayTargetAnimation(weaponItem.Weapon_CounterAttack, true);
         }
     }
 }
