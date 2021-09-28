@@ -32,16 +32,16 @@ namespace SG
 
         private void OnTriggerEnter(Collider other)
         {
-            if(other.tag == "Player")
-            {
-                PlayerStats playerStats = other.GetComponent<PlayerStats>();
+            // if(other.tag == "Player")
+            // {
+            //     PlayerStats playerStats = other.GetComponent<PlayerStats>();
 
-                if(playerStats != null)
-                {
-                    playerStats.TakeDamage(currentWeaponDamage);
-                }
-            }
-
+            //     if(playerStats != null)
+            //     {
+            //         playerStats.TakeDamage(currentWeaponDamage);
+            //     }
+            // }
+            Debug.Log(other.gameObject.name);
             if(other.tag == "Enemy")
             {
                 EnemyStats enemyStats = other.GetComponent<EnemyStats>();
@@ -53,6 +53,4 @@ namespace SG
             }
         }
     }
-
-
 }

@@ -7,12 +7,12 @@ namespace SG
 {
     public class AnimationLayerHandler : MonoBehaviour
     {
-        internal AnimatorHandler animatorHandler;
+        internal PlayerAnimatorHandler animatorHandler;
         private InputHandler inputHandler;
 
         public void Init()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             inputHandler = GetComponent<InputHandler>();
         }
 
@@ -30,10 +30,12 @@ namespace SG
             if (inputHandler.MoveAmount > 0)
             {
                 animatorHandler.PlayTargetAnimation("WeaponChange_UnEquip_NotMove", false);
+                animatorHandler.anim.SetBool("canRotate", true);
             }
             else
             {
                 animatorHandler.PlayTargetAnimation("WeaponChange_UnEquip", false);
+                animatorHandler.anim.SetBool("canRotate", true);
             }
         }
 

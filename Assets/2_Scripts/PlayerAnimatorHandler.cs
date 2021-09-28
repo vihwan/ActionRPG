@@ -5,13 +5,12 @@ using UnityEngine;
 
 namespace SG
 {
-    public class AnimatorHandler : AnimatorManager
+    public class PlayerAnimatorHandler : AnimatorManager
     {
         PlayerManager playerManager;
         [SerializeField] private PlayerLocomotion playerLocomotion;
         private int vertical;
         private int horizontal;
-        public bool canRotate;
 
         public void Initalize()
         {
@@ -93,12 +92,12 @@ namespace SG
 
         public void CanRotate()
         {
-            canRotate = true;
+            anim.SetBool("canRotate", true);
         }
 
-        public void StopRotation()
+        public void StopRotate()
         {
-            canRotate = false;
+            anim.SetBool("canRotate", false);
         }
 
         public void EnableInvulnerable()

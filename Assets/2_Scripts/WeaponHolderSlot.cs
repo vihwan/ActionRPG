@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -61,6 +62,18 @@ namespace SG
 
             currentWeaponModel = model;
             weaponGO = currentWeaponModel;
+            weaponGO.layer = LayerMask.NameToLayer("Weapon");
+
+            ChangeWeaponLayer(weaponGO, "Weapon");
+        }
+
+        private void ChangeWeaponLayer(GameObject gameObject, string layerName)
+        {
+            foreach (Transform child in gameObject.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer(layerName);
+                ChangeWeaponLayer(child.gameObject, layerName);
+            }
         }
     }
 }

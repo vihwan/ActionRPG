@@ -24,6 +24,7 @@ namespace SG
         private InteractableUI interactableUI;
         [SerializeField] private Interactable interactableObject;
         private AnimationLayerHandler animationLayerHandler;
+        private PlayerAnimatorHandler playerAnimatorHandler;
 
         public bool isInteracting;
 
@@ -80,6 +81,7 @@ namespace SG
                 playerQuestInventory.Init();
 
             anim = GetComponentInChildren<Animator>();
+            playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
 
             interactableUI = FindObjectOfType<InteractableUI>();
 
@@ -98,12 +100,10 @@ namespace SG
             isInvulnerable = anim.GetBool("isInvulnerable");
 
             inputHandler.TickInput(delta);
+            playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
             playerStats.RegenerationStamina();
-
-            //CheckForInteractable();
-            //CheckOpenUI();
         }
 
         private void CheckOpenUI()
@@ -123,6 +123,7 @@ namespace SG
             float delta = Time.fixedDeltaTime;
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
+            playerLocomotion.HandleRotation(delta);
             // playerLocomotion.HandleSprintEnd();
         }
 

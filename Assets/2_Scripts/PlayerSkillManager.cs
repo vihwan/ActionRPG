@@ -33,7 +33,7 @@ namespace SG
 
         public void Init()
         {
-            playerAttacker = GetComponent<PlayerAttackAnimation>();
+            playerAttacker = GetComponentInChildren<PlayerAttackAnimation>();
             playerStats = GetComponent<PlayerStats>();
             quickSlotUI = FindObjectOfType<QuickSlotUI>();
             try

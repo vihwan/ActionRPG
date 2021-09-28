@@ -19,11 +19,11 @@ namespace SG
         {
             PlayerInventory playerInventory;
             PlayerLocomotion playerLocomotion;
-            AnimatorHandler animatorHandler;
+            PlayerAnimatorHandler animatorHandler;
 
             playerInventory = playerManager.GetComponent<PlayerInventory>();
             playerLocomotion = playerManager.GetComponent<PlayerLocomotion>();
-            animatorHandler = playerManager.GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = playerManager.GetComponentInChildren<PlayerAnimatorHandler>();
 
             //물건을 줍는 동안 플레이어의 움직임은 멈춰야함
             playerLocomotion.rigidBody.velocity = Vector3.zero;

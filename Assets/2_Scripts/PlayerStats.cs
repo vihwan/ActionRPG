@@ -32,7 +32,7 @@ namespace SG
         private HealthBar healthBar;
         private ManaBar manaBar;
         private StaminaBar staminaBar;
-        private AnimatorHandler animatorHandler;
+        private PlayerAnimatorHandler animatorHandler;
         private PlayerManager playerManager;
         [SerializeField] private PlayerInventory playerInventory;
 
@@ -118,7 +118,7 @@ namespace SG
 
         public void Init()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             playerManager = GetComponent<PlayerManager>();
             healthBar = FindObjectOfType<HealthBar>();
             manaBar = FindObjectOfType<ManaBar>();

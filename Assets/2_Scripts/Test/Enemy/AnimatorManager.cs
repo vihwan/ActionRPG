@@ -7,10 +7,12 @@ namespace SG
     public class AnimatorManager : MonoBehaviour
     {
         public Animator anim;
+        public bool canRotate;
 
         public virtual void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2f)
         {
             anim.applyRootMotion = isInteracting;
+            anim.SetBool("canRotate", false);
             anim.SetBool("isInteracting", isInteracting);
             anim.CrossFade(targetAnim, duration);
         }

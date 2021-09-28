@@ -62,7 +62,7 @@ namespace SG
 
         public void Init()
         {
-            playerAttacker = GetComponent<PlayerAttackAnimation>();
+            playerAttacker = GetComponentInChildren<PlayerAttackAnimation>();
             if (playerAttacker == null)
                 Debug.LogWarning("playerAttacker Component is Null");
 

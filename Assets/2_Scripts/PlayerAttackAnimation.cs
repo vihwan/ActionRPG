@@ -6,13 +6,13 @@ namespace SG
 {
     public class PlayerAttackAnimation : MonoBehaviour
     {
-        AnimatorHandler animatorHandler;
+        PlayerAnimatorHandler animatorHandler;
         InputHandler inputHandler;
         public string lastAttack;
 
         private void Awake()
         {
-            animatorHandler = GetComponentInChildren<AnimatorHandler>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             inputHandler = GetComponent<InputHandler>();
         }
 
