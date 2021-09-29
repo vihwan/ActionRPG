@@ -16,6 +16,7 @@ namespace SG
             inputHandler = GetComponent<InputHandler>();
         }
 
+    #region  Attack Handle Functions
         public void HandleWeaponCombo(WeaponItem weaponItem)
         {
             animatorHandler.anim.SetBool("canDoCombo", false);
@@ -52,14 +53,25 @@ namespace SG
             animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
         }
 
+    #endregion
+
+    #region  Defense Handle Functions
+
         public void HandleGuard(WeaponItem weaponItem)
         {
-            animatorHandler.PlayTargetAnimation(weaponItem.Weapon_Guard, true);
+            if(PlayerManager.Instance.isBlocking)
+                return;
+
+            animatorHandler.PlayTargetAnimation(weaponItem.Weapon_Block, isInteracting: true);
+            animatorHandler.anim.SetBool("isBlocking", true);
+            Debug.Log("가드 실행");
         }
 
         public void HandleCounterAttack(WeaponItem weaponItem)
         {
             animatorHandler.PlayTargetAnimation(weaponItem.Weapon_CounterAttack, true);
         }
+
+    #endregion
     }
 }

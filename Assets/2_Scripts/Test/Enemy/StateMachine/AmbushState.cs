@@ -52,7 +52,7 @@ namespace SG
                         && viewableAngle < enemyManager.maximumDetectionAngle)
                     {
                         enemyManager.currentTarget = playerStats;
-                        enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true);
+                        enemyAnimatorHandler.PlayTargetAnimation(wakeAnimation, true, duration: 0f);
                         Invoke(nameof(IsSleepingFalse), 2.7f);
                         return;
                     }

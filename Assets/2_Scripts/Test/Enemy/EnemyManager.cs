@@ -19,13 +19,15 @@ namespace SG
         [SerializeField] public float detectionRadius;
         [SerializeField] public float rotationSpeed = 15f;
         [SerializeField] public float maximumAttackRange = 2f;
-
         [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float minimumDetectionAngle = -50f;
         [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float maximumDetectionAngle = 50f;
-
         public float currentRecoveryTime = 0;
-
         public State currentState;
+
+        [Header("Combo Flag")]
+        public bool canDoCombo;
+
+
 
         [Header("Need Component")]
         [SerializeField] private EnemyLocomotionManager enemyLocomotionManager;
@@ -69,18 +71,22 @@ namespace SG
             enemyRigidbody.isKinematic = false;
         }
 
-        private void FixedUpdate()
-        {
-            HandleState();
+        private void LateUpdate()
+        {       
+            navMeshAgent.transform.localPosition = Vector3.zero;
+            navMeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         private void Update()
         {
             HandleRecoveryTimer();
+            HandleStateMachine();
+
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
+            canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
         }
 
-        private void HandleState()
+        private void HandleStateMachine()
         {
             if (currentState != null)
             {

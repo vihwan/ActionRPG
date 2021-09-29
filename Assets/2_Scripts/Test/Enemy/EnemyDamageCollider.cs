@@ -44,7 +44,7 @@ namespace SG
                         //플레이어가 카운터공격 가능 플래그를 true
                         //데미지를 무효화
                         playerStats.GetComponent<InputHandler>().counterFlag = true;
-                        Debug.Log("counterFlag On");
+                        Debug.Log("<color=#E77D00>counterFlag</color> On ");
                         return;
                     }
 

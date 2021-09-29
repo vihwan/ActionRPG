@@ -14,7 +14,12 @@ namespace SG
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
-            //플레이어 주변을 서성이며 공격할 준비를 함     
+            //플레이어 주변을 서성이며 공격할 준비를 함    
+
+            if(enemyManager.isInteracting.Equals(true))
+            {
+                return this;
+            } 
 
             if(enemyManager.currentTarget == null)
                 return idleState;

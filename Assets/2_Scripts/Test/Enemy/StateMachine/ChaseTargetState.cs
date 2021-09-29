@@ -10,6 +10,11 @@ namespace SG
         public CombatStanceState combatStanceState;
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
+            if (enemyManager.isInteracting.Equals(true))
+            {
+                return this;
+            }
+
             if (enemyManager.isPerformingAction)
             {
                 enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
@@ -44,8 +49,6 @@ namespace SG
             }
 
             HandleRotateTowardsTarget(enemyManager);
-            enemyManager.navMeshAgent.transform.localPosition = Vector3.zero;
-            enemyManager.navMeshAgent.transform.localRotation = Quaternion.identity;
         }
 
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)

@@ -286,27 +286,44 @@ namespace SG
             if (isDead)
                 return;
 
+
+            PlayTakeDamageAnimation(ref damage);
+
             CurrentHealth -= damage;
             OnTakeDamaged?.Invoke();
             Debug.Log(damage + "의 데미지를 입었다.");
-
-            if (playerManager.isUnEquip == false)
-                animatorHandler.PlayTargetAnimation("Damage_01", true);
-            else
-                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true);
 
             if (CurrentHealth <= 0)
             {
                 CurrentHealth = 0;
                 isDead = true;
 
-                if (playerManager.isUnEquip == false)
+                if (playerManager.isUnEquip.Equals(false))
                     animatorHandler.PlayTargetAnimation("Damage_Die", true);
                 else
                     animatorHandler.PlayTargetAnimation("Damage_Die_UnEquip", true);
                 
                 //Handle Player Death
                 playerManager.SetAllMonsterCurrentTargetToNull();
+            }
+        }
+
+        private void PlayTakeDamageAnimation(ref int damage)
+        {
+            if(animatorHandler.anim.GetBool("isBlocking").Equals(true))
+            {
+               damage = Mathf.RoundToInt(damage * 0.5f);
+               animatorHandler.PlayTargetAnimation("BlockAccept", isInteracting: true);
+               return;
+            }
+
+            if (playerManager.isUnEquip.Equals(false))
+            {
+                animatorHandler.PlayTargetAnimation("Damage_01", true);
+            }
+            else
+            {
+                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true);
             }
         }
 

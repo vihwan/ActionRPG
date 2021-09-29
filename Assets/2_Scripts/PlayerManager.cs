@@ -35,10 +35,13 @@ namespace SG
         public bool isGrounded;
         public bool canDoCombo;
         public bool isInvulnerable;
+        public bool isBlocking;
         public bool canCounter;
 
         public float changeWeaponOutWaitTime = 0f;
+        public float counterAttackTime = 0f;
         [SerializeField] private const float changeWeaponOutLimitTime = 5f;
+        [SerializeField] private const float ableCounterAttackLimitTime = 1f;
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
@@ -100,24 +103,24 @@ namespace SG
             anim.SetBool("isInAir", isInAir);
             isUnEquip = anim.GetBool("isUnEquip");
             isInvulnerable = anim.GetBool("isInvulnerable");
+            isBlocking = anim.GetBool("isBlocking");
 
             inputHandler.TickInput(delta);
             playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
             playerStats.RegenerationStamina();
+            
         }
 
-        private void CheckOpenUI()
+        private void CheckCounterTimer(float delta)
         {
-            /*            if (GUIManager.instance.IsActiveUIWindows())
-                        {
-                            inputHandler.enabled = false;
-                        }
-                        else
-                        {
-                            inputHandler.enabled = true;
-                        }*/
+            counterAttackTime += delta;
+            if(counterAttackTime >= ableCounterAttackLimitTime)
+            {
+                counterAttackTime = 0f;
+                inputHandler.counterFlag = false;
+            }
         }
 
         private void FixedUpdate()
@@ -126,6 +129,7 @@ namespace SG
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleRotation(delta);
+            CheckCounterTimer(delta);
             // playerLocomotion.HandleSprintEnd();
         }
 
@@ -138,7 +142,7 @@ namespace SG
             inputHandler.rollFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
-            inputHandler.lt_Input = false;
+            //inputHandler.lt_Input = false;
             inputHandler.sk_One_Input = false;
             inputHandler.sk_Two_Input = false;
             inputHandler.sk_Three_Input = false;

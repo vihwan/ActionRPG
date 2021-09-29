@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 1656984548}
   - component: {fileID: 1656984547}
   m_Layer: 12
-  m_Name: Character Collider Blocker
+  m_Name: Enemy Collider Blocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   enemyManager: {fileID: 0}
 --- !u!1 &2221458385344092720
 GameObject:
@@ -289,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2221458386230641730}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2221458386576683334}
-  m_Layer: 8
+  m_Layer: 14
   m_Name: WeaponHolderSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,18 +476,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 690551270779787530}
+  isParrying: 0
   enemyName: Keiya Alter
   isBoss: 1
   currentTarget: {fileID: 0}
   isPerformingAction: 0
   isInteracting: 0
-  detectionRadius: 100
+  detectionRadius: 10
   rotationSpeed: 15
   maximumAttackRange: 2
   minimumDetectionAngle: -180
   maximumDetectionAngle: 180
   currentRecoveryTime: 0
-  currentState: {fileID: 0}
+  currentState: {fileID: 3563652791521703303}
   enemyLocomotionManager: {fileID: 0}
   enemyAnimatorHandler: {fileID: 0}
   enemyInventory: {fileID: 0}
@@ -528,11 +530,8 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: afdfc54b18a4ebf47869bd577f1f1bac, type: 2}
     itemAmount: 12
     dropChance: 100
-  - item: {fileID: 11400000, guid: 157b51418a1181041a535d38ef5d6b4c, type: 2}
-    itemAmount: 14
-    dropChance: 100
-  - item: {fileID: 11400000, guid: f841ebe5377cfd6449fe4899fa655e16, type: 2}
-    itemAmount: 6
+  - item: {fileID: 11400000, guid: be7fc577cff40f4429d7438a30b7c70d, type: 2}
+    itemAmount: 1
     dropChance: 100
   dropItems: []
 --- !u!114 &1621682159
@@ -10146,7 +10145,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSleeping: 1
-  detectionRadius: 7
   sleepAnimation: Sleep
   wakeAnimation: WakeUp
   detectionLayer:
@@ -10196,6 +10194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad116ca90b2c3724db1b2c5109ce2da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleState: {fileID: 2795285393657004949}
   chaseTargetState: {fileID: 3653030389810438291}
   attackState: {fileID: 1240513386964259521}
 --- !u!1 &5675787186317015149
@@ -10245,7 +10244,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51334537359e1c641bc71495043b35be, type: 2}
   - {fileID: 11400000, guid: 063d912696799d7439cc3c488e657bc8, type: 2}
   currentAttack: {fileID: 0}
+  idleState: {fileID: 2795285393657004949}
   combatStanceState: {fileID: 1283202574992205887}
+  isComboing: 0
 --- !u!1 &9167100195803561017
 GameObject:
   m_ObjectHideFlags: 0
@@ -10289,6 +10290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40df4c1a73f96bd41839949d2553eaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  idleState: {fileID: 2795285393657004949}
   combatStanceState: {fileID: 1283202574992205887}
 --- !u!1001 &2221458386125122413
 PrefabInstance:
@@ -10303,7 +10305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 29fbdd5c415a9eb4ba2b52d82337ab2f, type: 3}
       propertyPath: m_Layer
-      value: 8
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 29fbdd5c415a9eb4ba2b52d82337ab2f, type: 3}
       propertyPath: m_RootOrder

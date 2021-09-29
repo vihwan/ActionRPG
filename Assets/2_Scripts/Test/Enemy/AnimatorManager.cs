@@ -9,10 +9,10 @@ namespace SG
         public Animator anim;
         public bool canRotate;
 
-        public virtual void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2f)
+        public virtual void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2f, bool canRotate = false)
         {
             anim.applyRootMotion = isInteracting;
-            anim.SetBool("canRotate", false);
+            anim.SetBool("canRotate", canRotate);
             anim.SetBool("isInteracting", isInteracting);
             anim.CrossFade(targetAnim, duration);
         }

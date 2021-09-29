@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad116ca90b2c3724db1b2c5109ce2da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleState: {fileID: 0}
+  idleState: {fileID: 1149746383}
   chaseTargetState: {fileID: 1886500570}
   attackState: {fileID: 1967424504}
 --- !u!1 &586824029
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40df4c1a73f96bd41839949d2553eaf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleState: {fileID: 0}
+  idleState: {fileID: 1149746383}
   combatStanceState: {fileID: 475298226}
 --- !u!1 &1967424503
 GameObject:
@@ -967,7 +967,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 51334537359e1c641bc71495043b35be, type: 2}
   - {fileID: 11400000, guid: 063d912696799d7439cc3c488e657bc8, type: 2}
   currentAttack: {fileID: 0}
+  idleState: {fileID: 1149746383}
   combatStanceState: {fileID: 475298226}
+  isComboing: 0
 --- !u!1 &2465438526482408191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1053,6 +1055,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lockOnTransform: {fileID: 1732222629}
+  isParrying: 0
   enemyName: "\uC2A4\uD1A4 \uACE8\uB818"
   isBoss: 0
   currentTarget: {fileID: 0}
@@ -1084,7 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb1f3c17ba53d6a45a732cdc9922e39c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthLevel: 20
+  healthLevel: 200
   maxHealth: 0
   currentHealth: 0
   attack: 0
@@ -1107,7 +1110,7 @@ MonoBehaviour:
     itemAmount: 12
     dropChance: 100
   - item: {fileID: 11400000, guid: 157b51418a1181041a535d38ef5d6b4c, type: 2}
-    itemAmount: 14
+    itemAmount: 22
     dropChance: 100
   - item: {fileID: 11400000, guid: f841ebe5377cfd6449fe4899fa655e16, type: 2}
     itemAmount: 6
@@ -2563,6 +2566,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
+  canRotate: 0
   enemyManager: {fileID: 0}
 --- !u!1 &2465438526892724348
 GameObject:

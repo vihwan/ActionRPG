@@ -48,6 +48,7 @@ namespace SG
         private PlayerStats playerStats;
         private CameraHandler cameraHandler;
         private ActiveWeaponObject activeWeaponObject;
+        private PlayerAnimatorHandler animatorHandler;
 
 
         internal Vector2 movementInput;
@@ -73,6 +74,7 @@ namespace SG
             playerStats = GetComponent<PlayerStats>();
             cameraHandler = FindObjectOfType<CameraHandler>();
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
+            animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
         }
 
 
@@ -88,6 +90,7 @@ namespace SG
                 inputActions.PlayerActions.RB.performed += i => rb_Input = true;
                 inputActions.PlayerActions.RT.performed += i => rt_Input = true;
                 inputActions.PlayerActions.LT.performed += i => lt_Input = true;
+                inputActions.PlayerActions.LT.canceled += i => lt_Input = false;
                 inputActions.PlayerActions.Skill_One.performed += i => sk_One_Input = true;
                 inputActions.PlayerActions.Skill_Two.performed += i => sk_Two_Input = true;
                 inputActions.PlayerActions.Skill_Three.performed += i => sk_Three_Input = true;
@@ -193,7 +196,7 @@ namespace SG
 
                 if(counterFlag.Equals(true))
                 {
-                    Debug.Log("counterFlag is true");
+                    Debug.Log("<color=#E77D00>counterFlag</color> is true");
                     playerAttacker.HandleCounterAttack(PlayerInventory.Instance.currentWeapon);
                     counterFlag = false;
                 }
@@ -232,6 +235,10 @@ namespace SG
 
                 playerAttacker.HandleGuard(PlayerInventory.Instance.currentWeapon);
                 
+            }
+            else
+            {
+                animatorHandler.anim.SetBool("isBlocking", false);
             }
         }
 

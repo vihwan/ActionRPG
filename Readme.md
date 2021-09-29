@@ -58,16 +58,23 @@ ex) 레벨업, 강화, 이펙트, 상점(구매, 판매, 강화, 수리, 제작 
 **애니메이션 이벤트 함수**
 
 <PLayer>
-OpenRightHandDamageCollider\
-CloseRightHandDamageCollider\
+OpenDamageCollider\
+CloseDamageCollider\
 EnableCombo\
 DisableCombo\
 EnableInvulnerable\
 DisableInvulnerable\
+CanRotate\
+StopRotate\
+IsInteractingFalse\
 
 <Enemy>
-OpenDamageCollider
-CloseDamageCollider
+OpenDamageCollider\
+CloseDamageCollider\
+EnableCombo\
+DisableCombo\
+IsInteractingFalse\
+
 
 -------------------------------
 
@@ -105,6 +112,11 @@ Resources 폴더에 Fonts 폴더 생성
 
 - 몬스터 FSM의 CombatStanceState, AttackState에서, 플레이어가 가까이 붙어있으면 빠르게 제자리 회전하는 현상
 
+- Animation State of Controller not showing in Inspector when clicked
+
+> https://answers.unity.com/questions/1736606/animation-state-of-controller-not-showing-in-inspe.html
+
+
 -------------------------------
 
 ## Last Update
@@ -113,11 +125,27 @@ Resources 폴더에 Fonts 폴더 생성
 
 1. 캐릭터 전투 - 막기
 
-	- 우 클릭을 클릭하면, 캐릭터가 막기 자세를 취함
-	- 막기 자세 시작 이후 0.4초(?) 이내로 적의 공격이 들어오면 카운터 가능
-	- 카운터가 가능할 때, 왼클릭을 누르면 카운터 공격을 가함
+	- (완료) 우 클릭을 클릭하면, 캐릭터가 막기 자세를 취함
+	- (완료) 막기 자세 시작 이후 0.4초(?) 이내로 적의 공격이 들어오면 카운터 가능
+	- (완료) 카운터가 가능할 때, 왼클릭을 누르면 카운터 공격을 가함
+	- (완료) 공격 시, 컬라이더 조작 애니메이션 이름 리팩토링
+	- (완료) 우클릭을 누르고 있는 동안, 캐릭터가 막기 사제를 계속 취함
+	- (완료) 우클릭을 뗄 경우, 캐릭터 막기 자세를 품
+	- (완료) 막기 자세 동안, 캐릭터에게 공격이 들어오면, 공격 막기(GuardAccept) 애니메이션을 실행 및 데미지 경감
+	- (완료) 카운터가 가능할 때, 1초 이내에 왼클릭을 눌러야 카운터 공격을 하는 제한을 생성
 
-2. WeaponTrail
+
+2. 몬스터 A.I - 콤보 시스템
+
+	- (완료) 몬스터의 여러 공격 Scriptable를 생성
+	- (완료) EnemyAttackAction에 bool:CanCombo 와 nextComboAction 변수를 추가
+	- (완료) 몬스터가 공격 애니메이션을 실행 한 이후, 현재 공격의 nextComboAction이 존재한다면 콤보가능
+	- (완료) 애니메이션 공격마다 EnableCombo 이벤트 함수를 추가
+	- (완료) 콤보가 가능하면 연속하여 콤보를 실행
+
+3. WeaponTrail
+
+
 
 
 **다음 목표**

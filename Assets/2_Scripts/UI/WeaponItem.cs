@@ -42,7 +42,8 @@ namespace SG
         public string OneHanded_HeavyAttack1 = "Heavy_Attack_1";
 
         [Header("Guard Animations")]
-        public string Weapon_Guard = "Guard";
+        public string Weapon_Block = "Block";
+        public string Weapon_BlockAccept = "BlockAccept";
         public string Weapon_CounterAttack = "CounterAttack";
 
 

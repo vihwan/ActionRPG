@@ -79,7 +79,7 @@ namespace SG
             anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F)
+        public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F, bool canRotate = false)
         {
             base.PlayTargetAnimation(targetAnim, isInteracting, duration);
 
@@ -89,6 +89,9 @@ namespace SG
                 anim.CrossFade("Locomotion", 0.3f);
             }
         }
+
+
+        #region  Player Animation Event Functions
 
         public void CanRotate()
         {
@@ -129,6 +132,13 @@ namespace SG
         {
             anim.SetBool("canCounter", false);
         }
+
+        public void IsInteractingFalse()
+        {
+            anim.SetBool("isInteracting", false);
+        }
+
+        #endregion
 
         private void OnAnimatorMove()
         {

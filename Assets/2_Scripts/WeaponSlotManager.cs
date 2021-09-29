@@ -48,6 +48,8 @@ namespace SG
             activeWeaponObject.Initailize(weaponGO, playerManager.isUnEquip);
         }
 
+
+        #region Attack Animation Event Functions
         private void LoadLeftWeaponDamageCollider()
         {
             leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
@@ -58,25 +60,29 @@ namespace SG
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
         }
 
-        public void OpenRightHandDamageCollider()
+        public void OpenDamageCollider()
         {
             rightHandDamageCollider.EnableDamageCollider();
         }
 
+        public void CloseDamageCollider()
+        {
+            rightHandDamageCollider.DisableDamageCollider();
+        }
+
+
+        [System.Obsolete]
         public void OpenLeftHandDamageCollider()
         {
             leftHandDamageCollider.EnableDamageCollider();
         }
 
-        public void CloseRightHandDamageCollider()
-        {
-            rightHandDamageCollider.DisableDamageCollider();
-        }
-
+        [System.Obsolete]
         public void CloseLeftHandDamageCollider()
         {
             leftHandDamageCollider.DisableDamageCollider();
         }
-    }
+         #endregion
+    } 
 }
 

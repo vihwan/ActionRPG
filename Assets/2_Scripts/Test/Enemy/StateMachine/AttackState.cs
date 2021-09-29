@@ -9,7 +9,10 @@ namespace SG
     {
         public EnemyAttackAction[] enemyAttacks;
         public EnemyAttackAction currentAttack;
+        public IdleState idleState;
         public CombatStanceState combatStanceState;
+    
+        [SerializeField] private bool willDoNextCombo = false;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
@@ -18,15 +21,39 @@ namespace SG
             //공격이 가능하면, 움직임을 멈추고 상대를 공격
             //공격 회복 시간을 설정
             //CombatStanceState로 return
+            if (enemyManager.currentTarget == null)
+                return idleState;
+
             Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
             float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
             float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
 
+            HandleRotateTowardsTarget(enemyManager);
+
+            if (enemyManager.isInteracting.Equals(true) && enemyManager.canDoCombo.Equals(false))
+            {
+                return this;
+            }
+
+            if (enemyManager.canDoCombo.Equals(true) && willDoNextCombo)
+            {
+                enemyAnimatorHandler.DisableCombo();
+                willDoNextCombo = false;
+                AttackTarget(enemyManager, enemyAnimatorHandler);
+                if (currentAttack != null)
+                {
+                    return this;
+                }
+                else
+                {
+                    willDoNextCombo = false;
+                    return combatStanceState;
+                }
+            }
+
             if (enemyManager.isPerformingAction)
                 return combatStanceState;
 
-            if (enemyManager.isInteracting.Equals(false))
-                HandleRotateTowardsTarget(enemyManager);
 
             if (currentAttack != null)
             {
@@ -45,9 +72,17 @@ namespace SG
                             enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                             enemyAnimatorHandler.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                             AttackTarget(enemyManager, enemyAnimatorHandler);
-                            return combatStanceState;
+                            if(currentAttack != null) 
+                                return this;
+                            else 
+                                return combatStanceState;
                         }
                     }
+                }
+                else if(distanceFromTarget > currentAttack.maximumDistanceNeedToAttack)
+                {
+                    currentAttack = null;
+                    return combatStanceState;
                 }
             }
             else
@@ -62,18 +97,18 @@ namespace SG
 
         private void AttackTarget(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler)
         {
-            if (enemyManager.isPerformingAction)
-                return;
-
-            if (currentAttack == null)
+            enemyManager.isPerformingAction = true;
+            enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
+            enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
+            //Debug.Log("공격 애니메이션 실행 : " + currentAttack.actionAnimation);
+            if (currentAttack.canCombo)
             {
-                GetNewAttack(enemyManager);
+                currentAttack = currentAttack.nextComboAction;
+                willDoNextCombo = true;
             }
             else
             {
-                enemyManager.isPerformingAction = true;
                 enemyManager.currentRecoveryTime = currentAttack.recoveryTime;
-                enemyAnimatorHandler.PlayTargetAnimation(currentAttack.actionAnimation, true);
                 currentAttack = null;
             }
         }
@@ -133,7 +168,7 @@ namespace SG
 
             if (enemyManager.isPerformingAction)
             {
-                Debug.Log("회전 PerformingAction");
+                //Debug.Log("회전 PerformingAction");
                 Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
                 direction.y = 0;
                 direction.Normalize();

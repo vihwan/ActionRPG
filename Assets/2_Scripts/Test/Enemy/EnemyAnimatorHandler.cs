@@ -19,6 +19,21 @@ namespace SG
         //    base.PlayTargetAnimation(targetAnim, isInteracting, duration);
         //}
 
+        public void EnableCombo()
+        {
+            anim.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            anim.SetBool("canDoCombo", false);
+        }
+
+        public void isInteractingFalse()
+        {
+            anim.SetBool("isInteracting", false);
+        }
+
         private void OnAnimatorMove() 
         {
             float delta = Time.deltaTime;
