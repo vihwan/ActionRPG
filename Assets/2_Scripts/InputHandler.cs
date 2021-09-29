@@ -196,9 +196,10 @@ namespace SG
 
                 if(counterFlag.Equals(true))
                 {
-                    Debug.Log("<color=#E77D00>counterFlag</color> is true");
+                    Debug.Log("<color=#E77D00>카운터 공격 실행</color>");
                     playerAttacker.HandleCounterAttack(PlayerInventory.Instance.currentWeapon);
                     counterFlag = false;
+                    return;
                 }
 
                 if (playerManager.canDoCombo)

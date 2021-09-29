@@ -319,11 +319,11 @@ namespace SG
 
             if (playerManager.isUnEquip.Equals(false))
             {
-                animatorHandler.PlayTargetAnimation("Damage_01", true);
+                animatorHandler.PlayTargetAnimation("Damage_01", true, duration: 0f);
             }
             else
             {
-                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true);
+                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true, duration: 0f);
             }
         }
 

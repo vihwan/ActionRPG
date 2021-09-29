@@ -38,17 +38,18 @@ namespace SG
                 if (playerStats != null)
                 {
                     PlayerAnimatorHandler playerAnimatorHandler = playerStats.GetComponentInChildren<PlayerAnimatorHandler>();
-                    if(playerAnimatorHandler.anim.GetBool("canCounter").Equals(true))
+                    InputHandler inputHandler = playerStats.GetComponent<InputHandler>();
+                    if(playerAnimatorHandler.anim.GetBool("canCounter").Equals(true) && inputHandler.counterFlag.Equals(false))
                     {
                         //상대가 카운터 가능 시간대에 공격을 했다면
                         //플레이어가 카운터공격 가능 플래그를 true
                         //데미지를 무효화
-                        playerStats.GetComponent<InputHandler>().counterFlag = true;
+                        inputHandler.counterFlag = true;
                         Debug.Log("<color=#E77D00>counterFlag</color> On ");
-                        return;
+                        playerStats.TakeDamage(0); 
+                        return;    
                     }
-
-                    playerStats.TakeDamage(currentWeaponDamage);
+                    playerStats.TakeDamage(currentWeaponDamage);              
                 }
                 else
                     Debug.Log("PlayerStats is Null");

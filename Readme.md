@@ -145,7 +145,8 @@ Resources 폴더에 Fonts 폴더 생성
 
 3. WeaponTrail
 
-
+	- Boss Keiya 무기에 WeaponTrail을 생성
+	
 
 
 **다음 목표**

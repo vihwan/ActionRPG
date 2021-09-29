@@ -110,16 +110,26 @@ namespace SG
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerLocomotion.HandleJumping();
             playerStats.RegenerationStamina();
-            
+
         }
 
         private void CheckCounterTimer(float delta)
         {
-            counterAttackTime += delta;
-            if(counterAttackTime >= ableCounterAttackLimitTime)
+            if (inputHandler.counterFlag.Equals(true))
+            {
+                counterAttackTime += delta;
+
+                if (counterAttackTime >= ableCounterAttackLimitTime)
+                {
+                    counterAttackTime = 0f;
+                    inputHandler.counterFlag = false;
+                    Debug.Log("카운터 공격 가능 시간 초과");
+                }
+            }
+            else
             {
                 counterAttackTime = 0f;
-                inputHandler.counterFlag = false;
+                return;
             }
         }
 
@@ -129,6 +139,7 @@ namespace SG
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleRotation(delta);
+
             CheckCounterTimer(delta);
             // playerLocomotion.HandleSprintEnd();
         }
@@ -235,7 +246,7 @@ namespace SG
                         this.gameObject.transform.position,
                         Quaternion.identity,
                         this.transform) as GameObject;
-            go.transform.localScale = new Vector3 (.7f,.7f,.7f);
+            go.transform.localScale = new Vector3(.7f, .7f, .7f);
             go.GetComponent<ParticleSystem>().Play();
             Destroy(go, 5f);
         }

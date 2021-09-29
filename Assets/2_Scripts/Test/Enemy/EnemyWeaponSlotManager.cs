@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XftWeapon;
 
 
 namespace SG
@@ -11,6 +12,7 @@ namespace SG
         //public WeaponItem rightHandWeapon;
         public WeaponHolderSlot rightHandSlot;
         [SerializeField] private EnemyDamageCollider enemyDamageCollider;
+        [SerializeField] private XWeaponTrail xWeaponTrail;
 
         public void Init()
         {
@@ -35,6 +37,9 @@ namespace SG
             if(enemyDamageCollider != null)
             {
                 enemyDamageCollider.Init();
+                xWeaponTrail = enemyDamageCollider.GetComponentInChildren<XWeaponTrail>();
+                if(xWeaponTrail != null)
+                    xWeaponTrail.enabled = false;
             }
         }
 
@@ -42,11 +47,13 @@ namespace SG
         public void OpenDamageCollider()
         {
             enemyDamageCollider.EnableDamageCollider();
+            xWeaponTrail.enabled = true;
         }
 
         public void CloseDamageCollider()
         {
             enemyDamageCollider.DisableDamageCollider();
+            xWeaponTrail.enabled = false;
         }
 
         public void EnableCombo()
