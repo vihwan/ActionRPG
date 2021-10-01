@@ -120,6 +120,7 @@
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\IdleState.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\RotateTowardTargetState.cs" />
      <Compile Include="Assets\2_Scripts\Test\Enemy\StateMachine\State.cs" />
+     <Compile Include="Assets\2_Scripts\Test\Enemy\enemyTestStats.cs" />
      <Compile Include="Assets\2_Scripts\Test\EventColliderBossFight.cs" />
      <Compile Include="Assets\2_Scripts\Test\InteractDoor.cs" />
      <Compile Include="Assets\2_Scripts\Test\ItemLooting\DropItemBox.cs" />

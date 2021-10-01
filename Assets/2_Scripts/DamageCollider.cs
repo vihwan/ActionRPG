@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,16 +33,20 @@ namespace SG
 
         private void OnTriggerEnter(Collider other)
         {
-            // if(other.tag == "Player")
-            // {
-            //     PlayerStats playerStats = other.GetComponent<PlayerStats>();
-
-            //     if(playerStats != null)
-            //     {
-            //         playerStats.TakeDamage(currentWeaponDamage);
-            //     }
-            // }
             CheckColliderEnemy(other);
+            CheckColliderEnemyTest(other);
+        }
+
+        private void CheckColliderEnemyTest(Collider collider)
+        {
+            if(collider.tag.Equals("Enemy"))
+            {
+                EnemyTestStats enemyTestStats = collider.GetComponent<EnemyTestStats>();
+                if(enemyTestStats != null)
+                {
+                    enemyTestStats.TakeDamage(currentWeaponDamage);
+                }
+            }
         }
 
         private void CheckColliderEnemy(Collider collider)

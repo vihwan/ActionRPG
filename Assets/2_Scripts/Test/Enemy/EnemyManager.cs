@@ -18,14 +18,22 @@ namespace SG
         [SerializeField] public bool isInteracting;
         [SerializeField] public float detectionRadius;
         [SerializeField] public float rotationSpeed = 15f;
-        [SerializeField] public float maximumAttackRange = 2f;
-        [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float minimumDetectionAngle = -50f;
-        [Tooltip("시야각을 현실적이게 설정하기를 요망"), SerializeField] internal float maximumDetectionAngle = 50f;
+        [SerializeField] public float maximumAggroRadius = 2f;
+        [Tooltip("플레이어를 발견할 수 있는 각도"), SerializeField] internal float minimumDetectionAngle = -50f;
+        [Tooltip("플레이어를 발견할 수 있는 각도"), SerializeField] internal float maximumDetectionAngle = 50f;
         public float currentRecoveryTime = 0;
         public State currentState;
 
         [Header("Combo Flag")]
         public bool canDoCombo;
+
+        [Header("IsRotatingWithRootMotion")]
+        public bool isRotatingWithRootMotion;
+        public bool canRotate;
+
+        [Header("A.I Combat Setting")]
+        public bool allowAIToPerformCombo;
+        public float comboLikelyhood;
 
 
 
@@ -84,6 +92,8 @@ namespace SG
 
             isInteracting = enemyAnimatorHandler.anim.GetBool("isInteracting");
             canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
+            isRotatingWithRootMotion = enemyAnimatorHandler.anim.GetBool("isRotatingWithRootMotion");
+            canRotate = enemyAnimatorHandler.anim.GetBool("canRotate");
         }
 
         private void HandleStateMachine()

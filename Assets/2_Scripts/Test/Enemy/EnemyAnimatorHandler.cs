@@ -8,16 +8,30 @@ namespace SG
     public class EnemyAnimatorHandler : AnimatorManager
     {
         [SerializeField] private EnemyManager enemyManager;
+        [SerializeField] private EnemyWeaponSlotManager enemyWeaponSlotManager;
         public void Init()
         {
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
+            enemyWeaponSlotManager = GetComponent<EnemyWeaponSlotManager>();
         }
 
-        //public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F)
-        //{
-        //    base.PlayTargetAnimation(targetAnim, isInteracting, duration);
-        //}
+        public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F, bool canRotate = false)
+        {
+            if(enemyWeaponSlotManager != null)
+                enemyWeaponSlotManager.CloseDamageCollider();
+            base.PlayTargetAnimation(targetAnim, isInteracting, duration, canRotate);
+        }
+
+        public void CanRotate()
+        {
+            anim.SetBool("canRotate", true);
+        }
+
+        public void StopRotate()
+        {
+            anim.SetBool("canRotate", false);
+        }
 
         public void EnableCombo()
         {
@@ -42,6 +56,11 @@ namespace SG
             deltaPosition.y = 0;
             Vector3 velocity = deltaPosition / delta;
             enemyManager.enemyRigidbody.velocity = velocity;
+
+            if(enemyManager.isRotatingWithRootMotion)
+            {
+                enemyManager.transform.rotation *= anim.deltaRotation;
+            }
         }
     }
 }

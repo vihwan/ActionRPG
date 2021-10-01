@@ -17,6 +17,8 @@ namespace SG
         private EnemyHealthBarUI enemyHealthBarUI;
         private EnemyBossHealthBarUI enemyBossHealthBarUI;
         private EnemyManager enemyManager;
+        private CombatStanceState combatStanceState;
+        private AttackState attackState;
 
         public void Init()
         {
@@ -41,6 +43,9 @@ namespace SG
                     }
                 }
             }
+
+            combatStanceState = GetComponentInChildren<CombatStanceState>();
+            attackState = GetComponentInChildren<AttackState>();
         }
 
         private int SetMaxHealthFromHealthLevel()
@@ -63,6 +68,9 @@ namespace SG
 
             enemyAnimatorHandler.PlayTargetAnimation("Damage_01", true);
             Debug.Log(damage + " 데미지를 입힌다!");
+
+            enemyManager.currentState = combatStanceState;
+            attackState.currentAttack = null;
 
             if (currentHealth <= 0)
             {

@@ -8,78 +8,96 @@ namespace SG
     {
         public IdleState idleState;
         public CombatStanceState combatStanceState;
+        public RotateTowardTargetState rotateTowardTargetState;
+        public AttackState attackState;
+        public EnemyAttackAction[] dashAttacks;
+        public float viewableAngleLimitation = 90f;
+
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
-        {
-            if (enemyManager.isInteracting.Equals(true))
+        {          
+            if (enemyManager.currentTarget == null)
+                return idleState;
+
+            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            float distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
+            float viewableAngle = Vector3.SignedAngle(targetDirection, enemyManager.transform.forward, Vector3.up);
+
+            if(viewableAngle > viewableAngleLimitation || viewableAngle < -viewableAngleLimitation)
             {
-                return this;
+                Debug.Log(viewableAngle);
+                return rotateTowardTargetState;
             }
+
+            HandleRotateTowardsTarget(enemyManager);
+
+            if (enemyManager.isInteracting.Equals(true))
+                return this;
 
             if (enemyManager.isPerformingAction)
             {
                 enemyAnimatorHandler.anim.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
+                enemyAnimatorHandler.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
+                return this;
+            }
+            
+            if(distanceFromTarget > enemyManager.maximumAggroRadius)
+            {
+                enemyAnimatorHandler.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
+                enemyAnimatorHandler.anim.SetFloat("Horizontal", 0, 0.1f, Time.deltaTime);
                 return this;
             }
 
-            if (enemyManager.currentTarget == null)
-                return idleState;
-
-            //대상을 추적
-            //만약 공격사거리 안에 적이 들어오면 CombatStanceState로 전환
-            float distanceFromTarget;
-            HandleMoveToTarget(enemyManager, enemyAnimatorHandler, out distanceFromTarget);
-
-            if (distanceFromTarget <= enemyManager.maximumAttackRange)
+            if (distanceFromTarget <= enemyManager.maximumAggroRadius)
             {
+                if (dashAttacks.Length > 0)
+                {
+                    int rand = Random.Range(0, 2);
+                    if (rand.Equals(0))
+                        attackState.currentAttack = dashAttacks[0];
+                    else
+                        attackState.currentAttack = dashAttacks[1];
+                }
                 return combatStanceState;
             }
 
             return this;
         }
 
-        public void HandleMoveToTarget(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, out float distanceFromTarget)
-        {
-            Vector3 targetDirection = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
-            distanceFromTarget = Vector3.Distance(enemyManager.currentTarget.transform.position, enemyManager.transform.position);
-            float viewableAngle = Vector3.Angle(targetDirection, enemyManager.transform.forward);
-
-            if (distanceFromTarget > enemyManager.maximumAttackRange)
-            {
-                enemyAnimatorHandler.anim.SetFloat("Vertical", 2, 0.1f, Time.deltaTime);
-            }
-
-            HandleRotateTowardsTarget(enemyManager);
-        }
-
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
-            if (enemyManager.isPerformingAction)
-            {
-                Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
-                direction.y = 0;
-                direction.Normalize();
+            // if (enemyManager.isPerformingAction)
+            // {
+            //     Debug.Log("Performing 회전");
+            //     Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            //     direction.y = 0;
+            //     direction.Normalize();
 
-                if (direction.Equals(Vector3.zero))
-                {
-                    direction = transform.forward;
-                }
+            //     if (direction.Equals(Vector3.zero))
+            //     {
+            //         direction = transform.forward;
+            //     }
 
-                Quaternion targetRotation = Quaternion.LookRotation(direction);
-                enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
-            }
-            else
-            {
-                //Rotate With PathFinding
-                Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
-                Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+            //     Quaternion targetRotation = Quaternion.LookRotation(direction);
+            //     enemyManager.transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+            // }
+            // else
+            // {
 
-                enemyManager.navMeshAgent.enabled = true;
-                enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
-                enemyManager.enemyRigidbody.velocity = targetVelocity;
-                enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation,
-                                                                   enemyManager.navMeshAgent.transform.rotation,
-                                                                   enemyManager.rotationSpeed / Time.deltaTime);
-            }
+            //Rotate With PathFinding
+            //Debug.Log("회전한다");
+            Vector3 relativeDirection = transform.InverseTransformDirection(enemyManager.navMeshAgent.desiredVelocity);
+            Vector3 direction = enemyManager.currentTarget.transform.position - enemyManager.transform.position;
+            Vector3 targetVelocity = enemyManager.enemyRigidbody.velocity;
+
+            enemyManager.navMeshAgent.enabled = true;
+            enemyManager.navMeshAgent.SetDestination(enemyManager.currentTarget.transform.position);
+            enemyManager.enemyRigidbody.velocity = targetVelocity;
+            // enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation,
+            //                                                    enemyManager.navMeshAgent.transform.rotation,
+            //                                                    enemyManager.rotationSpeed / Time.deltaTime);
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+
         }
     }
 }

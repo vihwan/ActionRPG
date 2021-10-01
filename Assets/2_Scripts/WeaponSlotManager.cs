@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XftWeapon;
 
 
 namespace SG
@@ -18,7 +19,8 @@ namespace SG
         private Animator animator;
         private ActiveWeaponObject activeWeaponObject;
         private PlayerManager playerManager;
-
+        private XWeaponTrail xWeaponTrail;
+        
         public void Init()
         {
             WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
@@ -58,16 +60,26 @@ namespace SG
         private void LoadRightWeaponDamageCollider()
         {
             rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+            if(rightHandDamageCollider != null)
+            {
+                xWeaponTrail = rightHandDamageCollider.GetComponentInChildren<XWeaponTrail>(true);
+                if(xWeaponTrail != null)
+                    xWeaponTrail.enabled = false;
+            }
         }
 
         public void OpenDamageCollider()
         {
             rightHandDamageCollider.EnableDamageCollider();
+            if(xWeaponTrail != null)
+                xWeaponTrail.enabled = true;
         }
 
         public void CloseDamageCollider()
         {
             rightHandDamageCollider.DisableDamageCollider();
+            if(xWeaponTrail != null)
+                xWeaponTrail.enabled = false;
         }
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XftWeapon;
 
 namespace SG
 {
@@ -9,6 +10,8 @@ namespace SG
     {
         public Transform parentOverride;
         public GameObject currentUnequipWeaponModel;
+        public XWeaponTrail xWeaponTrail;
+
         public void LoadUnEquipWeaponModel(WeaponItem weaponItem)
         {
             UnloadWeaponAndDestroy();
@@ -33,6 +36,9 @@ namespace SG
                 model.transform.localScale = Vector3.one;
             }
             currentUnequipWeaponModel = model;
+            xWeaponTrail = currentUnequipWeaponModel.GetComponentInChildren<XWeaponTrail>();
+            if(xWeaponTrail != null)
+                xWeaponTrail.enabled = false;
         }
 
         private void UnloadWeaponAndDestroy()

@@ -12,6 +12,8 @@ namespace SG
         {
             //Look for potential target
             //switch to the chase target state if target is found
+            enemyAnimatorHandler.anim.SetFloat("Horizontal", 0f, 0.2f, Time.deltaTime);
+            enemyAnimatorHandler.anim.SetFloat("Vertical", 0f, 0.2f, Time.deltaTime);
             HandleDetection(enemyManager);
 
             if(enemyManager.currentTarget != null)

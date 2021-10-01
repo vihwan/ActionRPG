@@ -7,8 +7,9 @@ namespace SG
 {
     public class PlayerAnimatorHandler : AnimatorManager
     {
-        PlayerManager playerManager;
+        private PlayerManager playerManager;
         [SerializeField] private PlayerLocomotion playerLocomotion;
+        [SerializeField] private WeaponSlotManager playerWeaponSlotManager;
         private int vertical;
         private int horizontal;
 
@@ -16,6 +17,7 @@ namespace SG
         {
             playerManager = GetComponentInParent<PlayerManager>();
             anim = GetComponent<Animator>();
+            playerWeaponSlotManager = GetComponent<WeaponSlotManager>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
@@ -81,7 +83,8 @@ namespace SG
 
         public override void PlayTargetAnimation(string targetAnim, bool isInteracting, float duration = 0.2F, bool canRotate = false)
         {
-            base.PlayTargetAnimation(targetAnim, isInteracting, duration);
+            playerWeaponSlotManager.CloseDamageCollider();
+            base.PlayTargetAnimation(targetAnim, isInteracting, duration, canRotate);
 
             /*08월 06일, Override 행동 이후 자연스러운 애니메이션 변화를 위해서 추가**/
             if (targetAnim == "Empty")
