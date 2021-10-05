@@ -24,24 +24,28 @@ namespace SG
         // public GameObject normalCamera;
 
         [Header("Ground & Air Detection Stats")]
+        public float inAirTimer;
         [SerializeField] float groundDetectionRayStartPoint = 0.5f;
         [SerializeField] float minimumDistanceNeededToBeginFall = 1f;
         [SerializeField] float groundDirectionRayDistance = 0.2f;
-        LayerMask ignoreForGroundCheck;
-        public float inAirTimer;
+        [SerializeField] LayerMask ignoreForGroundCheck;
 
 
-        [Header("Player Stats")]
-        [SerializeField]
-        float walkingSpeed = 1;
-        [SerializeField]
-        float movementSpeed = 5;
-        [SerializeField]
-        float sprintSpeed = 7;
-        [SerializeField]
-        float rotationSpeed = 10;
-        [SerializeField]
-        float fallingSpeed = 80;
+        [Header("Movement Flags")]
+        public bool isGrounded;
+        public bool isJumping;
+
+
+        [Header("Movement Speed")]
+        [SerializeField] private float walkingSpeed = 1;
+        [SerializeField] private float movementSpeed = 5;
+        [SerializeField] private float sprintSpeed = 7;
+        [SerializeField] private float rotationSpeed = 10;
+        [SerializeField] private float fallingSpeed = 80;
+
+        [Header("Jump Speeds")]
+        public float jumpHeight = 3;
+        public float gravityIntensity = -15f;
 
         // Start is called before the first frame update
         public void Init()
@@ -56,7 +60,7 @@ namespace SG
             myTransform = transform;
             animatorHandler.Initalize();
 
-            playerManager.isGrounded = true;
+            isGrounded = true;
             ignoreForGroundCheck = ~(1 << 8 | 1 << 11);
             Physics.IgnoreCollision(characterCollider, characterBlockerCollider, true);
         }
@@ -67,6 +71,9 @@ namespace SG
 
         public void HandleMovement(float delta)
         {
+            if(isJumping)
+                return;
+
             if (inputHandler.rollFlag)
                 return;
 
@@ -116,12 +123,13 @@ namespace SG
             {
                 animatorHandler.UpdateAnimatorValues(inputHandler.MoveAmount, 0, playerManager.isSprinting);
             }
-
-
         }
 
         public void HandleRotation(float delta)
         {
+            if(isJumping)
+                return;
+
             if (animatorHandler.canRotate)
             {
                 if (inputHandler.lockOnFlag && inputHandler.sprintFlag == false)
@@ -215,7 +223,7 @@ namespace SG
 
         public void HandleFalling(float delta, Vector3 moveDirection)
         {
-            playerManager.isGrounded = false;
+            isGrounded = false;
             RaycastHit hit;
             Vector3 origin = myTransform.position;
             origin.y += groundDetectionRayStartPoint;
@@ -243,7 +251,7 @@ namespace SG
             {
                 normalVector = hit.normal;
                 Vector3 tp = hit.point;
-                playerManager.isGrounded = true;
+                isGrounded = true;
                 targetPosition.y = tp.y;
 
                 if (playerManager.isInAir)
@@ -273,9 +281,9 @@ namespace SG
             }
             else
             {
-                if (playerManager.isGrounded)
+                if (isGrounded)
                 {
-                    playerManager.isGrounded = false;
+                    isGrounded = false;
                 }
 
                 if (playerManager.isInAir == false)
@@ -295,7 +303,7 @@ namespace SG
                 }
             }
 
-            if (playerManager.isGrounded)
+            if (isGrounded)
             {
                 if (playerManager.isInteracting || inputHandler.MoveAmount > 0)
                 {
@@ -315,34 +323,19 @@ namespace SG
             {
                 myTransform.position = targetPosition;
             }
-
-
         }
 
         public void HandleJumping()
         {
-            if (playerManager.isInteracting)
-                return;
-
-            if (inputHandler.jump_Input)
+            if(isGrounded)
             {
+                animatorHandler.anim.SetBool("isJumping", true);
+                animatorHandler.PlayTargetAnimation("Jump", true);
 
-                moveDirection = cameraObject.forward * inputHandler.Vertical;
-                moveDirection += cameraObject.right * inputHandler.Horizontal;
-
-                if (playerManager.isUnEquip == false)
-                    animatorHandler.PlayTargetAnimation("Jump", true);
-                else
-                    animatorHandler.PlayTargetAnimation("Jump_UnEquip", true);
-
-                moveDirection.y = 0f; //Root Motion
-                Quaternion jumpRotation = Quaternion.LookRotation(moveDirection);
-                myTransform.rotation = jumpRotation;
-
-                if (inputHandler.MoveAmount > 0)
-                {
-
-                }
+                float jumpingVelocity = Mathf.Sqrt(-2 * gravityIntensity * jumpHeight);
+                Vector3 playerVelocity = moveDirection;
+                playerVelocity.y = jumpingVelocity;
+                rigidBody.velocity = playerVelocity;
             }
         }
 

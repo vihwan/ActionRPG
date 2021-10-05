@@ -32,7 +32,7 @@ namespace SG
         public bool isUnEquip;
         public bool isSprinting;
         public bool isInAir;
-        public bool isGrounded;
+
         public bool canDoCombo;
         public bool isInvulnerable;
         public bool isBlocking;
@@ -108,9 +108,7 @@ namespace SG
             inputHandler.TickInput(delta);
             playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
-            playerLocomotion.HandleJumping();
             playerStats.RegenerationStamina();
-
         }
 
         private void CheckCounterTimer(float delta)
@@ -162,9 +160,7 @@ namespace SG
             inputHandler.jump_Input = false;
             inputHandler.menu_Input = false;
             inputHandler.consume_Input = false;
-
             isSprinting = inputHandler.b_Input;
-
 
             if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
@@ -191,6 +187,8 @@ namespace SG
             {
                 playerLocomotion.inAirTimer += Time.deltaTime;
             }
+
+            playerLocomotion.isJumping = anim.GetBool("isJumping");
         }
 
         public void EnableInputHandler()

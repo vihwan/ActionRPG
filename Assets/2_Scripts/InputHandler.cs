@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -44,6 +44,7 @@ namespace SG
         private PlayerControls inputActions;
         private PlayerAttackAnimation playerAttacker;
         private PlayerManager playerManager;
+        private PlayerLocomotion playerLocomotion;
         private PlayerSkillManager playerSkillManager;
         private PlayerStats playerStats;
         private CameraHandler cameraHandler;
@@ -70,6 +71,7 @@ namespace SG
                 Debug.LogWarning("playerAttacker Component is Null");
 
             playerManager = GetComponent<PlayerManager>();
+            playerLocomotion = GetComponent<PlayerLocomotion>();
             playerSkillManager = GetComponent<PlayerSkillManager>();
             playerStats = GetComponent<PlayerStats>();
             cameraHandler = FindObjectOfType<CameraHandler>();
@@ -291,6 +293,10 @@ namespace SG
 
         private void HandleJumpingInput()
         {
+            if(jump_Input)
+            {
+                playerLocomotion.HandleJumping();
+            }
         }
 
         private void HandleMenuInput()
