@@ -65,7 +65,7 @@ namespace SG
             return this;       
         }
 
-        private void HandleRotateTowardsTarget(EnemyManager enemyManager)
+        protected void HandleRotateTowardsTarget(EnemyManager enemyManager)
         {
             if (enemyManager.isPerformingAction)
             {
@@ -96,7 +96,7 @@ namespace SG
             }
         }
 
-        private void DecideCirclingAction(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, float distanceFromTarget)
+        protected void DecideCirclingAction(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, float distanceFromTarget)
         {
 
 
@@ -108,7 +108,7 @@ namespace SG
             }
         }
     
-        private void WalkAroundTarget(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, float distanceFromTarget)
+        protected void WalkAroundTarget(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, float distanceFromTarget)
         {
             // if(distanceFromTarget <= enemyManager.maximumAggroRadius)
             //     verticalMovementValue = Random.Range(-1f, 0f);
@@ -136,7 +136,7 @@ namespace SG
             }
         }
 
-        private void GetNewAttack(EnemyManager enemyManager)
+        protected virtual void GetNewAttack(EnemyManager enemyManager)
         {
             Vector3 targetsDirection = enemyManager.currentTarget.transform.position - this.transform.position;
             float viewableAngle = Vector3.Angle(targetsDirection, transform.forward);

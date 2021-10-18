@@ -15,8 +15,8 @@ namespace SG
 
         private EnemyAnimatorHandler enemyAnimatorHandler;
         private EnemyHealthBarUI enemyHealthBarUI;
-        private EnemyBossHealthBarUI enemyBossHealthBarUI;
         private EnemyManager enemyManager;
+        private EnemyBossManager enemyBossManager;
         private CombatStanceState combatStanceState;
         private AttackState attackState;
 
@@ -31,7 +31,7 @@ namespace SG
             {
                 if (enemyManager.isBoss.Equals(true))
                 {
-                    enemyBossHealthBarUI = FindObjectOfType<EnemyBossHealthBarUI>();
+                    enemyBossManager = GetComponent<EnemyBossManager>();
                 }
                 else
                 {
@@ -54,31 +54,47 @@ namespace SG
             return maxHealth;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, string damageAnimation = "Damage_01")
         {
-            if (isDead)
+            if (isDead) 
                 return;
 
-            currentHealth = currentHealth - damage;
-
-            if (enemyManager.isBoss)
-                enemyBossHealthBarUI.SetBossCurrentHealth(currentHealth);
+            if (enemyManager.isPhaseShifting)
+            {
+                TakeDamageNoAnimation(damage);
+            }
             else
-                enemyHealthBarUI.SetHealth(currentHealth);
+            {
+                currentHealth -= damage;
+                enemyAnimatorHandler.PlayTargetAnimation(damageAnimation, true);
+                Debug.Log(damage + " 데미지를 입힌다!");
 
-            enemyAnimatorHandler.PlayTargetAnimation("Damage_01", true);
-            Debug.Log(damage + " 데미지를 입힌다!");
+                if (enemyManager.isBoss && enemyBossManager != null)
+                    enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+                else if (!enemyManager.isBoss)
+                    enemyHealthBarUI.SetHealth(currentHealth);
 
-            enemyManager.currentState = combatStanceState;
-            attackState.currentAttack = null;
+                enemyManager.currentState = combatStanceState;
+                attackState.currentAttack = null;
+            }       
 
             if (currentHealth <= 0)
             {
+                //Handle Death
                 currentHealth = 0;
                 isDead = true;
                 enemyAnimatorHandler.PlayTargetAnimation("Damage_Die", true);
                 enemyManager.Die();
             }
+        }
+
+        public void TakeDamageNoAnimation(int damage)
+        {
+            currentHealth -= damage;
+            if (enemyManager.isBoss && enemyBossManager != null)
+                enemyBossManager.UpdateBossHealthBar(currentHealth, maxHealth);
+            else if (!enemyManager.isBoss)
+                enemyHealthBarUI.SetHealth(currentHealth);
         }
 
         public void PlayTakeDamageAnimationByAttackScore()

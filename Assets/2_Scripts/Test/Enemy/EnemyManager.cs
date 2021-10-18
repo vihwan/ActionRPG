@@ -35,6 +35,9 @@ namespace SG
         public bool allowAIToPerformCombo;
         public float comboLikelyhood;
 
+        [Header("Phase Shift")]
+        public bool isPhaseShifting;
+
 
 
         [Header("Need Component")]
@@ -94,6 +97,8 @@ namespace SG
             canDoCombo = enemyAnimatorHandler.anim.GetBool("canDoCombo");
             isRotatingWithRootMotion = enemyAnimatorHandler.anim.GetBool("isRotatingWithRootMotion");
             canRotate = enemyAnimatorHandler.anim.GetBool("canRotate");
+            if(isBoss)
+                isPhaseShifting = enemyAnimatorHandler.anim.GetBool("isPhaseShifting");
         }
 
         private void HandleStateMachine()

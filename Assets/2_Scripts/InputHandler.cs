@@ -124,6 +124,8 @@ namespace SG
 
         public void TickInput(float delta)
         {
+            if (playerStats.isDead) //플레이어 사망 시, 조작을 할 수 없도록 설정.
+                return;
 
             if (GUIManager.instance.dialogObject.activeSelf.Equals(true))
                 return;

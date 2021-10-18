@@ -8,11 +8,18 @@ namespace SG
     public class EnemyAnimatorHandler : AnimatorManager
     {
         [SerializeField] private EnemyManager enemyManager;
+        [SerializeField] private EnemyBossManager enemyBossManager;
         [SerializeField] private EnemyWeaponSlotManager enemyWeaponSlotManager;
+        [SerializeField] private BossFXTransform bossFXTransform;
         public void Init()
         {
             anim = GetComponent<Animator>();
             enemyManager = GetComponentInParent<EnemyManager>();
+            if (enemyManager.isBoss)
+            {
+                enemyBossManager = enemyManager.GetComponent<EnemyBossManager>();
+                bossFXTransform = enemyManager.GetComponentInChildren<BossFXTransform>();
+            } 
             enemyWeaponSlotManager = GetComponent<EnemyWeaponSlotManager>();
         }
 
@@ -20,6 +27,7 @@ namespace SG
         {
             if(enemyWeaponSlotManager != null)
                 enemyWeaponSlotManager.CloseDamageCollider();
+
             base.PlayTargetAnimation(targetAnim, isInteracting, duration, canRotate);
         }
 
@@ -43,9 +51,21 @@ namespace SG
             anim.SetBool("canDoCombo", false);
         }
 
-        public void isInteractingFalse()
+        public void IsInteractingFalse()
         {
             anim.SetBool("isInteracting", false);
+        }
+
+        public void InstantiateBossParticleFX(string fxName)
+        {
+            if (bossFXTransform != null)
+                bossFXTransform.InstantiateParticleFX(fxName);
+        }
+
+        public void DestroyBossParticleFX(string fxName)
+        {
+            if (bossFXTransform != null)
+                bossFXTransform.DestroyParticleFX(fxName);
         }
 
         private void OnAnimatorMove() 
