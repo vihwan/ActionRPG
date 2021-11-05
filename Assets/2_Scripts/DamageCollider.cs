@@ -51,6 +51,7 @@ namespace SG
 
         private void CheckColliderEnemy(Collider collider)
         {
+            //플레이어의 공격에 따라 출력되는 적의 피격 애니메이션을 다르게 해야한다.
             Debug.Log(collider.gameObject.name);
             if(collider.tag.Equals("Enemy"))
             {

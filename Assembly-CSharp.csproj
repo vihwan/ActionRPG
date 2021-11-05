@@ -217,6 +217,7 @@
     <Compile Include="Assets\2_Scripts\_OldScripts\Utilities\Helper.cs" />
     <Compile Include="Assets\2_Scripts\_OldScripts\Utilities\KeepBool.cs" />
     <Compile Include="Assets\2_Scripts\_OldScripts\WeaponManager.cs" />
+    <Compile Include="Assets\Extensions\ErbGameArt\Sword slash FX\Demo scene\DemoToonVFX.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAtData.cs" />
@@ -317,6 +318,7 @@
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Golem\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_TransClipping_StencilMask.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\Slash2.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_ShadingGradeMap_Mobile_StencilMask.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess_Light_StencilMask.shader" />
     <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
@@ -340,6 +342,7 @@
     <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile_Clipping_StencilMask.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_ShadingGradeMap_AngelRing_StencilOut.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Scripts\poi-tools\Resources\Poi\PoiTexturePacker.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Shaders\S_Poiyomi_Toon.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiEnvironmentalRimLighting.cginc" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_AngelRing_Tess_Light.shader" />
@@ -357,7 +360,10 @@
     <None Include="Assets\Extensions\3_Models\Genshin\행자남\Traveler_Man_Hasvmd.xml" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_OutlineObject.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Treasure Chest\Read me.txt" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Readme.txt" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\UCTS_ShadowCaster_Tess.cginc" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\DissolveNoise.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Prefabs\Readme.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiIridescence.cginc" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Dragon\Read me.txt" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_ShadingGradeMap_StencilOut.shader" />
@@ -384,6 +390,7 @@
     <None Include="Assets\Extensions\Toon\Shader\ToonColor_ShadingGradeMap_StencilOut.shader" />
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\FadeSlash.shader" />
     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Slash_Mesh.shader" />
     <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Demo scene\HDRP and URP(LWRP).txt" />
     <None Include="Assets\Extensions\ProDrawCallOptimizer\VersionHistory.txt" />
@@ -432,10 +439,12 @@
     <None Include="Assets\Extensions\GUI Pro Kit Fantasy RPG\Extensions\UIParticle\hidden particle.shader" />
     <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Shaders\Ice.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_OutlineObject_Tess_StencilOut.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\Distortion.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiPathing.cginc" />
     <None Include="Assets\Extensions\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping.shader" />
     <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Demo scene\Scene files\Readme.txt" />
     <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Shaders\Blend_TwoSides.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiDecal.cginc" />
     <None Include="Assets\Extensions\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping_StencilMask.shader" />
@@ -549,6 +558,7 @@
     <None Include="Assets\Extensions\FantasySpellsEffectsPack\Shader_ForEffects\Object Skin\Shader_VertexAnimation(WithRimLight).shader" />
     <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather.shader" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\Slash.shader" />
     <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_eye.shader" />
     <None Include="Assets\Extensions\ProDrawCallOptimizer\Examples\Example2-CustomShaders\CustomShaders\Additive.shader" />
@@ -584,9 +594,11 @@
     <None Include="Assets\Extensions\Perfect RPG MMO 3D Effect FX Pack 2\Shader\Distort.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Giant Bee\Read me.txt" />
     <None Include="Assets\Extensions\Toon\Shader\UCTS_Outline.cginc" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\Blend_CenterGlow.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_Tess_StencilMask.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Toon_DoubleShadeWithFeather_Mobile.shader" />
     <None Include="Assets\Extensions\Hovl Studio\AAA Magic circles Vol 3\Demo scene\Readme.txt" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Demo scene\Readme.txt" />
     <None Include="Assets\Extensions\=RzFX_SlashFX\Shader\Rz_Slash.shader" />
     <None Include="Assets\MT Assets\Easy Mesh Combiner\Third-Party Assets.txt" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\ToonColor_ShadingGradeMap_Transparent_Tess_StencilOut.shader" />
@@ -632,6 +644,7 @@
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_ShadingGradeMap_TransClipping_Tess.shader" />
     <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Dragon\www.meshtint.com.txt" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiPassOutline.cginc" />
+    <None Include="Assets\Extensions\ErbGameArt\Sword slash FX\Shaders\SlashOld.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_Tess.shader" />
     <None Include="Assets\Extensions\Toon\Shader\Tess\Toon_DoubleShadeWithFeather_TransClipping_Tess.shader" />
     <None Include="Assets\Extensions\_PoiyomiShaders\Shaders\Pro\Includes\CGI_PoiOutlineVert.cginc" />

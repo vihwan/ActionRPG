@@ -141,7 +141,7 @@ namespace SG
             HandleMoveInput(delta);
             HandleRollInput(delta);
             HandleAttackInput(delta);
-            HandleQuickSlotInput();
+            //HandleQuickSlotInput();
             HandleSkillAttackInput(delta);
             HandleInteractingInput();
             HandleJumpingInput();

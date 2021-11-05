@@ -5,6 +5,20 @@ using UnityEngine;
 namespace SG
 {
     [System.Serializable]
+    public class WeaponAttack
+    {
+        [SerializeField] private string attackName;
+        [SerializeField] private int attackScore;
+
+        public WeaponAttack(string attackName, int attackScore)
+        {
+            this.attackName = attackName;
+            this.attackScore = attackScore;
+        }
+    }
+
+
+    [System.Serializable]
     [CreateAssetMenu(menuName = "Items/Weapon Item")]
     public class WeaponItem : Item
     {
@@ -28,7 +42,12 @@ namespace SG
             new ItemAttribute(){attribute = Attribute.Stamina, value = 0}
         };
 
-
+        public List<WeaponAttack> weaponAttacks = new List<WeaponAttack>()
+        {
+            new WeaponAttack("Light_Atttack_1", 1),
+            new WeaponAttack("Light_Atttack_1", 1),
+            new WeaponAttack("Light_Atttack_1", 1)
+        };
 
         //나중에 무기에 따라 다르게 설정되도록 프로퍼티로 세팅하는 것이 좋겠다.
         [Header("Idle Animations")]
@@ -54,6 +73,7 @@ namespace SG
                 itemAttributes[i].value += count;
             }
         }
+        
         public bool IsMaxEnforceLevel()
         {
             if (enforceLevel == 5)
