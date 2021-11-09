@@ -9,6 +9,7 @@ namespace SG
         private Collider damageCollider;
         private int currentWeaponDamage = 0;
         private EnemyStats enemyStats;
+        public int attackScore;
         public void Init()
         {
             damageCollider = GetComponent<BoxCollider>();
@@ -46,10 +47,10 @@ namespace SG
                         //데미지를 무효화
                         inputHandler.counterFlag = true;
                         Debug.Log("<color=#E77D00>counterFlag</color> On ");
-                        playerStats.TakeDamage(0); 
+                        playerStats.TakeDamage(0, attackScore); 
                         return;    
                     }
-                    playerStats.TakeDamage(currentWeaponDamage);              
+                    playerStats.TakeDamage(currentWeaponDamage, attackScore);              
                 }
                 else
                     Debug.Log("PlayerStats is Null");

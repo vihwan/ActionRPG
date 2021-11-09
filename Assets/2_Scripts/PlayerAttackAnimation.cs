@@ -53,6 +53,12 @@ namespace SG
             animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
         }
 
+        public void HandleStandUpRevengeAttack()
+        {
+            animatorHandler.anim.SetBool("isFalldown", false);
+            animatorHandler.PlayTargetAnimation("StandUp_Revenge", true, duration: 0f);
+        }
+
     #endregion
 
     #region  Defense Handle Functions

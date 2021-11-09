@@ -37,6 +37,7 @@ namespace SG
         public bool isInvulnerable;
         public bool isBlocking;
         public bool canCounter;
+        public bool isFalldown;
 
         public float changeWeaponOutWaitTime = 0f;
         public float counterAttackTime = 0f;
@@ -104,6 +105,7 @@ namespace SG
             isUnEquip = anim.GetBool("isUnEquip");
             isInvulnerable = anim.GetBool("isInvulnerable");
             isBlocking = anim.GetBool("isBlocking");
+            isFalldown = anim.GetBool("isFalldown");
 
             inputHandler.TickInput(delta);
             playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
@@ -200,10 +202,16 @@ namespace SG
         {
             changeWeaponOutWaitTime += delta;
 
-            //구르기, 점프, 공격, 스킬 입력키가 입력되면(isInteracting == true 대기경과시간을 초기화)
+            if(isFalldown)
+            {   //다운되어있는 상태라면 전투 대기시간을 계속 초기화
+                changeWeaponOutWaitTime = 0f;
+            }
+
+            //구르기, 점프, 공격, 스킬 입력키, 막기가 입력되면(isInteracting == true 대기경과시간을 초기화)
             if (this.isInteracting ||
                 inputHandler.rb_Input || inputHandler.jump_Input ||
-                inputHandler.sk_One_Input || inputHandler.sk_Two_Input || inputHandler.sk_Three_Input || inputHandler.sk_Ult_Input)
+                inputHandler.sk_One_Input || inputHandler.sk_Two_Input || inputHandler.sk_Three_Input || inputHandler.sk_Ult_Input ||
+                inputHandler.lt_Input)
             {
                 changeWeaponOutWaitTime = 0f;
             }

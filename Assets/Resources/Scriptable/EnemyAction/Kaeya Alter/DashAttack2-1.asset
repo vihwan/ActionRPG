@@ -15,7 +15,7 @@ MonoBehaviour:
   actionAnimation: DashAttack2-1
   canCombo: 1
   nextComboAction: {fileID: 11400000, guid: a0bc4a4328f2aa047981a58634a64c58, type: 2}
-  attackScore: 3
+  attackScore: 1
   recoveryTime: 3
   maximumAttackAngle: 35
   minimumAttackAngle: -35

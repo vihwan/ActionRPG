@@ -9,6 +9,7 @@ namespace SG
         public IdleState idleState;
         public ChaseTargetState chaseTargetState;
         public AttackState attackState;
+        public EnemyDamageCollider enemyDamageCollider;
 
         public EnemyAttackAction[] enemyAttacks;
 
@@ -179,6 +180,7 @@ namespace SG
                         if (tempScore > randomValue)
                         {
                             attackState.currentAttack = enemyAttackAction;
+                            enemyDamageCollider.attackScore = enemyAttackAction.attackScore;
                         }
                     }
                 }

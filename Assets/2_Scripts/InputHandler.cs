@@ -138,10 +138,13 @@ namespace SG
                 return;
             }
 
-            HandleMoveInput(delta);
-            HandleRollInput(delta);
             HandleAttackInput(delta);
-            //HandleQuickSlotInput();
+            HandleRollInput(delta);
+
+            if(playerManager.isFalldown)
+                return;
+
+            HandleMoveInput(delta);
             HandleSkillAttackInput(delta);
             HandleInteractingInput();
             HandleJumpingInput();
@@ -203,6 +206,13 @@ namespace SG
                     Debug.Log("<color=#E77D00>카운터 공격 실행</color>");
                     playerAttacker.HandleCounterAttack(PlayerInventory.Instance.currentWeapon);
                     counterFlag = false;
+                    return;
+                }
+
+                if(playerManager.isFalldown)
+                {
+                    Debug.Log("기상 공격 실행");
+                    playerAttacker.HandleStandUpRevengeAttack();
                     return;
                 }
 

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,6 +56,7 @@ namespace SG
                             if (tempScore > randomValue)
                             {
                                 attackState.currentAttack = enemyAttackAction;
+                                enemyDamageCollider.attackScore = attackState.currentAttack.attackScore;
                             }
                         }
                     }

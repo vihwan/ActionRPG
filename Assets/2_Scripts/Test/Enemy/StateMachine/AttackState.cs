@@ -13,6 +13,7 @@ namespace SG
         public ChaseTargetState chaseTargetState;
         public RotateTowardTargetState rotateTowardTargetState;
         public CombatStanceState combatStanceState;
+        public EnemyDamageCollider enemyDamageCollider;
     
         [SerializeField] private bool willDoNextCombo = false;
         public bool hasPerformedAttack = false;
@@ -92,6 +93,7 @@ namespace SG
                 {
                     willDoNextCombo = true;
                     currentAttack = currentAttack.nextComboAction;
+                    enemyDamageCollider.attackScore = currentAttack.attackScore;
                     //Debug.Log("다음 공격 전환");
                 }
                 else

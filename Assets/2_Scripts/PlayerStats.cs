@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -278,7 +278,7 @@ namespace SG
             CurrentStamina = MaxStamina;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(int damage, int attackScore)
         {
             if (playerManager.isInvulnerable) //무적상태
                 return;
@@ -287,7 +287,7 @@ namespace SG
                 return;
 
 
-            PlayTakeDamageAnimation(ref damage);
+            PlayTakeDamageAnimation(ref damage, attackScore);
 
             CurrentHealth -= damage;
             OnTakeDamaged?.Invoke();
@@ -308,7 +308,7 @@ namespace SG
             }
         }
 
-        private void PlayTakeDamageAnimation(ref int damage)
+        private void PlayTakeDamageAnimation(ref int damage, int attackScore)
         {
             if(animatorHandler.anim.GetBool("isBlocking").Equals(true))
             {
@@ -317,9 +317,26 @@ namespace SG
                return;
             }
 
+            if(attackScore == 3)
+            {
+                //FallDown
+                animatorHandler.anim.SetInteger("DamageScore", 3);
+                animatorHandler.anim.SetTrigger("isDamage");
+                animatorHandler.anim.SetBool("isFalldown", true);
+                return;
+            }
+            else if(attackScore == 2)
+            {
+                //LargeHit
+                animatorHandler.anim.SetInteger("DamageScore", 2);
+                animatorHandler.anim.SetTrigger("isDamage");
+                return;
+            }
+
             if (playerManager.isUnEquip.Equals(false))
             {
-                animatorHandler.PlayTargetAnimation("Damage_01", true, duration: 0f);
+                animatorHandler.anim.SetInteger("DamageScore", 1);
+                animatorHandler.anim.SetTrigger("isDamage");
             }
             else
             {

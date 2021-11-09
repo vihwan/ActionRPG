@@ -15,7 +15,7 @@ MonoBehaviour:
   actionAnimation: Attack2-2
   canCombo: 1
   nextComboAction: {fileID: 11400000, guid: 5cca1e4c3ecd1194eb597cebbc9ce9a0, type: 2}
-  attackScore: 3
+  attackScore: 1
   recoveryTime: 3
   maximumAttackAngle: 35
   minimumAttackAngle: -35
