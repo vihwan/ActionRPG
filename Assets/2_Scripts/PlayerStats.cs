@@ -270,11 +270,11 @@ namespace SG
 
         public void SetStatusByLevelUp()
         {
-            MaxHealth += Mathf.RoundToInt(10 * Mathf.Sqrt(LevelManager.Instance.GetLevel() + 1));
+            MaxHealth += Mathf.RoundToInt(10 * Mathf.Sqrt(LevelManager.Instance.Level + 1));
             CurrentHealth = MaxHealth;
-            Attack += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.GetLevel() + 1));
-            defense += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.GetLevel() + 1));
-            MaxStamina += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.GetLevel() + 1));
+            Attack += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.Level + 1));
+            defense += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.Level + 1));
+            MaxStamina += Mathf.RoundToInt(Mathf.Sqrt(LevelManager.Instance.Level + 1));
             CurrentStamina = MaxStamina;
         }
 
@@ -320,6 +320,8 @@ namespace SG
             if(attackScore == 3)
             {
                 //FallDown
+                if(playerManager.isUnEquip)
+                    
                 animatorHandler.anim.SetInteger("DamageScore", 3);
                 animatorHandler.anim.SetTrigger("isDamage");
                 animatorHandler.anim.SetBool("isFalldown", true);

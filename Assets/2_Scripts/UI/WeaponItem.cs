@@ -58,6 +58,8 @@ namespace SG
         public string OneHanded_LightAttack1 = "Light_Attack_1";
         public string OneHanded_LightAttack2 = "Light_Attack_2";
         public string OneHanded_LightAttack3 = "Light_Attack_3";
+        public string OneHanded_LightAttack4 = "Light_Attack_4";
+        public string OneHanded_LightAttack5 = "Light_Attack_5";
         public string OneHanded_HeavyAttack1 = "Heavy_Attack_1";
 
         [Header("Guard Animations")]

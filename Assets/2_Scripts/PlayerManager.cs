@@ -25,6 +25,7 @@ namespace SG
         [SerializeField] private Interactable interactableObject;
         private AnimationLayerHandler animationLayerHandler;
         private PlayerAnimatorHandler playerAnimatorHandler;
+        private ActiveWeaponObject activeWeaponObject;
 
         public bool isInteracting;
 
@@ -93,6 +94,8 @@ namespace SG
             animationLayerHandler = GetComponent<AnimationLayerHandler>();
             if (animationLayerHandler != null)
                 animationLayerHandler.Init();
+
+            activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
         }
 
         private void Update()
@@ -295,6 +298,13 @@ namespace SG
             {
                 enemyManagers[i].currentTarget = null;
             }
+        }
+
+        public void ChangePlayerMotionToEquip()
+        {
+            isUnEquip = false;
+            AnimationLayerHandler.HandlePlayerEquip();
+            activeWeaponObject.SetActiveHandWeapon(true);
         }
     }
 }

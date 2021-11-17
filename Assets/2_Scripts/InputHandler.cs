@@ -48,7 +48,6 @@ namespace SG
         private PlayerSkillManager playerSkillManager;
         private PlayerStats playerStats;
         private CameraHandler cameraHandler;
-        private ActiveWeaponObject activeWeaponObject;
         private PlayerAnimatorHandler animatorHandler;
 
 
@@ -75,7 +74,6 @@ namespace SG
             playerSkillManager = GetComponent<PlayerSkillManager>();
             playerStats = GetComponent<PlayerStats>();
             cameraHandler = FindObjectOfType<CameraHandler>();
-            activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
             animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
         }
 
@@ -177,7 +175,14 @@ namespace SG
 
             if (b_Input)
             {
-                //rollFlag = true;
+                if(playerManager.isFalldown)
+                {
+
+                    sprintFlag = false;
+                    rollFlag = true;
+                    playerStats.UseStamina(15);
+                    return;
+                }    
                 rollInputTimer += delta;
             }
             else
@@ -199,7 +204,7 @@ namespace SG
         {
             if (rb_Input)
             {
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
 
                 if(counterFlag.Equals(true))
                 {
@@ -244,7 +249,7 @@ namespace SG
             if(lt_Input)
             {
                 //막기 자세를 취함
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
                 if(playerManager.isInteracting)
                     return;
 
@@ -269,22 +274,22 @@ namespace SG
         {
             if (sk_One_Input)
             {
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(1);
             }
             else if (sk_Two_Input)
             {
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(2);
             }
             else if (sk_Three_Input)
             {
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(3);
             }
             else if (sk_Ult_Input)
             {
-                ChangePlayerMotionToEquip();
+                playerManager.ChangePlayerMotionToEquip();
                 playerSkillManager.UseSkill(4);
             }
         }
@@ -370,13 +375,6 @@ namespace SG
             }
 
             cameraHandler.SetCameraHeight();
-        }
-
-        private void ChangePlayerMotionToEquip()
-        {
-            playerManager.isUnEquip = false;
-            playerManager.AnimationLayerHandler.HandlePlayerEquip();
-            activeWeaponObject.SetActiveHandWeapon(true);
         }
     }
 }

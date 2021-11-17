@@ -10,6 +10,7 @@ namespace SG
         Transform cameraObject;
         InputHandler inputHandler;
         CameraHandler cameraHandler;
+        AnimationLayerHandler animationLayerHandler;
         public CapsuleCollider characterCollider;
         public CapsuleCollider characterBlockerCollider;
 
@@ -53,6 +54,7 @@ namespace SG
             playerManager = GetComponent<PlayerManager>();
             rigidBody = GetComponent<Rigidbody>();
             inputHandler = GetComponent<InputHandler>();
+            animationLayerHandler = GetComponent<AnimationLayerHandler>();
             animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             cameraHandler = FindObjectOfType<CameraHandler>();
 
@@ -199,6 +201,22 @@ namespace SG
             {
                 moveDirection = cameraObject.forward * inputHandler.Vertical;
                 moveDirection += cameraObject.right * inputHandler.Horizontal;
+
+                if(playerManager.isFalldown)
+                {
+                    animatorHandler.anim.SetBool("isFalldown", false);
+
+                    if(inputHandler.movementInput.y > 0)
+                        animatorHandler.PlayTargetAnimation("Dodge_Front",true);
+                    else if(inputHandler.movementInput.x > 0)
+                        animatorHandler.PlayTargetAnimation("Dodge_Right",true);
+                    else if(inputHandler.movementInput.x < 0)
+                        animatorHandler.PlayTargetAnimation("Dodge_Left",true);
+                    else
+                        animatorHandler.PlayTargetAnimation("Dodge_Back",true);
+
+                    return;
+                }
 
                 if (inputHandler.MoveAmount > 0)
                 {

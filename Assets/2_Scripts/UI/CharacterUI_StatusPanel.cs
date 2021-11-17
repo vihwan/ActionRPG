@@ -54,9 +54,9 @@ namespace SG
         public void SetParameter()
         {
             nameText.text = PlayerManager.Instance.playerName;
-            levelText.text = "Lv. " + LevelManager.Instance.GetLevel();
+            levelText.text = "Lv. " + LevelManager.Instance.Level;
             expText.text = string.Format("{0} / {1}",
-                            LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.GetLevel()));
+                            LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
             SetExpSlider();
             hpText.text = playerStats.CurrentHealth + " / " + playerStats.MaxHealth;
             attackText.text = playerStats.Attack.ToString();

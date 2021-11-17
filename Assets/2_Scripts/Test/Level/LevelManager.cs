@@ -62,11 +62,6 @@ namespace SG
             if (OnExperienceChanged != null) OnExperienceChanged(this, EventArgs.Empty);
         }
 
-        public int GetLevel()
-        {
-            return Level;
-        }
-
         public float GetExperienceNormalized()
         {
             return (float)Experience / GetExperienceNextLevel(Level);

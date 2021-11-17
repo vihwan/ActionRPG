@@ -24,9 +24,9 @@ namespace SG
 
         public void SetLevelSystem()
         {
-            SetLevelText(LevelManager.Instance.GetLevel());
+            SetLevelText(LevelManager.Instance.Level);
             SetExpSlider(LevelManager.Instance.GetExperienceNormalized());
-            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.GetLevel()));
+            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
 
             LevelManager.Instance.OnLevelChanged += LevelSystem_OnLevelChanged;
             LevelManager.Instance.OnExperienceChanged += LevelSystem_OnExperienceChanged;
@@ -50,13 +50,13 @@ namespace SG
         
         private void LevelSystem_OnLevelChanged(object sender, EventArgs e)
         {
-            SetLevelText(LevelManager.Instance.GetLevel());
+            SetLevelText(LevelManager.Instance.Level);
         }
 
         private void LevelSystem_OnExperienceChanged(object sender, EventArgs e)
         {
             SetExpSlider(LevelManager.Instance.GetExperienceNormalized());
-            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.GetLevel()));
+            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
         }
     }
 }

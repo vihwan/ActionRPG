@@ -16,19 +16,29 @@ namespace SG
             inputHandler = GetComponent<InputHandler>();
         }
 
-    #region  Attack Handle Functions
+        #region  Attack Handle Functions
         public void HandleWeaponCombo(WeaponItem weaponItem)
         {
             animatorHandler.anim.SetBool("canDoCombo", false);
-            if(lastAttack == weaponItem.OneHanded_LightAttack1)
+            if (lastAttack == weaponItem.OneHanded_LightAttack1)
             {
                 animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack2, true);
                 lastAttack = weaponItem.OneHanded_LightAttack2;
             }
-            else if(lastAttack == weaponItem.OneHanded_LightAttack2)
+            else if (lastAttack == weaponItem.OneHanded_LightAttack2)
             {
                 animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack3, true);
                 lastAttack = weaponItem.OneHanded_LightAttack3;
+            }
+            else if (lastAttack == weaponItem.OneHanded_LightAttack3)
+            {
+                animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack4, true);
+                lastAttack = weaponItem.OneHanded_LightAttack4;
+            }
+            else if (lastAttack == weaponItem.OneHanded_LightAttack4)
+            {
+                animatorHandler.PlayTargetAnimation(weaponItem.OneHanded_LightAttack5, true);
+                lastAttack = weaponItem.OneHanded_LightAttack5;
             }
         }
 
@@ -59,13 +69,13 @@ namespace SG
             animatorHandler.PlayTargetAnimation("StandUp_Revenge", true, duration: 0f);
         }
 
-    #endregion
+        #endregion
 
-    #region  Defense Handle Functions
+        #region  Defense Handle Functions
 
         public void HandleGuard(WeaponItem weaponItem)
         {
-            if(PlayerManager.Instance.isBlocking)
+            if (PlayerManager.Instance.isBlocking)
                 return;
 
             animatorHandler.PlayTargetAnimation(weaponItem.Weapon_Block, isInteracting: true);
@@ -78,6 +88,6 @@ namespace SG
             animatorHandler.PlayTargetAnimation(weaponItem.Weapon_CounterAttack, true);
         }
 
-    #endregion
+        #endregion
     }
 }

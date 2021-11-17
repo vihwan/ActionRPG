@@ -89,11 +89,12 @@ namespace SG
             float comboChance = UnityEngine.Random.Range(0f, 100f);
             if(enemyManager.allowAIToPerformCombo && comboChance <= enemyManager.comboLikelyhood)
             {
+                enemyDamageCollider.attackScore = currentAttack.attackScore;    
                 if(currentAttack.nextComboAction != null)
                 {
                     willDoNextCombo = true;
                     currentAttack = currentAttack.nextComboAction;
-                    enemyDamageCollider.attackScore = currentAttack.attackScore;
+                    //enemyDamageCollider.attackScore = currentAttack.attackScore;      
                     //Debug.Log("다음 공격 전환");
                 }
                 else
