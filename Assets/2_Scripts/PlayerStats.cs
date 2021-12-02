@@ -34,6 +34,7 @@ namespace SG
         private StaminaBar staminaBar;
         private PlayerAnimatorHandler animatorHandler;
         private PlayerManager playerManager;
+        private InputHandler inputHandler;
         [SerializeField] private PlayerInventory playerInventory;
 
 
@@ -120,6 +121,7 @@ namespace SG
         {
             animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             playerManager = GetComponent<PlayerManager>();
+            inputHandler = GetComponent<InputHandler>();
             healthBar = FindObjectOfType<HealthBar>();
             manaBar = FindObjectOfType<ManaBar>();
             staminaBar = FindObjectOfType<StaminaBar>();
@@ -286,6 +288,10 @@ namespace SG
             if (isDead)
                 return;
 
+            if(playerManager.isUnEquip)
+            {
+               playerManager.ChangePlayerMotionToEquip();
+            }
 
             PlayTakeDamageAnimation(ref damage, attackScore);
 
@@ -317,11 +323,10 @@ namespace SG
                return;
             }
 
+            inputHandler.StopMovement();
             if(attackScore == 3)
-            {
+            {        
                 //FallDown
-                if(playerManager.isUnEquip)
-                    
                 animatorHandler.anim.SetInteger("DamageScore", 3);
                 animatorHandler.anim.SetTrigger("isDamage");
                 animatorHandler.anim.SetBool("isFalldown", true);
@@ -329,21 +334,15 @@ namespace SG
             }
             else if(attackScore == 2)
             {
+                inputHandler.StopMovement();
                 //LargeHit
                 animatorHandler.anim.SetInteger("DamageScore", 2);
                 animatorHandler.anim.SetTrigger("isDamage");
                 return;
             }
 
-            if (playerManager.isUnEquip.Equals(false))
-            {
-                animatorHandler.anim.SetInteger("DamageScore", 1);
-                animatorHandler.anim.SetTrigger("isDamage");
-            }
-            else
-            {
-                animatorHandler.PlayTargetAnimation("Damage_01_UnEquip", true, duration: 0f);
-            }
+            animatorHandler.anim.SetInteger("DamageScore", 1);
+            animatorHandler.anim.SetTrigger("isDamage");
         }
 
         public void PlusStatsByComsumableItem(ConsumableItem consumableItem)

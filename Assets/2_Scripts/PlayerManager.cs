@@ -302,7 +302,6 @@ namespace SG
 
         public void ChangePlayerMotionToEquip()
         {
-            isUnEquip = false;
             AnimationLayerHandler.HandlePlayerEquip();
             activeWeaponObject.SetActiveHandWeapon(true);
         }

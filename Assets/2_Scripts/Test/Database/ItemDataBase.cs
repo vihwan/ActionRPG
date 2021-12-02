@@ -17,8 +17,7 @@ namespace SG
         [SerializeField] public List<IngredientItem> ingredientItems = new List<IngredientItem>();
 
         public void Init()
-        {
-            
+        {      
             LoadWeapon();
             LoadIngredient();
             LoadEquipment();
