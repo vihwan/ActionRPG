@@ -62,7 +62,6 @@ namespace SG
             //Decide Circling Action;       
             DecideCirclingAction(enemyManager, enemyAnimatorHandler, distanceFromTarget);
   
-
             return this;       
         }
 
@@ -99,10 +98,8 @@ namespace SG
 
         protected void DecideCirclingAction(EnemyManager enemyManager, EnemyAnimatorHandler enemyAnimatorHandler, float distanceFromTarget)
         {
-
-
             randomDestinationTimer += Time.deltaTime;
-            if(randomDestinationTimer >= 2f)
+            if(randomDestinationTimer >= 1f)
             {
                 WalkAroundTarget(enemyManager, enemyAnimatorHandler, distanceFromTarget);
                 randomDestinationTimer = 0f;
@@ -129,11 +126,11 @@ namespace SG
 
             if (horizontalMovementValue <= 1 && horizontalMovementValue >= 0)
             {
-                horizontalMovementValue = 0.5f;
+                horizontalMovementValue = 0.3f;
             }
             else if (horizontalMovementValue >= 1 && horizontalMovementValue < 0)
             {
-                horizontalMovementValue = -0.5f;
+                horizontalMovementValue = -0.3f;
             }
         }
 

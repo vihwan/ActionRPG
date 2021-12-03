@@ -9,6 +9,7 @@ namespace SG
     {
         [Header("Second Phase FX")]
         public GameObject secondPhaseFX;
+        public GameObject skill_1_FX;
 
         [Header("Current Effect Fx List")]
         [SerializeField] private List<GameObject> currentFxList = new List<GameObject>();
@@ -24,7 +25,13 @@ namespace SG
             {
                 GameObject go = Instantiate(secondPhaseFX, this.transform);
                 currentFxList.Add(go);
-            }          
+            }
+
+            if(fxName == "Skill1")
+            {
+                GameObject go = Instantiate(skill_1_FX, this.transform);
+                currentFxList.Add(go);
+            }       
         }
 
         public void DestroyParticleFX(string fxName)

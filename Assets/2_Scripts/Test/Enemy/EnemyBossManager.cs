@@ -12,13 +12,26 @@ namespace SG
     {
         //Handle Switch Phase
         //Handle Switch Attack Patterns
+        [SerializeField] private bool hasPhaseShifted;
+
         [Header("Need Component")]
         [SerializeField] private EnemyBossHealthBarUI enemyBossHealthBarUI;
         [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private EnemyStats enemyStats;
         [SerializeField] private EnemyAnimatorHandler enemyAnimatorManager;
+        [SerializeField] private BossChaseTargetState bossChaseTargetState;
         [SerializeField] private BossCombatStanceState bossCombatStanceState;
         [SerializeField] private BossFXTransform bossFXTransform;
+
+        public bool HasPhaseShifted { 
+            get => hasPhaseShifted; 
+            set 
+            {
+                hasPhaseShifted = value;
+                bossChaseTargetState.hasPhaseShifted = value;
+                bossCombatStanceState.hasPhaseShifted = value;
+            }
+        }
 
         private void Start() 
         {
@@ -32,6 +45,7 @@ namespace SG
                 enemyBossHealthBarUI.SetBossMaxHealth(enemyStats.maxHealth);
 
             enemyAnimatorManager = GetComponentInChildren<EnemyAnimatorHandler>();
+            bossChaseTargetState = GetComponentInChildren<BossChaseTargetState>();
             bossCombatStanceState = GetComponentInChildren<BossCombatStanceState>();
             bossFXTransform = GetComponentInChildren<BossFXTransform>();
             if (bossFXTransform != null)
@@ -41,7 +55,7 @@ namespace SG
         public void UpdateBossHealthBar(int currentHealth, int maxHealth)
         {
             enemyBossHealthBarUI.SetBossCurrentHealth(currentHealth);
-            if (currentHealth <= maxHealth / 2 && !bossCombatStanceState.hasPhaseShifted)
+            if (currentHealth <= maxHealth / 2 && !HasPhaseShifted)
             {
                 ShiftToSecondPhase();
             }
@@ -53,8 +67,7 @@ namespace SG
             //Switch Attack Actions
             enemyAnimatorManager.anim.SetBool("isPhaseShifting", true);
             enemyAnimatorManager.PlayTargetAnimation("Phase Shift", true);
-            bossCombatStanceState.hasPhaseShifted = true;
-
+            HasPhaseShifted = true;
             Debug.Log("Phase Shift!!");
         }
     }

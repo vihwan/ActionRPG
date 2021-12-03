@@ -1,6 +1,5 @@
 # < 개발 일지 > - 다(이루)크 소울 -
 
-
 ## 명심하자!
 항상 코드는 DRY하고 KISS하고 YAGNI하게..
 
@@ -112,7 +111,8 @@ DisableCombo\
 CanRotate\
 StopRotate\
 IsInteractingFalse\
-
+InstantiateBossParticleFX
+DestroyBossParticleFX
 
 -------------------------------
 
@@ -159,15 +159,16 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## Last Update
 
-## 2021.12.02 (목)
+## 2021.12.03 (금)
 
-1. 대상에 부딪혀서 넘어지는 모션이 제대로 실행되지 않는 버그를 수정
+1. 보스 몬스터 A.I - 스킬 추가
 
-> InputHandler.StopMovement();
+	- 적절한 Particle Effect 선정
+	- 색상, 재생시간 등 설정 변경
 
-2. 무기 미장착 상태에서 AttackScore에 의한 피격 애니메이션을 추가
+2. 보스 몬스터 A.I - SecondPhase DashAttack
 
-> PlayerManager.ChangePlayerMotionToEquip();
+	- Boss전용 ChaseTargetState를 만들고 상속받아 사용
 
 
 **다음 목표**
@@ -267,6 +268,17 @@ Resources 폴더에 Fonts 폴더 생성
 -------------------------------
 
 ## 이전 개발 일지
+
+### 2021.12.02 (목)
+
+1. 대상에 부딪혀서 넘어지는 모션이 제대로 실행되지 않는 버그를 수정
+
+> InputHandler.StopMovement();
+
+2. 무기 미장착 상태에서 AttackScore에 의한 피격 애니메이션을 추가
+
+> PlayerManager.ChangePlayerMotionToEquip();
+
 
 ### 2021.11.17 (수)
 

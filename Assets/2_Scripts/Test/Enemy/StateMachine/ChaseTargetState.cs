@@ -47,20 +47,22 @@ namespace SG
                 return this;
             }
 
-            if (distanceFromTarget <= enemyManager.maximumAggroRadius)
+            if(distanceFromTarget <= enemyManager.maximumAggroRadius)
             {
-                if (dashAttacks.Length > 0)
-                {
-                    int rand = Random.Range(0, 2);
-                    if (rand.Equals(0))
-                        attackState.currentAttack = dashAttacks[0];
-                    else
-                        attackState.currentAttack = dashAttacks[1];
-                }
+                GetNewDashAttack(enemyManager, distanceFromTarget);
                 return combatStanceState;
             }
-
+            
             return this;
+        }
+
+        protected virtual void GetNewDashAttack(EnemyManager enemyManager, float distanceFromTarget)
+        {
+            if (dashAttacks.Length > 0)
+            {
+                int rand = Random.Range(0, dashAttacks.Length);
+                attackState.currentAttack = dashAttacks[rand];
+            }   
         }
 
         private void HandleRotateTowardsTarget(EnemyManager enemyManager)
