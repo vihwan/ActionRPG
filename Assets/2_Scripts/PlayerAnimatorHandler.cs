@@ -126,6 +126,16 @@ namespace SG
             anim.SetBool("canDoCombo", false);
         }
 
+        public void EnableRolling()
+        {
+            anim.SetBool("isRolling", true);
+            EnableInvulnerable();
+        }
+        public void DisableRolling()
+        {
+            anim.SetBool("isRolling", false);
+            DisableInvulnerable();
+        }
         public void EnableCheckCounterAttack()
         {
             anim.SetBool("canCounter", true);

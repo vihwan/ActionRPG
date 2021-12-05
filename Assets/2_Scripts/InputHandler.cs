@@ -135,13 +135,13 @@ namespace SG
                 return;
             }
 
+            HandleMoveInput(delta);
             HandleAttackInput(delta);
             HandleRollInput(delta);
 
             if(playerManager.isFalldown)
                 return;
-
-            HandleMoveInput(delta);
+     
             HandleSkillAttackInput(delta);
             HandleInteractingInput();
             HandleJumpingInput();
@@ -160,6 +160,9 @@ namespace SG
 
         private void HandleMoveInput(float delta)
         {
+            if(playerManager.isFalldown)
+                return;
+                
             Horizontal = movementInput.x;
             Vertical = movementInput.y;
             MoveAmount = Mathf.Clamp01(Mathf.Abs(Horizontal) + Mathf.Abs(Vertical));

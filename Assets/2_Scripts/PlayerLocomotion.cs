@@ -226,7 +226,6 @@ namespace SG
 
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
-                    Debug.Log(rollRotation.eulerAngles);
                     myTransform.rotation = rollRotation;
                 }
                 else

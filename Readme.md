@@ -185,12 +185,25 @@ Resources 폴더에 Fonts 폴더 생성
 
 	- 빠진 조건문을 추가.
 
+5. 카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정 시도
+
+	- PlayerLocomotion.HandleRotation() 에서 playerManager.isRolling || inputHandler.sprintFlag 구문이
+	아주 적게 실행되는 중임을 확인. 그래서 플레이어 방향이 재빠르게 바뀌어 똑바른 방향으로 구르지 않게 되었다.
+
+	- animator parameter로 isRolling을 추가하여 테스트를 했지만 크게 소용이 없었다.
+
+	- PlayerLocomotion.RotationSpeed가 20으로 되어있었는데, 다시 10으로 수정하였다.
+
+	- canRotate의 문제와 연관되어있다고 생각한다.
+	- 근데 isRolling 도중 스킬을 쓰면 bool이 다시 false가 안되기 때문에 캐릭터가 굳어버리는 현상이 벌어진다.
+
+	- 일단 원래 코드로 돌리자.
 
 
 
 **다음 목표**
 
-카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정
+
 데미지 피격 도중 무기를 집어넣는 버그를 수정
 보스 스킬2 모션중, 점프하지 않는 버그를 확인
 공격 이펙트 관리

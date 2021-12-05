@@ -33,6 +33,7 @@ namespace SG
         [Header("Player Flags")]
         public bool isUnEquip;
         public bool isSprinting;
+        public bool isRolling; //문제..
         public bool isInAir;
 
         public bool canDoCombo;
@@ -112,6 +113,7 @@ namespace SG
             isInvulnerable = anim.GetBool("isInvulnerable");
             isBlocking = anim.GetBool("isBlocking");
             isFalldown = anim.GetBool("isFalldown");
+            isRolling = anim.GetBool("isRolling");  //문제..
 
             inputHandler.TickInput(delta);
             playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
@@ -145,7 +147,6 @@ namespace SG
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleRotation(delta);
-
             CheckCounterTimer(delta);;
             // playerLocomotion.HandleSprintEnd();
         }

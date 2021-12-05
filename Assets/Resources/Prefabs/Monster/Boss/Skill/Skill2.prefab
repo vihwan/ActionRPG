@@ -38418,6 +38418,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 50
+  attackScore: 3
   canDisableCollider: 1
   colliderDuration: 2
 --- !u!1 &1994824758168566

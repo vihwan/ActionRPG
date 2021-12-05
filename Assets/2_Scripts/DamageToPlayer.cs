@@ -8,6 +8,7 @@ namespace SG
     public class DamageToPlayer : MonoBehaviour
     {
         public int damage = 25;
+        [Range(1,3)] public int attackScore = 1;
         public bool canDisableCollider;
         public float colliderDuration;
         
@@ -28,7 +29,7 @@ namespace SG
             PlayerStats playerStats = other.GetComponent<PlayerStats>();
             if(playerStats != null)
             {
-                playerStats.TakeDamage(damage, 3); //FallDown
+                playerStats.TakeDamage(damage, attackScore);
                 Debug.Log("데미지 입음");
             }
         }
