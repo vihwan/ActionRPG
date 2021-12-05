@@ -159,23 +159,41 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## Last Update
 
-## 2021.12.03 (금)
+## 2021.12.05 (일)
 
-1. 보스 몬스터 A.I - 스킬 추가
+1. 플레이어 무기 - WeaponPivot 수정
 
-	- 적절한 Particle Effect 선정
-	- 색상, 재생시간 등 설정 변경
+	- 공격 시 WeaponPivot과 가드 시 WeaponPivot을 다르게 하도록 새로 스크립트를 작성
 
-2. 보스 몬스터 A.I - SecondPhase DashAttack
+	> WeaponPivoting Class 생성. 
+	일반 상태와 가드 상태에서의 회전축을 설정하고 localPosition과 localRotation이 변경되도록 설정
 
-	- Boss전용 ChaseTargetState를 만들고 상속받아 사용
+	- 무기 교체 시, 해당 무기의 WeaponPivoting Class와 연결되도록 설정
+
+2. 보스 몬스터 A.I - 스킬 추가
+
+	- 주변에 여러 갈래의 얼음 가시가 나오는 보스 패턴을 추가
+
+	> BossFXTransform에 Skill2를 추가
+
+3. 누워있을 때, 데미지를 받으면 다시 일어나서 데미지를 받는 부분을 개선
+
+	- AnyState에 의한 데미지 분리를 다시 PlayTargetAnimation 으로 수정
+	- 누워있는 상태에서 피격시 계속 누워있도록 새롭게 애니메이션을 생성
+
+4. 누워있는 상태에서, Shift를 누르면 스태미나가 무한으로 계속 깎이는 실행을 수정
+
+	- 빠진 조건문을 추가.
+
+
 
 
 **다음 목표**
 
-무기 회전축 관리 -> 공격 모션 및 가드 모션 / 다른 가드 모션 찾아보기 or 회전축을 바꾸는 스크립트 작성
+카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정
+데미지 피격 도중 무기를 집어넣는 버그를 수정
+보스 스킬2 모션중, 점프하지 않는 버그를 확인
 공격 이펙트 관리
-누워있는 상태에서 회피기
 
 -------------------------------
 
@@ -268,6 +286,20 @@ Resources 폴더에 Fonts 폴더 생성
 -------------------------------
 
 ## 이전 개발 일지
+
+### 2021.12.03 (금)
+
+1. 보스 몬스터 A.I - 스킬 추가
+
+	- 적절한 Particle Effect 선정
+	- 색상, 재생시간 등 설정 변경
+
+	> BossFXTransform에 Skill1을 추가하고 관리
+
+2. 보스 몬스터 A.I - SecondPhase DashAttack
+
+	- Boss전용 ChaseTargetState를 만들고 상속받아 사용
+
 
 ### 2021.12.02 (목)
 

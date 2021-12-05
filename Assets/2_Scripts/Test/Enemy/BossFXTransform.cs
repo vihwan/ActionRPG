@@ -10,6 +10,7 @@ namespace SG
         [Header("Second Phase FX")]
         public GameObject secondPhaseFX;
         public GameObject skill_1_FX;
+        public GameObject skill_2_FX;
 
         [Header("Current Effect Fx List")]
         [SerializeField] private List<GameObject> currentFxList = new List<GameObject>();
@@ -30,6 +31,12 @@ namespace SG
             if(fxName == "Skill1")
             {
                 GameObject go = Instantiate(skill_1_FX, this.transform);
+                currentFxList.Add(go);
+            }
+            
+            if(fxName == "Skill2")
+            {
+                GameObject go = Instantiate(skill_2_FX, this.transform);
                 currentFxList.Add(go);
             }       
         }

@@ -26,6 +26,7 @@ namespace SG
         private AnimationLayerHandler animationLayerHandler;
         private PlayerAnimatorHandler playerAnimatorHandler;
         private ActiveWeaponObject activeWeaponObject;
+        private WeaponPivoting weaponPivoting;
 
         public bool isInteracting;
 
@@ -47,6 +48,7 @@ namespace SG
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
+        public WeaponPivoting WeaponPivoting { get => weaponPivoting; set => weaponPivoting = value; }
 
         public void Awake()
         {
@@ -96,6 +98,7 @@ namespace SG
                 animationLayerHandler.Init();
 
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
+            WeaponPivoting = GetComponentInChildren<WeaponPivoting>();
         }
 
         private void Update()
@@ -143,9 +146,10 @@ namespace SG
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleRotation(delta);
 
-            CheckCounterTimer(delta);
+            CheckCounterTimer(delta);;
             // playerLocomotion.HandleSprintEnd();
         }
+
 
         private void LateUpdate()
         {
@@ -194,6 +198,13 @@ namespace SG
             }
 
             playerLocomotion.isJumping = anim.GetBool("isJumping");
+            CheckWeaponPivoting();
+        }
+
+        private void CheckWeaponPivoting()
+        {
+            if(isBlocking) WeaponPivoting.GuardPivot();
+            else WeaponPivoting.NormalPivot();
         }
 
         public void EnableInputHandler()

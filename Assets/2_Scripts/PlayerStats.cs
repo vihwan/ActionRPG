@@ -316,6 +316,12 @@ namespace SG
 
         private void PlayTakeDamageAnimation(ref int damage, int attackScore)
         {
+            if(playerManager.isFalldown)
+            {
+                animatorHandler.PlayTargetAnimation("Falldown_Damage", isInteracting: true);
+                return;
+            }
+
             if(animatorHandler.anim.GetBool("isBlocking").Equals(true))
             {
                damage = Mathf.RoundToInt(damage * 0.5f);
@@ -327,22 +333,24 @@ namespace SG
             if(attackScore == 3)
             {        
                 //FallDown
-                animatorHandler.anim.SetInteger("DamageScore", 3);
-                animatorHandler.anim.SetTrigger("isDamage");
+                // animatorHandler.anim.SetInteger("DamageScore", 3);
+                // animatorHandler.anim.SetTrigger("isDamage");
+                animatorHandler.PlayTargetAnimation("Damage_03", isInteracting: true);
                 animatorHandler.anim.SetBool("isFalldown", true);
                 return;
             }
             else if(attackScore == 2)
             {
-                inputHandler.StopMovement();
                 //LargeHit
-                animatorHandler.anim.SetInteger("DamageScore", 2);
-                animatorHandler.anim.SetTrigger("isDamage");
+                // animatorHandler.anim.SetInteger("DamageScore", 2);
+                // animatorHandler.anim.SetTrigger("isDamage");
+                animatorHandler.PlayTargetAnimation("Damage_02", isInteracting: true);
                 return;
             }
 
-            animatorHandler.anim.SetInteger("DamageScore", 1);
-            animatorHandler.anim.SetTrigger("isDamage");
+            // animatorHandler.anim.SetInteger("DamageScore", 1);
+            // animatorHandler.anim.SetTrigger("isDamage");
+            animatorHandler.PlayTargetAnimation("Damage_01", isInteracting: true);
         }
 
         public void PlusStatsByComsumableItem(ConsumableItem consumableItem)

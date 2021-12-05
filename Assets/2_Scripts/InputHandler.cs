@@ -50,7 +50,6 @@ namespace SG
         private CameraHandler cameraHandler;
         private PlayerAnimatorHandler animatorHandler;
 
-
         internal Vector2 movementInput;
         Vector2 cameraInput;
 
@@ -175,12 +174,12 @@ namespace SG
 
             if (b_Input)
             {
-                if(playerManager.isFalldown)
+                if(playerManager.isFalldown && playerStats.CurrentStamina >= 15)
                 {
 
                     sprintFlag = false;
                     rollFlag = true;
-                    playerStats.UseStamina(15);
+                    playerStats.UseStamina(3);
                     return;
                 }    
                 rollInputTimer += delta;
@@ -193,7 +192,7 @@ namespace SG
                     {
                         sprintFlag = false;
                         rollFlag = true;
-                        playerStats.UseStamina(15);
+                        playerStats.UseStamina(3);
                     }
                 }
                 rollInputTimer = 0;
@@ -254,7 +253,6 @@ namespace SG
                     return;
 
                 playerAttacker.HandleGuard(PlayerInventory.Instance.currentWeapon);
-                
             }
             else
             {

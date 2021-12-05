@@ -9,6 +9,7 @@ namespace SG
     {
         public int damage = 25;
         public bool canDisableCollider;
+        public float colliderDuration;
         
         float disableColliderTime;
         float elapsedTime = 0f;
@@ -16,7 +17,10 @@ namespace SG
         private void Start() 
         {
             ParticleSystem ps = GetComponent<ParticleSystem>();
-            if(ps != null) disableColliderTime = ps.main.duration;
+            if(colliderDuration == 0f)
+            {
+                if(ps != null) disableColliderTime = ps.main.duration;  
+            }  
         }
 
         private void OnTriggerEnter(Collider other)

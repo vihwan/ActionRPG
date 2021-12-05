@@ -45,6 +45,7 @@ namespace SG
         {
             GameObject weaponGO;
             rightHandSlot.LoadWeaponModel(weaponItem, out weaponGO);
+            playerManager.WeaponPivoting = weaponGO.GetComponentInChildren<WeaponPivoting>();
             LoadRightWeaponDamageCollider();
             unholderSlot.LoadUnEquipWeaponModel(weaponItem);
             activeWeaponObject.Initailize(weaponGO, playerManager.isUnEquip);

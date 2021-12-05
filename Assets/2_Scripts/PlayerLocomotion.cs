@@ -214,7 +214,6 @@ namespace SG
                         animatorHandler.PlayTargetAnimation("Dodge_Left",true);
                     else
                         animatorHandler.PlayTargetAnimation("Dodge_Back",true);
-
                     return;
                 }
 
@@ -227,6 +226,7 @@ namespace SG
 
                     moveDirection.y = 0;
                     Quaternion rollRotation = Quaternion.LookRotation(moveDirection);
+                    Debug.Log(rollRotation.eulerAngles);
                     myTransform.rotation = rollRotation;
                 }
                 else

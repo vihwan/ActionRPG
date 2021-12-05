@@ -191,6 +191,7 @@
      <Compile Include="Assets\2_Scripts\Util\UtilHelper.cs" />
      <Compile Include="Assets\2_Scripts\WeaponHolderSlot.cs" />
      <Compile Include="Assets\2_Scripts\WeaponPickUp.cs" />
+     <Compile Include="Assets\2_Scripts\WeaponPivoting.cs" />
      <Compile Include="Assets\2_Scripts\WeaponSlotManager.cs" />
      <Compile Include="Assets\2_Scripts\WeaponUnholderSlot.cs" />
      <Compile Include="Assets\2_Scripts\_OldScripts\CalledInAnimation.cs" />
