@@ -7,10 +7,15 @@ namespace SG
 {
     public class RotateTowardTargetState : State
     {
+        public IdleState idleState;
         public CombatStanceState combatStanceState;
 
         public override State Tick(EnemyManager enemyManager, EnemyStats enemyStats, EnemyAnimatorHandler enemyAnimatorHandler)
         {
+
+            if(enemyManager.currentTarget == null)
+                return idleState;
+
             enemyAnimatorHandler.anim.SetFloat("Vertical", 0f);
             enemyAnimatorHandler.anim.SetFloat("Horizontal", 0f);
 
@@ -25,29 +30,29 @@ namespace SG
             if(viewableAngle > 120 & viewableAngle <= 180 && !enemyManager.isInteracting)
             {
                 Debug.Log("Turn Left 180");
-                enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Left 180", isInteracting: true); 
-                //HandleRotateTowardsTarget(enemyManager);  
+                //enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Left 180", isInteracting: true); 
+                HandleRotateTowardsTarget(enemyManager);  
                 return this;
             }
             else if(viewableAngle < -120 && viewableAngle >= -180 && !enemyManager.isInteracting)
             {
                 Debug.Log("Turn Right 180");
-                enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Right 180", isInteracting: true);
-                //HandleRotateTowardsTarget(enemyManager);  
+                //enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Right 180", isInteracting: true);
+                HandleRotateTowardsTarget(enemyManager);  
                 return this;
             }
             else if(viewableAngle < -60 && viewableAngle >= -120 & !enemyManager.isInteracting)
             {
                 Debug.Log("Turn Right");
-                enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Right", isInteracting: true);
-                //HandleRotateTowardsTarget(enemyManager);  
+                //enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Right", isInteracting: true);
+                HandleRotateTowardsTarget(enemyManager);  
                 return this;
             }
             else if(viewableAngle > 60 && viewableAngle <= 120 & !enemyManager.isInteracting)
             {
                 Debug.Log("Turn Left");
-                enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Left", isInteracting: true);
-                //HandleRotateTowardsTarget(enemyManager);  
+                //enemyAnimatorHandler.PlayTargetAnimationRootRotation("Turn Left", isInteracting: true);
+                HandleRotateTowardsTarget(enemyManager);  
                 return this;
             }
 
@@ -66,7 +71,7 @@ namespace SG
             }
 
             Quaternion targetRotation = Quaternion.LookRotation(direction);
-            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime);
+            enemyManager.transform.rotation = Quaternion.Slerp(enemyManager.transform.rotation, targetRotation, enemyManager.rotationSpeed / Time.deltaTime * 0.3f);
         }
     }
 }

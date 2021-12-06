@@ -134,14 +134,14 @@ namespace SG
                 StopMovement();
                 return;
             }
-
-            HandleMoveInput(delta);
+            
             HandleAttackInput(delta);
             HandleRollInput(delta);
 
-            if(playerManager.isFalldown)
+            if(playerManager.isFalldown || playerManager.isRolling)
                 return;
      
+            HandleMoveInput(delta);
             HandleSkillAttackInput(delta);
             HandleInteractingInput();
             HandleJumpingInput();
@@ -177,7 +177,7 @@ namespace SG
 
             if (b_Input)
             {
-                if(playerManager.isFalldown && playerStats.CurrentStamina >= 15)
+                if(playerManager.isFalldown && playerStats.CurrentStamina >= 3)
                 {
 
                     sprintFlag = false;
@@ -191,7 +191,7 @@ namespace SG
             {
                 if (rollInputTimer > 0 && rollInputTimer < 0.5f)
                 {
-                    if (playerStats.CurrentStamina >= 15 && !playerManager.isInteracting)
+                    if (playerStats.CurrentStamina >= 3 && !playerManager.isInteracting)
                     {
                         sprintFlag = false;
                         rollFlag = true;

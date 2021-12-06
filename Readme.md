@@ -161,52 +161,51 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## 2021.12.05 (일)
 
-1. 플레이어 무기 - WeaponPivot 수정
+1. 캐릭터 이동 - 구르기 도중 스킬
 
-	- 공격 시 WeaponPivot과 가드 시 WeaponPivot을 다르게 하도록 새로 스크립트를 작성
+	- 구르는 도중에 스킬을 쓴다는 것은.. 좀 말이 안된다. 못하도록 설정
 
-	> WeaponPivoting Class 생성. 
-	일반 상태와 가드 상태에서의 회전축을 설정하고 localPosition과 localRotation이 변경되도록 설정
+2. 캐릭터 이동 - 기상 공격 및 여러 구르기에 무적을 부여
 
-	- 무기 교체 시, 해당 무기의 WeaponPivoting Class와 연결되도록 설정
+	- PlayerAnimatorHandler 클래스를 활용.
+	
+	- 모든 구르기의 무적 시간을 0.5초로 통일.
+	- 기상 공격의 무적 시간을 0.7초로 설정
 
-2. 보스 몬스터 A.I - 스킬 추가
+3. 플레이어 무기 - UnEquip도중 WeaponPivot 
 
-	- 주변에 여러 갈래의 얼음 가시가 나오는 보스 패턴을 추가
+	- UnEquip도중의 WeaponPivot, UnEquipPivot 클래스를 새로 생성하여 WeaponUnholderSlot 클래스에서 적용되도록 설정.
 
-	> BossFXTransform에 Skill2를 추가
 
-3. 누워있을 때, 데미지를 받으면 다시 일어나서 데미지를 받는 부분을 개선
+4. 카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정.
 
-	- AnyState에 의한 데미지 분리를 다시 PlayTargetAnimation 으로 수정
-	- 누워있는 상태에서 피격시 계속 누워있도록 새롭게 애니메이션을 생성
+	> **모든 이유는 canRotate 변수가 느리게 바뀌어서 Rotation 동작이 한번 더 실행된 것.**
 
-4. 누워있는 상태에서, Shift를 누르면 스태미나가 무한으로 계속 깎이는 실행을 수정
+	- canRotate의 변환시점을 HandleRotation()보다 빠르도록 FixedUpdate() 상단에 배치.
+	
+5. 보스 스킬을 맞고 캐릭터가 일어나는 버그를 수정
 
-	- 빠진 조건문을 추가.
+	- Box Collider의 isTrigger가 꺼져있었음.
 
-5. 카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정 시도
+6. 데미지 피격 도중 무기를 집어넣는 버그를 수정
 
-	- PlayerLocomotion.HandleRotation() 에서 playerManager.isRolling || inputHandler.sprintFlag 구문이
-	아주 적게 실행되는 중임을 확인. 그래서 플레이어 방향이 재빠르게 바뀌어 똑바른 방향으로 구르지 않게 되었다.
+	- 플레이어의 피격을 확인하는 변수 isDamaged를 추가.
 
-	- animator parameter로 isRolling을 추가하여 테스트를 했지만 크게 소용이 없었다.
+7. 보스 스킬2 모션중, 점프하지 않는 버그를 수정.
 
-	- PlayerLocomotion.RotationSpeed가 20으로 되어있었는데, 다시 10으로 수정하였다.
+	- Animation의 Root Position Y 부분의 문제. 
 
-	- canRotate의 문제와 연관되어있다고 생각한다.
-	- 근데 isRolling 도중 스킬을 쓰면 bool이 다시 false가 안되기 때문에 캐릭터가 굳어버리는 현상이 벌어진다.
+8. 보스 컷신 제작 - Unity Timeline
 
-	- 일단 원래 코드로 돌리자.
+	- Timeline을 이용하여 컷신을 만들 수 있다.
+	- 하지만 이 작업은 스테이지의 구성이 완성되어있어야 할 수 있는 작업이라는 것을 깨달았기에 이 작업은 후반부로 미룬다.
 
 
 
 **다음 목표**
 
-
-데미지 피격 도중 무기를 집어넣는 버그를 수정
-보스 스킬2 모션중, 점프하지 않는 버그를 확인
 공격 이펙트 관리
+보스 패턴 구성
 
 -------------------------------
 
@@ -278,14 +277,19 @@ Resources 폴더에 Fonts 폴더 생성
 	
 ▷13. 보스 몬스터
 
-	- 보스 등장 시네머신
 	- 보스 특수 패턴
 
 14. 월드맵
 
+	- 스테이지 재구성
+	- 최적화 작업
+	- 맵 만들기
+
 15. 업적
 
 16. 스크린샷
+
+	- 보스 등장 시네머신
 
 17. 환경 설정
 
@@ -299,6 +303,49 @@ Resources 폴더에 Fonts 폴더 생성
 -------------------------------
 
 ## 이전 개발 일지
+
+## 2021.12.05 (일)
+
+1. 플레이어 무기 - WeaponPivot 수정
+
+	- 공격 시 WeaponPivot과 가드 시 WeaponPivot을 다르게 하도록 새로 스크립트를 작성
+
+	> WeaponPivoting Class 생성. 
+	일반 상태와 가드 상태에서의 회전축을 설정하고 localPosition과 localRotation이 변경되도록 설정
+
+	- 무기 교체 시, 해당 무기의 WeaponPivoting Class와 연결되도록 설정
+
+	> WeaponSlotManager.LoadWeaponSlot();
+
+2. 보스 몬스터 A.I - 스킬 추가
+
+	- 주변에 여러 갈래의 얼음 가시가 나오는 보스 패턴을 추가
+
+	> BossFXTransform에 Skill2를 추가
+
+3. 누워있을 때, 데미지를 받으면 다시 일어나서 데미지를 받는 부분을 개선
+
+	- AnyState에 의한 데미지 분리를 다시 PlayTargetAnimation 으로 수정
+	- 누워있는 상태에서 피격시 계속 누워있도록 새롭게 애니메이션을 생성
+
+4. 누워있는 상태에서, Shift를 누르면 스태미나가 무한으로 계속 깎이는 실행을 수정
+
+	- 빠진 조건문을 추가.
+
+5. 카메라 록온 상태에서, 뒤구르기가 안되는 버그를 수정 시도
+
+	- PlayerLocomotion.HandleRotation() 에서 playerManager.isRolling || inputHandler.sprintFlag 구문이
+	아주 적게 실행되는 중임을 확인. 그래서 플레이어 방향이 재빠르게 바뀌어 똑바른 방향으로 구르지 않게 되었다.
+
+	- animator parameter로 isRolling을 추가하여 테스트를 했지만 크게 소용이 없었다.
+
+	- PlayerLocomotion.RotationSpeed가 20으로 되어있었는데, 다시 10으로 수정하였다.
+
+	- canRotate의 문제와 연관되어있다고 생각한다.
+	- 근데 isRolling 도중 스킬을 쓰면 bool이 다시 false가 안되기 때문에 캐릭터가 굳어버리는 현상이 벌어진다.
+
+	- 일단 원래 코드로 돌리자.
+
 
 ### 2021.12.03 (금)
 

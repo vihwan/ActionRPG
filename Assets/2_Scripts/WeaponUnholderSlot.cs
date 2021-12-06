@@ -36,6 +36,7 @@ namespace SG
                 model.transform.localScale = Vector3.one;
             }
             currentUnequipWeaponModel = model;
+            currentUnequipWeaponModel.GetComponentInChildren<WeaponPivoting>().UnEquipPivoting();
             xWeaponTrail = currentUnequipWeaponModel.GetComponentInChildren<XWeaponTrail>();
             if(xWeaponTrail != null)
                 xWeaponTrail.enabled = false;

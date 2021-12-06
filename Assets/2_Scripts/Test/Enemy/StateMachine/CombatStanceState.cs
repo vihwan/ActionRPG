@@ -134,6 +134,13 @@ namespace SG
             }
         }
 
+        //구르기 함수
+
+        protected void RollingAroundTarget(EnemyManager enemyManager)
+        {
+            
+        }
+
         protected virtual void GetNewAttack(EnemyManager enemyManager)
         {
             Vector3 targetsDirection = enemyManager.currentTarget.transform.position - this.transform.position;

@@ -38,6 +38,7 @@ namespace SG
 
         public bool canDoCombo;
         public bool isInvulnerable;
+        public bool isDamaged;
         public bool isBlocking;
         public bool canCounter;
         public bool isFalldown;
@@ -104,19 +105,19 @@ namespace SG
 
         private void Update()
         {
-            float delta = Time.deltaTime;
+            float delta = Time.deltaTime;      
             isInteracting = anim.GetBool("isInteracting");
             canDoCombo = anim.GetBool("canDoCombo");
             canCounter = anim.GetBool("canCounter");
             anim.SetBool("isInAir", isInAir);
             isUnEquip = anim.GetBool("isUnEquip");
             isInvulnerable = anim.GetBool("isInvulnerable");
+            isDamaged = anim.GetBool("isDamaged");
             isBlocking = anim.GetBool("isBlocking");
             isFalldown = anim.GetBool("isFalldown");
             isRolling = anim.GetBool("isRolling");  //문제..
 
             inputHandler.TickInput(delta);
-            playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleRollingAndSprinting(delta);
             playerStats.RegenerationStamina();
         }
@@ -144,6 +145,7 @@ namespace SG
         private void FixedUpdate()
         {
             float delta = Time.fixedDeltaTime;
+            playerAnimatorHandler.canRotate = anim.GetBool("canRotate");
             playerLocomotion.HandleMovement(delta);
             playerLocomotion.HandleFalling(delta, playerLocomotion.moveDirection);
             playerLocomotion.HandleRotation(delta);
@@ -158,7 +160,6 @@ namespace SG
             if (!isUnEquip && GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
                 ChangePlayerToUnEquip(delta);
 
-            inputHandler.rollFlag = false;
             inputHandler.rb_Input = false;
             inputHandler.rt_Input = false;
             //inputHandler.lt_Input = false;
@@ -170,8 +171,9 @@ namespace SG
             inputHandler.jump_Input = false;
             inputHandler.menu_Input = false;
             inputHandler.consume_Input = false;
+            inputHandler.rollFlag = false;
             isSprinting = inputHandler.b_Input;
-
+            
             if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
 
@@ -198,14 +200,15 @@ namespace SG
                 playerLocomotion.inAirTimer += Time.deltaTime;
             }
 
+            anim.SetBool("isDamaged", false);
             playerLocomotion.isJumping = anim.GetBool("isJumping");
             CheckWeaponPivoting();
         }
 
         private void CheckWeaponPivoting()
         {
-            if(isBlocking) WeaponPivoting.GuardPivot();
-            else WeaponPivoting.NormalPivot();
+            if(isBlocking) WeaponPivoting.GuardPivoting();
+            else WeaponPivoting.NormalPivoting();
         }
 
         public void EnableInputHandler()
@@ -217,8 +220,8 @@ namespace SG
         {
             changeWeaponOutWaitTime += delta;
 
-            if(isFalldown)
-            {   //다운되어있는 상태라면 전투 대기시간을 계속 초기화
+            if(isFalldown || isDamaged)
+            {   //데미지를 입은 상태 혹은 다운되어있는 상태라면 전투 대기시간을 계속 초기화
                 changeWeaponOutWaitTime = 0f;
             }
 

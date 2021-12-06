@@ -316,6 +316,7 @@ namespace SG
 
         private void PlayTakeDamageAnimation(ref int damage, int attackScore)
         {
+            animatorHandler.anim.SetBool("isDamaged", true);
             if(playerManager.isFalldown)
             {
                 animatorHandler.PlayTargetAnimation("Falldown_Damage", isInteracting: true);
