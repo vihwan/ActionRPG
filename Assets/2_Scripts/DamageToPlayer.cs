@@ -10,14 +10,19 @@ namespace SG
         public int damage = 25;
         [Range(1,3)] public int attackScore = 1;
         public bool canDisableCollider;
+        public float colliderStartTime;
         public float colliderDuration;
-        
+
+        bool triggerEnableCollider = false;
         float disableColliderTime;
         float elapsedTime = 0f;
+        Collider collider;
 
         private void Start() 
         {
             ParticleSystem ps = GetComponent<ParticleSystem>();
+            collider = GetComponent<Collider>();
+            if(colliderStartTime > 0f) collider.enabled = false;
             if(colliderDuration == 0f)
             {
                 if(ps != null) disableColliderTime = ps.main.duration;  
@@ -36,7 +41,18 @@ namespace SG
 
         private void Update() 
         {
-            if(canDisableCollider) DisableCollider();
+            if(!triggerEnableCollider) CheckColliderEnable();
+            else if(triggerEnableCollider && canDisableCollider) DisableCollider();
+        }
+
+        private void CheckColliderEnable()
+        {
+            elapsedTime += Time.deltaTime;
+            if(elapsedTime >= colliderStartTime){
+                elapsedTime = 0f;
+                collider.enabled = true;  
+                triggerEnableCollider = true;      
+            }
         }
 
         private void DisableCollider()
@@ -45,7 +61,7 @@ namespace SG
            if(elapsedTime >= disableColliderTime)
            {
                elapsedTime = 0f;
-               GetComponent<Collider>().enabled = false;
+               collider.enabled = false;
            }
         }
     }
