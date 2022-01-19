@@ -158,8 +158,8 @@ Resources 폴더에 Fonts 폴더 생성
 	- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
 	- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
 
-<img src="./SampleScreenshot/stage_example1.PNG"  width="800" height="480">
-<img src="./SampleScreenshot/stage_example1.PNG"  width="800" height="480">
+<img src="./SampleScreenshot/stage_example1.PNG">
+<img src="./SampleScreenshot/stage_example2.PNG">
 
 -------------------------------
 
