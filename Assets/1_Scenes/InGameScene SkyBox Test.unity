@@ -25,16 +25,16 @@ RenderSettings:
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
-  m_AmbientMode: 4
+  m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: b27efa2a72537b846aee47723637f341, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
   m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
   m_DefaultReflectionMode: 0
-  m_DefaultReflectionResolution: 128
+  m_DefaultReflectionResolution: 2048
   m_ReflectionBounces: 1
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
@@ -73,7 +73,7 @@ LightmapSettings:
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
     m_MixedBakeMode: 2
-    m_BakeBackend: 2
+    m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
@@ -122,7 +122,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: 83bcd749105817f40ad5d3f28a54e27d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: d41d20184227ed7429a14305561eedcf, type: 2}
 --- !u!1 &2306221
 GameObject:
   m_ObjectHideFlags: 0
@@ -4940,9 +4940,9 @@ RectTransform:
   m_Father: {fileID: 2085520474}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 660, y: -636.7064}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1320, y: 263.48175}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &130821434
@@ -22058,7 +22058,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00004205143}
+  m_AnchoredPosition: {x: 0, y: 0.22661853}
   m_SizeDelta: {x: 0, y: 221.32404}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &562488105
@@ -31906,7 +31906,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1439732899}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.7477765
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -44046,7 +44046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.00002763686}
+  m_AnchoredPosition: {x: 0, y: 0.16354278}
   m_SizeDelta: {x: 0, y: 159.75}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1149967650
@@ -44767,9 +44767,9 @@ RectTransform:
   m_Father: {fileID: 2085520474}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 660, y: -914.3821}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1320, y: 291.8695}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1174649300
@@ -50105,7 +50105,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 928786952}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.72334504
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -68933,9 +68933,9 @@ RectTransform:
   m_Father: {fileID: 2085520474}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 660, y: -502.4828}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1320, y: 4.965576}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1917393016
@@ -88339,7 +88339,7 @@ PrefabInstance:
     - target: {fileID: 2820564947416396831, guid: ff7bde9f97a2408468a36b3f4a2abb97,
         type: 3}
       propertyPath: m_ClearFlags
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2820564947416396831, guid: ff7bde9f97a2408468a36b3f4a2abb97,
         type: 3}

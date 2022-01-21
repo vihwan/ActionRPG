@@ -138,30 +138,30 @@ Resources 폴더에 Fonts 폴더 생성
 
 **Memo**
 
-버그 발견
-
-- 몬스터 FSM의 CombatStanceState, AttackState에서, 플레이어가 가까이 붙어있으면 빠르게 제자리 회전하는 현상
-
 - Animation State of Controller not showing in Inspector when clicked
 
 > https://answers.unity.com/questions/1736606/animation-state-of-controller-not-showing-in-inspe.html
 
 
+- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
+- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
+- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
+
 -------------------------------
 
 ## Last Update
 
-## 2022.01.21 (금)
+## 2022.01.22 (금)
 
-1. 스테이지 구성 - SkyBox
+1. 스테이지 구성 - SkyBox 적용
 
-	- SkyBox 하늘 배경 소스를 검색 및 적용
-	- Lighting 간단 조정
+	- SkyBox 하늘 배경 적용
+	- SkyBox로 사용하고 싶은 Texture를 CubeMap으로 설정하기
+	- 새로운 Material을 SkyBox/CubeMap으로 설정하고 Texture 적용
+	- 메인 카메라의 Background를 SkyBox로 바꾸기
+	- Lighting 탭에서 Environment의 Material을 지정하기
+	<img src="./SampleScreenshot/stage_example3.PNG">
 
-`	- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
-	- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
-	- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
-`
 
 -------------------------------
 
@@ -263,6 +263,14 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## 이전 개발 일지
 
+### 2022.01.21 (금)
+
+1. 스테이지 구성 - SkyBox
+
+	- SkyBox 하늘 배경 소스를 검색 및 적용
+	- Lighting 간단 조정
+
+
 ### 2022.01.19 (수)
 
 1. 스테이지 재구성 - 중간점검
@@ -270,9 +278,9 @@ Resources 폴더에 Fonts 폴더 생성
 	- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
 	- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
 	- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
+	<img src="./SampleScreenshot/stage_example1.PNG">
+	<img src="./SampleScreenshot/stage_example2.PNG">
 
-<img src="./SampleScreenshot/stage_example1.PNG">
-<img src="./SampleScreenshot/stage_example2.PNG">
 
 ### 2021.12.30 (목)
 
