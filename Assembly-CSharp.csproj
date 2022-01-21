@@ -367,6 +367,7 @@
      <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hair_ds.shader" />
      <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\Extensions\Toon\Shader\ToonColor_DoubleShadeWithFeather_TransClipping_StencilOut.shader" />
+     <None Include="Assets\Extensions\Fantasy Skybox FREE\Readme.txt" />
      <None Include="Assets\Extensions\Polygonal Creatures Pack\Polygonal Wolf\www.meshtint.com.txt" />
      <None Include="Assets\Extensions\GUI Kit Casual Game\Extensions\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
      <None Include="Assets\Extensions\Frank_Slash_Pack\Documentation\Frank_Warrior.txt" />

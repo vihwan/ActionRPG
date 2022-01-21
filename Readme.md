@@ -105,6 +105,7 @@ StopRotate\
 IsInteractingFalse\
 InstantiateBossParticleFX
 DestroyBossParticleFX
+
 -------------------------------
 
 **Input Handler Keys**
@@ -150,16 +151,17 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## Last Update
 
-## 2022.01.19 (수)
+## 2022.01.21 (금)
 
-1. 스테이지 재구성 - 중간점검
+1. 스테이지 구성 - SkyBox
 
-	- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
+	- SkyBox 하늘 배경 소스를 검색 및 적용
+	- Lighting 간단 조정
+
+`	- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
 	- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
 	- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
-
-<img src="./SampleScreenshot/stage_example1.PNG">
-<img src="./SampleScreenshot/stage_example2.PNG">
+`
 
 -------------------------------
 
@@ -260,6 +262,17 @@ Resources 폴더에 Fonts 폴더 생성
 -------------------------------
 
 ## 이전 개발 일지
+
+### 2022.01.19 (수)
+
+1. 스테이지 재구성 - 중간점검
+
+	- 소품들(박스, 컨테이너, 함정, 잡동사니 등)과의 상호작용을 고려하면서 만들것인가?
+	- Fx 효과(빛, 안개 등)들의 처리를 어떻게 따로 처리할 것인가>
+	- 던전 외부의 배경을 어떤식으로 만들 수 있을까?
+
+<img src="./SampleScreenshot/stage_example1.PNG">
+<img src="./SampleScreenshot/stage_example2.PNG">
 
 ### 2021.12.30 (목)
 
