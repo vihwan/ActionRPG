@@ -151,16 +151,23 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## Last Update
 
-## 2022.01.22 (금)
+## 2022.01.24 (월)
 
-1. 스테이지 구성 - SkyBox 적용
+1. 스테이지 구성 - 세부 설정
 
-	- SkyBox 하늘 배경 적용
-	- SkyBox로 사용하고 싶은 Texture를 CubeMap으로 설정하기
-	- 새로운 Material을 SkyBox/CubeMap으로 설정하고 Texture 적용
-	- 메인 카메라의 Background를 SkyBox로 바꾸기
-	- Lighting 탭에서 Environment의 Material을 지정하기
-	<img src="./SampleScreenshot/stage_example3.PNG">
+- 현재까지 구상한 스테이지 정리(아래 구상도 참고)
+<img src="./SampleScreenshot/stage_example4.PNG">
+
+- 상호작용이 가능한 것들 (Interactable 클래스 사용)
+
+> 상자, 열쇠, 책상 혹은 책장 위 물건, 나무문, 철창문, 철창함정, 화톳불
+
+
+- 부술 수 있는 것들 (CanCrash 클래스를 새로 작성)
+
+> 나무통, 나무상자, 항아리 등
+
+- 플레이어가 다니는 길에는 장애물을 설치하지 않도록 만든다.
 
 
 -------------------------------
@@ -243,6 +250,8 @@ Resources 폴더에 Fonts 폴더 생성
 	- 스테이지 재구성
 	- 최적화 작업
 	- 맵 만들기
+	- 상호작용 물품 설정
+
 
 15. 이펙트
 
@@ -254,22 +263,47 @@ Resources 폴더에 Fonts 폴더 생성
 
 16. 업적
 
-17. 스크린샷
+17. 사운드 매니저
+
+	- 플레이어 사운드
+	- 에너미 사운드
+	- 효과음
+	- 배경음악
+
+18. 스크린샷
 
 	- 보스 등장 시네머신
 
-18. 환경 설정
+19. 환경 설정
 
-19. 타이틀 메뉴
+20. 타이틀 메뉴
 
-20. 세이브 로드
+21. 데이터 관리
 
-21. 다이나믹 본
+	- 테이블 기반의 데이터 관리 (Json 사용 예정)
+	- 세이브 로드
+	- NPC와 대화내용
+	- 퀘스트
+	- 업적
+
+22. 다이나믹 본
 
 
 -------------------------------
 
 ## 이전 개발 일지
+
+## 2022.01.22 (금)
+
+1. 스테이지 구성 - SkyBox 적용
+
+	- SkyBox 하늘 배경 적용
+	- SkyBox로 사용하고 싶은 Texture를 CubeMap으로 설정하기
+	- 새로운 Material을 SkyBox/CubeMap으로 설정하고 Texture 적용
+	- 메인 카메라의 Background를 SkyBox로 바꾸기
+	- Lighting 탭에서 Environment의 Material을 지정하기
+	<img src="./SampleScreenshot/stage_example3.PNG">
+
 
 ### 2022.01.21 (금)
 
