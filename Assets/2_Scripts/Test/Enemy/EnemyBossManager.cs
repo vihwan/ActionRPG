@@ -13,7 +13,7 @@ namespace SG
         //Handle Switch Phase
         //Handle Switch Attack Patterns
         [SerializeField] private bool hasPhaseShifted;
-
+        #region inspector
         [Header("Need Component")]
         [SerializeField] private EnemyBossHealthBarUI enemyBossHealthBarUI;
         [SerializeField] private EnemyManager enemyManager;
@@ -22,6 +22,7 @@ namespace SG
         [SerializeField] private BossChaseTargetState bossChaseTargetState;
         [SerializeField] private BossCombatStanceState bossCombatStanceState;
         [SerializeField] private BossFXTransform bossFXTransform;
+        #endregion
 
         public bool HasPhaseShifted { 
             get => hasPhaseShifted; 

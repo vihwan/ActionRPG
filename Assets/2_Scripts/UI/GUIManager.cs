@@ -11,6 +11,7 @@ namespace SG
     {
         public static GUIManager instance; //Singleton
 
+        #region inspector
         [Header("HUD Windows")]
         [SerializeField] private GameObject hudWindows;
         [SerializeField] private HealthBar healthBar;
@@ -34,7 +35,7 @@ namespace SG
 
         [Header("PopUp Generator")]
         [SerializeField] internal PopUpGenerator popUpGenerator;
-
+        #endregion
 
         // Start is called before the first frame update
         public void Init()

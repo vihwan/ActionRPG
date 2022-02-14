@@ -1,6 +1,7 @@
 #folder
 Library/
 Logs/
+obj/
 Packages/
 Temp/
 Assets/Extensions/
