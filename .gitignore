@@ -6,3 +6,13 @@ Packages/
 Temp/
 Assets/Extensions/
 Assets/MT Assets/
+Assets/3_Models/
+Assets/5_Prefabs/
+Thry/
+.vs/
+.vscode/
+
+#etc
+.gitignore
+RotaryHeart.csproj
+ThryAssemblyDefinition.csproj

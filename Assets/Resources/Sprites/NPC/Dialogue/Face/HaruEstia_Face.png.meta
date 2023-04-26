@@ -69,7 +69,7 @@ TextureImporter:
       213: 8945625298312281902
     second: HaruEstia_Face_21
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -89,6 +89,8 @@ TextureImporter:
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -97,12 +99,12 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
-    wrapW: -1
+    wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -120,10 +122,14 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
+  ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -163,6 +169,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -648,6 +666,29 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      HaruEstia_Face_0: -1945651857295383452
+      HaruEstia_Face_1: -4732199022511157991
+      HaruEstia_Face_10: 616452063931996428
+      HaruEstia_Face_11: 1896047931041282800
+      HaruEstia_Face_12: 385909309042460185
+      HaruEstia_Face_13: 8714487434595692054
+      HaruEstia_Face_14: 6745728379428841030
+      HaruEstia_Face_15: 6950571603163474570
+      HaruEstia_Face_16: 270913414101507383
+      HaruEstia_Face_17: 4392861388870110484
+      HaruEstia_Face_18: -4479691581873558379
+      HaruEstia_Face_19: 9039409024430890012
+      HaruEstia_Face_2: 849110926382405595
+      HaruEstia_Face_20: 1936184854249361676
+      HaruEstia_Face_21: 8945625298312281902
+      HaruEstia_Face_3: -52080375881310729
+      HaruEstia_Face_4: -4997230572243557983
+      HaruEstia_Face_5: -8280857704995846464
+      HaruEstia_Face_6: 5715902210479569215
+      HaruEstia_Face_7: -7232070822277310854
+      HaruEstia_Face_8: 4545685764048771799
+      HaruEstia_Face_9: 1595478734389655684
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
