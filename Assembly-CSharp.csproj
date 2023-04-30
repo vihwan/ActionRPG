@@ -319,6 +319,7 @@
     <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_SkillPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\2_Scripts\System\ActiveWeaponObject.cs" />
+    <Compile Include="Assets\2_Scripts\Framework\MonoBehaviourSingleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
