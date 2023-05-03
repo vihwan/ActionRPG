@@ -9,8 +9,8 @@ namespace SG
 {
     public class LevelUpAlertUI : MonoBehaviour
     {
-        private Animator animator;
         [SerializeField] private TMP_Text levelText;
+        private Animator animator;
 
         public void Init()
         {

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace SG
 {
@@ -172,7 +173,7 @@ namespace SG
 
         private void HandleRollInput(float delta)
         {
-            b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Started;
+            b_Input = inputActions.PlayerActions.Roll.phase == InputActionPhase.Performed;
             sprintFlag = b_Input;
 
             if (b_Input)
@@ -297,7 +298,7 @@ namespace SG
 
         private void HandleInteractingInput()
         {
-            inputActions.PlayerActions.A.canceled += i => a_Input = true;
+            inputActions.PlayerActions.Interact.canceled += i => a_Input = true;
 
             //Set the UI to the Interactable Object's Text
             //Set the Text Popup to true
@@ -305,7 +306,6 @@ namespace SG
             {
                 if (playerManager.InteractableObject != null)
                     playerManager.ExecuteInteract();
-                //interactableObject.Interact(this);
             }
         }
 
