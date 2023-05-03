@@ -75,7 +75,7 @@ namespace SG
 
         public void HandleGuard(WeaponItem weaponItem)
         {
-            if (PlayerManager.Instance.isBlocking)
+            if (PlayerManager.it.isBlocking)
                 return;
 
             animatorHandler.PlayTargetAnimation(weaponItem.Weapon_Block, isInteracting: true);

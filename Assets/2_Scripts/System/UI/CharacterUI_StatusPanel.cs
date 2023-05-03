@@ -53,10 +53,10 @@ namespace SG
 
         public void SetParameter()
         {
-            nameText.text = PlayerManager.Instance.playerName;
-            levelText.text = "Lv. " + LevelManager.Instance.Level;
+            nameText.text = PlayerManager.it.playerName;
+            levelText.text = "Lv. " + LevelManager.it.Level;
             expText.text = string.Format("{0} / {1}",
-                            LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
+                            LevelManager.it.Experience, LevelManager.it.GetExperienceNextLevel(LevelManager.it.Level));
             SetExpSlider();
             hpText.text = playerStats.CurrentHealth + " / " + playerStats.MaxHealth;
             attackText.text = playerStats.Attack.ToString();
@@ -68,7 +68,7 @@ namespace SG
 
         private void SetExpSlider()
         {
-            expSlider.value = LevelManager.Instance.GetExperienceNormalized();
+            expSlider.value = LevelManager.it.GetExperienceNormalized();
         }
     }
 }

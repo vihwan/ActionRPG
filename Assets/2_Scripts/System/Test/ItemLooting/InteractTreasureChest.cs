@@ -57,8 +57,8 @@ namespace SG
             anim.SetBool("Open", isOpen);
             anim.Play("Close to Open");
 
-            GUIManager.instance.lootWindow.SetLootWindow(this.gameObject, itemsInChest);
-            GUIManager.instance.lootWindow.OpenLootWindow();
+            GUIManager.it.lootWindow.SetLootWindow(this.gameObject, itemsInChest);
+            GUIManager.it.lootWindow.OpenLootWindow();
             //Interact Object UI SetActive False
             playerManager.InteractableUI.SetActiveInteractUI(false);
 

@@ -87,9 +87,9 @@ namespace SG
 
             // 업적 리스트를 가져와 생성합니다.
 
-            for (int i = 0; i < AchieveManager.Instance.achieves.Count; i++)
+            for (int i = 0; i < AchieveManager.it.achieves.Count; i++)
             {
-                Achieve achieve = AchieveManager.Instance.achieves[i];
+                Achieve achieve = AchieveManager.it.achieves[i];
                 achieve.Init();
                 AchieveListDisplay ald = Instantiate(achieveListDisplayPrefab, achieveListTransform) as AchieveListDisplay;
                 ald.Init();

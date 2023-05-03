@@ -26,29 +26,29 @@ namespace SG {
             characterButton = UtilHelper.Find<Button>(transform, "Select Character");
             if (characterButton != null)
             {
-                characterButton.onClick.AddListener(GUIManager.instance.windowPanel.OpenCharacterWindowPanel);
-                characterButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+                characterButton.onClick.AddListener(GUIManager.it.windowPanel.OpenCharacterWindowPanel);
+                characterButton.onClick.AddListener(GUIManager.it.CloseSelectMenuWindow);
             }
 
             inventoryButton = UtilHelper.Find<Button>(transform, "Select Inventory");    
             if (inventoryButton != null)
             {
-                inventoryButton.onClick.AddListener(GUIManager.instance.windowPanel.OpenInventoryWindowPanel);
-                inventoryButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+                inventoryButton.onClick.AddListener(GUIManager.it.windowPanel.OpenInventoryWindowPanel);
+                inventoryButton.onClick.AddListener(GUIManager.it.CloseSelectMenuWindow);
             }
 
             worldmapButton = UtilHelper.Find<Button>(transform, "Select WorldMap");
             questButton = UtilHelper.Find<Button>(transform, "Select Quest");
             if(questButton != null)
             {
-                questButton.onClick.AddListener(GUIManager.instance.questPanel.OpenQuestPanelEvent);
-                questButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+                questButton.onClick.AddListener(GUIManager.it.questPanel.OpenQuestPanelEvent);
+                questButton.onClick.AddListener(GUIManager.it.CloseSelectMenuWindow);
             }
             achieveButton = UtilHelper.Find<Button>(transform, "Select Achivement");
             if(achieveButton != null)
             {
-                achieveButton.onClick.AddListener(GUIManager.instance.achievePanel.OpenAchievePanelEvent);
-                achieveButton.onClick.AddListener(GUIManager.instance.CloseSelectMenuWindow);
+                achieveButton.onClick.AddListener(GUIManager.it.achievePanel.OpenAchievePanelEvent);
+                achieveButton.onClick.AddListener(GUIManager.it.CloseSelectMenuWindow);
             }
             screenshotButton = UtilHelper.Find<Button>(transform, "Select Screenshot");
             optionButton = UtilHelper.Find<Button>(transform, "Select GameOptions");

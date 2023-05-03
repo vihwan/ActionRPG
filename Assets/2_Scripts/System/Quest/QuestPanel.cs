@@ -68,7 +68,7 @@ namespace SG
             if (infoPanel != null)
                 infoPanel.Init();
 
-            rewardItemSlotPrefab = Database.Instance.prefabDatabase.rewardItemSlot;
+            rewardItemSlotPrefab = Database.it.prefabDatabase.rewardItemSlot;
             CloseQuestPanelGameObject();
         }
 
@@ -129,7 +129,7 @@ namespace SG
 
         private void OnClickQuestHUDBtn(Quest quest)
         {
-            GUIManager.instance.questAlertUI.OnQuestAlertUI(quest);
+            GUIManager.it.questAlertUI.OnQuestAlertUI(quest);
         }
 
         private void SetObjectiveDisplay(Quest quest)

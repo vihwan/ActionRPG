@@ -25,7 +25,7 @@ namespace SG
 
         public void PlayLevelUpAlertAnimation()
         {
-            levelText.text = string.Format("{0}", LevelManager.Instance.Level);
+            levelText.text = string.Format("{0}", LevelManager.it.Level);
             animator.SetTrigger("LevelUp");
         }
     }

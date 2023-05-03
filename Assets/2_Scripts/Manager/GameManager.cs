@@ -4,33 +4,17 @@ using UnityEngine;
 
 namespace SG
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviourSingleton<GameManager>
     {
-        public static GameManager Instance;
-        private Database database;
-        private PlayerManager playerManager;
         private NPCManager[] npcManagers;
-        private GUIManager guiManager;
-        private ItemDropManager itemDropManager;
-        private DialogueManager dialogueManager;
-        private EnforceManager enforceManager;
-        private QuestManager questManager;
-        private AchieveManager achieveManager;
-        private LevelManager levelManager;
-        private WorldEventManager worldEventManager;
 
         private void Awake()
         {
-            if (Instance == null)
-                Instance = this;
+            if (Database.it != null)
+                Database.it.Init();
 
-            database = FindObjectOfType<Database>();
-            if (database != null)
-                database.Init();
-
-            guiManager = FindObjectOfType<GUIManager>();
-            if (guiManager != null)
-                guiManager.Init();
+            if (GUIManager.it != null)
+                GUIManager.it.Init();
 
             npcManagers = FindObjectsOfType<NPCManager>();
             if(npcManagers != null)
@@ -40,40 +24,30 @@ namespace SG
                     npcManagers[i].Init();
                 }
             }
-            
-            playerManager = FindObjectOfType<PlayerManager>();
-            if (playerManager != null)
-                playerManager.Init();
 
-            itemDropManager = GetComponentInChildren<ItemDropManager>();
-            if (itemDropManager != null)
-                itemDropManager.Init();
+            if(PlayerManager.it != null)
+                PlayerManager.it.Init();
 
-            dialogueManager = GetComponentInChildren<DialogueManager>();
-            if (dialogueManager != null)
-                dialogueManager.Init();
+            if (ItemDropManager.it != null)
+                ItemDropManager.it.Init();
 
-            enforceManager = GetComponentInChildren<EnforceManager>();
-            if (enforceManager != null)
-                enforceManager.Init();
+            if (DialogueManager.it != null)
+                DialogueManager.it.Init();
 
-            questManager = GetComponentInChildren<QuestManager>();
-            if (questManager != null)
-                questManager.Init();
+            if (EnforceManager.it != null)
+                EnforceManager.it.Init();
 
-            achieveManager = GetComponentInChildren<AchieveManager>();
-            if (achieveManager != null)
-                achieveManager.Init();
+            if (QuestManager.it != null)
+                QuestManager.it.Init();
 
-            levelManager = GetComponentInChildren<LevelManager>();
-            if (levelManager != null)
-                levelManager.Init();
+            if (AchieveManager.it != null)
+                AchieveManager.it.Init();
 
-            worldEventManager = GetComponentInChildren<WorldEventManager>();
-            if(worldEventManager != null)
-                worldEventManager.Init();
+            if (LevelManager.it != null)
+                LevelManager.it.Init();
 
-            DontDestroyOnLoad(this.gameObject);
+            if(WorldEventManager.it != null)
+                WorldEventManager.it.Init();
         }
     }
 

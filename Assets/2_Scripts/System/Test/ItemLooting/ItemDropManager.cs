@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace SG
 {
-    public class ItemDropManager : MonoBehaviour
+    public class ItemDropManager : MonoBehaviourSingleton<ItemDropManager>
     {
-        public static ItemDropManager Instance;
-
         [Header("DropItem Prefabs")]
         [SerializeField] private DropItemBox dropItemBoxPrefab;
 
@@ -19,16 +17,13 @@ namespace SG
         public Material rare5_material;
         public void Init()
         {
-            if(Instance == null)
-                Instance = this;
+            dropItemBoxPrefab = Database.it.prefabDatabase.dropItemBox;
 
-            dropItemBoxPrefab = Database.Instance.prefabDatabase.dropItemBox;
-
-            rare1_material = Database.Instance.prefabDatabase.GetMaterialByName("star1");
-            rare2_material = Database.Instance.prefabDatabase.GetMaterialByName("star2");
-            rare3_material = Database.Instance.prefabDatabase.GetMaterialByName("star3");
-            rare4_material = Database.Instance.prefabDatabase.GetMaterialByName("star4");
-            rare5_material = Database.Instance.prefabDatabase.GetMaterialByName("star5");
+            rare1_material = Database.it.prefabDatabase.GetMaterialByName("star1");
+            rare2_material = Database.it.prefabDatabase.GetMaterialByName("star2");
+            rare3_material = Database.it.prefabDatabase.GetMaterialByName("star3");
+            rare4_material = Database.it.prefabDatabase.GetMaterialByName("star4");
+            rare5_material = Database.it.prefabDatabase.GetMaterialByName("star5");
         }
         public void GenerateDropItemBox(List<Item> items, Transform dropTransfom)
         {

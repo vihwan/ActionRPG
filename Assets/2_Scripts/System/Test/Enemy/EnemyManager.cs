@@ -139,7 +139,7 @@ namespace SG
         {
             if(isBoss)
             {
-                WorldEventManager.Instance.IsDefeatedBoss();
+                WorldEventManager.it.IsDefeatedBoss();
             }
             
             currentTarget = null;
@@ -151,7 +151,7 @@ namespace SG
             enemyInventory.CreateDropItem();
 
             //플레이어 경험치 획득
-            LevelManager.Instance.AddExperience(enemyInventory.Exp);
+            LevelManager.it.AddExperience(enemyInventory.Exp);
             Destroy(this.gameObject, 7f);
         }
     }

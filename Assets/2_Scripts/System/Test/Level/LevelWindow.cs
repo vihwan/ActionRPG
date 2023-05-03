@@ -11,8 +11,6 @@ namespace SG
         [SerializeField] private ExpBar expBar;
         [SerializeField] private TMPro.TMP_Text levelText;
 
-        private LevelManager levelManager;
-
         public void Init()
         {
             expBar = GetComponentInChildren<ExpBar>(true);
@@ -24,12 +22,12 @@ namespace SG
 
         public void SetLevelSystem()
         {
-            SetLevelText(LevelManager.Instance.Level);
-            SetExpSlider(LevelManager.Instance.GetExperienceNormalized());
-            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
+            SetLevelText(LevelManager.it.Level);
+            SetExpSlider(LevelManager.it.GetExperienceNormalized());
+            SetExpText(LevelManager.it.Experience, LevelManager.it.GetExperienceNextLevel(LevelManager.it.Level));
 
-            LevelManager.Instance.OnLevelChanged += LevelSystem_OnLevelChanged;
-            LevelManager.Instance.OnExperienceChanged += LevelSystem_OnExperienceChanged;
+            LevelManager.it.OnLevelChanged += LevelSystem_OnLevelChanged;
+            LevelManager.it.OnExperienceChanged += LevelSystem_OnExperienceChanged;
         }
 
 
@@ -50,13 +48,13 @@ namespace SG
         
         private void LevelSystem_OnLevelChanged(object sender, EventArgs e)
         {
-            SetLevelText(LevelManager.Instance.Level);
+            SetLevelText(LevelManager.it.Level);
         }
 
         private void LevelSystem_OnExperienceChanged(object sender, EventArgs e)
         {
-            SetExpSlider(LevelManager.Instance.GetExperienceNormalized());
-            SetExpText(LevelManager.Instance.Experience, LevelManager.Instance.GetExperienceNextLevel(LevelManager.Instance.Level));
+            SetExpSlider(LevelManager.it.GetExperienceNormalized());
+            SetExpText(LevelManager.it.Experience, LevelManager.it.GetExperienceNextLevel(LevelManager.it.Level));
         }
     }
 }

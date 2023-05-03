@@ -103,9 +103,9 @@ namespace SG
         #endregion
         private void LoadWeaponInventoryList()
         {
-            for (int i = 0; i < Database.Instance.itemDataBase.weaponItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.weaponItems.Count; i++)
             {
-                WeaponItem weaponItem = Instantiate(Database.GetItemByID(ItemType.Weapon, i)) as WeaponItem;
+                WeaponItem weaponItem = Instantiate(Database.it.GetItemByID(ItemType.Weapon, i)) as WeaponItem;
                 weaponItem.quantity = 1;
                 weaponItem.isArmed = false;
                 weaponsInventory.Add(weaponItem);
@@ -126,44 +126,44 @@ namespace SG
         }
         private void LoadEquipmentInventoryList()
         {
-            for (int i = 0; i < Database.Instance.itemDataBase.topsItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.topsItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Tops, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Tops, i)) as EquipItem;
                 topsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.Instance.itemDataBase.bottomsItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.bottomsItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Bottoms, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Bottoms, i)) as EquipItem;
                 bottomsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.Instance.itemDataBase.glovesItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.glovesItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Gloves, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Gloves, i)) as EquipItem;
                 glovesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.Instance.itemDataBase.shoesItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.shoesItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Shoes, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Shoes, i)) as EquipItem;
                 shoesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.Instance.itemDataBase.accessoryItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.accessoryItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.Accessory, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Accessory, i)) as EquipItem;
                 accessoryInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.Instance.itemDataBase.specialEquipItems.Count; i++)
+            for (int i = 0; i < Database.it.itemDataBase.specialEquipItems.Count; i++)
             {
-                EquipItem equipItem = Instantiate(Database.GetItemByID(ItemType.SpecialEquip, i)) as EquipItem;
+                EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.SpecialEquip, i)) as EquipItem;
                 specialEquipInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
@@ -185,7 +185,7 @@ namespace SG
         {
             for (int i = 0; i < 3; i++)
             {
-                ConsumableItem consumeItem = Instantiate(Database.GetItemByID(ItemType.Consumable, i)) as ConsumableItem;
+                ConsumableItem consumeItem = Instantiate(Database.it.GetItemByID(ItemType.Consumable, i)) as ConsumableItem;
                 consumableInventory.Add(consumeItem);
                 consumeItem.isArmed = false;
                 consumeItem.quantity = Random.Range(1, 6);
@@ -198,7 +198,7 @@ namespace SG
         {
             for (int i = 0; i < 3; i++)
             {
-                IngredientItem ingredientItem = Instantiate(Database.GetItemByID(ItemType.Ingredient, i)) as IngredientItem;
+                IngredientItem ingredientItem = Instantiate(Database.it.GetItemByID(ItemType.Ingredient, i)) as IngredientItem;
                 ingredientInventory.Add(ingredientItem);
                 ingredientItem.quantity = Random.Range(1, 30);
             }
@@ -275,7 +275,7 @@ namespace SG
             //아이템 팝업 출력
             PopUpGenerator.Instance.GetMessageGetItemObject(item, count);
             //퀵슬롯 현재 장착 소비 아이템 갱신
-            GUIManager.instance.quickSlotUI.ConsumesSlot.SetActiveBtn(currentConsumableItem);
+            GUIManager.it.quickSlotUI.ConsumesSlot.SetActiveBtn(currentConsumableItem);
         }
         private void GetItem(WeaponItem weaponItem, int count = 1)
         {

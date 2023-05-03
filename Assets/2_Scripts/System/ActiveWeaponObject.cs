@@ -21,7 +21,7 @@ namespace SG
                 handWeaponObject.SetActive(!status);
                 unequipWeaponObject.SetActive(status);
 
-            if(GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
+            if(GUIManager.it.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
                 handWeaponObject.SetActive(true);
                 unequipWeaponObject.SetActive(false);

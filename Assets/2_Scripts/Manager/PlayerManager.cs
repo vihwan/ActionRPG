@@ -6,10 +6,8 @@ using UnityEngine;
 namespace SG
 {
 
-    public class PlayerManager : CharacterManager
+    public class PlayerManager : MonoBehaviourSingleton<PlayerManager>
     {
-        public static PlayerManager Instance;
-
         [Header("Basics")]
         public readonly string playerName = "Diluc Ragnvindr";
 
@@ -47,18 +45,14 @@ namespace SG
         public float counterAttackTime = 0f;
         [SerializeField] private const float changeWeaponOutLimitTime = 5f;
         [SerializeField] private const float ableCounterAttackLimitTime = 1f;
+        [SerializeField] internal Transform lockOnTransform;
+
         public InteractableUI InteractableUI { get => interactableUI; }
         public Interactable InteractableObject { get => interactableObject; }
         public AnimationLayerHandler AnimationLayerHandler { get => animationLayerHandler; }
         public WeaponPivoting WeaponPivoting { get => weaponPivoting; set => weaponPivoting = value; }
 
-        public void Awake()
-        {
-            if (Instance == null)
-                Instance = this;
-        }
-
-        private void Start()
+        public void Start()
         {
             if (CameraHandler.Instance != null)
                 cameraHandler = CameraHandler.Instance;
@@ -157,7 +151,7 @@ namespace SG
         private void LateUpdate()
         {
             float delta = Time.deltaTime;
-            if (!isUnEquip && GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
+            if (!isUnEquip && GUIManager.it.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(false))
                 ChangePlayerToUnEquip(delta);
 
             inputHandler.rb_Input = false;
@@ -174,7 +168,7 @@ namespace SG
             inputHandler.rollFlag = false;
             isSprinting = inputHandler.b_Input;
             
-            if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
+            if (GUIManager.it.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
             {
 
                 cameraHandler.HandleCharacterWindowCameraPosition(delta);
@@ -254,7 +248,7 @@ namespace SG
 
         public void SetLevelSystem()
         {
-            LevelManager.Instance.OnLevelChanged += LevelManager_OnLevelChanged;
+            LevelManager.it.OnLevelChanged += LevelManager_OnLevelChanged;
         }
 
         private void LevelManager_OnLevelChanged(object sender, EventArgs e)
@@ -266,7 +260,7 @@ namespace SG
 
         private void PlayLevelUpParticleEffect()
         {
-            GameObject go = Instantiate(Database.Instance.prefabDatabase.levelUpParticlePrefab,
+            GameObject go = Instantiate(Database.it.prefabDatabase.levelUpParticlePrefab,
                         this.gameObject.transform.position,
                         Quaternion.identity,
                         this.transform) as GameObject;

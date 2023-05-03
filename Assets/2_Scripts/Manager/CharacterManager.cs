@@ -4,9 +4,14 @@ using UnityEngine;
 
 namespace SG
 {
-    public class CharacterManager : MonoBehaviour
+    public class CharacterManager : MonoBehaviourSingleton<CharacterManager>
     {
         [SerializeField] internal Transform lockOnTransform;
+
+        public virtual void Init()
+        {
+
+        }
     }
 }
 

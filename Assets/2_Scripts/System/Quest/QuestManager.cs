@@ -6,18 +6,13 @@ using UnityEngine;
 
 namespace SG
 {
-    public class QuestManager : MonoBehaviour
+    public class QuestManager : MonoBehaviourSingleton<QuestManager>
     {
-        //Singleton
-        public static QuestManager Instance;
-
         [Header("All Quests")]
         [SerializeField] private List<Quest> questsList;
+
         public void Init()
         {
-            if (Instance == null)
-                Instance = this;
-
             //리소스 폴더의 모든 퀘스트를 가져옵니다.
             Quest[] quests;
 

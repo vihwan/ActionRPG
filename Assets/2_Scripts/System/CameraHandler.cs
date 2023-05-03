@@ -286,7 +286,7 @@ namespace SG
 
         public void DragCharacter_OnActiveCharacterWindowUI()
         {
-            if (GUIManager.instance.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
+            if (GUIManager.it.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
                 return;
 
             if (Mouse.current.leftButton.isPressed)
@@ -304,7 +304,7 @@ namespace SG
 
         public void Zoom_OnActiveCharacterWindowUI()
         {
-            if (GUIManager.instance.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
+            if (GUIManager.it.windowPanel.characterWindowUI.skillPanel.gameObject.activeSelf.Equals(true))
                 return;
 
             //위로 마우스 휠업을 하면, F버튼 아이콘이 상위 아이템 패널을 가리키게 된다.

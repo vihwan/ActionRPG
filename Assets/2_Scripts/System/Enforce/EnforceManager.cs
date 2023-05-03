@@ -7,7 +7,7 @@ using Random = UnityEngine.Random;
 namespace SG
 {
     //강화할 아이템의 강화 수치에 따른 확률 조정, 필요 골드, 상승 수치 등을 관리하는 매니저
-    public class EnforceManager : MonoBehaviour
+    public class EnforceManager : MonoBehaviourSingleton<EnforceManager>
     {
         public static EnforceManager Instance;
 
@@ -56,9 +56,9 @@ namespace SG
 
         public void Init()
         {
-            if (Instance == null)
-                Instance = this;
+
         }
+
         public void SetEnforceItem(Item item)
         {
             targetItem = item;

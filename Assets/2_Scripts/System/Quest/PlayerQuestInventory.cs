@@ -52,8 +52,8 @@ namespace SG
                 quests[i].currentQuestObjective.UpdateObjective();
             }
 
-            if(GUIManager.instance.questAlertUI.questPopup.activeSelf.Equals(true))
-                GUIManager.instance.questAlertUI.UpdateCurrentObjectiveText();
+            if(GUIManager.it.questAlertUI.questPopup.activeSelf.Equals(true))
+                GUIManager.it.questAlertUI.UpdateCurrentObjectiveText();
         }
         public void AddQuest(Quest quest, NPCManager npc)
         {

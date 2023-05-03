@@ -124,12 +124,12 @@ namespace SG
             if (playerStats.isDead) //플레이어 사망 시, 조작을 할 수 없도록 설정.
                 return;
 
-            if (GUIManager.instance.dialogObject.activeSelf.Equals(true))
+            if (GUIManager.it.dialogObject.activeSelf.Equals(true))
                 return;
 
             HandleMenuInput();
 
-            if (GUIManager.instance.IsActiveUIWindows())
+            if (GUIManager.it.IsActiveUIWindows())
             {
                 StopMovement();
                 return;
@@ -321,7 +321,7 @@ namespace SG
         {
             if (menu_Input)
             {
-                if (GUIManager.instance.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
+                if (GUIManager.it.windowPanel.characterWindowUI.gameObject.activeSelf.Equals(true))
                     GetComponent<AnimationLayerHandler>().SetAnimaionLayerWeightCloseCharacterPanel();
 
                 HandleMenuFlag();
@@ -331,7 +331,7 @@ namespace SG
         public void HandleMenuFlag()
         {
             menuFlag = !menuFlag;
-            GUIManager.instance.SetActiveGUIMenu(menuFlag);
+            GUIManager.it.SetActiveGUIMenu(menuFlag);
         }
 
         private void HandleLockOnInput()

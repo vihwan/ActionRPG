@@ -14,7 +14,7 @@ namespace SG
                 if(!isActive)
                 {
                     isActive = true;
-                    WorldEventManager.Instance.ActiveBossFight();
+                    WorldEventManager.it.ActiveBossFight();
                 }             
             }
         }

@@ -7,7 +7,7 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : Component
     private static T m_instance;
     private static bool m_shuttingDown = false;
     private static object m_lock = new object();
-    public static T Instance
+    public static T it
     {
         get
         {
@@ -40,6 +40,11 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : Component
                 return m_instance;
             }
         }
+    }
+
+    public static bool hasInstance()
+    {
+        return m_instance != null;
     }
 
     private void OnDestroy()

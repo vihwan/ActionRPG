@@ -87,9 +87,9 @@ namespace SG
 
             //NPC가 가지고 있는 아이템을 보여주는 상점을 활성화시킴.
 
-            GUIManager.instance.shopPanel.SetActiveShopPanel(true);
-            GUIManager.instance.shopPanel.SetShopPanel(shopNameText);
-            GUIManager.instance.shopPanel.CreateItemList(itemLists);
+            GUIManager.it.shopPanel.SetActiveShopPanel(true);
+            GUIManager.it.shopPanel.SetShopPanel(shopNameText);
+            GUIManager.it.shopPanel.CreateItemList(itemLists);
             inputHandler.menuFlag = !inputHandler.menuFlag;
         }
 
@@ -107,7 +107,7 @@ namespace SG
             dialogueQuestTrigger.TriggerAcceptRefuseQuestDialogue(isAcceptQuest: true);
 
             //NPC가 가지고 있는 Quest 정보의 상태를 변경
-            QuestManager.Instance.SetQuestProgress(npcManager.haveQuest, QuestProgress.Proceeding);
+            QuestManager.it.SetQuestProgress(npcManager.haveQuest, QuestProgress.Proceeding);
             //해당 NPC의 QuesetionMark를 없는 상태로 변경
             npcManager.ChangeQuestionMark(2);
 
@@ -130,7 +130,7 @@ namespace SG
 
             //강화하기 UI를 활성화시킴
 
-            GUIManager.instance.windowPanel.OpenEnforceWindowPanel();
+            GUIManager.it.windowPanel.OpenEnforceWindowPanel();
             inputHandler.menuFlag = !inputHandler.menuFlag;
         }
 

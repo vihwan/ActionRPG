@@ -14,7 +14,7 @@ namespace SG
 
         private InteractNPC interactNPC;
 
-        public void Init()
+        public override void Init()
         {
             lockOnTransform = UtilHelper.Find<Transform>(transform, "LockOnTransform").transform;
 

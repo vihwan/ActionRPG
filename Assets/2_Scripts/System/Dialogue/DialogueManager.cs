@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace SG
 {
-    public class DialogueManager : MonoBehaviour
+    public class DialogueManager : MonoBehaviourSingleton<DialogueManager>
     {
         private Queue<Dialogue> dialoguesQueue;
         private Queue<Sentences> sentences;
@@ -82,7 +82,7 @@ namespace SG
             Debug.Log("대화 시작 " + dialogue.characterName);
             dialogueObject.SetActive(true);
 
-            GUIManager.instance.SetActiveHudWindows(false);
+            GUIManager.it.SetActiveHudWindows(false);
 
             //출력할 다이얼로그의 캐릭터 이름과 이미지 설정
             SetDialogue(dialogue);
@@ -229,7 +229,7 @@ namespace SG
         public void EndDialogue()
         {
             dialogueObject.SetActive(false);
-            GUIManager.instance.SetActiveHudWindows(true);
+            GUIManager.it.SetActiveHudWindows(true);
             endDialogueEvent?.Invoke();
             endDialogueEvent = null;
         }

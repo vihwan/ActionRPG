@@ -17,8 +17,8 @@ namespace SG
         {
             //루트 아이템 윈도우 생성
 
-            GUIManager.instance.lootWindow.SetLootWindow(this.gameObject, itemsInDropBox);
-            GUIManager.instance.lootWindow.OpenLootWindow();
+            GUIManager.it.lootWindow.SetLootWindow(this.gameObject, itemsInDropBox);
+            GUIManager.it.lootWindow.OpenLootWindow();
 
             //Interact Object UI SetActive False
             playerManager.InteractableUI.SetActiveInteractUI(false);

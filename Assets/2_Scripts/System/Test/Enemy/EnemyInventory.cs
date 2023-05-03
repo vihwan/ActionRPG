@@ -36,7 +36,7 @@ namespace SG
             dropItems.Clear();
             dropItems = LootTable.RollLoot(itemTable);
 
-            ItemDropManager.Instance.GenerateDropItemBox(dropItems, this.gameObject.transform);
+            ItemDropManager.it.GenerateDropItemBox(dropItems, this.gameObject.transform);
             Debug.Log("아이템 드랍");
         }
     }

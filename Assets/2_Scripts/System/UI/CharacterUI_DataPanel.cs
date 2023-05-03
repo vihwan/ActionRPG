@@ -31,7 +31,7 @@ namespace SG
         }
         private void SetCharacterDataPanel()
         {
-            characterName.text = PlayerManager.Instance.playerName;
+            characterName.text = PlayerManager.it.playerName;
             characterVoice.text = "성우 : 최승훈";
 
             SetCharacterStatusText();

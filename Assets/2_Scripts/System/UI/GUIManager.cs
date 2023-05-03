@@ -7,10 +7,8 @@ namespace SG
 
     //전체적인 UI 요소들을 가져와 컨트롤하는 스크립트. GUI의 최상단 매니저
     //각 UI 요소들을 참조하여 초기화하고 각 요소의 활성/비활성을 담당합니다.
-    public class GUIManager : MonoBehaviour
+    public class GUIManager : MonoBehaviourSingleton<GUIManager>
     {
-        public static GUIManager instance; //Singleton
-
         #region inspector
         [Header("HUD Windows")]
         [SerializeField] private GameObject hudWindows;
@@ -40,9 +38,6 @@ namespace SG
         // Start is called before the first frame update
         public void Init()
         {
-            if (instance == null)
-                instance = this;
-
             hudWindows = transform.Find("PlayerUI/HUD").gameObject;
             if (hudWindows == null)
                 Debug.LogWarning("HUD 가 참조되지 않았습니다");

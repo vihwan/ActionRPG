@@ -5,9 +5,8 @@ using UnityEngine;
 
 namespace SG
 {
-    public class WorldEventManager : MonoBehaviour
+    public class WorldEventManager : MonoBehaviourSingleton<WorldEventManager>
     {
-        public static WorldEventManager Instance;
         private EnemyBossHealthBarUI enemyBossHealthBarUI;
 
         public bool bossFightIsActive;
@@ -16,9 +15,6 @@ namespace SG
 
         public void Init()
         {
-            if(Instance == null)
-                Instance = this;
-                
             enemyBossHealthBarUI = FindObjectOfType<EnemyBossHealthBarUI>();
         }
 

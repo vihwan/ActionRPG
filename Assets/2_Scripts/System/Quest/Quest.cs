@@ -111,7 +111,7 @@ namespace SG
             //골드 회득
             PlayerInventory.Instance.GetGold(rewardGold);
             //경험치 획득
-            LevelManager.Instance.AddExperience(rewardExp);
+            LevelManager.it.AddExperience(rewardExp);
             //경험치 획득 팝업 생성
             PopUpGenerator.Instance.GetMessageGetExp(rewardExp);
             

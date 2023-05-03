@@ -14,9 +14,8 @@ namespace SG
         public int Experience;
     }
 
-    public class LevelManager : MonoBehaviour
+    public class LevelManager : MonoBehaviourSingleton<LevelManager>
     {
-        public static LevelManager Instance;
         private PlayerManager playerManager;
         public event EventHandler OnExperienceChanged;
         public event EventHandler OnLevelChanged;
@@ -32,9 +31,6 @@ namespace SG
 
         public void Init()
         {
-            if (Instance == null)
-                Instance = this;
-
             playerManager = FindObjectOfType<PlayerManager>();
 
             Level = 0;
@@ -46,7 +42,7 @@ namespace SG
 
         public void SetLevelManagerEventHandler()
         {
-            GUIManager.instance.levelWindow.SetLevelSystem();
+            GUIManager.it.levelWindow.SetLevelSystem();
             playerManager.SetLevelSystem();
         }
 

@@ -128,7 +128,7 @@ namespace SG
                             //최근에 대화한 NPC의 QuestionMark를 표시가 안되도록 변경시킨다.
                             PlayerQuestInventory.Instance.GetRecentTalkNpc().ChangeQuestionMark(2);
                             //퀘스트를 주었던 대상의 EndQuestDialogue 대화의 트리거를 실행시킨다.
-                            ParentScript.NPC_Requester.GetComponent<InteractNPC>().TalkNPC(PlayerManager.Instance, true);
+                            ParentScript.NPC_Requester.GetComponent<InteractNPC>().TalkNPC(PlayerManager.it, true);
 
 
                             //퀘스트 진행도를 하나 올린다.
@@ -158,14 +158,14 @@ namespace SG
             }
             if (nextObjective != null)
             {
-                GUIManager.instance.questAlertUI.OnActiveQuestObjectiveAlertText(nextObjective);
+                GUIManager.it.questAlertUI.OnActiveQuestObjectiveAlertText(nextObjective);
                 ParentScript.currentQuestObjective = nextObjective;
                 ParentScript.currentQuestObjective.state = QuestObjectiveState.Active;
                 ParentScript.currentQuestObjective.Initialize();
                 if(ParentScript.currentQuestObjective.type.Equals(QuestObjectiveType.Talk))
                 {
                     PlayerQuestInventory.Instance.SetRecentTalkNpc(null);
-                    QuestManager.Instance.FindQuestTargetAndChangeQuestionMark(ParentScript.currentQuestObjective.objectiveTarget);
+                    QuestManager.it.FindQuestTargetAndChangeQuestionMark(ParentScript.currentQuestObjective.objectiveTarget);
                 }
             }
             else

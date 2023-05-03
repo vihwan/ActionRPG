@@ -259,6 +259,7 @@
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\DebugDraw.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\Door.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Level\ExpBar.cs" />
+    <Compile Include="Assets\2_Scripts\Framework\MonoBehaviourSingleton.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLCInput\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs" />
     <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_EquipmentPanel.cs" />
@@ -319,7 +320,8 @@
     <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_SkillPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\2_Scripts\System\ActiveWeaponObject.cs" />
-    <Compile Include="Assets\2_Scripts\Framework\MonoBehaviourSingleton.cs" />
+    <Compile Include="Assets\2_Scripts\Framework\Singleton.cs" />
+    <Compile Include="Assets\2_Scripts\System\GameMain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
