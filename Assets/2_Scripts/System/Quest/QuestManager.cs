@@ -24,18 +24,20 @@ namespace SG
                 questsList.Add(quests[i]);
             }
 
-            NPCManager[] npcs = GameObject.FindObjectsOfType<NPCManager>();
-            for (int i = 0; i < npcs.Length; i++)
+
+            for (int i = 0; i < NPCManager.it.npcs.Length; i++)
             {
-                if(npcs[i].haveQuest != null)
+                var npc = NPCManager.it.npcs[i];
+
+                if (npc.haveQuest != null)
                 {
-                    if(npcs[i].haveQuest.questProgress == QuestProgress.NotStarting)
+                    if(npc.haveQuest.questProgress == QuestProgress.NotStarting)
                     {
-                        npcs[i].ChangeQuestionMark(0);
+                        npc.ChangeQuestionMark(0);
                         continue;
                     }
                 }
-                npcs[i].ChangeQuestionMark(2);
+                npc.ChangeQuestionMark(2);
             }
         }
         public Quest GetQuestByName(string questName)
@@ -69,12 +71,13 @@ namespace SG
 
         public void FindQuestTargetAndChangeQuestionMark(string objectiveTarget)
         {
-            NPCManager[] npcs = GameObject.FindObjectsOfType<NPCManager>();
-            for (int i = 0; i < npcs.Length; i++)
+            for (int i = 0; i < NPCManager.it.npcs.Length; i++)
             {
-                if (npcs[i].npcName == objectiveTarget)
+                var npc = NPCManager.it.npcs[i];
+
+                if (npc.npcName == objectiveTarget)
                 {
-                    npcs[i].ChangeQuestionMark(1);
+                    npc.ChangeQuestionMark(1);
                     return;
                 }
             }

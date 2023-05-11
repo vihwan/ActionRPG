@@ -28,14 +28,14 @@ namespace SG
         
 
         private PlayerAttackAnimation playerAttacker;
-        private QuickSlotUI quickSlotUI;
         private PlayerStats playerStats;
+        [SerializeField] private QuickSlotUI quickSlotUI;
 
         public void Init()
         {
             playerAttacker = GetComponentInChildren<PlayerAttackAnimation>();
             playerStats = GetComponent<PlayerStats>();
-            quickSlotUI = FindObjectOfType<QuickSlotUI>();
+
             try
             {
                 skillBtn_1 = quickSlotUI.SkillBtn_1;
@@ -159,8 +159,7 @@ namespace SG
                 {
                     //만약 해당 소비 아이템을 전부 사용했을 경우
                     //인벤토리에 해당 아이템을 제거하고 null로 퀵슬롯 UI를 갱신
-                    bool allDelete = false;
-                    PlayerInventory.Instance.SaveDeleteItemToInventoryConsIngred(consumableItem_One, out allDelete);
+                    PlayerInventory.Instance.SaveDeleteItemToInventoryConsIngred(consumableItem_One, out bool allDelete);
                     if (allDelete.Equals(true))
                         Debug.Log("인벤토리에서 성공적으로 제거되었습니다.");
 

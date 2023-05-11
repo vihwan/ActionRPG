@@ -24,8 +24,6 @@ namespace SG
 
         public void Init()
         {
-            equipmentPanel = GetComponentInParent<CharacterUI_EquipmentPanel>();
-
             itemBtn = GetComponentInChildren<Button>(true);
             if (itemBtn != null)
             {

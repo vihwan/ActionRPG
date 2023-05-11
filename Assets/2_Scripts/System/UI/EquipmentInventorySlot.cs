@@ -121,19 +121,19 @@ namespace SG
             //임시적인 방안이므로, 나중에 다른 방법을 사용할 수 있습니다.
             if (isArmed)
             {
-                itemBtn.GetComponent<Image>().sprite = Database.it.prefabDatabase.itemSlotIsArmed;
-                enforceImage.sprite = Database.it.prefabDatabase.itemSlotIsArmed;
+                itemBtn.GetComponent<Image>().sprite = Database.it.PrefabDataBase.itemSlotIsArmed;
+                enforceImage.sprite = Database.it.PrefabDataBase.itemSlotIsArmed;
                 return;
             }
             else if (isSelect)
             {
-                itemBtn.GetComponent<Image>().sprite = Database.it.prefabDatabase.itemSlotIsSelect;
-                enforceImage.sprite = Database.it.prefabDatabase.itemSlotIsSelect;
+                itemBtn.GetComponent<Image>().sprite = Database.it.PrefabDataBase.itemSlotIsSelect;
+                enforceImage.sprite = Database.it.PrefabDataBase.itemSlotIsSelect;
             }
             else if (!isSelect)
             {
-                itemBtn.GetComponent<Image>().sprite = Database.it.prefabDatabase.itemSlotNormal;
-                enforceImage.sprite = Database.it.prefabDatabase.itemSlotNormal;
+                itemBtn.GetComponent<Image>().sprite = Database.it.PrefabDataBase.itemSlotNormal;
+                enforceImage.sprite = Database.it.PrefabDataBase.itemSlotNormal;
             }                
         }
     }

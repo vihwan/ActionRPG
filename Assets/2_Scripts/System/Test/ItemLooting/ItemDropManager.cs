@@ -17,13 +17,13 @@ namespace SG
         public Material rare5_material;
         public void Init()
         {
-            dropItemBoxPrefab = Database.it.prefabDatabase.dropItemBox;
+            dropItemBoxPrefab = Database.it.PrefabDataBase.dropItemBox;
 
-            rare1_material = Database.it.prefabDatabase.GetMaterialByName("star1");
-            rare2_material = Database.it.prefabDatabase.GetMaterialByName("star2");
-            rare3_material = Database.it.prefabDatabase.GetMaterialByName("star3");
-            rare4_material = Database.it.prefabDatabase.GetMaterialByName("star4");
-            rare5_material = Database.it.prefabDatabase.GetMaterialByName("star5");
+            rare1_material = Database.it.PrefabDataBase.GetMaterialByName("star1");
+            rare2_material = Database.it.PrefabDataBase.GetMaterialByName("star2");
+            rare3_material = Database.it.PrefabDataBase.GetMaterialByName("star3");
+            rare4_material = Database.it.PrefabDataBase.GetMaterialByName("star4");
+            rare5_material = Database.it.PrefabDataBase.GetMaterialByName("star5");
         }
         public void GenerateDropItemBox(List<Item> items, Transform dropTransfom)
         {

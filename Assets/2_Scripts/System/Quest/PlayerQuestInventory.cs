@@ -16,7 +16,7 @@ namespace SG
         [Header("Recent Get Info")]
         [SerializeField] internal EnemyManager recentKilledEnemy;
         [SerializeField] internal GoalPosition reachGoalPosition;
-        [SerializeField] internal NPCManager recentTalkNpc;
+        [SerializeField] internal NPCStatus recentTalkNpc;
 
         public delegate void QuestManagerDelegate(PlayerQuestInventory sender);
         public delegate void QuestAddedDelegate(Quest addedQuest);
@@ -55,7 +55,7 @@ namespace SG
             if(GUIManager.it.questAlertUI.questPopup.activeSelf.Equals(true))
                 GUIManager.it.questAlertUI.UpdateCurrentObjectiveText();
         }
-        public void AddQuest(Quest quest, NPCManager npc)
+        public void AddQuest(Quest quest, NPCStatus npc)
         {
             quest.Init();
             quest.SetNPCRequester(npc);
@@ -101,12 +101,12 @@ namespace SG
             Destroy(reachGoalPosition.gameObject);
         }
 
-        public void SetRecentTalkNpc(NPCManager npc)
+        public void SetRecentTalkNpc(NPCStatus npc)
         {
             recentTalkNpc = npc;
         }
 
-        internal NPCManager GetRecentTalkNpc()
+        internal NPCStatus GetRecentTalkNpc()
         {
             return recentTalkNpc;
         }

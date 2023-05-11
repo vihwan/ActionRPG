@@ -8,16 +8,17 @@ namespace SG
 {
     public class Database : MonoBehaviourSingleton<Database>
     {
-        public ItemDataBase itemDataBase;
-        public PrefabDataBase prefabDatabase;
+        [SerializeField] private ItemDataBase itemDataBase;
+        [SerializeField] private PrefabDataBase prefabDatabase;
+
+        public ItemDataBase ItemDataBase => itemDataBase;
+        public PrefabDataBase PrefabDataBase => prefabDatabase;
 
         public void Init()
         {
-            itemDataBase = GetComponentInChildren<ItemDataBase>(true);
             if (itemDataBase != null)
                 itemDataBase.Init();
 
-            prefabDatabase = GetComponentInChildren<PrefabDataBase>(true);
             if (prefabDatabase != null)
                 prefabDatabase.Init();
         }

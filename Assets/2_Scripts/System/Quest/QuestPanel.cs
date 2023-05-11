@@ -68,7 +68,7 @@ namespace SG
             if (infoPanel != null)
                 infoPanel.Init();
 
-            rewardItemSlotPrefab = Database.it.prefabDatabase.rewardItemSlot;
+            rewardItemSlotPrefab = Database.it.PrefabDataBase.rewardItemSlot;
             CloseQuestPanelGameObject();
         }
 

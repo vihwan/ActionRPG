@@ -34,7 +34,7 @@ namespace SG
             titleText = UtilHelper.Find<TMP_Text>(t, "TitleText");
             userGoldText = UtilHelper.Find<TMP_Text>(t, "UserGold/priceText");
             shopListSlotCreateTransform = t.Find("ItemList/Scroll View/Viewport/Content").transform;
-            shopListSlotPrefab = Database.it.prefabDatabase.shopListSlot;
+            shopListSlotPrefab = Database.it.PrefabDataBase.shopListSlot;
 
             infoPanel = GetComponentInChildren<Shop_InfoPanel>(true);
             if (infoPanel != null)

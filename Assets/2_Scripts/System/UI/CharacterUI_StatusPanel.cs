@@ -30,17 +30,17 @@ namespace SG
 
         public void Init()
         {
-            nameText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Name");
-            levelText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Level");
-            expText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Exp");
-            expSlider = GetComponentInChildren<Slider>();
+            //nameText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Name");
+            //levelText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Level");
+            //expText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Exp");
+            //expSlider = GetComponentInChildren<Slider>();
 
-            hpText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/HP/Text");
-            attackText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/ATK/Text");
-            defenseText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/DEF/Text");
-            criticalText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/CRI/Text");
-            criticalDamageText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/CRIDMG/Text");
-            staminaText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/STA/Text");
+            //hpText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/HP/Text");
+            //attackText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/ATK/Text");
+            //defenseText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/DEF/Text");
+            //criticalText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/CRI/Text");
+            //criticalDamageText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/CRIDMG/Text");
+            //staminaText = UtilHelper.Find<TMP_Text>(transform, "UI Background/Status/STA/Text");
 
             playerStats = FindObjectOfType<PlayerStats>();
             //levelManager = FindObjectOfType<LevelManager>();

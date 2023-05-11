@@ -15,23 +15,23 @@ namespace SG
         [SerializeField] private TextMesh textMesh;
         [SerializeField] public QuestionMark mark;
 
-        private NPCManager npcManager;
+        private NPCStatus npcStat;
         private DialogueTrigger dialogueTrigger;
         private InputHandler inputHandler;
 
         public void Init()
         {
-            npcManager = GetComponent<NPCManager>();
-            if(npcManager != null)
+            npcStat = GetComponent<NPCStatus>();
+            if(npcStat != null)
             {
-                interactIcon = npcManager.smallIcon;
-                interactName = npcManager.npcName;
+                interactIcon = npcStat.smallIcon;
+                interactName = npcStat.npcName;
             }
             dialogueTrigger = GetComponent<DialogueTrigger>();
             textMesh = GetComponentInChildren<TextMesh>(true);
             if (textMesh != null)
             {
-                textMesh.text = "<NPC> "+ npcManager.npcName;
+                textMesh.text = "<NPC> "+ npcStat.npcName;
             }
 
             mark = GetComponentInChildren<QuestionMark>();
@@ -76,7 +76,7 @@ namespace SG
             }
 
             //최근에 대화한 NPC 등록
-            playerManager.GetComponent<PlayerQuestInventory>().SetRecentTalkNpc(npcManager);
+            playerManager.GetComponent<PlayerQuestInventory>().SetRecentTalkNpc(npcStat);
             //Interact Object UI SetActive False
             playerManager.InteractableUI.SetActiveInteractUI(false);
         }
@@ -107,12 +107,12 @@ namespace SG
             dialogueQuestTrigger.TriggerAcceptRefuseQuestDialogue(isAcceptQuest: true);
 
             //NPC가 가지고 있는 Quest 정보의 상태를 변경
-            QuestManager.it.SetQuestProgress(npcManager.haveQuest, QuestProgress.Proceeding);
+            QuestManager.it.SetQuestProgress(npcStat.haveQuest, QuestProgress.Proceeding);
             //해당 NPC의 QuesetionMark를 없는 상태로 변경
-            npcManager.ChangeQuestionMark(2);
+            npcStat.ChangeQuestionMark(2);
 
             //NPC가 가지고 있는 Quest를 PlayerQuestInventory에 등록하고 초기화
-            inputHandler.GetComponent<PlayerQuestInventory>().AddQuest(npcManager.haveQuest, npcManager);
+            inputHandler.GetComponent<PlayerQuestInventory>().AddQuest(npcStat.haveQuest, npcStat);
         }
 
         internal void RefuseQuest()

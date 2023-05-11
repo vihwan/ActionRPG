@@ -103,7 +103,7 @@ namespace SG
         #endregion
         private void LoadWeaponInventoryList()
         {
-            for (int i = 0; i < Database.it.itemDataBase.weaponItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.weaponItems.Count; i++)
             {
                 WeaponItem weaponItem = Instantiate(Database.it.GetItemByID(ItemType.Weapon, i)) as WeaponItem;
                 weaponItem.quantity = 1;
@@ -126,42 +126,42 @@ namespace SG
         }
         private void LoadEquipmentInventoryList()
         {
-            for (int i = 0; i < Database.it.itemDataBase.topsItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.topsItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Tops, i)) as EquipItem;
                 topsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.it.itemDataBase.bottomsItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.bottomsItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Bottoms, i)) as EquipItem;
                 bottomsInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.it.itemDataBase.glovesItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.glovesItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Gloves, i)) as EquipItem;
                 glovesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.it.itemDataBase.shoesItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.shoesItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Shoes, i)) as EquipItem;
                 shoesInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.it.itemDataBase.accessoryItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.accessoryItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.Accessory, i)) as EquipItem;
                 accessoryInventory.Add(equipItem);
                 equipItem.isArmed = false;
             }
 
-            for (int i = 0; i < Database.it.itemDataBase.specialEquipItems.Count; i++)
+            for (int i = 0; i < Database.it.ItemDataBase.specialEquipItems.Count; i++)
             {
                 EquipItem equipItem = Instantiate(Database.it.GetItemByID(ItemType.SpecialEquip, i)) as EquipItem;
                 specialEquipInventory.Add(equipItem);

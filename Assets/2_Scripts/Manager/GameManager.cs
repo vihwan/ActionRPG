@@ -6,7 +6,6 @@ namespace SG
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
-        private NPCManager[] npcManagers;
 
         private void Awake()
         {
@@ -16,14 +15,8 @@ namespace SG
             if (GUIManager.it != null)
                 GUIManager.it.Init();
 
-            npcManagers = FindObjectsOfType<NPCManager>();
-            if(npcManagers != null)
-            {
-                for (int i = 0; i < npcManagers.Length; i++)
-                {
-                    npcManagers[i].Init();
-                }
-            }
+            if (NPCManager.it != null)
+                NPCManager.it.init();
 
             if(PlayerManager.it != null)
                 PlayerManager.it.Init();

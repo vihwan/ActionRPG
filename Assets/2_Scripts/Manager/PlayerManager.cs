@@ -260,7 +260,7 @@ namespace SG
 
         private void PlayLevelUpParticleEffect()
         {
-            GameObject go = Instantiate(Database.it.prefabDatabase.levelUpParticlePrefab,
+            GameObject go = Instantiate(Database.it.PrefabDataBase.levelUpParticlePrefab,
                         this.gameObject.transform.position,
                         Quaternion.identity,
                         this.transform) as GameObject;

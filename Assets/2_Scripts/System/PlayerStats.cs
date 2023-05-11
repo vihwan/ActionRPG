@@ -29,9 +29,9 @@ namespace SG
         [SerializeField] public bool isDead;
 
         [Header("Need Component")]
-        private HealthBar healthBar;
-        private ManaBar manaBar;
-        private StaminaBar staminaBar;
+        [SerializeField] private HealthBar healthBar;
+        [SerializeField] private ManaBar manaBar;
+        [SerializeField] private StaminaBar staminaBar;
         private PlayerAnimatorHandler animatorHandler;
         private PlayerManager playerManager;
         private InputHandler inputHandler;
@@ -122,9 +122,6 @@ namespace SG
             animatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
             playerManager = GetComponent<PlayerManager>();
             inputHandler = GetComponent<InputHandler>();
-            healthBar = FindObjectOfType<HealthBar>();
-            manaBar = FindObjectOfType<ManaBar>();
-            staminaBar = FindObjectOfType<StaminaBar>();
             playerInventory = GetComponent<PlayerInventory>();
 
             MaxHealth = healthLevel * 10;

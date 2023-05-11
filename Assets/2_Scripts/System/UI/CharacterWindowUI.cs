@@ -45,26 +45,12 @@ namespace SG
             if (springBoardMenu != null)
                 springBoardMenu.Init();
 
-            statusPanel = GetComponentInChildren<CharacterUI_StatusPanel>();
-            if (statusPanel != null)
-                statusPanel.Init();
 
-            weaponPanel = GetComponentInChildren<CharacterUI_WeaponPanel>();
-            if (weaponPanel != null)
-                weaponPanel.Init();
-
-            equipmentPanel = GetComponentInChildren<CharacterUI_EquipmentPanel>();
-            if (equipmentPanel != null)
-                equipmentPanel.Init();
-
-            skillPanel = GetComponentInChildren<CharacterUI_SkillPanel>();
-            if (skillPanel != null)
-                skillPanel.Init();
-
-            dataPanel = GetComponentInChildren<CharacterUI_DataPanel>();
-            if (dataPanel != null)
-                dataPanel.Init();
-
+            statusPanel?.Init();
+            weaponPanel?.Init();
+            equipmentPanel?.Init();
+            skillPanel?.Init();
+            dataPanel.Init();
 
             closeBtn = UtilHelper.Find<Button>(transform, "CloseBtn");
             if (closeBtn != null)

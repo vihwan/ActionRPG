@@ -7,6 +7,8 @@ namespace SG
 {
     public class CharacterMenuSpringBoard : MonoBehaviour
     {
+        [SerializeField] private CharacterWindowUI characterWindowUI;
+
         [SerializeField] internal Button statusBtn;
         [SerializeField] private Button weaponBtn;
         [SerializeField] private Button equipBtn;
@@ -16,46 +18,23 @@ namespace SG
         private Color alpha0 = new Color(1f, 1f, 1f, 0f);
         private Color selectColor = new Color(0f,.48f,.68f,1f);
 
-        private CharacterWindowUI characterWindowUI;
 
         public void Init()
         {
-            characterWindowUI = GetComponentInParent<CharacterWindowUI>();
+            statusBtn?.onClick.AddListener(characterWindowUI.OpenStatusPanel);
+            statusBtn?.onClick.AddListener(() => OnClickBtnChangeColor(statusBtn));
 
-            statusBtn = UtilHelper.Find<Button>(transform, "Status");
-            if (statusBtn != null)
-            {
-                statusBtn.onClick.AddListener(characterWindowUI.OpenStatusPanel);
-                statusBtn.onClick.AddListener(() => OnClickBtnChangeColor(statusBtn));
-            }
+            weaponBtn?.onClick.AddListener(characterWindowUI.OpenWeaponPanel);
+            weaponBtn?.onClick.AddListener(() => OnClickBtnChangeColor(weaponBtn));
 
-            weaponBtn = UtilHelper.Find<Button>(transform, "Weapon");
-            if (weaponBtn != null)
-            {
-                weaponBtn.onClick.AddListener(characterWindowUI.OpenWeaponPanel);
-                weaponBtn.onClick.AddListener(() => OnClickBtnChangeColor(weaponBtn));
-            }
+            equipBtn?.onClick.AddListener(characterWindowUI.OpenEquipmentPanel);
+            equipBtn?.onClick.AddListener(() => OnClickBtnChangeColor(equipBtn));
 
-            equipBtn = UtilHelper.Find<Button>(transform, "Equipment");
-            if (equipBtn != null)
-            {
-                equipBtn.onClick.AddListener(characterWindowUI.OpenEquipmentPanel);
-                equipBtn.onClick.AddListener(() => OnClickBtnChangeColor(equipBtn));
-            }
+            skillBtn?.onClick.AddListener(characterWindowUI.OpenSkillPanel);
+            skillBtn?.onClick.AddListener(() => OnClickBtnChangeColor(skillBtn));
 
-            skillBtn = UtilHelper.Find<Button>(transform, "Skill");
-            if (skillBtn != null)
-            {
-                skillBtn.onClick.AddListener(characterWindowUI.OpenSkillPanel);
-                skillBtn.onClick.AddListener(() => OnClickBtnChangeColor(skillBtn));
-            }
-
-            dataBtn = UtilHelper.Find<Button>(transform, "Data");
-            if (dataBtn != null)
-            {
-                dataBtn.onClick.AddListener(characterWindowUI.OpenDataPanel);
-                dataBtn.onClick.AddListener(() => OnClickBtnChangeColor(dataBtn));
-            }
+            dataBtn?.onClick.AddListener(characterWindowUI.OpenDataPanel);
+            dataBtn?.onClick.AddListener(() => OnClickBtnChangeColor(dataBtn));
         }
 
         public void OnClickBtnChangeColor(Button button)

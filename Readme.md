@@ -76,7 +76,8 @@ ex) 레벨업, 강화, 이펙트, 상점(구매, 판매, 강화, 수리, 제작 
 
 -------------------------------
 
-**애니메이션 이벤트 함수**
+<details>
+<summary> **애니메이션 이벤트 함수** </summary>
 
 <PLayer>
 OpenDamageCollider\
@@ -100,9 +101,12 @@ IsInteractingFalse\
 InstantiateBossParticleFX
 DestroyBossParticleFX
 
+</details>
 -------------------------------
 
-**Input Handler Keys**
+<details>
+<summary> **Input Handler Keys** </summary>
+
 
 1. 이동 - WASD
 2. 스킬 - 1,2,3,4
@@ -117,6 +121,8 @@ DestroyBossParticleFX
 11. 무기교체 - X
 12. 타겟 고정 - 마우스 휠버튼
 13. 카메라이동 - 마우스 이동
+
+</details>
 
 ------------------------------
 
@@ -142,9 +148,18 @@ Resources 폴더에 Fonts 폴더 생성
 
 ## Last Update
 
-## 2023.05.09 (화)
+## 2023.05.11 (목)
 
-1. MonoBehaviour용 싱글턴 적용
+**리팩토링 진행중**
+
+1. 플레이어 초기화 방식 수정
+	- 싱글턴 적용 및 UI 연결 제거
+	- 코드 리팩토링
+
+
+2. UI 초기화 방식 수정
+	- Component를 찾아오는 방식이 아닌, SerializeField를 통해 UI 객체 설정
+	- 코드 리팩토링
 
 
 -------------------------------
@@ -281,6 +296,11 @@ Resources 폴더에 Fonts 폴더 생성
 <summary> 접기 / 펼치기 </summary>
 
 ---------------------------------------------------
+### 2023.05.09 (화)
+
+1. UI Initalize 코드 리팩토링
+
+
 ### 2023.05.03 (수)
 
 1. MonoBehaviour용 싱글턴 적용

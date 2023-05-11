@@ -15,63 +15,50 @@ namespace SG
 
         public void Init()
         {
+            characterWindowUI?.Init();
+            characterWindowUI?.gameObject.SetActive(false);
 
-            characterWindowUI = UtilHelper.Find<CharacterWindowUI>(transform, "Character Window");
-            if (characterWindowUI != null)
-            {
-                characterWindowUI.Init();
-                characterWindowUI.gameObject.SetActive(false);
-            }
+            inventoryWindowUI?.Init();
+            inventoryWindowUI?.gameObject.SetActive(false);
 
-            inventoryWindowUI = UtilHelper.Find<InventoryWindowUI>(transform, "Inventory Window");
-            if(inventoryWindowUI != null)
-            {
-                inventoryWindowUI.Init();
-                inventoryWindowUI.gameObject.SetActive(false);
-            }
-
-            enforceWindowUI = UtilHelper.Find<EnforceWindowUI>(transform, "Enforce Window");
-            if (enforceWindowUI != null)
-            {
-                enforceWindowUI.Init();
-                enforceWindowUI.gameObject.SetActive(false);
-            }
+            enforceWindowUI.Init();
+            enforceWindowUI?.gameObject.SetActive(false);
         }
 
         #region Panel Window Controls
         public void OpenCharacterWindowPanel()
         {
-            characterWindowUI.gameObject.SetActive(true);
-            characterWindowUI.OpenStatusPanel();
+            characterWindowUI?.gameObject.SetActive(true);
+            characterWindowUI?.OpenStatusPanel();
             FindObjectOfType<ActiveWeaponObject>().SetActiveHandWeapon(false);
         }
 
         public void CloseCharacterWindowPanel()
         {
-            characterWindowUI.gameObject.SetActive(false);
+            characterWindowUI?.gameObject.SetActive(false);
         }
 
         public void OpenInventoryWindowPanel()
         {
-            inventoryWindowUI.gameObject.SetActive(true);
-            inventoryWindowUI.OnOpenPanel();
+            inventoryWindowUI?.gameObject.SetActive(true);
+            inventoryWindowUI?.OnOpenPanel();
         }
 
         public void CloseInventoryWindowPanel()
         {
-            inventoryWindowUI.OnClosePanel();
-            inventoryWindowUI.gameObject.SetActive(false);
+            inventoryWindowUI?.OnClosePanel();
+            inventoryWindowUI?.gameObject.SetActive(false);
         }
 
         public void OpenEnforceWindowPanel()
         {
-            enforceWindowUI.OnOpenPanel();
-            enforceWindowUI.gameObject.SetActive(true);
+            enforceWindowUI?.OnOpenPanel();
+            enforceWindowUI?.gameObject.SetActive(true);
         }
 
         public void CloseEnforceWindowPanel()
         {
-            enforceWindowUI.gameObject.SetActive(false);
+            enforceWindowUI?.gameObject.SetActive(false);
         }
 
         #endregion
