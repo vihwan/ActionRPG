@@ -23,4 +23,4 @@ MonoBehaviour:
   damageDic:
   - damageName: 
     damage: 0
-  skillAnimationName: Skill_Attack_3
+  m_skillAnimationName: Skill_Attack_3

@@ -12,18 +12,18 @@ namespace SG
         public List<Dialogue> dialogueList = new List<Dialogue>();
         public DialogueChoice[] dialogueChoices;
         private InteractNPC interactNPC;
-        private NPCStatus npcStat;
+        private NPCData npcData;
 
         private void Start()
         {
             interactNPC = GetComponent<InteractNPC>();
-            npcStat = GetComponent<NPCStatus>();
+            npcData = GetComponent<NPCData>();
         }
         public void TriggerDialouge()
         {
             SetDialogueChoicesAction();
             DialogueManager dialogueManager = FindObjectOfType<DialogueManager>();
-            dialogueManager.SetDialougeList(npcStat,dialogueList, dialogueChoices);
+            dialogueManager.SetDialougeList(npcData,dialogueList, dialogueChoices);
         }
         private void SetDialogueChoicesAction()
         {

@@ -6,12 +6,12 @@ namespace SG
 {
     public class NPCManager : MonoBehaviourSingleton<NPCManager>
     {
-        private NPCStatus[] statuses;
-        public NPCStatus[] npcs => statuses;
+        private NPCData[] statuses;
+        public NPCData[] npcs => statuses;
 
         public void init()
         {
-            statuses = FindObjectsOfType<NPCStatus>();
+            statuses = FindObjectsOfType<NPCData>();
             if (statuses != null)
             {
                 for (int i = 0; i < statuses.Length; i++)

@@ -26,5 +26,5 @@ MonoBehaviour:
     \uC801\uC5D0\uAC8C \uB300\uB7C9\uC758 \uD53C\uD574\uB97C \uC8FC\uACE0, \uBD88\uC0C8\uAC00
     \uC0AC\uB77C\uC9C0\uAE30 \uC804\uC5D0 \uD3ED\uBC1C\uD574 \uB300\uB7C9\uC758 \uD53C\uD574\uB97C
     \uC900\uB2E4."
-  damageList: 
-  skillAnimationName: Skill_Attack_Ult
+  damageDic: []
+  m_skillAnimationName: Skill_Attack_Ult

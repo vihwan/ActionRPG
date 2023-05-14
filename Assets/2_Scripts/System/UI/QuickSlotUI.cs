@@ -8,19 +8,13 @@ namespace SG
     //스킬 아이콘 및 퀵슬롯 UI들을 관리하는 스크립트
     public class QuickSlotUI : MonoBehaviour
     {
-        private SkillBtn skillBtn_1;
-        private SkillBtn skillBtn_2;
-        private SkillBtn skillBtn_3;
-        private SkillBtn skillBtn_Ult;
-        private ConsumableBtn consumesSlot;
-
         private PlayerSkillManager skillManager;
 
-        public SkillBtn SkillBtn_1 { get => skillBtn_1; private set => skillBtn_1 = value; }
-        public SkillBtn SkillBtn_2 { get => skillBtn_2; private set => skillBtn_2 = value; }
-        public SkillBtn SkillBtn_3 { get => skillBtn_3; private set => skillBtn_3 = value; }
-        public SkillBtn SkillBtn_Ult { get => skillBtn_Ult; private set => skillBtn_Ult = value; }
-        public ConsumableBtn ConsumesSlot { get => consumesSlot; private set => consumesSlot = value; }
+        public SkillBtn SkillBtn_1 { get; private set; }
+        public SkillBtn SkillBtn_2 { get; private set; }
+        public SkillBtn SkillBtn_3 { get; private set; }
+        public SkillBtn SkillBtn_Ult { get; private set; }
+        public ConsumableBtn ConsumesSlot { get; private set; }
 
         public void Init()
         {
@@ -40,9 +34,9 @@ namespace SG
             if (SkillBtn_Ult != null)
                 SkillBtn_Ult.Init();
 
-            consumesSlot = UtilHelper.Find<ConsumableBtn>(transform, "ConsumesSlot");
-            if (consumesSlot != null)
-                consumesSlot.Init();
+            ConsumesSlot = UtilHelper.Find<ConsumableBtn>(transform, "ConsumesSlot");
+            if (ConsumesSlot != null)
+                ConsumesSlot.Init();
 
             skillManager = FindObjectOfType<PlayerSkillManager>();
             if (skillManager != null)
@@ -51,7 +45,7 @@ namespace SG
                 UpdateSkillSlotsUI(2, skillManager.playerSkill_Two);
                 UpdateSkillSlotsUI(3, skillManager.playerSkill_Three);
                 UpdateSkillSlotsUI(4, skillManager.playerSkill_Ult);
-                UpdateConsumeSlotUI(skillManager.consumableItem_One);
+                UpdateConsumeSlotUI(skillManager.ConsumableItem_One);
             }
         }
 
@@ -61,19 +55,19 @@ namespace SG
             switch (skillSlotNum)
             {
                 case 1:
-                    skillBtn_1.SetActiveBtn(playerSkill);
+                    SkillBtn_1.SetActiveBtn(playerSkill);
                     break;
 
                 case 2:
-                    skillBtn_2.SetActiveBtn(playerSkill);
+                    SkillBtn_2.SetActiveBtn(playerSkill);
                     break;
 
                 case 3:
-                    skillBtn_3.SetActiveBtn(playerSkill);
+                    SkillBtn_3.SetActiveBtn(playerSkill);
                     break;
 
                 case 4:
-                    skillBtn_Ult.SetActiveBtn(playerSkill);
+                    SkillBtn_Ult.SetActiveBtn(playerSkill);
                     break;
             }
         }
@@ -81,7 +75,7 @@ namespace SG
         //퀵슬롯 아이콘(ex. 소비템)을 갱신하는 함수
         public void UpdateConsumeSlotUI(ConsumableItem consumableItem)
         {
-            consumesSlot.SetActiveBtn(consumableItem);
+            ConsumesSlot.SetActiveBtn(consumableItem);
         }
     }
 }

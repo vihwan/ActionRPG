@@ -60,7 +60,7 @@ namespace SG
                 return;
 
             animatorHandler.anim.SetBool("canDoCombo", false);
-            animatorHandler.PlayTargetAnimation(playerSkill.skillAnimationName, true);
+            animatorHandler.PlayTargetAnimation(playerSkill.SkillAnimationName, true);
         }
 
         public void HandleStandUpRevengeAttack()

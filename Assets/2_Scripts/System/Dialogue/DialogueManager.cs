@@ -60,7 +60,7 @@ namespace SG
                 PopUpGenerator.Instance.messagesList.gameObject.SetActive(true);
         }
 
-        internal void SetDialougeList(NPCStatus npc, List<Dialogue> dialogueList, DialogueChoice[] choices)
+        internal void SetDialougeList(NPCData npc, List<Dialogue> dialogueList, DialogueChoice[] choices)
         {
             SetDialogueChoices(npc, choices);
             for (int i = 0; i < dialogueList.Count; i++)
@@ -110,7 +110,7 @@ namespace SG
             }
             nameText.text = dialogue.characterName;
         }
-        private void SetDialogueChoices(NPCStatus npc, DialogueChoice[] choices)
+        private void SetDialogueChoices(NPCData npc, DialogueChoice[] choices)
         {
             if (dialogue_Choices.Count > 0)
             {

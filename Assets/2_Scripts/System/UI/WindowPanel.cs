@@ -15,6 +15,8 @@ namespace SG
 
         public void Init()
         {
+            this.gameObject.SetActive(true);
+
             characterWindowUI?.Init();
             characterWindowUI?.gameObject.SetActive(false);
 

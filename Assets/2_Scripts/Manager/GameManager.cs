@@ -6,7 +6,6 @@ namespace SG
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
-
         private void Awake()
         {
             if (Database.it != null)
@@ -43,5 +42,4 @@ namespace SG
                 WorldEventManager.it.Init();
         }
     }
-
 }

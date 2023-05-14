@@ -37,7 +37,6 @@ namespace SG
         public float unlockedPivotPosition = 1f;
 
 
-
         [Header("Camera LockOn")]
         [SerializeField]
         private List<CharacterManager> availableTargets = new List<CharacterManager>();
@@ -52,7 +51,7 @@ namespace SG
 
         private InputHandler inputHandler;
         private PlayerManager playerManager;
-        internal bool isTurningCamera;
+        internal bool isTurningCamera = false;
         internal bool isUpdate = false;
 
         public Transform TempTransform { get => tempTransform; private set => tempTransform = value; }
@@ -64,14 +63,17 @@ namespace SG
 
         private void Start()
         {
-            targetTransform = FindObjectOfType<PlayerManager>().transform;
+            playerManager = FindObjectOfType<PlayerManager>();
+            if(playerManager != null)
+            {
+                targetTransform = FindObjectOfType<PlayerManager>().transform;
+            }
+
             myTransform = transform;
             defaultPosition = cameraTransform.localPosition.z;
             ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10 | 1 << 12);
             environmentLayer = LayerMask.NameToLayer("Environment");
             inputHandler = FindObjectOfType<InputHandler>();
-            playerManager = FindObjectOfType<PlayerManager>();
-
         }
 
         public void FollowTarget(float delta)
@@ -126,12 +128,10 @@ namespace SG
         private void HandleCameraCollisions(float delta)
         {
             targetPosition = defaultPosition;
-            RaycastHit hit;
-            Vector3 direction = cameraTransform.position - cameraPivotTransform.position;
-            direction.Normalize();
+            Vector3 dir_normalize = (cameraTransform.position - cameraPivotTransform.position).normalized;
 
             if (Physics.SphereCast(cameraPivotTransform.position,
-                cameraSphereRadius, direction, out hit, Mathf.Abs(targetPosition), ignoreLayers))
+                cameraSphereRadius, dir_normalize, out RaycastHit hit, Mathf.Abs(targetPosition), ignoreLayers))
             {
                 float dis = Vector3.Distance(cameraPivotTransform.position, hit.point);
                 targetPosition = -(dis - cameraCollisionOffset);
@@ -162,31 +162,30 @@ namespace SG
             for (int i = 0; i < colliders.Length; i++)
             {
                 CharacterManager character = colliders[i].GetComponent<CharacterManager>();
-
-                if (character != null)
+                if (character == null)
                 {
-                    Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
-                    float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
-                    float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
-                    RaycastHit hit;
+                    continue;
+                }
 
-                    if (character.transform.root != targetTransform.transform.root
-                        && viewableAngle > -50
-                        && viewableAngle < 50
-                        && distanceFromTarget <= maximumLockOnDistance)
+                Vector3 lockTargetDirection = character.transform.position - targetTransform.position;
+                float distanceFromTarget = Vector3.Distance(targetTransform.position, character.transform.position);
+                float viewableAngle = Vector3.Angle(lockTargetDirection, cameraTransform.forward);
+
+                if (false == isTargetInViewRange(character, distanceFromTarget, viewableAngle))
+                {
+                    continue;
+                }
+
+                if (Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out RaycastHit hit))
+                {
+                    Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.cyan);
+                    if (hit.transform.gameObject.layer == environmentLayer)
                     {
-                        if (Physics.Linecast(playerManager.lockOnTransform.position, character.lockOnTransform.position, out hit))
-                        {
-                            Debug.DrawLine(playerManager.lockOnTransform.position, character.lockOnTransform.position, Color.cyan);
-                            if (hit.transform.gameObject.layer == environmentLayer)
-                            {
-                                //cannot lockon to target, object in way
-                            }
-                            else
-                            {
-                                availableTargets.Add(character);
-                            }
-                        }
+                        //cannot lockon to target, object in way
+                    }
+                    else
+                    {
+                        availableTargets.Add(character);
                     }
                 }
             }
@@ -229,6 +228,8 @@ namespace SG
                 }
             }
         }
+
+
 
         //록온한 대상을 해제하여 원래대로 돌아온다.
         public void ClearLockOnTarget()
@@ -328,6 +329,14 @@ namespace SG
                 }
                 cameraTransform.localPosition -= new Vector3(0, 0, 0.3f);
             }
+        }
+
+        bool isTargetInViewRange(CharacterManager character, float distanceFromTarget, float viewableAngle)
+        {
+            return character.transform.root != targetTransform.transform.root
+                                && viewableAngle > -50
+                                && viewableAngle < 50
+                                && distanceFromTarget <= maximumLockOnDistance;
         }
     }
 }

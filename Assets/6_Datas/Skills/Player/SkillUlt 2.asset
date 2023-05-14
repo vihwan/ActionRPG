@@ -22,4 +22,4 @@ MonoBehaviour:
     \uC2DC\uAC04 \uB3D9\uC548 \uC790\uC2E0\uC758 \uACF5\uACA9\uB825, \uCE58\uBA85\uD0C0
     \uD53C\uD574\uB7C9, \uACF5\uACA9 \uC18D\uB3C4\uAC00 \uC99D\uAC00\uD55C\uB2E4."
   damageDic: []
-  skillAnimationName: Skill_Attack_Ult
+  m_skillAnimationName: Skill_Attack_Ult

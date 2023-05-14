@@ -23,15 +23,17 @@ namespace SG
     public class PlayerSkill : Skill
     {
         [Header("Skill Parameter")]
-        [SerializeField] private PlayerSkillType skillType;
-        [SerializeField] private int level;
-        [SerializeField] private int needMana;
-        [SerializeField] private int coolTime;
-        [TextArea, SerializeField] private string explainText;
+        [SerializeField] private PlayerSkillType skillType = PlayerSkillType.Active;
+        [SerializeField] private int level = 0;
+        [SerializeField] private int needMana = 0;
+        [SerializeField] private int coolTime = 0;
+        [TextArea, SerializeField] private string explainText = string.Empty;
         public DamageMap[] damageDic;
 
         [Header("Skill Animation")]
-        public string skillAnimationName;
+        [SerializeField]
+        private string m_skillAnimationName = string.Empty;
+        public string SkillAnimationName => m_skillAnimationName;
 
         public PlayerSkillType SkillType { get => skillType; private set => skillType = value; }
         public int Level { get => level; private set => level = value; }

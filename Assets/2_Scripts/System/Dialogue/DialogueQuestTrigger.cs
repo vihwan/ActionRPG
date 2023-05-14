@@ -15,12 +15,12 @@ namespace SG
         public DialogueChoice[] yesNoQuestChoices;
 
         private InteractNPC interactNPC;
-        private NPCStatus npcStatus;
+        private NPCData npcStatus;
         DialogueManager dialogueManager;
         private void Start()
         {
             interactNPC = GetComponent<InteractNPC>();
-            npcStatus = GetComponent<NPCStatus>();
+            npcStatus = GetComponent<NPCData>();
             dialogueManager = FindObjectOfType<DialogueManager>();
         }
         internal void TriggerStartEndQuestDialouge(bool isStartQuest)

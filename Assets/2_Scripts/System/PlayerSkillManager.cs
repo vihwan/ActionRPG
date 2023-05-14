@@ -8,20 +8,22 @@ namespace SG
     //플레이어가 현재 장착중인 스킬과 소비 아이템을 관리하는 매니저입니다.
     public class PlayerSkillManager : MonoBehaviour
     {
-        [Header("Player Skill")]
-        public PlayerSkill playerSkill_One;
-        public PlayerSkill playerSkill_Two;
-        public PlayerSkill playerSkill_Three;
-        public PlayerSkill playerSkill_Ult;
+        //[Header("Player Skill")]
+
+        [field: SerializeField] public PlayerSkill playerSkill_One { get; private set; }
+        [field: SerializeField] public PlayerSkill playerSkill_Two { get; private set; }
+        [field: SerializeField] public PlayerSkill playerSkill_Three { get; private set; }
+        [field: SerializeField] public PlayerSkill playerSkill_Ult { get; private set; }
 
         [Header("Player Skill Button")]
-        [SerializeField] public SkillBtn skillBtn_1;
-        [SerializeField] public SkillBtn skillBtn_2;
-        [SerializeField] public SkillBtn skillBtn_3;
-        [SerializeField] public SkillBtn skillBtn_Ult;
+        [SerializeField] private SkillBtn skillBtn_1;
+        [SerializeField] private SkillBtn skillBtn_2;
+        [SerializeField] private SkillBtn skillBtn_3;
+        [SerializeField] private SkillBtn skillBtn_Ult;
 
         [Header("Player Consumable")]
-        public ConsumableItem consumableItem_One;
+        [SerializeField] private ConsumableItem consumableItem_One;
+        public ConsumableItem ConsumableItem_One => consumableItem_One;
 
         [Header("Player Consumable Button")]
         [SerializeField] public ConsumableBtn consumableBtn_1;
