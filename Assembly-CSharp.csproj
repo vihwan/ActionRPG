@@ -56,7 +56,7 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\2_Scripts\System\UI\EquipmentInventoryList.cs" />
+    <Compile Include="Assets\2_Scripts\UI\EquipmentInventoryList.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\ItemLooting\LootTable.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\Code\Gravity.cs" />
     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\XWeaponTrail.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\SplineControlPoint.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\PlayerControllerBNS.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\WeaponInventoryList.cs" />
+    <Compile Include="Assets\2_Scripts\UI\WeaponInventoryList.cs" />
     <Compile Include="Assets\Extensions\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\Code\PlayerMachineDebug.cs" />
     <Compile Include="Assets\2_Scripts\System\SerializableDictionary.cs" />
@@ -78,34 +78,34 @@
     <Compile Include="Assets\2_Scripts\System\PlayerSkillManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyWeaponSlotManager.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryMain_InfoPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryMain_InfoPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\AchieveMissionDisplay.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\ItemLooting\InteractTreasureChest.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\WindowPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\WindowPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
     <Compile Include="Assets\Extensions\Perfect RPG MMO 3D Effect FX Pack 2\Demo\Demo.cs" />
     <Compile Include="Assets\2_Scripts\System\MouseItem.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\PlayerQuestInventory.cs" />
     <Compile Include="Assets\2_Scripts\System\ResetAnimationBool.cs" />
     <Compile Include="Assets\2_Scripts\System\ScreenshotHandler.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_StatusPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterUI_StatusPanel.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\CombatStanceState.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\IdleState.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\FollowTrackingCamera.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SelectMenu.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SelectMenu.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\2_Scripts\System\Interactable.cs" />
     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\XWeaponTrailDemo.cs" />
     <Compile Include="Assets\Extensions\XWeaponTrail\Scripts\Spline.cs" />
     <Compile Include="Assets\2_Scripts\System\Dialogue\DialogueTrigger.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_DataPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterUI_DataPanel.cs" />
     <Compile Include="Assets\2_Scripts\System\IngredientItem.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryContentSlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryContentSlot.cs" />
     <Compile Include="Assets\Extensions\TinyDungeons\Scripts\TinyThirdPersonCharacter.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\AchieveMissionTitle.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\AchievePanel.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryMain_ContentList.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryMain_ContentList.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\QuestDisplay.cs" />
     <Compile Include="Assets\2_Scripts\System\WeaponHolderSlot.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\EffectsScene.cs" />
@@ -119,14 +119,14 @@
     <Compile Include="Assets\2_Scripts\System\WeaponSlotManager.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Level\LevelUpAlertUI.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\Code\SimpleStateMachine.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\WeaponInventorySlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\WeaponInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\Util\CSVReader.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\NPC\NPCData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerStats.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerSkill.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\PopUpGenerator.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\PopUpMessage.cs" />
+    <Compile Include="Assets\2_Scripts\UI\PopUpGenerator.cs" />
+    <Compile Include="Assets\2_Scripts\UI\PopUpMessage.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\QuestObjective.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Level\ManaBar.cs" />
     <Compile Include="Assets\2_Scripts\System\WeaponUnholderSlot.cs" />
@@ -135,14 +135,14 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\MissionTarget.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\ShopListSlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\ShopListSlot.cs" />
     <Compile Include="Assets\2_Scripts\System\DamageToPlayer.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\Quest.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\EquipSlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\EquipSlot.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\ItemLooting\LootWindowUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\Code\PlayerMachine.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SkillBtn.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SkillBtn.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\RewardItemSlot.cs" />
     <Compile Include="Assets\2_Scripts\System\Enforce\EnforceUI_RightPanel.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\RotateTowardTargetState.cs" />
@@ -164,17 +164,17 @@
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Math3d.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerSkillInventory.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\Shop_InfoPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Shop_InfoPanel.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAtData.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\HealthBar.cs" />
+    <Compile Include="Assets\2_Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyInventory.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\Message_GetItem.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Message_GetItem.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\Utilities\Helper.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\CalledInAnimation.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SkillSlot_Current.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryWindowUI.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\EquipItem.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SkillSlot_Current.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryWindowUI.cs" />
+    <Compile Include="Assets\2_Scripts\UI\EquipItem.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\ChaseTargetState.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyLocomotionManager.cs" />
     <Compile Include="Assets\2_Scripts\Util\UtilHelper.cs" />
@@ -193,12 +193,12 @@
     <Compile Include="Assets\2_Scripts\System\Test\Level\LevelWindow.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\State.cs" />
     <Compile Include="Assets\Extensions\UnityChan\Scripts\ThirdPersonCamera.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryMenuSpringBoard.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryMenuSpringBoard.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperMath.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\WeaponItem.cs" />
+    <Compile Include="Assets\2_Scripts\UI\WeaponItem.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\InteractDoor.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyFXTransform.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_WeaponPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterUI_WeaponPanel.cs" />
     <Compile Include="Assets\2_Scripts\System\DamageCollider.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Move\TranslateMove.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\ScaleChange.cs" />
@@ -207,17 +207,17 @@
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\Material_Change.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\SimpleObjectMake.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\ItemLooting\ItemDropManager.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryList.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryList.cs" />
     <Compile Include="Assets\Extensions\UnityChan\Scripts\UnityChanControlScriptWithRgidBody.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SetItem.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\MessagesList.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SetItem.cs" />
+    <Compile Include="Assets\2_Scripts\UI\MessagesList.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\NPC\InteractNPC.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\AchieveMission.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SkillSlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SkillSlot.cs" />
     <Compile Include="Assets\MT Assets\Easy Mesh Combiner\DemoScene\Scripts\CombineInRuntimeDemo.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\WeaponManager.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterWindowUI.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SkillTimer.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterWindowUI.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SkillTimer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ChatController.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\AchieveManager.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\Utilities\KeepBool.cs" />
@@ -232,8 +232,8 @@
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\AttackState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerInventory.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\Item.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\QuickSlotUI.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Item.cs" />
+    <Compile Include="Assets\2_Scripts\UI\QuickSlotUI.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyBossHealthBarUI.cs" />
     <Compile Include="Assets\MT Assets\Easy Mesh Combiner\Libraries\MTAssets Mathematics\MTAssetsMathematics.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Move\MoveToTag.cs" />
@@ -246,7 +246,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\EventColliderBossFight.cs" />
     <Compile Include="Assets\2_Scripts\System\Enforce\WeaponEnforceList.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterMenuSpringBoard.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterMenuSpringBoard.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyTestStats.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\MT Assets\Easy Mesh Combiner\Libraries\MTAssets Editor UI\MTAssetsEditorUi.cs" />
@@ -264,8 +264,8 @@
     <Compile Include="Assets\2_Scripts\System\GameMain.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLCInput\RPG Character Mecanim Animation Pack\Inputs\RPGInputs.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\BruteForceMesh.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_EquipmentPanel.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\PopUpMultiSelection.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterUI_EquipmentPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\PopUpMultiSelection.cs" />
     <Compile Include="Assets\Extensions\Hovl Studio\AOE Magic spells Vol.1\Scripts\EGA_EffectSound.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyStats.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\BossChaseTargetState.cs" />
@@ -273,26 +273,26 @@
     <Compile Include="Assets\Extensions\UnityChan\Scripts\FaceUpdate.cs" />
     <Compile Include="Assets\Extensions\ProDrawCallOptimizer\Examples\Example2-CustomShaders\Models\Buzzer\MoveBuzzer.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventorySlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\System\Enforce\EnforceMenuSpringBoard.cs" />
     <Compile Include="Assets\2_Scripts\System\Enforce\EnforceWindowUI.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\QuestionMark.cs" />
     <Compile Include="Assets\2_Scripts\Manager\CharacterManager.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\ConsumableBtn.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\ConsumableItem.cs" />
+    <Compile Include="Assets\2_Scripts\UI\ConsumableBtn.cs" />
+    <Compile Include="Assets\2_Scripts\UI\ConsumableItem.cs" />
     <Compile Include="Assets\Extensions\UnityChan\Scripts\SceneLoader.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\CameraMoveController.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\MouseOrbit.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\RotateObject.cs" />
     <Compile Include="Assets\Extensions\GUI Pro Kit Fantasy RPG\Extensions\UIParticle\UIParticleSystem.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerAttackAnimation.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\InventoryMainContents.cs" />
+    <Compile Include="Assets\2_Scripts\UI\InventoryMainContents.cs" />
     <Compile Include="Assets\2_Scripts\System\PlayerLocomotion.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\GUIManager.cs" />
+    <Compile Include="Assets\2_Scripts\UI\GUIManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Database\ItemDataBase.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\EquipmentInventorySlot.cs" />
+    <Compile Include="Assets\2_Scripts\UI\EquipmentInventorySlot.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\ObjectiveDisplay.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\AnimatorManager.cs" />
     <Compile Include="Assets\2_Scripts\System\WeaponPivoting.cs" />
@@ -315,14 +315,16 @@
     <Compile Include="Assets\2_Scripts\System\Enforce\EnforceManager.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs" />
     <Compile Include="Assets\2_Scripts\Framework\Singleton.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\SetTemplate.cs" />
+    <Compile Include="Assets\2_Scripts\UI\SetTemplate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Move\MoveToObject.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\ShopPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\ShopPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
-    <Compile Include="Assets\2_Scripts\System\UI\CharacterUI_SkillPanel.cs" />
+    <Compile Include="Assets\2_Scripts\UI\CharacterUI_SkillPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\2_Scripts\System\ActiveWeaponObject.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Test\UniRxExample.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Test\DownloadTexture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
@@ -1358,6 +1360,10 @@
     <ProjectReference Include="ThryAssemblyDefinition.csproj">
       <Project>{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}</Project>
       <Name>ThryAssemblyDefinition</Name>
+    </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}</Project>
+      <Name>UniRx</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

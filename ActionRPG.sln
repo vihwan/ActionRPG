@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniRx", "UniRx.csproj", "{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniRx.Examples", "UniRx.Examples.csproj", "{74016451-1AB8-77A5-173F-28E498E2B6C8}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThryAssemblyDefinition", "ThryAssemblyDefinition.csproj", "{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{E230656A-CD8B-9DED-5CDD-E96C3102CA0D}"
@@ -17,6 +21,14 @@ Global
 		{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8138F823-1DC5-E6F5-9C9A-8658B1F5EA77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74016451-1AB8-77A5-173F-28E498E2B6C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74016451-1AB8-77A5-173F-28E498E2B6C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74016451-1AB8-77A5-173F-28E498E2B6C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74016451-1AB8-77A5-173F-28E498E2B6C8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}.Release|Any CPU.ActiveCfg = Release|Any CPU

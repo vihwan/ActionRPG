@@ -785,6 +785,10 @@
       <Project>{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}</Project>
       <Name>ThryAssemblyDefinition</Name>
     </ProjectReference>
+    <ProjectReference Include="UniRx.csproj">
+      <Project>{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}</Project>
+      <Name>UniRx</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
