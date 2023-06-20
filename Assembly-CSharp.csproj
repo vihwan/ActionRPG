@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.17</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.18</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2021.3.23f1</UnityVersion>
@@ -71,6 +71,7 @@
     <Compile Include="Assets\2_Scripts\UI\WeaponInventoryList.cs" />
     <Compile Include="Assets\Extensions\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\Code\PlayerMachineDebug.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Test\DownloadTexture.cs" />
     <Compile Include="Assets\2_Scripts\System\SerializableDictionary.cs" />
     <Compile Include="Assets\MT Assets\Easy Mesh Combiner\Scripts\RuntimeMeshCombiner.cs" />
     <Compile Include="Assets\Extensions\GUI Kit Casual Game\Scripts\PanelControl.cs" />
@@ -110,9 +111,9 @@
     <Compile Include="Assets\2_Scripts\System\WeaponHolderSlot.cs" />
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\EffectsScene.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperStateMachine.cs" />
-    <Compile Include="Assets\2_Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyAnimatorHandler.cs" />
     <Compile Include="Assets\2_Scripts\_LegacyScripts\CameraMan.cs" />
+    <Compile Include="Assets\2_Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\StateMachine\DeadState.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Level\StaminaBar.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\ItemLooting\DropItemBox.cs" />
@@ -131,10 +132,10 @@
     <Compile Include="Assets\2_Scripts\System\Test\Level\ManaBar.cs" />
     <Compile Include="Assets\2_Scripts\System\WeaponUnholderSlot.cs" />
     <Compile Include="Assets\Extensions\Hovl Studio\AOE Magic spells Vol.1\Scripts\ParticleCollisionInstance.cs" />
-    <Compile Include="Assets\2_Scripts\System\Quest\GoalPosition.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Achieve\MissionTarget.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\FABRIKSolver.cs" />
+    <Compile Include="Assets\2_Scripts\System\Quest\GoalPosition.cs" />
     <Compile Include="Assets\2_Scripts\UI\ShopListSlot.cs" />
     <Compile Include="Assets\2_Scripts\System\DamageToPlayer.cs" />
     <Compile Include="Assets\2_Scripts\System\Quest\Quest.cs" />
@@ -163,8 +164,8 @@
     <Compile Include="Assets\2_Scripts\Manager\PlayerManager.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAt.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Math3d.cs" />
-    <Compile Include="Assets\2_Scripts\System\PlayerSkillInventory.cs" />
     <Compile Include="Assets\2_Scripts\UI\Shop_InfoPanel.cs" />
+    <Compile Include="Assets\2_Scripts\System\PlayerSkillInventory.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\RPG Character Mecanim Animation Pack\Code\PerfectLookAt\PerfectLookAtData.cs" />
     <Compile Include="Assets\2_Scripts\UI\HealthBar.cs" />
     <Compile Include="Assets\2_Scripts\System\Test\Enemy\EnemyInventory.cs" />
@@ -314,6 +315,7 @@
     <Compile Include="Assets\Extensions\FantasySpellsEffectsPack\Scripts\Object\DelayObjectMake.cs" />
     <Compile Include="Assets\2_Scripts\System\Enforce\EnforceManager.cs" />
     <Compile Include="Assets\Extensions\ExplosiveLLC\SuperCharacterController\SuperCharacterController\Core\SuperCharacterController.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Test\UniRxExample.cs" />
     <Compile Include="Assets\2_Scripts\Framework\Singleton.cs" />
     <Compile Include="Assets\2_Scripts\UI\SetTemplate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
@@ -323,8 +325,8 @@
     <Compile Include="Assets\2_Scripts\UI\CharacterUI_SkillPanel.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\2_Scripts\System\ActiveWeaponObject.cs" />
-    <Compile Include="Assets\2_Scripts\UI\Test\UniRxExample.cs" />
-    <Compile Include="Assets\2_Scripts\UI\Test\DownloadTexture.cs" />
+    <Compile Include="Assets\2_Scripts\Manager\UDPManager.cs" />
+    <Compile Include="Assets\2_Scripts\UI\Test\SphereManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Extensions\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_fuku.shader" />
@@ -935,6 +937,9 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\2021.3.23f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>C:\Program Files\2021.3.23f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
     </Reference>
@@ -1328,14 +1333,14 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
@@ -1357,13 +1362,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="ThryAssemblyDefinition.csproj">
-      <Project>{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}</Project>
-      <Name>ThryAssemblyDefinition</Name>
-    </ProjectReference>
     <ProjectReference Include="UniRx.csproj">
       <Project>{0E1389DA-1C90-0DE5-C392-5D7CE76693CD}</Project>
       <Name>UniRx</Name>
+    </ProjectReference>
+    <ProjectReference Include="ThryAssemblyDefinition.csproj">
+      <Project>{1B17074B-1830-F2B3-EA1C-0C8FF713C93A}</Project>
+      <Name>ThryAssemblyDefinition</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

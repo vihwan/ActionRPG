@@ -38,7 +38,7 @@ namespace SG
         // Start is called before the first frame update
         public void Init()
         {
-            hudWindows = transform.Find("PlayerUI/HUD").gameObject;
+            hudWindows = transform?.Find("PlayerUI/HUD").gameObject;
             if (hudWindows == null)
                 Debug.LogWarning("HUD 가 참조되지 않았습니다");
 

@@ -47,7 +47,7 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.17</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.18</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2021.3.23f1</UnityVersion>
@@ -56,19 +56,19 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample09_EventHandling.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample02_ObservableTriggers.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample12_ReactiveProperty.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample03_GameObjectAsObservable.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample01_ObservableWWW.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample08_DetectDoubleClick.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample10_MainThreadDispatcher.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample05_ConvertFromCoroutine.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample12_ReactiveProperty.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample06_ConvertToCoroutine.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample13_ToDoApp.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample01_ObservableWWW.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample04_ConvertFromUnityCallback.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample07_OrchestratIEnumerator.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample09_EventHandling.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample03_GameObjectAsObservable.cs" />
+    <Compile Include="Assets\Plugins\UniRx\Examples\Sample10_MainThreadDispatcher.cs" />
     <Compile Include="Assets\Plugins\UniRx\Examples\Sample11_Logger.cs" />
-    <Compile Include="Assets\Plugins\UniRx\Examples\Sample13_ToDoApp.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\UniRx\Examples\UniRx.Examples.asmdef" />

@@ -40,6 +40,9 @@ namespace SG
 
             if(WorldEventManager.it != null)
                 WorldEventManager.it.Init();
+
+            if (UdpManager.it != null)
+                UdpManager.it.Init();
         }
     }
 }
