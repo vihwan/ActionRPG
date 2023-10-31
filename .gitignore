@@ -16,3 +16,4 @@ Thry/
 .gitignore
 RotaryHeart.csproj
 ThryAssemblyDefinition.csproj
+Assembly-CSharp.csproj
