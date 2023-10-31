@@ -11,20 +11,20 @@ namespace SG
         [Header("Basics")]
         public readonly string playerName = "Diluc Ragnvindr";
 
-        private InputHandler inputHandler;
-        private Animator anim;
-        private CameraHandler cameraHandler;
-        private PlayerLocomotion playerLocomotion;
-        private PlayerStats playerStats;
-        private PlayerInventory playerInventory;
-        private PlayerSkillManager playerSkillManager;
-        private PlayerQuestInventory playerQuestInventory;
-        private InteractableUI interactableUI;
+        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private Animator anim;
+        [SerializeField] private CameraHandler cameraHandler;
+        [SerializeField] private PlayerLocomotion playerLocomotion;
+        [SerializeField] private PlayerStats playerStats;
+        [SerializeField] private PlayerInventory playerInventory;
+        [SerializeField] private PlayerSkillManager playerSkillManager;
+        [SerializeField] private PlayerQuestInventory playerQuestInventory;
+        [SerializeField] private InteractableUI interactableUI;
         [SerializeField] private Interactable interactableObject;
-        private AnimationLayerHandler animationLayerHandler;
-        private PlayerAnimatorHandler playerAnimatorHandler;
-        private ActiveWeaponObject activeWeaponObject;
-        private WeaponPivoting weaponPivoting;
+        [SerializeField] private AnimationLayerHandler animationLayerHandler;
+        [SerializeField] private PlayerAnimatorHandler playerAnimatorHandler;
+        [SerializeField] private ActiveWeaponObject activeWeaponObject;
+        [SerializeField] private WeaponPivoting weaponPivoting;
 
         public bool isInteracting;
 
@@ -60,39 +60,17 @@ namespace SG
 
         public void Init()
         {
-            inputHandler = GetComponent<InputHandler>();
-            if (inputHandler != null)
-                inputHandler.Init();
-
-            playerLocomotion = GetComponent<PlayerLocomotion>();
-            if (playerLocomotion != null)
-                playerLocomotion.Init();
-
-            playerInventory = GetComponent<PlayerInventory>();
-            if (playerInventory != null)
-                playerInventory.Init();
-
-            playerStats = GetComponent<PlayerStats>();
-            if (playerStats != null)
-                playerStats.Init();
-
-            playerSkillManager = GetComponent<PlayerSkillManager>();
-            if (playerSkillManager != null)
-                playerSkillManager.Init();
-
-            playerQuestInventory = GetComponent<PlayerQuestInventory>();
-            if (playerQuestInventory != null)
-                playerQuestInventory.Init();
+            inputHandler?.Init();
+            playerLocomotion?.Init();
+            playerInventory?.Init();
+            playerStats?.Init();
+            playerSkillManager?.Init();
+            playerQuestInventory?.Init();
+            animationLayerHandler?.Init();
 
             anim = GetComponentInChildren<Animator>();
             playerAnimatorHandler = GetComponentInChildren<PlayerAnimatorHandler>();
-
             interactableUI = FindObjectOfType<InteractableUI>();
-
-            animationLayerHandler = GetComponent<AnimationLayerHandler>();
-            if (animationLayerHandler != null)
-                animationLayerHandler.Init();
-
             activeWeaponObject = GetComponentInChildren<ActiveWeaponObject>();
             WeaponPivoting = GetComponentInChildren<WeaponPivoting>();
         }

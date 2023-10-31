@@ -6,43 +6,33 @@ namespace SG
 {
     public class GameManager : MonoBehaviourSingleton<GameManager>
     {
-        private void Awake()
+        void Awake()
         {
-            if (Database.it != null)
-                Database.it.Init();
+            DontDestroyOnLoad(this);
 
-            if (GUIManager.it != null)
-                GUIManager.it.Init();
+            Database.it?.Init();
+            GUIManager.it?.Init();
+            NPCManager.it?.init();
+            PlayerManager.it?.Init();
+            ItemDropManager.it?.Init();
+            DialogueManager.it?.Init();
+            EnforceManager.it?.Init();
+            QuestManager.it?.Init();
+            AchieveManager.it?.Init();
+            LevelManager.it?.Init();
+            WorldEventManager.it?.Init();
+            UdpManager.it.Init();
+        }
 
-            if (NPCManager.it != null)
-                NPCManager.it.init();
 
-            if(PlayerManager.it != null)
-                PlayerManager.it.Init();
+        void Reset()
+        {
 
-            if (ItemDropManager.it != null)
-                ItemDropManager.it.Init();
+        }
 
-            if (DialogueManager.it != null)
-                DialogueManager.it.Init();
-
-            if (EnforceManager.it != null)
-                EnforceManager.it.Init();
-
-            if (QuestManager.it != null)
-                QuestManager.it.Init();
-
-            if (AchieveManager.it != null)
-                AchieveManager.it.Init();
-
-            if (LevelManager.it != null)
-                LevelManager.it.Init();
-
-            if(WorldEventManager.it != null)
-                WorldEventManager.it.Init();
-
-            if (UdpManager.it != null)
-                UdpManager.it.Init();
+        private void OnApplicationQuit()
+        {
+            DestroyImmediate(this);
         }
     }
 }

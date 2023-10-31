@@ -1,0 +1,31 @@
+.button_blue {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: rgb(255, 255, 255);
+    background-color: rgb(0, 103, 255);
+    font-size: 80px;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    transition-timing-function: ease-out-elastic;
+    transition-duration: 0.5s;
+}
+
+.button_blue:hover {
+    scale: 1.1 1.1;
+}
+
+.button_blue:active {
+    background-color: rgba(0, 149, 106, 255);
+}

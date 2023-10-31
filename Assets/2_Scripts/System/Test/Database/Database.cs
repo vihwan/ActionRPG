@@ -14,8 +14,10 @@ namespace SG
         public ItemDataBase ItemDataBase => itemDataBase;
         public PrefabDataBase PrefabDataBase => prefabDatabase;
 
-        public void Init()
+        protected override void Init()
         {
+            base.Init();
+
             if (itemDataBase != null)
                 itemDataBase.Init();
 
