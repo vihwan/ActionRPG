@@ -15,7 +15,7 @@ namespace SG
         public void Init()
         {
             animator = GetComponent<Animator>();
-            FindObjectOfType<LevelManager>().OnLevelChanged += LevelSystem_OnLevelChange;
+            LevelManager.it.OnLevelChanged += LevelSystem_OnLevelChange;
         }
 
         private void LevelSystem_OnLevelChange(object sender, EventArgs e)

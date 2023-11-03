@@ -41,18 +41,19 @@ namespace SG
                 dialogueText = UtilHelper.Find<TMP_Text>(dialogueObject.transform, "Dialogue/DialougeText");
                 characterImage = UtilHelper.Find<Image>(dialogueObject.transform, "CharacterImage");
                 nextBtn = UtilHelper.Find<Button>(dialogueObject.transform, "Dialogue/NextButton");
-                if (nextBtn != null)
-                    nextBtn.onClick.AddListener(DisplayNextSentences);
+                nextBtn?.onClick.AddListener(DisplayNextSentences);
 
                 choicePanelTransform = dialogueObject.transform.Find("Choices Panel").transform;
             }
 
-            dialogueObject.SetActive(false);
+            dialogueObject?.SetActive(false);
+
+            choiceDialogue_Prefab = Resources.Load<DialogueChoiceBox>("Prefabs/DialogChoices");
         }
 
         private void Update()
         {
-            if (dialogueObject.activeSelf.Equals(true))
+            if (dialogueObject?.activeSelf == true)
             {
                 PopUpGenerator.Instance.messagesList.gameObject.SetActive(false);
             }
@@ -131,6 +132,7 @@ namespace SG
                     {
                         continue;
                     }
+
                     DialogueChoiceBox dcb = Instantiate(choiceDialogue_Prefab, choicePanelTransform);
                     dcb.Init();
                     dcb.SetDialogChoice(choices[i].selectText, choices[i].icon, choices[i].action);

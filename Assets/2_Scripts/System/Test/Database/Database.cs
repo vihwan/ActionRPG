@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-
+using Extension;
 
 namespace SG
 {
@@ -14,15 +14,13 @@ namespace SG
         public ItemDataBase ItemDataBase => itemDataBase;
         public PrefabDataBase PrefabDataBase => prefabDatabase;
 
-        public override void Init()
+        public void Init()
         {
-            base.Init();
+            itemDataBase = this.gameObject.GetComponentForce<ItemDataBase>();
+            itemDataBase.Init();
 
-            if (itemDataBase != null)
-                itemDataBase.Init();
-
-            if (prefabDatabase != null)
-                prefabDatabase.Init();
+            prefabDatabase = this.gameObject.GetComponentForce<PrefabDataBase>();
+            prefabDatabase.Init();
         }
 
         public Item GetItemByID(ItemType itemType, int id)

@@ -9,7 +9,7 @@ namespace SG
     public class QuestManager : MonoBehaviourSingleton<QuestManager>
     {
         [Header("All Quests")]
-        [SerializeField] private List<Quest> questsList;
+        [SerializeField] private List<Quest> questsList = new List<Quest>();
 
         public void Init()
         {
@@ -52,7 +52,6 @@ namespace SG
             Debug.Log("퀘스트를 찾지 못했습니다. : " + questName);
             return null;
         }
-
 
         public void SetQuestProgress(Quest quest, QuestProgress questProgress)
         {

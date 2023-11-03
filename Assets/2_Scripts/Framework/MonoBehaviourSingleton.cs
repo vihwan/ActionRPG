@@ -47,12 +47,6 @@ public class MonoBehaviourSingleton<T> : MonoBehaviour where T : Component
         return m_instance != null;
     }
 
-    public virtual void Init()
-    {
-        this.transform.SetParent(SG.GameManager.it.transform);
-    }
-
-
     private void OnDestroy()
     {
         m_shuttingDown = true;
